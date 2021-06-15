@@ -13,6 +13,7 @@
 # or <http://www.gnu.org/licenses/lgpl.txt>.
 
 import urllib2
+import ntlm3 as ntlm
 from ntlm import ntlm
 
 

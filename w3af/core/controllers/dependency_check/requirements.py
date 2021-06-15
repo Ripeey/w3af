@@ -46,8 +46,8 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      PIPDependency('guess_language', 'guess-language', '0.2'),
                      PIPDependency('cluster', 'cluster', '1.1.1b3'),
                      PIPDependency('msgpack', 'msgpack', '0.5.6'),
-                     # break pip3 v 1.0.1
-                     PIPDependency('ntlm', 'python-ntlm', '1.1.0'),
+                     # break pip3 v 1.1.0 isnt updated to their version 3 sadly
+                     PIPDependency('ntlm', 'python-ntlm3', '1.0.2'),
                      # no support for python3 anymore
                      #PIPDependency('Halberd', 'halberd', '0.2.4'),
                      PIPDependency('darts.lib.utils', 'darts.util.lru', '0.5'),

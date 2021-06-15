@@ -1372,6 +1372,7 @@ def _setHTTPAuthentication():
 
         elif authType == AUTH_TYPE.NTLM:
             try:
+                import ntlm3 as ntlm
                 from ntlm import HTTPNtlmAuthHandler
             except ImportError:
                 errMsg = "sqlmap requires Python NTLM third-party library "

@@ -70,15 +70,15 @@ def checkDependencies():
         missing_libraries.add('python-impacket')
 
     try:
-        __import__("ntlm")
-        debugMsg = "'python-ntlm' third-party library is found"
+        __import__("ntlm3")
+        debugMsg = "'python-ntlm3' third-party library is found"
         logger.debug(debugMsg)
     except ImportError:
-        warnMsg = "sqlmap requires 'python-ntlm' third-party library "
+        warnMsg = "sqlmap requires 'python-ntlm3' third-party library "
         warnMsg += "if you plan to attack a web application behind NTLM "
-        warnMsg += "authentication. Download from http://code.google.com/p/python-ntlm/"
+        warnMsg += "authentication. Download from pypi python-ntlm3"
         logger.warn(warnMsg)
-        missing_libraries.add('python-ntlm')
+        missing_libraries.add('python-ntlm3')
 
     try:
         __import__("websocket.ABNF")

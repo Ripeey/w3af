@@ -34,4 +34,5 @@
 # html.entities
 
 
-#
+# Fix __slots__ conflicts class variable (unsure)
+# urllib, stringio submodule import fix 
