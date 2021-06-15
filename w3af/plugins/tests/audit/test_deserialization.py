@@ -22,7 +22,7 @@ import os
 import re
 import json
 import urllib
-import cPickle
+import pickle
 import base64
 import unittest
 
@@ -54,13 +54,13 @@ class TestDeserializePickle(PluginTest):
 
             try:
                 message = base64.b64decode(b64message)
-            except Exception, e:
+            except (Exception, e):
                 body = str(e)
                 return self.status, response_headers, body
 
             try:
-                cPickle.loads(message)
-            except Exception, e:
+                pickle.loads(message)
+            except (Exception, e):
                 body = str(e)
                 return self.status, response_headers, body
 
@@ -93,8 +93,8 @@ class TestDeserializePickleNotBase64(PluginTest):
             message = uri[uri.find('=') + 1:]
 
             try:
-                cPickle.loads(message)
-            except Exception, e:
+                pickle.loads(message)
+            except (Exception, e):
                 body = str(e)
                 return self.status, response_headers, body
 
@@ -128,13 +128,13 @@ class TestShouldInjectIsCalled(PluginTest):
 
             try:
                 message = base64.b64decode(b64message)
-            except Exception, e:
+            except (Exception, e):
                 body = str(e)
                 return self.status, response_headers, body
 
             try:
-                cPickle.loads(message)
-            except Exception, e:
+                pickle.loads(message)
+            except (Exception, e):
                 body = str(e)
                 return self.status, response_headers, body
 
@@ -186,7 +186,7 @@ class TestShouldInject(unittest.TestCase):
         self.assertFalse(self.plugin._should_inject(mutant, 'python'))
 
     def test_should_inject_qs_with_b64_pickle(self):
-        b64data = base64.b64encode(cPickle.dumps({'data': 'here',
+        b64data = base64.b64encode(pickle.dumps({'data': 'here',
                                                   'cookie': 'A' * 16}))
         self.url = URL('http://moth/?id=%s' % b64data)
         freq = FuzzableRequest(self.url)
@@ -197,7 +197,7 @@ class TestShouldInject(unittest.TestCase):
         self.assertTrue(self.plugin._should_inject(mutant, 'python'))
 
     def test_should_not_inject_qs_with_b64_pickle_java(self):
-        b64data = base64.b64encode(cPickle.dumps(1))
+        b64data = base64.b64encode(pickle.dumps(1))
         self.url = URL('http://moth/?id=%s' % b64data)
         freq = FuzzableRequest(self.url)
 
@@ -207,7 +207,7 @@ class TestShouldInject(unittest.TestCase):
         self.assertFalse(self.plugin._should_inject(mutant, 'java'))
 
     def test_should_inject_qs_with_pickle(self):
-        pickle_data = cPickle.dumps(1)
+        pickle_data = pickle.dumps(1)
         self.url = URL('http://moth/?id=%s' % pickle_data)
         freq = FuzzableRequest(self.url)
 
@@ -234,7 +234,7 @@ class TestShouldInject(unittest.TestCase):
         self.assertTrue(self.plugin._should_inject(m, 'python'))
 
     def test_should_inject_cookie_value(self):
-        b64data = base64.b64encode(cPickle.dumps({'data': 'here',
+        b64data = base64.b64encode(pickle.dumps({'data': 'here',
                                                   'cookie': 'A' * 16}))
 
         url = URL('http://moth/')
@@ -273,7 +273,7 @@ class TestJSONPayloadIsValid(unittest.TestCase):
                     continue
 
                 if file_name.endswith(deserialization.PAYLOAD_EXTENSION):
-                    json_str = file(os.path.join(root, file_name)).read()
+                    json_str = open(os.path.join(root, file_name)).read()
                     data = json.loads(json_str)
 
                     self.assertIn('1', data, file_name)
@@ -331,7 +331,7 @@ class TestExactDelay(unittest.TestCase):
                     continue
 
                 if file_name.endswith(deserialization.PAYLOAD_EXTENSION):
-                    json_str = file(os.path.join(root, file_name)).read()
+                    json_str = open(os.path.join(root, file_name)).read()
                     payload = json.loads(json_str)
 
                     ed = B64DeserializationExactDelay(payload)
@@ -339,7 +339,7 @@ class TestExactDelay(unittest.TestCase):
                     try:
                         payload_1 = ed.get_string_for_delay(1)
                         payload_22 = ed.get_string_for_delay(22)
-                    except Exception, e:
+                    except (Exception, e):
                         msg = 'Raised exception "%s" on "%s"'
                         args = (e, file_name)
                         self.assertTrue(False, msg % args)

@@ -47,7 +47,7 @@ class TestHTMLParserPerformance(unittest.TestCase):
     def test_parse_html_performance(self):
         headers = Headers()
         headers['content-type'] = 'text/html'
-        body = file(self.HTML_FILE).read()
+        body = open(self.HTML_FILE).read()
         url = URL('http://www.w3af.org/')
         response = HTTPResponse(200, body, headers, url, url, charset='utf-8')
 
@@ -78,8 +78,7 @@ class TestHTMLParserPerformance(unittest.TestCase):
         om.remove_expensive_references()
         summary = om.summarize()
 
-        print summary
-
+        print(summary)
         #print('runsnakemem %s' % self.MEMORY_DUMP)
 
         usage = resource.getrusage(resource.RUSAGE_SELF)
@@ -101,7 +100,7 @@ def test():
 
     That will activate the profiler.
     """
-    body = file(OUTPUT_FILE).read()
+    body = open(OUTPUT_FILE).read()
     url = URL('http://www.clarin.com.ar/')
     headers = Headers()
     headers['content-type'] = 'text/html'

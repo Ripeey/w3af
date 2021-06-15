@@ -870,7 +870,7 @@ class FormParser(_AbstractSgmllibParser, sgmllib.SGMLParser):
     def feed(self, data):
         try:
             sgmllib.SGMLParser.feed(self, data)
-        except SGMLLIB_PARSEERROR, exc:
+        except (SGMLLIB_PARSEERROR, exc):
             raise ParseError(exc)
 
     def close(self):
@@ -896,7 +896,7 @@ def _create_bs_classes(bs,
         def feed(self, data):
             try:
                 self.bs_base_class.feed(self, data)
-            except SGMLLIB_PARSEERROR, exc:
+            except (SGMLLIB_PARSEERROR, exc):
                 raise ParseError(exc)
         def close(self):
             self.bs_base_class.close(self)
@@ -1100,7 +1100,7 @@ def _ParseFileEx(file, base_uri,
         data = file.read(CHUNK)
         try:
             fp.feed(data)
-        except ParseError, e:
+        except (ParseError, e):
             e.base_uri = base_uri
             raise
         if len(data) != CHUNK: break
@@ -1141,7 +1141,7 @@ def _ParseFileEx(file, base_uri,
     for form in forms:
         try:
             form.fixup()
-        except AttributeError, ex:
+        except (AttributeError, ex):
             if not any(_ in str(ex) for _ in ("is disabled", "is readonly")):
                 raise
     return forms
@@ -2902,7 +2902,7 @@ class HTMLForm:
         control = self.find_control(name)
         try:
             control.value = value
-        except AttributeError, e:
+        except (AttributeError, e):
             raise ValueError(str(e))
 
     def get_value(self,

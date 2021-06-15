@@ -179,7 +179,7 @@ class retirejs(GrepPlugin):
                 http_response = self._uri_opener.GET(self._retire_db_url,
                                                      binary_response=True,
                                                      respect_size_limit=False)
-            except Exception, e:
+            except (Exception, e):
                 msg = 'Failed to download the retirejs database: "%s"'
                 om.out.error(msg % e)
                 return
@@ -366,7 +366,7 @@ class retirejs(GrepPlugin):
             return dict()
 
         try:
-            file_contents = file(json_file.name).read()
+            file_contents = open(json_file.name).read()
         except Exception:
             msg = 'Failed to read retirejs output file at %s'
             om.out.debug(msg % json_file.name)
@@ -376,7 +376,7 @@ class retirejs(GrepPlugin):
 
         try:
             json_doc = json.loads(file_contents)
-        except Exception, e:
+        except (Exception, e):
             msg = ('Failed to parse retirejs output as JSON.'
                    ' Exception is "%s" and file content: "%s..."')
             args = (e, file_contents[:20])

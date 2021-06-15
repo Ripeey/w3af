@@ -28,30 +28,32 @@ GUI = 2
 CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      PIPDependency('github', 'PyGithub', '1.21.0'),
                      PIPDependency('git.util', 'GitPython', '2.1.15'),
-                     PIPDependency('pybloomfilter', 'pybloomfiltermmap', '0.3.14'),
+                     PIPDependency('pybloomfilter', 'pybloomfiltermmap3', '0.5.3'),
                      PIPDependency('phply', 'phply', '0.9.1'),
                      PIPDependency('nltk', 'nltk', '3.0.1'),
                      PIPDependency('chardet', 'chardet', '3.0.4'),
                      PIPDependency('tblib', 'tblib', '0.2.0'),
-                     PIPDependency('pdfminer', 'pdfminer', '20140328'),
-                     PIPDependency('concurrent.futures', 'futures', '3.2.0'),
+                     PIPDependency('pdfminer', 'pdfminer', '20191125'),
                      PIPDependency('OpenSSL', 'pyOpenSSL', '18.0.0'),
                      PIPDependency('ndg', 'ndg-httpsclient', '0.4.0'),
 
+                     PIPDependency('distro', 'distro', '1.5.0'),
                      # We need 0.1.8 because of mitmproxy
-                     PIPDependency('pyasn1', 'pyasn1', '0.4.2'),
-
-                     PIPDependency('lxml', 'lxml', '3.4.4'),
+                     PIPDependency('pyasn1', 'pyasn1', '0.4.8'),
+                     # changed cause libxml/xmlversion.h error
+                     PIPDependency('lxml', 'lxml', '4.6.3'),
                      PIPDependency('scapy.config', 'scapy', '2.4.0'),
                      PIPDependency('guess_language', 'guess-language', '0.2'),
                      PIPDependency('cluster', 'cluster', '1.1.1b3'),
                      PIPDependency('msgpack', 'msgpack', '0.5.6'),
-                     PIPDependency('ntlm', 'python-ntlm', '1.0.1'),
-                     PIPDependency('Halberd', 'halberd', '0.2.4'),
+                     # break pip3 v 1.0.1
+                     PIPDependency('ntlm', 'python-ntlm', '1.1.0'),
+                     # no support for python3 anymore
+                     #PIPDependency('Halberd', 'halberd', '0.2.4'),
                      PIPDependency('darts.lib.utils', 'darts.util.lru', '0.5'),
                      PIPDependency('jinja2', 'Jinja2', '2.10'),
                      PIPDependency('vulndb', 'vulndb', '0.1.1'),
-                     PIPDependency('markdown', 'markdown', '2.6.1'),
+                     PIPDependency('markdown', 'markdown', '3.3.4'),
 
                      # This was used for testing, but now it's required for
                      # regular users too, do not remove!
@@ -66,15 +68,13 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      # We "outsource" the HTTP proxy feature to mitmproxy
                      PIPDependency('mitmproxy', 'mitmproxy', '0.13'),
 
-                     # https://gist.github.com/andresriancho/cf2fa1ce239b30f37bd9
-                     PIPDependency('ruamel.ordereddict',
-                                   'ruamel.ordereddict',
-                                   '0.4.8'),
+                     # ruamel.ordereddict No longer needed as theres
+                     # collections.OrderedDict 
 
                      # Only used by the REST API, but in the future the console
                      # and GUI will consume it so it's ok to put this here
                      PIPDependency('Flask', 'Flask', '0.10.1'),
-                     PIPDependency('yaml', 'PyYAML', '3.12'),
+                     PIPDependency('yaml', 'PyYAML', '5.4.1'),
 
                      # tldextract extracts the tld from any domain name
                      PIPDependency('tldextract', 'tldextract', '1.7.2'),
@@ -85,8 +85,11 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      # acora speeds up string search, for regular expressions
                      # we use esmre to extract the string literals from the re
                      # and acora to match those against the target string
-                     PIPDependency('acora', 'acora', '2.1'),
-                     PIPDependency('esmre', 'esmre', '0.3.1'),
+                     PIPDependency('acora', 'acora', '2.3'),
+                     
+                     # 0.5.2 supports py3 BUT PARROT wheel PEP 517 throw error 
+                     # added in CORE packages instead python3-esmre
+                     #PIPDependency('esmre', 'esmre', '0.5.2'),
 
                      # String diff by Google
                      PIPDependency('diff_match_patch', 'diff-match-patch', '20121119'),
@@ -95,7 +98,8 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      PIPDependency('bravado_core', 'bravado-core', '5.15.0'),
 
                      # Fast compression library
-                     PIPDependency('lz4', 'lz4', '1.1.0'),
+                     # version changed cause syntax *k error
+                     PIPDependency('lz4', 'lz4', '2.2.1'),
 
                      # Vulners API plugin needs this lib
                      PIPDependency('vulners', 'vulners', '1.3.0'),

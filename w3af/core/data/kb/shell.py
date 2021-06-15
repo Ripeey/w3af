@@ -207,7 +207,7 @@ class Shell(ExploitResult):
                 payload = payload_handler.get_payload_instance(
                     payload_name, self)
                 result = payload.get_desc()
-            except ValueError, ve:
+            except (ValueError, ve):
                 # We get here when one of the parameters provided by the user is
                 # not of the correct type, or something like that.
                 result = str(ve)
@@ -298,7 +298,7 @@ class Shell(ExploitResult):
                 - None: replacing the ExtendedUrllib we don't want to pickle
                 - None: replacing the Pool we don't want to pickle
         
-        When unpickling cPickle will create the Shell using:
+        When unpickling pickle will create the Shell using:
             Shell(vuln, None, None)
         
         So, the UI has the responsibility to assign a ExtendedUrllib and a

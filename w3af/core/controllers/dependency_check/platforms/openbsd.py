@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import platform
+import distro, platform
 import subprocess
 
 from .base_platform import Platform
@@ -29,17 +29,17 @@ from ..requirements import CORE, GUI
 class OpenBSD5(Platform):
     SYSTEM_NAME = 'OpenBSD 5'
     PKG_MANAGER_CMD = 'pkg_add -i -v'
-    PIP_CMD = 'pip-2.7'
+    PIP_CMD = 'pip-3'
 
     #
     #    Package list here http://ftp.openbsd.org/pub/OpenBSD/5.2/packages/i386/
     #
-    CORE_SYSTEM_PACKAGES = ['py-pip', 'python-2.7.3p0', 'py-setuptools',
+    CORE_SYSTEM_PACKAGES = ['py3-pip', 'python-3', 'py3-setuptools',
                             'gcc', 'git', 'libxml', 'libxslt', 'py-pcapy',
                             'py-libdnet', 'libffi']
 
     GUI_SYSTEM_PACKAGES = CORE_SYSTEM_PACKAGES[:]
-    GUI_SYSTEM_PACKAGES.extend(['graphviz', 'gtksourceview'])
+    #GUI_SYSTEM_PACKAGES.extend(['graphviz', 'gtksourceview'])
 
     SYSTEM_PACKAGES = {CORE: CORE_SYSTEM_PACKAGES,
                        GUI: GUI_SYSTEM_PACKAGES}
@@ -61,7 +61,7 @@ class OpenBSD5(Platform):
         msg = 'Before running pkg_add remember to specify the package path using:\n'\
               '    export PKG_PATH=ftp://ftp.openbsd.org/pub/OpenBSD/`uname'\
               ' -r`/packages/`machine -a`/'
-        print msg
+        print(msg)
 
     @staticmethod
     def is_current_platform():

@@ -1394,11 +1394,11 @@ class ExtendedUrllib(object):
 
         try:
             self.send(req, grep=False)
-        except HTTPRequestException, e:
+        except (HTTPRequestException, e):
             msg = 'Remote URL %s is UNREACHABLE due to: "%s"'
             om.out.debug(msg % (root_url, e))
             return False
-        except Exception, e:
+        except (Exception, e):
             msg = 'Internal error makes URL %s UNREACHABLE due to: "%s"'
             om.out.debug(msg % (root_url, e))
             return False
@@ -1500,7 +1500,7 @@ class ExtendedUrllib(object):
         for eplugin in self._evasion_plugins:
             try:
                 request = eplugin.modify_request(request)
-            except BaseFrameworkException, e:
+            except (BaseFrameworkException, e):
                 msg = 'Evasion plugin "%s" failed to modify the request: "%s"'
                 args = (eplugin.get_name(), e)
                 om.out.error(msg % args)

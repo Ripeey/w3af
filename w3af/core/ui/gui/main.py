@@ -222,7 +222,7 @@ class MainApp(object):
         genconfigfile = os.path.join(get_home_dir(), "gui_config.pkl")
         try:
             self.generalconfig = shelve.open(genconfigfile)
-        except Exception, e:
+        except (Exception, e):
             print ("WARNING: something bad happened when trying to open the"
                    " general config! File: %s. Problem: %s" % (genconfigfile, e))
             self.generalconfig = FakeShelve()
@@ -413,7 +413,7 @@ class MainApp(object):
         self.pcbody = pluginconfig.PluginConfigBody(self, self.w3af)
         try:
             self.profiles = profiles.ProfileList(self.w3af, initial=profile)
-        except ValueError, ve:
+        except (ValueError, ve):
             # This is raised when the profile doesn't exist
             #
             # I handle this by creating the profiles without an initial profile

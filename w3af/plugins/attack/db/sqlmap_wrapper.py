@@ -197,7 +197,7 @@ class SQLMapWrapper(object):
                                        shell=False,
                                        universal_newlines=True,
                                        cwd=cwd)
-        except OSError, os_err:
+        except (OSError, os_err):
             # https://github.com/andresriancho/w3af/issues/10186
             # OSError: [Errno 12] Cannot allocate memory
             if os_err.errno == errno.ENOMEM:
@@ -340,7 +340,7 @@ class SQLMapWrapper(object):
             return ''
         else:
             if os.path.exists(local_file):
-                return file(local_file).read()
+                return open(local_file).read()
         
         return 
 

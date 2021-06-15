@@ -45,6 +45,6 @@ class TestGenerateTXT(unittest.TestCase):
         requirements_file = generate_requirements_txt([PIPDependency('a', 'a', '1.2.3'),
                                                        PIPDependency('b', 'c', '3.2.1'),])
         
-        self.assertEqual(EXPECTED, file(requirements_file).read())
+        self.assertEqual(EXPECTED, open(requirements_file).read())
         os.unlink(requirements_file)
         

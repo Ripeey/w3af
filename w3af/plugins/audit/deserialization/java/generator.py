@@ -91,7 +91,7 @@ def main(payloads):
         try:
             p1, o1 = get_payload_bin_for_command_len(payload, 1)
             p2, o2 = get_payload_bin_for_command_len(payload, 2)
-        except Exception, e:
+        except (Exception, e):
             args = (payload, e)
             msg = 'Failed to create %s.json, exception: "%s"'
             print(msg % args)
@@ -103,7 +103,7 @@ def main(payloads):
                         "2": {"payload": base64.b64encode(p2),
                               "offsets": o2}}
 
-        file('%s.json' % payload, 'w').write(json.dumps(payload_json, indent=4))
+        open('%s.json' % payload, 'w').write(json.dumps(payload_json, indent=4))
         print('Successfully created %s.json' % payload)
         print('\n\n\n')
 

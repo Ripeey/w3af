@@ -96,7 +96,7 @@ class TestDocumentParserFactory(unittest.TestCase):
         """
         Issue to verify https://github.com/andresriancho/w3af/issues/106
         """
-        sharepoint_pl = file(self.HTML_FILE).read()
+        sharepoint_pl = open(self.HTML_FILE).read()
         parser = document_parser_factory(_build_http_response(sharepoint_pl,
                                                               u'text/html'))
 

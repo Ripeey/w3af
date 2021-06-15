@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import platform
+import distro, platform
 import subprocess
 
 from .base_platform import Platform
@@ -29,15 +29,14 @@ from ..requirements import CORE, GUI
 class SuSE(Platform):
     SYSTEM_NAME = 'SuSE'
     PKG_MANAGER_CMD = 'sudo zypper install'
-    PIP_CMD = 'pip-2.7'
+    PIP_CMD = 'pip-3'
 
-    CORE_SYSTEM_PACKAGES = ['python-pip','npm', 'python-devel', 'sqlite3-devel',
+    CORE_SYSTEM_PACKAGES = ['python3-pip','npm', 'python3-devel', 'sqlite3-devel',
                             'git', 'libxml2-devel', 'libxslt-devel',
                             'python-webkitgtk', 'libffi-devel']
 
     GUI_SYSTEM_PACKAGES = CORE_SYSTEM_PACKAGES[:]
-    GUI_SYSTEM_PACKAGES.extend(['graphviz', 'python-gtksourceview',
-                                'python-gtk', 'python-webkitgtk'])
+    #GUI_SYSTEM_PACKAGES.extend(['graphviz', 'python-gtksourceview', 'python-gtk', 'python-webkitgtk'])
 
     SYSTEM_PACKAGES = {CORE: CORE_SYSTEM_PACKAGES,
                        GUI: GUI_SYSTEM_PACKAGES}
@@ -65,4 +64,4 @@ class SuSE(Platform):
 
     @staticmethod
     def is_current_platform():
-        return 'SuSE' in platform.dist()[0]
+        return 'SuSE' in distro.linux_distribution()[0]

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import uuid
-import Queue
+import queue
 import bisect
 
 import w3af.core.controllers.output_manager as om

@@ -75,9 +75,8 @@ def main():
             except KeyboardInterrupt:
                 raise
 
-            except Exception, msg:
-                print msg
-
+            except (Exception, msg):
+                print(msg)
             if abort:
                 break
 
@@ -86,8 +85,7 @@ def main():
             sys.stdout.write("---------------\n")
 
             for sqlfile in files:
-                print sqlfile
-
+                print(sqlfile)
                 try:
                     req = urllib2.Request(sqlfile)
                     response = urllib2.urlopen(req)
@@ -118,9 +116,8 @@ def main():
                 except KeyboardInterrupt:
                     raise
 
-                except Exception, msg:
-                    print msg
-
+                except (Exception, msg):
+                    print(msg)
             else:
                 i += 1
 

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import unittest
-import cPickle
+import pickle
 import copy
 
 from nose.plugins.attrib import attr
@@ -132,7 +132,7 @@ class TestForm(unittest.TestCase):
 
         form = Form(form_params)
 
-        pickled_form = cPickle.loads(cPickle.dumps(form))
+        pickled_form = pickle.loads(pickle.dumps(form))
 
         self.assertEqual(pickled_form.items(), form.items())
 
@@ -144,7 +144,7 @@ class TestForm(unittest.TestCase):
         form = Form(form_params)
         form['xyz'] = ['1', '2']
 
-        pickled_form = cPickle.loads(cPickle.dumps(form))
+        pickled_form = pickle.loads(pickle.dumps(form))
 
         self.assertEqual(pickled_form.items(), form.items())
 

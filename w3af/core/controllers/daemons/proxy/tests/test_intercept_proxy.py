@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import threading
 import unittest
 import urllib2
-import Queue
+import queue
 import time
 
 from nose.plugins.attrib import attr
@@ -147,9 +147,9 @@ class TestInterceptProxy(unittest.TestCase):
                 # Catch the 403 from the local proxy when the user
                 # drops the HTTP request.
                 results.put(he)
-            except KeyboardInterrupt, k:
+            except (KeyboardInterrupt, k):
                 exceptions.put(k)
-            except Exception, e:
+            except (Exception, e):
                 exceptions.put(e)
             else:
                 results.put(response)

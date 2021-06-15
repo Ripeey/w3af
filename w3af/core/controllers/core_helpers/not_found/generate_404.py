@@ -305,7 +305,7 @@ def send_404(uri_opener, url_404, debugging_id=None):
                                   cache=True,
                                   grep=False,
                                   debugging_id=debugging_id)
-    except HTTPRequestException, hre:
+    except (HTTPRequestException, hre):
         message = 'Exception found while detecting 404: "%s" (did:%s)'
         args = (hre, debugging_id)
         om.out.debug(message % args)

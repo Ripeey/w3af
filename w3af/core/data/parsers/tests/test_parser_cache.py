@@ -101,7 +101,7 @@ class TestParserCache(unittest.TestCase):
 
             try:
                 self.dpc.get_document_parser_for(http_resp)
-            except BaseFrameworkException, bfe:
+            except (BaseFrameworkException, bfe):
                 self._is_timeout_exception_message(bfe, http_resp)
             else:
                 self.assertTrue(False)
@@ -117,7 +117,7 @@ class TestParserCache(unittest.TestCase):
             #
             try:
                 self.dpc.get_document_parser_for(http_resp)
-            except BaseFrameworkException, bfe:
+            except (BaseFrameworkException, bfe):
                 self.assertIn('Exceeded timeout while parsing', str(bfe))
 
     def _is_timeout_exception_message(self, toe, http_resp):

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import json
 import copy
-import cPickle
+import pickle
 import unittest
 
 from nose.plugins.attrib import attr
@@ -133,7 +133,7 @@ class TestInfo(unittest.TestCase):
         self.assertIn('\n\nThis information was', i.get_desc())
 
     def test_pickleable(self):
-        cPickle.dumps(MockInfo())
+        pickle.dumps(MockInfo())
 
     def test_data_container_default(self):
         """

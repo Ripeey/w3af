@@ -42,7 +42,7 @@ def retirejs_is_installed():
     except subprocess.CalledProcessError:
         return False
 
-    version = version.strip()
+    version = version.decode().strip()
     version_split = version.split('.')
 
     # Just check that the version has the format 1.6.0

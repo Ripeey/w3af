@@ -29,8 +29,8 @@ def do_json(obj):
     json.loads(msg)
 
 def do_cpickle(obj):
-    msg = cPickle.dumps(obj)
-    cPickle.loads(msg)
+    msg = pickle.dumps(obj)
+    pickle.loads(msg)
 
 def do_ultrajson(obj):
     msg = ujson.dumps(obj)
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     import time
     import msgpack
     import json
-    import cPickle
+    import pickle
     import ujson
 
     for serializator_name, serializator_func in tests:

@@ -45,7 +45,7 @@ if user_wants_psutil():
     try:
         # User's don't need this module
         import psutil
-    except ImportError, ie:
+    except (ImportError, ie):
         print('Failed to import psutil: %s' % ie)
         sys.exit(-1)
 
@@ -125,7 +125,7 @@ def dump_psutil():
                    'Disk usage': disk_usage,
                    'Thread CPU usage': get_threads_cpu_percent()}
     
-    json.dump(psutil_data, file(output_file, 'w'), indent=4, sort_keys=True)
+    json.dump(psutil_data, open(output_file, 'w'), indent=4, sort_keys=True)
 
 
 def ps_mem_to_json(sorted_cmds, shareds, count, total):

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import sys
 import time
-import Queue
+import queue
 
 from multiprocessing import TimeoutError
 
@@ -133,7 +133,7 @@ class CoreStrategy(object):
 
             self._fuzzable_request_router()
 
-        except Exception, e:
+        except (Exception, e):
 
             om.out.debug('strategy.start() found exception "%s"' % e)
             exc_info = sys.exc_info()
@@ -141,7 +141,7 @@ class CoreStrategy(object):
             try:
                 # Terminate the consumers, exceptions at this level stop the scan
                 self.terminate()
-            except Exception, e:
+            except (Exception, e):
                 msg = 'strategy.start() found exception while terminating workers "%s"'
                 om.out.debug(msg % e)
             finally:
@@ -202,7 +202,7 @@ class CoreStrategy(object):
 
             try:
                 consumer_inst.terminate()
-            except Exception, e:
+            except (Exception, e):
                 msg = '%s consumer terminate() raised exception: "%s"'
                 args = (consumer_inst.get_name(), e)
                 om.out.debug(msg % args)
@@ -491,7 +491,7 @@ class CoreStrategy(object):
                 except ScanMustStopByUserRequest:
                     # Not a real error, the user stopped the scan
                     raise
-                except Exception, e:
+                except (Exception, e):
                     dbg = 'Exception found during verify_target_server_up: "%s"'
                     om.out.debug(dbg % e)
 
@@ -525,7 +525,7 @@ class CoreStrategy(object):
             except ScanMustStopByUserRequest:
                 # Not a real error, the user stopped the scan
                 raise
-            except Exception, e:
+            except (Exception, e):
                 msg = 'Exception found during replace_targets_with_redir(): "%s"'
                 om.out.debug(msg % e)
                 raise ScanMustStopException(msg % e)
@@ -582,7 +582,7 @@ class CoreStrategy(object):
             except ScanMustStopByUserRequest:
                 # Not a real error, the user stopped the scan
                 raise
-            except Exception, e:
+            except (Exception, e):
                 msg = 'Exception found during alert_if_target_is_301_all(): "%s"'
                 om.out.debug(msg % e)
                 raise ScanMustStopException(msg % e)
@@ -617,7 +617,7 @@ class CoreStrategy(object):
                 response = self._w3af_core.uri_opener.GET(url, cache=True)
             except ScanMustStopByUserRequest:
                 raise
-            except Exception, e:
+            except (Exception, e):
                 msg = ('Failed to send HTTP request to the configured target'
                        ' URL "%s", the original exception was: "%s" (%s).')
                 args = (url, e, e.__class__.__name__)
@@ -627,7 +627,7 @@ class CoreStrategy(object):
                 current_target_is_404 = is_404(response)
             except ScanMustStopByUserRequest:
                 raise
-            except Exception, e:
+            except (Exception, e):
                 msg = ('Failed to initialize the 404 detection using HTTP'
                        ' response from "%s", the original exception was: "%s"'
                        ' (%s).')

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import time
-import Queue
+import queue
 
 import w3af.core.data.kb.config as cf
 import w3af.core.data.kb.knowledge_base as kb
@@ -113,7 +113,7 @@ class CrawlInfrastructure(BaseConsumer):
 
                     try:
                         self._process_poison_pill()
-                    except Exception, e:
+                    except (Exception, e):
                         msg = 'An exception was found while processing poison pill: "%s"'
                         om.out.debug(msg % e)
                     finally:
@@ -166,7 +166,7 @@ class CrawlInfrastructure(BaseConsumer):
                            ' scan must stop exception was raised')
                 self._log_end_took(msg_fmt, start_time, plugin)
 
-            except Exception, e:
+            except (Exception, e):
                 msg_fmt = ('Spent %.2f seconds running %s.end() until an'
                            ' unhandled exception was found')
                 self._log_end_took(msg_fmt, start_time, plugin)
@@ -215,7 +215,7 @@ class CrawlInfrastructure(BaseConsumer):
         try:
             for observer in self._observers:
                 observer.crawl(self, fuzzable_request)
-        except Exception, e:
+        except (Exception, e):
             self.handle_exception('CrawlInfrastructure',
                                   'CrawlInfrastructure._run_observers()',
                                   'CrawlInfrastructure._run_observers()', e)
@@ -528,7 +528,7 @@ class CrawlInfrastructure(BaseConsumer):
 
         try:
             result = plugin.discover_wrapper(fuzzable_request, debugging_id)
-        except BaseFrameworkException, e:
+        except (BaseFrameworkException, e):
             msg = 'An exception was found while running "%s" with "%s": "%s" (did: %s)'
             args = (plugin.get_name(), fuzzable_request, debugging_id)
             om.out.error(msg % args, e)
@@ -537,7 +537,7 @@ class CrawlInfrastructure(BaseConsumer):
             # that is implemented by raising a RunOnce
             # exception
             self._remove_discovery_plugin(plugin)
-        except Exception, e:
+        except (Exception, e):
             self.handle_exception(plugin.get_type(),
                                   plugin.get_name(),
                                   fuzzable_request,

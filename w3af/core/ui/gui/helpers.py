@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 # This module is a collection of useful code snippets for the GTK gui
 
 import threading
-import Queue
+import queue
 import textwrap
 import gtk
 import os
@@ -203,7 +203,7 @@ class _Wrapper(object):
         """Apply the wrap."""
         try:
             return func(*args, **kwargs)
-        except Exception, err:
+        except (Exception, err):
             if isinstance(err, self.friendly):
                 FriendlyExceptionDlg(str(err))
             raise

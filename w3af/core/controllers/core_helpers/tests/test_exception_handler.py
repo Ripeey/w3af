@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import sys
-import cPickle
+import pickle
 import unittest
 import threading
 
@@ -54,7 +54,7 @@ class TestExceptionHandler(unittest.TestCase):
 
         try:
             raise Exception('unittest')
-        except Exception, e:
+        except (Exception, e):
             exec_info = sys.exc_info()
             enabled_plugins = ''
             self.exception_handler.handle(self.status,
@@ -89,7 +89,7 @@ class TestExceptionHandler(unittest.TestCase):
         for _ in xrange(10):
             try:
                 raise Exception('unittest')
-            except Exception, e:
+            except (Exception, e):
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 self.exception_handler.handle(self.status, e, exec_info,
@@ -115,7 +115,7 @@ class TestExceptionHandler(unittest.TestCase):
         for _ in xrange(10):
             try:
                 raise Exception('unittest')
-            except Exception, e:
+            except (Exception, e):
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 self.exception_handler.handle(self.status, e, exec_info,
@@ -145,7 +145,7 @@ class TestExceptionHandler(unittest.TestCase):
         def test(ehandler):
             try:
                 test2()
-            except Exception, e:
+            except (Exception, e):
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 ehandler.handle(self.status, e, exec_info, enabled_plugins)
@@ -181,7 +181,7 @@ class TestExceptionHandler(unittest.TestCase):
         def test(ehandler):
             try:
                 test2()
-            except Exception, e:
+            except (Exception, e):
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 ehandler.handle(self.status, e, exec_info, enabled_plugins)
@@ -228,8 +228,8 @@ class TestExceptionData(unittest.TestCase):
                                        enabled_plugins,
                                        store_tb=False)
 
-        pickled_ed = cPickle.dumps(exception_data)
-        unpickled_ed = cPickle.loads(pickled_ed)
+        pickled_ed = pickle.dumps(exception_data)
+        unpickled_ed = pickle.loads(pickled_ed)
 
         self.assertEqual(exception_data.to_json(),
                          unpickled_ed.to_json())
@@ -237,7 +237,7 @@ class TestExceptionData(unittest.TestCase):
     def test_serialize_deserialize(self):
         try:
             raise KeyError
-        except Exception, e:
+        except (Exception, e):
             except_type, except_class, tb = sys.exc_info()
             enabled_plugins = '{}'
 
@@ -254,8 +254,8 @@ class TestExceptionData(unittest.TestCase):
                                            enabled_plugins,
                                            store_tb=False)
 
-            pickled_ed = cPickle.dumps(exception_data)
-            unpickled_ed = cPickle.loads(pickled_ed)
+            pickled_ed = pickle.dumps(exception_data)
+            unpickled_ed = pickle.loads(pickled_ed)
 
             self.assertEqual(exception_data.to_json(),
                              unpickled_ed.to_json())
@@ -263,7 +263,7 @@ class TestExceptionData(unittest.TestCase):
     def test_fail_traceback_serialize(self):
         try:
             raise KeyError
-        except Exception, e:
+        except (Exception, e):
             except_type, except_class, tb = sys.exc_info()
             enabled_plugins = '{}'
 
@@ -280,4 +280,4 @@ class TestExceptionData(unittest.TestCase):
                                            enabled_plugins,
                                            store_tb=True)
 
-            self.assertRaises(TypeError, cPickle.dumps, exception_data)
+            self.assertRaises(TypeError, pickle.dumps, exception_data)

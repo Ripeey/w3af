@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import sys
-import platform
+import distro, platform
 import subprocess
 
 from w3af.core.controllers.dependency_check.pip_dependency import PIPDependency
@@ -49,20 +49,19 @@ message "Device not configured".
 class MacOSX(Platform):
     SYSTEM_NAME = 'Mac OS X'
     PKG_MANAGER_CMD = 'sudo port install'
-    PIP_CMD = 'pip-2.7'
+    PIP_CMD = 'pip3'
 
     #
     # Remember to use http://www.macports.org/ports.php to search for
     # packages
     #
     # Python port includes the dev headers
-    CORE_SYSTEM_PACKAGES = ['py27-pip', 'python27', 'py27-setuptools', 'gcc48',
-                            'autoconf', 'automake', 'git-core', 'py27-pcapy',
-                            'py27-libdnet', 'libffi']
+    CORE_SYSTEM_PACKAGES = ['py3-pip', 'python3', 'py3-setuptools', 'gcc48',
+                            'autoconf', 'automake', 'git-core', 'py3-pcapy',
+                            'py3-libdnet', 'libffi']
 
     GUI_SYSTEM_PACKAGES = CORE_SYSTEM_PACKAGES[:]
-    GUI_SYSTEM_PACKAGES.extend(['graphviz', 'py27-pygtksourceview',
-                                'py27-pygtk', 'py27-webkitgtk'])
+    #GUI_SYSTEM_PACKAGES.extend(['graphviz', 'py3-pygtksourceview', 'py3-pygtk', 'py3-webkitgtk'])
 
     SYSTEM_PACKAGES = {CORE: CORE_SYSTEM_PACKAGES,
                        GUI: GUI_SYSTEM_PACKAGES}
@@ -71,7 +70,7 @@ class MacOSX(Platform):
     # https://github.com/andresriancho/w3af/issues/485
     MAC_CORE_PIP_PACKAGES = CORE_PIP_PACKAGES[:]
     MAC_CORE_PIP_PACKAGES.remove(PIPDependency('pybloomfilter',
-                                               'pybloomfiltermmap', '0.3.14'))
+                                               'pybloomfiltermmap3', '0.5.3'))
 
     MAC_GUI_PIP_PACKAGES = MAC_CORE_PIP_PACKAGES[:]
     MAC_GUI_PIP_PACKAGES.extend(GUI_PIP_EXTRAS)
@@ -81,7 +80,7 @@ class MacOSX(Platform):
 
     @staticmethod
     def is_current_platform():
-        return 'darwin' in platform.dist() or 'mac' in platform.dist()
+        return 'darwin' in distro.linux_distribution() or 'mac' in distro.linux_distribution()
 
     @staticmethod
     def os_package_is_installed(package_name):
@@ -116,7 +115,7 @@ class MacOSX(Platform):
             # that python site-packages directory
             pass
         else:
-            print TWO_PYTHON_MSG % sys.executable
+            print(TWO_PYTHON_MSG % sys.executable)
 
         #check if scapy is correctly installed/working on OSX
         try:
@@ -124,6 +123,6 @@ class MacOSX(Platform):
         except ImportError:
             # The user just needs to work on his dependencies.
             pass
-        except OSError, ose:
+        except (OSError, ose):
             if "Device not configured" in str(ose):
                 print(TRACEROUTE_SCAPY_MSG)

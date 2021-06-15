@@ -142,7 +142,7 @@ def get_test_ids(nose_selector):
 @nottest
 def save_noseids_as_json():
     nose_ids = pickle.load(file(ID_FILE))
-    file(JSON_ID_FILE, 'w').write(json.dumps(nose_ids['ids'], indent=4))
+    open(JSON_ID_FILE, 'w').write(json.dumps(nose_ids['ids'], indent=4))
 
 
 @nottest

@@ -123,7 +123,7 @@ class ConsoleUI(object):
         try:
             user_response = raw_input(msg)
         except (KeyboardInterrupt, EOFError):
-            print ''
+            print('')
             user_response = ''
 
         user_response = user_response.lower()
@@ -161,7 +161,7 @@ class ConsoleUI(object):
                 try:
                     c = term.getch()
                     self._handleKey(c)
-                except Exception, e:
+                except (Exception, e):
                     om.out.console(str(e))
 
             term.set_raw_input_mode(False)
@@ -230,7 +230,7 @@ class ConsoleUI(object):
                 self._handlers[key]()
             else:
                 self._paste(key)
-        except Exception, e:
+        except (Exception, e):
             # TODO
             traceback.print_exc()
 
@@ -290,7 +290,7 @@ class ConsoleUI(object):
                 menu = None
                 self.exit()
 
-            except BaseFrameworkException, e:
+            except (BaseFrameworkException, e):
                 menu = None
                 om.out.console(e.value)
 
@@ -444,7 +444,7 @@ class ConsoleUI(object):
 
         try:
             result = shlex.split(line)
-        except ValueError, ve:
+        except (ValueError, ve):
             term.write(str(ve) + '\n')
             return []
         else:
@@ -497,7 +497,7 @@ class ConsoleUI(object):
         
         messages_file = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                      'exitmessages.txt')
-        f = file(messages_file, 'r')
+        f = open(messages_file, 'r')
         lines = f.readlines()
         idx = random.randrange(len(lines))
         line = lines[idx]

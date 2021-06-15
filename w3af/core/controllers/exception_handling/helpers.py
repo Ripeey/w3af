@@ -25,7 +25,7 @@ import copy
 import pprint
 import tempfile
 import StringIO
-import platform
+import distro, platform
 
 from itertools import chain
 
@@ -57,15 +57,15 @@ def gettempdir():
     return tempfile.gettempdir()
 
 
-def get_platform_dist():
+def get_distro.linux_distribution():
     """
-    :return: A human readable representation of platform.dist() , unknown if
+    :return: A human readable representation of distro.linux_distribution() , unknown if
              the module returned none / ''
     """
-    if platform.dist() == ('', '', ''):
+    if distro.linux_distribution() == ('', '', ''):
         return 'Unknown'
 
-    return ' '.join(platform.dist())
+    return ' '.join(distro.linux_distribution())
 
 
 def get_versions():
@@ -88,7 +88,7 @@ def get_versions():
     w3af_version = '\n    '.join(get_w3af_version().split('\n'))
     
     versions = versions % (sys.version.replace('\n', ''),
-                           get_platform_dist(),
+                           get_distro.linux_distribution(),
                            gtk_version,
                            pygtk_version,
                            w3af_version)
@@ -99,7 +99,7 @@ def get_versions():
 def create_crash_file(exception):
     filename = 'w3af-crash-%s.txt' % rand_alnum(5)
     filename = os.path.join(gettempdir(), filename)
-    crash_dump = file(filename, 'w')
+    crash_dump = open(filename, 'w')
     crash_dump.write(_('Submit this bug here:'
                        ' https://github.com/andresriancho/w3af/issues/new \n'))
     crash_dump.write(get_versions())

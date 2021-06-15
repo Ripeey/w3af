@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import os
 import sys
 import time
-import Queue
+import queue
 import threading
 
 from multiprocessing.dummy import Process
@@ -188,7 +188,7 @@ class OutputManager(Process):
     def flush_plugin_output(self):
         """
         Call flush() on all plugins so they write their data to the external
-        file(s) / socket(s) if they want to. This is useful when the scan
+        open(s) / socket(s) if they want to. This is useful when the scan
         takes a lot of time to complete.
 
         By default output plugins have a no-op implementation for flush(), but
@@ -249,7 +249,7 @@ class OutputManager(Process):
 
         try:
             o_plugin.flush()
-        except Exception, exception:
+        except (Exception, exception):
             self._handle_output_plugin_exception(o_plugin, exception)
         finally:
             o_plugin.is_running_flush = False
@@ -443,7 +443,7 @@ class OutputManager(Process):
             try:
                 opl_func_ptr = getattr(o_plugin, action_name)
                 apply(opl_func_ptr, args, kwds)
-            except Exception, exception:
+            except (Exception, exception):
                 self._handle_output_plugin_exception(o_plugin, exception)
 
     def set_output_plugin_inst(self, output_plugin_inst):

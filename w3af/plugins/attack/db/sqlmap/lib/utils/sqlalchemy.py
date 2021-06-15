@@ -69,7 +69,7 @@ class SQLAlchemy(GenericConnector):
                 raise
             except SqlmapFilePathException:
                 raise
-            except Exception, msg:
+            except (Exception, msg):
                 raise SqlmapConnectionException("SQLAlchemy connection issue ('%s')" % msg[0])
 
             self.printConnected()

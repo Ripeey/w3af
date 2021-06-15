@@ -74,7 +74,7 @@ For example, you can do:
   First ten letters: $string.lowercase[:10]$
   The words "spam" and "eggs": $['spam', 'eggs']$
   The content of a file:
-      $[l.strip() for l in file('input.txt').readlines()]$
+      $[l.strip() for l in open('input.txt').readlines()]$
 </tt>
 """
 
@@ -412,12 +412,12 @@ class FuzzyRequests(entries.RememberingWindow):
                                                               fixContentLength)
             error_msg = None
             self.result_ok += 1
-        except HTTPRequestException, e:
+        except (HTTPRequestException, e):
             # One HTTP request failed
             error_msg = str(e)
             http_resp = None
             self.result_err += 1
-        except ScanMustStopException, e:
+        except (ScanMustStopException, e):
             # Many HTTP requests failed and the URL library wants to stop
             error_msg = str(e)
             self.result_err += 1

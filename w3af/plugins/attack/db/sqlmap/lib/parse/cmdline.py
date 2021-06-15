@@ -501,7 +501,7 @@ def cmdLineParser(argv=None):
                                help="Prompt for an interactive SQL shell")
 
         enumeration.add_option("--sql-file", dest="sqlFile",
-                               help="Execute SQL statements from given file(s)")
+                               help="Execute SQL statements from given open(s)")
 
         # Brute force options
         brute = OptionGroup(parser, "Brute force", "These "
@@ -908,7 +908,7 @@ def cmdLineParser(argv=None):
             try:
                 for arg in shlex.split(command):
                     argv.append(getUnicode(arg, encoding=sys.stdin.encoding))
-            except ValueError, ex:
+            except (ValueError, ex):
                 raise SqlmapSyntaxException, "something went wrong during command line parsing ('%s')" % ex.message
 
         for i in xrange(len(argv)):
@@ -954,7 +954,7 @@ def cmdLineParser(argv=None):
 
         try:
             (args, _) = parser.parse_args(argv)
-        except UnicodeEncodeError, ex:
+        except (UnicodeEncodeError, ex):
             dataToStdout("\n[!] %s\n" % ex.object.encode("unicode-escape"))
             raise SystemExit
         except SystemExit:

@@ -9,7 +9,7 @@ machine:
     - docker
 
   python:
-    version: 2.7.3
+    version: 2.7.18
 
   post:
     # This was required to avoid issues with different builds of python being
@@ -51,7 +51,7 @@ dependencies:
     - sudo service clamav-daemon start
 
     # Install the core/console dependencies
-    - pip install --upgrade pip
+    - pip2.7 install --upgrade pip
     - w3af/core/controllers/ci/install_scripts/install_core_dependencies.sh
 
     # Install GUI dependencies
@@ -77,14 +77,14 @@ dependencies:
     # test ID which was running when circleci killed the build. Using that ID
     # and the output of this tool, you'll be able to pinpoint which test was
     # using a lot of memory.
-    - python w3af/core/controllers/ci/nosetests_wrapper/show-test-ids.py
+    - python2.7 w3af/core/controllers/ci/nosetests_wrapper/show-test-ids.py
 
     # Might need more waiting for the docker-compose up command to finish
     - w3af/tests/waitfor-test-dependencies.py
 
   post:
-    - pip --version
-    - pip freeze
+    - pip2.7 --version
+    - pip2.7 freeze
 
 
 test:

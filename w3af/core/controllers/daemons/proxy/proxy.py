@@ -148,7 +148,7 @@ class Proxy(Process):
         except socket.error, se:
             raise ProxyException('Socket error while starting proxy: "%s"'
                                  % se.strerror)
-        except ProxyServerError, pse:
+        except (ProxyServerError, pse):
             raise ProxyException('%s' % pse)
         else:
             # This is here to support port == 0, which will bind to the first

@@ -49,7 +49,7 @@ class Wordlist(object):
                     errMsg += "sure that you haven't made any changes to it"
                     raise SqlmapInstallationException, errMsg
                 if len(_.namelist()) == 0:
-                    errMsg = "no file(s) inside '%s'" % self.current
+                    errMsg = "no open(s) inside '%s'" % self.current
                     raise SqlmapDataException(errMsg)
                 self.fp = _.open(_.namelist()[0])
             else:

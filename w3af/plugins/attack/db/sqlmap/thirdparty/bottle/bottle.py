@@ -159,7 +159,7 @@ else:  # 2.x
     from urllib import urlencode, quote as urlquote, unquote as urlunquote
     from Cookie import SimpleCookie
     from itertools import imap
-    import cPickle as pickle
+    import pickle as pickle
     from StringIO import StringIO as BytesIO
     from ConfigParser import SafeConfigParser as ConfigParser, \
                              Error as ConfigParserError
@@ -2452,7 +2452,7 @@ class ResourceManager(object):
 class FileUpload(object):
     def __init__(self, fileobj, name, filename, headers=None):
         """ Wrapper for file uploads. """
-        #: Open file(-like) object (BytesIO buffer or temporary file)
+        #: Open open(-like) object (BytesIO buffer or temporary file)
         self.file = fileobj
         #: Name of the upload form field
         self.name = name
@@ -2493,11 +2493,11 @@ class FileUpload(object):
         self.file.seek(offset)
 
     def save(self, destination, overwrite=False, chunk_size=2 ** 16):
-        """ Save file to disk or copy its content to an open file(-like) object.
+        """ Save file to disk or copy its content to an open open(-like) object.
             If *destination* is a directory, :attr:`filename` is added to the
             path. Existing files are not overwritten by default (IOError).
 
-            :param destination: File path, directory or file(-like) object.
+            :param destination: File path, directory or open(-like) object.
             :param overwrite: If True, replace existing files. (default: False)
             :param chunk_size: Bytes to read at a time. (default: 64kb)
         """

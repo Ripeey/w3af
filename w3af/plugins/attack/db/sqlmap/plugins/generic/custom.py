@@ -70,7 +70,7 @@ class Custom:
 
                 output = NULL
 
-        except SqlmapNoneDataException, ex:
+        except (SqlmapNoneDataException, ex):
             logger.warn(ex)
 
         return output
@@ -116,7 +116,7 @@ class Custom:
                 dataToStdout("No output\n")
 
     def sqlFile(self):
-        infoMsg = "executing SQL statements from given file(s)"
+        infoMsg = "executing SQL statements from given open(s)"
         logger.info(infoMsg)
 
         for filename in re.split(PARAMETER_SPLITTING_REGEX, conf.sqlFile):

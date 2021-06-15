@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import platform
+import distro, platform
 
 from .fedora import Fedora
 from ..requirements import CORE, GUI
@@ -28,21 +28,20 @@ from ..requirements import CORE, GUI
 class CentOS(Fedora):
     SYSTEM_NAME = 'CentOS'
     PKG_MANAGER_CMD = 'sudo yum install'
-    PIP_CMD = 'pip-python'
+    PIP_CMD = 'pip3'
 
-    CORE_SYSTEM_PACKAGES = ['python-pip','npm', 'python-devel', 'python-setuptools',
+    CORE_SYSTEM_PACKAGES = ['python3-pip','npm', 'python3-devel', 'python3-setuptools',
                             'libsqlite3x-devel', 'gcc-c++', 'gcc', 'make',
                             'git', 'libxml2-devel', 'libxslt-devel',
                             'pyOpenSSL', 'openssl-devel', 'libcom_err-devel',
                             'libcom_err', 'libffi-devel']
 
     GUI_SYSTEM_PACKAGES = CORE_SYSTEM_PACKAGES[:]
-    GUI_SYSTEM_PACKAGES.extend(['graphviz', 'gtksourceview2', 'pygtksourceview',
-                                'pywebkitgtk'])
+    #GUI_SYSTEM_PACKAGES.extend(['graphviz', 'gtksourceview2', 'pygtksourceview', 'pywebkitgtk'])
 
     SYSTEM_PACKAGES = {CORE: CORE_SYSTEM_PACKAGES,
                        GUI: GUI_SYSTEM_PACKAGES}
 
     @staticmethod
     def is_current_platform():
-        return 'redhat' in platform.dist()
+        return 'redhat' in distro.linux_distribution()

@@ -12,7 +12,7 @@ ALEXA_FILE_COMPRESSED = 'top-1m.csv.zip'
 if __name__ == '__main__':
     if not os.path.exists(ALEXA_FILE_COMPRESSED):
         resp = urllib2.urlopen(ALEXA_TOP1M)
-        file(ALEXA_FILE, 'w').write(resp.read())
+        open(ALEXA_FILE, 'w').write(resp.read())
 
     if not os.path.exists(ALEXA_FILE):
         zfile = zipfile.ZipFile(ALEXA_FILE_COMPRESSED)

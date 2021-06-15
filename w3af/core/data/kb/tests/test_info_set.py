@@ -25,7 +25,7 @@ import json
 import unittest
 
 from nose.plugins.attrib import attr
-from cPickle import loads
+from pickle import loads
 
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.kb.info import Info

@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import unittest
-import cPickle
+import pickle
 import copy
 import time
 
@@ -387,7 +387,7 @@ class TestFormParams(unittest.TestCase):
     def test_pickle(self):
         form = create_form_params_helper(form_with_radio + form_with_checkbox)
 
-        pickled_form_params = cPickle.loads(cPickle.dumps(form))
+        pickled_form_params = pickle.loads(pickle.dumps(form))
 
         self.assertEqual(pickled_form_params.items(), form.items())
         self.assertIsNot(form, copy)

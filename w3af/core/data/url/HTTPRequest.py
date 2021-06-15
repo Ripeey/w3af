@@ -193,7 +193,7 @@ class HTTPRequest(RequestMixIn, urllib2.Request):
     @classmethod    
     def from_dict(cls, unserialized_dict):
         """
-        * msgpack is MUCH faster than cPickle,
+        * msgpack is MUCH faster than pickle,
         * msgpack can't serialize python objects,
         * I have to create a dict representation of HTTPRequest to serialize it,
         * and a from_dict to have the object back

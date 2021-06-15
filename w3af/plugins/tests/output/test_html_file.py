@@ -83,7 +83,7 @@ class TestHTMLOutput(PluginTest):
         vuln_url_re = re.compile('<li>Vulnerable URL: <a href="(.*?)">')
         vulns = []
 
-        for line in file(self.OUTPUT_FILE):
+        for line in open(self.OUTPUT_FILE):
 
             mo = vuln_url_re.search(line)
             if mo:
@@ -167,11 +167,11 @@ class TestHTMLRendering(PluginTest):
 
     def test_render(self):
         output = StringIO()
-        template = file(self.plugin._template, 'r')
+        template = open(self.plugin._template, 'r')
 
         result = self.plugin._render_html_file(template, self.CONTEXT, output)
 
         self.assertTrue(result)
 
         output.seek(0)
-        file(os.path.expanduser(self.plugin._output_file_name), 'w').write(output.read())
+        open(os.path.expanduser(self.plugin._output_file_name), 'w').write(output.read())

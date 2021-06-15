@@ -70,8 +70,7 @@ def main(inputFile, outputFile):
         sys.stdout.write(script)
         sys.stdout.close()
     else:
-        print script
-
+        print(script)
 if __name__ == "__main__":
     usage = "%s -i <input file> [-o <output file>]" % sys.argv[0]
     parser = OptionParser(usage=usage, version="0.1")

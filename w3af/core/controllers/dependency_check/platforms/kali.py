@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import platform
+import distro, platform
 
 from .ubuntu1204 import Ubuntu1204
 
@@ -28,7 +28,7 @@ According to Kali's documentation [0] in order to avoid breaking the packaged\
  w3af version you should run the following commands:
 
 cd ~
-apt-get install -y python-pip
+apt-get install -y python3-pip
 pip install --upgrade pip
 git clone https/github.com/andresriancho/w3af.git
 cd w3af
@@ -48,5 +48,5 @@ class Kali(Ubuntu1204):
 
     @staticmethod
     def is_current_platform():
-        return 'debian' in platform.dist() and 'kali' in platform.release()
+        return 'debian' in distro.linux_distribution() and 'kali' in platform.release()
 

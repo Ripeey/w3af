@@ -234,7 +234,7 @@ class find_vhosts(InfrastructurePlugin):
         for ne_domain in (non_existent_domain, non_existent_subdomain):
             try:
                 http_response = self._http_get_vhost(base_url, ne_domain)
-            except Exception, e:
+            except (Exception, e):
                 msg = 'Failed to generate invalid domain fingerprint: %s'
                 om.out.debug(msg % e)
             else:

@@ -122,7 +122,7 @@ class wordpress_fingerprint(CrawlPlugin):
 
             release_db = self._release_db
 
-            for line in file(release_db):
+            for line in open(release_db):
                 try:
                     line = line.strip()
                     release_db_hash, release_db_name = line.split(',')
@@ -256,7 +256,7 @@ class wordpress_fingerprint(CrawlPlugin):
         try:
             wordpress_fp_fd = codecs.open(self.WP_VERSIONS_XML, 'r', 'utf-8',
                                           errors='ignore')
-        except Exception, e:
+        except (Exception, e):
             msg = 'Failed to open wordpress fingerprint database "%s": "%s".'
             args = (self.WP_VERSIONS_XML, e)
             raise BaseFrameworkException(msg % args)
@@ -268,7 +268,7 @@ class wordpress_fingerprint(CrawlPlugin):
         
         try:
             parser.parse(wordpress_fp_fd)
-        except Exception, e:
+        except (Exception, e):
             msg = 'XML parsing error in wordpress version DB, exception: "%s".'
             raise BaseFrameworkException(msg % e)
         

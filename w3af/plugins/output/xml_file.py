@@ -199,7 +199,7 @@ class xml_file(OutputPlugin):
 
         try:
             self._add_scan_status_to_context(context)
-        except RuntimeError, rte:
+        except (RuntimeError, rte):
             # In some very strange scenarios we get this error:
             #
             #   Can NOT call get_run_time before start()
@@ -291,10 +291,10 @@ class xml_file(OutputPlugin):
         # This for loop is a performance improvement which should yield
         # really good results, taking into account that get_all_uniq_ids_iter
         # will only query the DB and yield IDs, without doing any of the
-        # CPU-intensive cPickle.loads() done in get_all_findings_iter()
+        # CPU-intensive pickle.loads() done in get_all_findings_iter()
         # which we do below.
         #
-        # Ideally, we're only doing a cPickle.loads() once for each finding
+        # Ideally, we're only doing a pickle.loads() once for each finding
         # the rest of the calls to flush() will load the finding from the
         # cache in this loop, and use the exclude_ids to prevent cached
         # entries from being queried

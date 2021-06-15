@@ -20,7 +20,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import unittest
-import cPickle
+import pickle
 import os
 from random import choice
 
@@ -172,8 +172,8 @@ class TestHTTPResponse(unittest.TestCase):
         headers = Headers([('Content-Type', 'text/html')])
         resp = self.create_resp(headers, html)
         
-        pickled_resp = cPickle.dumps(resp)
-        unpickled_resp = cPickle.loads(pickled_resp)
+        pickled_resp = pickle.dumps(resp)
+        unpickled_resp = pickle.loads(pickled_resp)
         
         self.assertEqual(unpickled_resp, resp)
 
@@ -258,7 +258,7 @@ class TestHTTPResponse(unittest.TestCase):
         TEST_FILE = os.path.join(ROOT_PATH, 'core', 'controllers', 'misc', 'tests',
                                  'data', 'code-detect-false-positive.jpg')
 
-        body = file(TEST_FILE).read()
+        body = open(TEST_FILE).read()
 
         # Note: This is failing when the body contains binary, the content-type
         # is text/html, and the HTTPResponse object trusts the content-type

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import unittest
-import cPickle
+import pickle
 import copy
 
 from nose.plugins.attrib import attr
@@ -278,7 +278,7 @@ class TestFuzzableRequest(unittest.TestCase):
     def test_pickle(self):
         fr = self.create_simple_fuzzable_request()
 
-        unpickled_fr = cPickle.loads(cPickle.dumps(fr))
+        unpickled_fr = pickle.loads(pickle.dumps(fr))
         self.assertEqual(fr, unpickled_fr)
 
     def test_deepcopy(self):

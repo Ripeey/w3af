@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import unittest
 import urllib
 import copy
-import cPickle
+import pickle
 
 from nose.plugins.attrib import attr
 
@@ -165,8 +165,8 @@ class TestURLEncodedForm(unittest.TestCase):
         form = URLEncodedForm.from_postdata(headers, post_data)
         form.set_token(('a', 0))
 
-        pickled_form = cPickle.dumps(form)
-        unpickled_form = cPickle.loads(pickled_form)
+        pickled_form = pickle.dumps(form)
+        unpickled_form = pickle.loads(pickled_form)
 
         self.assertEqual(form, unpickled_form)
         self.assertEqual(form.get_token(), unpickled_form.get_token())

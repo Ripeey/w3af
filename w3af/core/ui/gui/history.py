@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-import cPickle
+import pickle
 import msgpack
 import operator
 import os
@@ -51,7 +51,7 @@ class HistorySuggestion(object):
                 # it and migrate to msgpack
                 #
                 try:
-                    self.history = cPickle.load(file(filename, 'rb'))
+                    self.history = pickle.load(file(filename, 'rb'))
                 except:
                     #
                     # Well... the file is completely broken, just write an
@@ -59,14 +59,14 @@ class HistorySuggestion(object):
                     # the next time the user executes the GUI
                     #
                     self.history = {}
-                    msgpack.dump({}, file(filename, 'wb'))
+                    msgpack.dump({}, open(filename, 'wb'))
                 else:
                     #
                     # We were able to read using pickle, migrate the file to
                     # msgpack to prevent deserialization issues
                     # https://github.com/andresriancho/w3af/issues/17807
                     #
-                    msgpack.dump(self.history, file(filename, 'wb'))
+                    msgpack.dump(self.history, open(filename, 'wb'))
 
     def get_texts(self):
         """Provides the texts, ordered by relevance.
@@ -84,7 +84,7 @@ class HistorySuggestion(object):
     def save(self):
         """Saves the history information."""
         fileh = open(self.filename, "w")
-        cPickle.dump(self.history, fileh)
+        pickle.dump(self.history, fileh)
         fileh.close()
 
 

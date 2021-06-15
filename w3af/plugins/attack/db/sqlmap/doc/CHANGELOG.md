@@ -80,7 +80,7 @@
 * Added switch `--skip-urlencode` to skip URL encoding of payload data.
 * Added switch `--skip-waf` to skip heuristic detection of WAF/IPS/IDS protection.
 * Added switch `--smart` to conduct thorough tests only if positive heuristic(s).
-* Added option `--sql-file` for setting file(s) holding SQL statements to be executed (in case of stacked SQLi).
+* Added option `--sql-file` for setting open(s) holding SQL statements to be executed (in case of stacked SQLi).
 * Added switch `--sqlmap-shell` to turn on interactive sqlmap shell prompt.
 * Added option `--test-filter` for test filtration by payloads and/or titles (e.g. `ROW`).
 * Added option `--test-skip` for skipping tests by payloads and/or titles (e.g. `BENCHMARK`).

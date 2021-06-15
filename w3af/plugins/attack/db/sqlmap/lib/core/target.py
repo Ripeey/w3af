@@ -418,7 +418,7 @@ def _setHashDB():
             try:
                 os.remove(conf.hashDBFile)
                 logger.info("flushing session file")
-            except OSError, msg:
+            except (OSError, msg):
                 errMsg = "unable to flush the session file (%s)" % msg
                 raise SqlmapFilePathException(errMsg)
 
@@ -554,7 +554,7 @@ def _setResultsFile():
                 conf.resultsFP = openFile(conf.resultsFilename, "w+", UNICODE_ENCODING, buffering=0)
                 warnMsg += "Using temporary file '%s' instead" % conf.resultsFilename
                 logger.warn(warnMsg)
-            except IOError, _:
+            except (IOError, _):
                 errMsg = "unable to write to the temporary directory ('%s'). " % _
                 errMsg += "Please make sure that your disk is not full and "
                 errMsg += "that you have sufficient write permissions to "
@@ -578,7 +578,7 @@ def _createFilesDir():
     if not os.path.isdir(conf.filePath):
         try:
             os.makedirs(conf.filePath, 0755)
-        except OSError, ex:
+        except (OSError, ex):
             tempDir = tempfile.mkdtemp(prefix="sqlmapfiles")
             warnMsg = "unable to create files directory "
             warnMsg += "'%s' (%s). " % (conf.filePath, getUnicode(ex))
@@ -600,7 +600,7 @@ def _createDumpDir():
     if not os.path.isdir(conf.dumpPath):
         try:
             os.makedirs(conf.dumpPath, 0755)
-        except OSError, ex:
+        except (OSError, ex):
             tempDir = tempfile.mkdtemp(prefix="sqlmapdump")
             warnMsg = "unable to create dump directory "
             warnMsg += "'%s' (%s). " % (conf.dumpPath, getUnicode(ex))
@@ -632,7 +632,7 @@ def _createTargetDirs():
     except (OSError, IOError), ex:
         try:
             tempDir = tempfile.mkdtemp(prefix="sqlmapoutput")
-        except Exception, _:
+        except (Exception, _):
             errMsg = "unable to write to the temporary directory ('%s'). " % _
             errMsg += "Please make sure that your disk is not full and "
             errMsg += "that you have sufficient write permissions to "
@@ -654,7 +654,7 @@ def _createTargetDirs():
     except (OSError, IOError, TypeError), ex:
         try:
             tempDir = tempfile.mkdtemp(prefix="sqlmapoutput")
-        except Exception, _:
+        except (Exception, _):
             errMsg = "unable to write to the temporary directory ('%s'). " % _
             errMsg += "Please make sure that your disk is not full and "
             errMsg += "that you have sufficient write permissions to "
@@ -675,7 +675,7 @@ def _createTargetDirs():
             f.write("  # %s" % getUnicode(subprocess.list2cmdline(sys.argv), encoding=sys.stdin.encoding))
             if conf.data:
                 f.write("\n\n%s" % getUnicode(conf.data))
-    except IOError, ex:
+    except (IOError, ex):
         if "denied" in getUnicode(ex):
             errMsg = "you don't have enough permissions "
         else:

@@ -370,7 +370,7 @@ class TestDiskList(unittest.TestCase):
         #
         #   This test runs in ~5.0 seconds on my workstation
         #
-        #   It seems that cPickle takes almost no time to serialize
+        #   It seems that pickle takes almost no time to serialize
         #   a simple string.
         #
         count = 30000

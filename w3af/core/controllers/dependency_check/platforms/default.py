@@ -24,7 +24,7 @@ from ..requirements import CORE, GUI
 
 
 class DefaultPlatform(Platform):
-    PIP_CMD = 'pip'
+    PIP_CMD = 'pip3'
 
     # Should never be used since we have an empty SYSTEM_PACKAGES
     PKG_MANAGER_CMD = ''

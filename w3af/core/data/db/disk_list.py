@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import __builtin__
 
 import hashlib
-import cPickle
+import pickle
 
 from w3af.core.data.misc.cpickle_dumps import cpickle_dumps
 from w3af.core.data.db.disk_item import DiskItem
@@ -96,7 +96,7 @@ class DiskList(object):
     def _dump(self, obj):
         """
         Serialize an object, using the dump function provided in __init__
-        or cPickle if None was specified.
+        or pickle if None was specified.
 
         :return: A string containing the object
         """
@@ -108,7 +108,7 @@ class DiskList(object):
     def _load(self, serialized_object):
         """
         Load an object instance using the load function provided in __init__
-        or cPickle if None was specified.
+        or pickle if None was specified.
 
         :param serialized_object: The string containing the object
         :return: An instance
@@ -116,7 +116,7 @@ class DiskList(object):
         if self.load is not None:
             return self.load(serialized_object)
 
-        return cPickle.loads(serialized_object)
+        return pickle.loads(serialized_object)
 
     def _get_eq_attrs_values(self, obj):
         """

@@ -81,7 +81,7 @@ class spider_man(CrawlPlugin):
                                        plugin=self,
                                        target_domain=fuzzable_request.get_url().get_domain(),
                                        name='SpiderManProxyThread')
-        except ProxyException, proxy_exc:
+        except (ProxyException, proxy_exc):
             om.out.error('%s' % proxy_exc)
         
         else:
@@ -195,7 +195,7 @@ class LoggingHandler(ProxyHandler):
 
                 # Send the request to the remote webserver
                 http_response = self._send_http_request(http_request, grep=grep)
-        except Exception, e:
+        except (Exception, e):
             trace = str(traceback.format_exc())
             http_response = self._create_error_response(http_request, None, e,
                                                         trace=trace)
@@ -233,7 +233,7 @@ class LoggingHandler(ProxyHandler):
         ))
 
         http_response = HTTPResponse(200,
-                                     file(favicon, 'rb').read(),
+                                     open(favicon, 'rb').read(),
                                      headers,
                                      http_response.get_uri(),
                                      http_response.get_uri(),

@@ -39,11 +39,11 @@ __all__ = ['Pool']
 #
 
 import threading
-import Queue
+import queue
 import itertools
 import collections
 import time
-import cPickle
+import pickle
 
 from multiprocessing import Process, cpu_count, TimeoutError
 from multiprocessing.util import Finalize, debug
@@ -129,7 +129,7 @@ def worker(inqueue, outqueue, initializer=None, initargs=(), maxtasks=None):
         job, i, func, args, kwds = task
         try:
             result = (True, func(*args, **kwds))
-        except Exception, e:
+        except (Exception, e):
             result = (False, e)
 
         try:
@@ -153,7 +153,7 @@ def create_detailed_pickling_error(exception, instance):
 
     def can_pickle(data):
         try:
-            cPickle.dumps(v)
+            pickle.dumps(v)
         except:
             return False
         else:

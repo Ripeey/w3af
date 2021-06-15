@@ -372,8 +372,7 @@ class RequestResponsePart(gtk.Notebook):
             view.initial = False
 
     def show_error(self, text):
-        print text
-
+        print(text)
     def show_object(self, obj):
         self._obj = obj
 
@@ -438,9 +437,8 @@ class ResponsePart(RequestResponsePart):
         try:
             rend = getRenderingView(w3af, self)
             self.add_view(rend)
-        except Exception, ex:
-            print ex
-
+        except (Exception, ex):
+            print(ex)
     def get_both_texts(self):
         return self._obj.dump_response_head(), str(self._obj.get_body())
 
@@ -510,7 +508,7 @@ class ThreadedURLImpact(threading.Thread):
                     try:
                         tmp_result = plugin.audit_return_vulns(self.request)
                         plugin.end()
-                    except BaseFrameworkException, e:
+                    except (BaseFrameworkException, e):
                         om.out.error(str(e))
                     else:
                         #
@@ -530,7 +528,7 @@ class ThreadedURLImpact(threading.Thread):
                 try:
                     self.result = plugin.audit_return_vulns(self.request)
                     plugin.end()
-                except BaseFrameworkException, e:
+                except (BaseFrameworkException, e):
                     om.out.error(str(e))
                 else:
                     #
@@ -542,7 +540,7 @@ class ThreadedURLImpact(threading.Thread):
             #   We got here, everything is OK!
             self.ok = True
 
-        except Exception, e:
+        except (Exception, e):
             self.exception = e
             #
             #   This is for debugging errors in the audit button of the

@@ -86,8 +86,8 @@ class json_file(OutputPlugin):
         self.output_file = os.path.expanduser(self.output_file)
 
         try:
-            output_handler = file(self.output_file, 'wb')
-        except IOError, ioe:
+            output_handler = open(self.output_file, 'wb')
+        except (IOError, ioe):
             msg = 'Failed to open the output file for writing: "%s"'
             om.out.error(msg % ioe)
             return
@@ -125,7 +125,7 @@ class json_file(OutputPlugin):
                         "VulnDB ID": info.get_vulndb_id(),
                         "Description": info.get_desc()}
                 items.append(item)
-            except Exception, e:
+            except (Exception, e):
                 msg = ('An exception was raised while trying to write the '
                        ' vulnerabilities to the output file. Exception: "%s"')
                 om.out.error(msg % e)

@@ -34,6 +34,7 @@ from .kali import Kali
 from .kali2 import Kali2
 from .mac import MacOSX
 from .openbsd import OpenBSD5
+from .parrotos import ParrotOS
 from .suse import SuSE
 from .elementaryOS02 import ElementaryOS02
 from .default import DefaultPlatform
@@ -50,6 +51,7 @@ KNOWN_PLATFORMS = [
                    Kali2,
                    MacOSX,
                    OpenBSD5,
+                   ParrotOS,
                    SuSE,
                    Ubuntu1204,
                    Ubuntu1404,

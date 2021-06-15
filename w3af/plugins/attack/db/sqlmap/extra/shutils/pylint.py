@@ -23,7 +23,7 @@ def check(module):
             if re.match(r"\AE:", line):
                 print line.strip()
             if __RATING__ and "Your code has been rated at" in line:
-                print line
+                print(line)
                 score = re.findall(r"\d.\d\d", line)[0]
                 total += float(score)
                 count += 1

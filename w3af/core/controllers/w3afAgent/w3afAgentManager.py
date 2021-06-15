@@ -182,7 +182,7 @@ class w3afAgentManager(Process):
         if python.startswith('/'):
             client = os.path.join(ROOT_PATH, 'core', 'controllers', 'w3afAgent',
                                   'client', 'w3afAgentClient.py')
-            file_content = file(client).read()
+            file_content = open(client).read()
             extension = 'py'
             interpreter = python
         else:
@@ -213,7 +213,7 @@ class w3afAgentManager(Process):
         es = extrusionScanner(self._exec_method)
         try:
             inbound_port = es.get_inbound_port()
-        except Exception, e:
+        except (Exception, e):
 
             om.out.error('The extrusion scan failed.')
             om.out.error('Error: ' + str(e))

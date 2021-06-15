@@ -105,7 +105,7 @@ class ExecShell(Shell):
             return 'Remote file does not exist.'
         else:
             try:
-                fh = file(local_filename, 'w')
+                fh = open(local_filename, 'w')
             except:
                 return 'Failed to open local file for writing.'
             else:
@@ -125,7 +125,7 @@ class ExecShell(Shell):
         :return: The message to show to the user.
         """
         try:
-            fh = file(local_filename, 'r')
+            fh = open(local_filename, 'r')
         except:
             return 'Failed to open local file for reading.'
         else:
@@ -149,7 +149,7 @@ class ExecShell(Shell):
             try:
                 ptf = payload_transfer_factory(self.execute)
                 self._transfer_handler = ptf.get_transfer_handler()
-            except BaseFrameworkException, e:
+            except (BaseFrameworkException, e):
                 return '%s' % e
 
         if not self._transfer_handler.can_transfer():

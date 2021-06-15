@@ -86,8 +86,7 @@ class rootMenu(menu):
                    " printed to the console, we advise you to enable at least"
                    " one output plugin in order to be able to actually see the"
                    " the scan output.")
-            print msg
-
+            print(msg)
         # Note that I'm NOT starting this in a new multiprocess Process
         # please note the multiprocessing.dummy , this is required because
         # I want to start new threads inside this thread and there is a bug
@@ -142,9 +141,9 @@ class rootMenu(menu):
             self._w3af.plugins.init_plugins()
             self._w3af.verify_environment()
             self._w3af.start()
-        except BaseFrameworkException, w3:
+        except (BaseFrameworkException, w3):
             om.out.error(str(w3))
-        except ScanMustStopException, w3:
+        except (ScanMustStopException, w3):
             om.out.error(str(w3))
         except Exception:
             self._w3af.stop()

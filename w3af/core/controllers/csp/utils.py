@@ -76,7 +76,7 @@ MIME_TYPES = MimeTypes().types_map[1].values()
 
 # Define NamedTuple tuple subclass to represents a CSP vulnerability.
 # Declare type here in order to expose it with project visibility
-# and permit cPickle processing to see it. See link below:
+# and permit pickle processing to see it. See link below:
 # http://stackoverflow.com/questions/4677012/python-cant-pickle-type-x-attribute-lookup-failed
 CSPVulnerability = namedtuple('CSPVulnerability', ['desc', 'severity'])            
 

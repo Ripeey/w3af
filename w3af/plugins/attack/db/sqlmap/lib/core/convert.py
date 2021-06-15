@@ -6,7 +6,7 @@ See the file 'LICENSE' for copying permission
 """
 
 try:
-    import cPickle as pickle
+    import pickle as pickle
 except:
     import pickle
 finally:

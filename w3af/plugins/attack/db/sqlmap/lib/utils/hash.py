@@ -40,7 +40,7 @@ from hashlib import sha224
 from hashlib import sha256
 from hashlib import sha384
 from hashlib import sha512
-from Queue import Queue
+from queue import Queue
 
 from lib.core.common import Backend
 from lib.core.common import checkFile
@@ -762,7 +762,7 @@ def _bruteProcessVariantA(attack_info, hash_regex, suffix, retVal, proc_id, proc
             except (UnicodeEncodeError, UnicodeDecodeError):
                 pass  # ignore possible encoding problems caused by some words in custom dictionaries
 
-            except Exception, e:
+            except (Exception, e):
                 warnMsg = "there was a problem while hashing entry: %s (%s). " % (repr(word), e)
                 warnMsg += "Please report by e-mail to '%s'" % DEV_EMAIL_ADDRESS
                 logger.critical(warnMsg)
@@ -836,7 +836,7 @@ def _bruteProcessVariantB(user, hash_, kwargs, hash_regex, suffix, retVal, found
             except (UnicodeEncodeError, UnicodeDecodeError):
                 pass  # ignore possible encoding problems caused by some words in custom dictionaries
 
-            except Exception, e:
+            except (Exception, e):
                 warnMsg = "there was a problem while hashing entry: %s (%s). " % (repr(word), e)
                 warnMsg += "Please report by e-mail to '%s'" % DEV_EMAIL_ADDRESS
                 logger.critical(warnMsg)
@@ -980,14 +980,14 @@ def dictionaryAttack(attack_dict):
                         if os.path.splitext(dictPath)[1].lower() == ".zip":
                             _ = zipfile.ZipFile(dictPath, 'r')
                             if len(_.namelist()) == 0:
-                                errMsg = "no file(s) inside '%s'" % dictPath
+                                errMsg = "no open(s) inside '%s'" % dictPath
                                 raise SqlmapDataException(errMsg)
                             else:
                                 _.open(_.namelist()[0])
 
                     kb.wordlists = dictPaths
 
-                except Exception, ex:
+                except (Exception, ex):
                     warnMsg = "there was a problem while loading dictionaries"
                     warnMsg += " ('%s')" % getSafeExString(ex)
                     logger.critical(warnMsg)
