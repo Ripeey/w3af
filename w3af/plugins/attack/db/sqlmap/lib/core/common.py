@@ -36,7 +36,7 @@ import unicodedata
 
 from ConfigParser import DEFAULTSECT
 from ConfigParser import RawConfigParser
-from StringIO import StringIO
+from io import StringIO
 from difflib import SequenceMatcher
 from math import sqrt
 from optparse import OptionValueError

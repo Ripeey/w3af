@@ -160,7 +160,7 @@ else:  # 2.x
     from Cookie import SimpleCookie
     from itertools import imap
     import pickle as pickle
-    from StringIO import StringIO as BytesIO
+    from io import StringIO as BytesIO
     from ConfigParser import SafeConfigParser as ConfigParser, \
                              Error as ConfigParserError
     if py25:

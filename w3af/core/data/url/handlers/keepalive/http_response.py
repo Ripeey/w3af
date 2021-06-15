@@ -3,7 +3,7 @@ import httplib
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 from .utils import debug
 from w3af.core.data.constants.response_codes import NO_CONTENT

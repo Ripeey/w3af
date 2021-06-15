@@ -11,7 +11,7 @@ import types
 import urllib2
 from urllib.parse import urlparse
 
-from StringIO import StringIO
+from io import StringIO
 
 from lib.core.data import conf
 from lib.core.data import kb

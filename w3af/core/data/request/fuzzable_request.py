@@ -25,8 +25,7 @@ import hashlib
 import collections
 
 from itertools import chain
-from urllib import unquote, quote, quote_plus
-
+from urllib.parse import unquote, quote, quote_plus
 import w3af.core.controllers.output_manager as om
 import w3af.core.data.kb.config as cf
 
