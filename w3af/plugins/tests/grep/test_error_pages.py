@@ -71,7 +71,7 @@ class TestErrorPages(PluginTest):
         body = plugin.ERROR_PAGES[5]
         headers = Headers({'content-type': 'text/html'}.items())
 
-        for i in xrange(plugin.MAX_REPORTED_PER_MSG * 2):
+        for i in range(plugin.MAX_REPORTED_PER_MSG * 2):
             url = URL('http://www.w3af.com/%s' % i)
             request = FuzzableRequest(url, method='GET')
             response = HTTPResponse(200, body, headers, url, url, _id=1)
@@ -90,7 +90,7 @@ class TestErrorPages(PluginTest):
         body = plugin.ERROR_PAGES[5]
         headers = Headers({'content-type': 'text/html'}.items())
 
-        for i in xrange(plugin.MAX_REPORTED_PER_MSG * 2):
+        for i in range(plugin.MAX_REPORTED_PER_MSG * 2):
             url = URL('http://www.w3af.com/%s' % i)
             request = FuzzableRequest(url, method='GET')
             response = HTTPResponse(200, body, headers, url, url, _id=1)

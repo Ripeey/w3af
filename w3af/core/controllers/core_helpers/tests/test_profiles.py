@@ -144,7 +144,7 @@ class TestCoreProfiles(unittest.TestCase):
         """
         valid, _ = self.core.profiles.get_profile_list('.')
 
-        for _ in xrange(10):
+        for _ in range(10):
             for profile_inst in valid:
                 profile_name = profile_inst.get_name()
 

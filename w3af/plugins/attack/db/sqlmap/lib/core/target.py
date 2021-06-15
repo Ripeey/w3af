@@ -295,17 +295,17 @@ def _setRequestParams():
                 conf.paramDict[place] = OrderedDict()
 
                 if place == PLACE.CUSTOM_HEADER:
-                    for index in xrange(len(conf.httpHeaders)):
+                    for index in range(len(conf.httpHeaders)):
                         header, value = conf.httpHeaders[index]
                         if kb.customInjectionMark in re.sub(PROBLEMATIC_CUSTOM_INJECTION_PATTERNS, "", value):
                             parts = value.split(kb.customInjectionMark)
-                            for i in xrange(len(parts) - 1):
-                                conf.paramDict[place]["%s #%d%s" % (header, i + 1, kb.customInjectionMark)] = "%s,%s" % (header, "".join("%s%s" % (parts[j], kb.customInjectionMark if i == j else "") for j in xrange(len(parts))))
+                            for i in range(len(parts) - 1):
+                                conf.paramDict[place]["%s #%d%s" % (header, i + 1, kb.customInjectionMark)] = "%s,%s" % (header, "".join("%s%s" % (parts[j], kb.customInjectionMark if i == j else "") for j in range(len(parts))))
                             conf.httpHeaders[index] = (header, value.replace(kb.customInjectionMark, ""))
                 else:
                     parts = value.split(kb.customInjectionMark)
 
-                    for i in xrange(len(parts) - 1):
+                    for i in range(len(parts) - 1):
                         name = None
                         if kb.postHint:
                             for ending, _ in hintNames:
@@ -314,7 +314,7 @@ def _setRequestParams():
                                     break
                         if name is None:
                             name = "%s#%s%s" % (("%s " % kb.postHint) if kb.postHint else "", i + 1, kb.customInjectionMark)
-                        conf.paramDict[place][name] = "".join("%s%s" % (parts[j], kb.customInjectionMark if i == j else "") for j in xrange(len(parts)))
+                        conf.paramDict[place][name] = "".join("%s%s" % (parts[j], kb.customInjectionMark if i == j else "") for j in range(len(parts)))
 
                     if place == PLACE.URI and PLACE.GET in conf.paramDict:
                         del conf.paramDict[PLACE.GET]

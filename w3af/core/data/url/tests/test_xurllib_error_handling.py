@@ -76,12 +76,12 @@ class TestXUrllibDelayOnError(unittest.TestCase):
 
         # Now check the delays
         with patch('w3af.core.data.url.extended_urllib.time.sleep') as sleepm:
-            for i in xrange(loops):
+            for i in range(loops):
                 try:
                     self.uri_opener.GET(url, cache=False)
                 except HTTPRequestException:
                     http_exception_count += 1
-                except (Exception, e):
+                except Exception as e:
                     msg = 'Not expecting: "%s"'
                     self.assertTrue(False, msg % e.__class__.__name__)
                 else:
@@ -159,14 +159,14 @@ class TestXUrllibDelayOnError(unittest.TestCase):
         loops = 100
 
         # Loop until we reach a must stop exception
-        for i in xrange(loops):
+        for i in range(loops):
             try:
                 self.uri_opener.GET(url, cache=False)
             except HTTPRequestException:
                 http_exception_count += 1
             except (ScanMustStopByKnownReasonExc, smse):
                 break
-            except (Exception, e):
+            except Exception as e:
                 msg = 'Not expecting: "%s"'
                 self.assertTrue(False, msg % e.__class__.__name__)
             else:
@@ -176,7 +176,7 @@ class TestXUrllibDelayOnError(unittest.TestCase):
         self.assertEquals(http_exception_count, 9)
 
         # After reaching this state we will always yield ScanMustStopByKnownReasonExc
-        for i in xrange(loops):
+        for i in range(loops):
             self.assertRaises(ScanMustStopByKnownReasonExc,
                               self.uri_opener.GET, url, cache=False)
 

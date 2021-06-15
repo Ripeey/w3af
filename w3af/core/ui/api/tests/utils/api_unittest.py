@@ -63,7 +63,7 @@ class APIUnitTest(unittest.TestCase):
         Wait until the scan is in Running state
         :return: The HTTP response
         """
-        for _ in xrange(10):
+        for _ in range(10):
             time.sleep(0.5)
 
             response = self.app.get('/scans/', headers=self.HEADERS)
@@ -81,7 +81,7 @@ class APIUnitTest(unittest.TestCase):
         """
         status = None
 
-        for _ in xrange(wait_loops):
+        for _ in range(wait_loops):
             time.sleep(0.5)
 
             response = self.app.get('/scans/', headers=self.HEADERS)

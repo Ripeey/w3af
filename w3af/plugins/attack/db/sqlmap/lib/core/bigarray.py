@@ -92,7 +92,7 @@ class BigArray(list):
         return self.chunks[-1].pop()
 
     def index(self, value):
-        for index in xrange(len(self)):
+        for index in range(len(self)):
             if self[index] == value:
                 return index
 
@@ -141,7 +141,7 @@ class BigArray(list):
         i = max(0, len(self) + i if i < 0 else i)
         j = min(len(self), len(self) + j if j < 0 else j)
 
-        for _ in xrange(i, j):
+        for _ in range(i, j):
             retval.append(self[_])
 
         return retval
@@ -176,7 +176,7 @@ class BigArray(list):
         return "%s%s" % ("..." if len(self.chunks) > 1 else "", self.chunks[-1].__repr__())
 
     def __iter__(self):
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             yield self[i]
 
     def __len__(self):

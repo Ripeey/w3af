@@ -262,7 +262,7 @@ def _feedTargetsDict(reqFile, addedTargetUrls):
             lines = request.split('\n')
             headers = []
 
-            for index in xrange(len(lines)):
+            for index in range(len(lines)):
                 line = lines[index]
 
                 if not line.strip() and index == len(lines) - 1:
@@ -398,7 +398,7 @@ def _loadQueries():
     tree = ElementTree()
     try:
         tree.parse(paths.QUERIES_XML)
-    except (Exception, ex):
+    except Exception as ex:
         errMsg = "something appears to be wrong with "
         errMsg += "the file '%s' ('%s'). Please make " % (paths.QUERIES_XML, getSafeExString(ex))
         errMsg += "sure that you haven't made any changes to it"
@@ -506,7 +506,7 @@ def _setCrawler():
             targets = getFileItems(conf.bulkFile)
         else:
             targets = parseSitemap(conf.sitemapUrl)
-        for i in xrange(len(targets)):
+        for i in range(len(targets)):
             try:
                 target = targets[i]
                 crawl(target)
@@ -514,7 +514,7 @@ def _setCrawler():
                 if conf.verbose in (1, 2):
                     status = "%d/%d links visited (%d%%)" % (i + 1, len(targets), round(100.0 * (i + 1) / len(targets)))
                     dataToStdout("\r[%s] [INFO] %s" % (time.strftime("%X"), status), True)
-            except (Exception, ex):
+            except Exception as ex:
                 errMsg = "problem occurred while crawling at '%s' ('%s')" % (target, getSafeExString(ex))
                 logger.error(errMsg)
 
@@ -639,7 +639,7 @@ def _findPageForms():
         elif conf.googleDork:
             targets = [_[0] for _ in kb.targets]
             kb.targets.clear()
-        for i in xrange(len(targets)):
+        for i in range(len(targets)):
             try:
                 target = targets[i]
                 page, _, _ = Request.getPage(url=target.strip(), crawling=True, raise404=False)
@@ -650,7 +650,7 @@ def _findPageForms():
                     dataToStdout("\r[%s] [INFO] %s" % (time.strftime("%X"), status), True)
             except KeyboardInterrupt:
                 break
-            except (Exception, ex):
+            except Exception as ex:
                 errMsg = "problem occurred while searching for forms at '%s' ('%s')" % (target, getSafeExString(ex))
                 logger.error(errMsg)
 
@@ -1125,7 +1125,7 @@ def _setHTTPHandlers():
 
         try:
             _ = urlparse.urlsplit(conf.proxy)
-        except (Exception, ex):
+        except Exception as ex:
             errMsg = "invalid proxy address '%s' ('%s')" % (conf.proxy, getSafeExString(ex))
             raise SqlmapSyntaxException, errMsg
 
@@ -1440,7 +1440,7 @@ def _setHTTPUserAgent():
         message += "through HTTP User-Agent header?\n"
         items = sorted(getPublicTypeMembers(MOBILES, True))
 
-        for count in xrange(len(items)):
+        for count in range(len(items)):
             item = items[count]
             message += "[%d] %s%s\n" % (count + 1, item[0], " (default)" if item == MOBILES.IPHONE else "")
 
@@ -2451,14 +2451,14 @@ def _basicOptionValidation():
     if conf.regexp:
         try:
             re.compile(conf.regexp)
-        except (Exception, ex):
+        except Exception as ex:
             errMsg = "invalid regular expression '%s' ('%s')" % (conf.regexp, getSafeExString(ex))
             raise SqlmapSyntaxException(errMsg)
 
     if conf.crawlExclude:
         try:
             re.compile(conf.crawlExclude)
-        except (Exception, ex):
+        except Exception as ex:
             errMsg = "invalid regular expression '%s' ('%s')" % (conf.crawlExclude, getSafeExString(ex))
             raise SqlmapSyntaxException(errMsg)
 

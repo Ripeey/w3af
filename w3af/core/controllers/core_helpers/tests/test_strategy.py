@@ -100,7 +100,7 @@ class TestStrategy(PluginTest):
 
         loops = 2 if is_running_on_ci() else 10
 
-        for i in xrange(loops):
+        for i in range(loops):
             print('Start run #%s' % i)
             found_vulns = set()
 

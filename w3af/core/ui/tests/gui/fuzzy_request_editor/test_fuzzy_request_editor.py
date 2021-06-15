@@ -35,7 +35,7 @@ from w3af.core.data.url.tests.helpers.http_daemon import HTTPDaemon
 #
 # But it fails because of the pygtk vs. gi stuff... 
 FUZZY_REQUEST_EXAMPLE = """\
-GET http://localhost/$xrange(10)$ HTTP/1.0
+GET http://localhost/$range(10)$ HTTP/1.0
 Host: www.some_host.com
 User-Agent: w3af.org
 Pragma: no-cache

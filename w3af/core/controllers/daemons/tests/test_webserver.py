@@ -38,7 +38,7 @@ class TestWebserver(unittest.TestCase):
     def setUp(self):
         self.tempdir = tempfile.gettempdir()
         
-        for port in xrange(self.PORT, self.PORT + 15):
+        for port in range(self.PORT, self.PORT + 15):
             try:
                 self.server = start_webserver(self.IP, port, self.tempdir)
             except:

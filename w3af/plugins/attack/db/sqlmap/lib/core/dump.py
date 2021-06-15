@@ -424,7 +424,7 @@ class Dump(object):
                     if not os.path.isdir(dumpDbPath):
                         try:
                             os.makedirs(dumpDbPath, 0755)
-                        except (Exception, ex):
+                        except Exception as ex:
                             try:
                                 tempDir = tempfile.mkdtemp(prefix="sqlmapdb")
                             except (IOError, _):
@@ -580,7 +580,7 @@ class Dump(object):
             warnMsg += "large table size"
             logger.warning(warnMsg)
 
-        for i in xrange(count):
+        for i in range(count):
             console = (i >= count - TRIM_STDOUT_DUMP_SIZE)
             field = 1
             values = []

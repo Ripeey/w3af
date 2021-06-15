@@ -90,7 +90,7 @@ class BlindSqliResponseDiff(object):
         # seems to be a blind SQL injection
         #
         confirmations = 0
-        for _ in xrange(self.CONFIRMATION_ROUNDS):
+        for _ in range(self.CONFIRMATION_ROUNDS):
 
             # Get fresh statements with new random numbers for each
             # confirmation round.

@@ -16,7 +16,7 @@ from optparse import OptionParser
 
 def hideAscii(data):
     retVal = ""
-    for i in xrange(len(data)):
+    for i in range(len(data)):
         if ord(data[i]) < 128:
             retVal += chr(ord(data[i]) ^ 127)
         else:

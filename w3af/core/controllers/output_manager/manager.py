@@ -110,7 +110,7 @@ class OutputManager(Process):
         self._plugin_options = {}
 
         # Internal variables
-        self.in_queue = SilentJoinableQueue()
+        self.in_queue = SilentJoinableQueue(ctx = threading)
         self._w3af_core = None
         self._last_output_flush = None
         self._is_shutting_down = False
@@ -147,7 +147,7 @@ class OutputManager(Process):
         while True:
             try:
                 work_unit = self.in_queue.get(timeout=self.FLUSH_TIMEOUT)
-            except Queue.Empty:
+            except queue.Empty:
                 self.flush_plugin_output()
                 continue
 

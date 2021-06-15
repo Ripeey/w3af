@@ -3,6 +3,8 @@
 *~
 *.swp
 
+# Notes
+.nts
 # C extensions
 *.so
 

@@ -278,7 +278,7 @@ class HistoryItem(object):
         #
         # Retry the read a few times to handle concurrency issues
         #
-        for _ in xrange(int(1 / wait_time)):
+        for _ in range(int(1 / wait_time)):
             try:
                 return self._load_from_trace_file(_id)
             except TraceReadException as e:
@@ -498,7 +498,7 @@ class HistoryItem(object):
             path, fname = os.path.split(path_fname)
             split_path = path.split('/')
 
-            for i in xrange(len(split_path) + 1):
+            for i in range(len(split_path) + 1):
                 test_path = '/'.join(split_path[:i])
                 if not os.path.exists(test_path):
                     msg = ('Directory does not exist: "%s" while trying to'
@@ -611,7 +611,7 @@ class HistoryItem(object):
         :return: None
         """
         session_dir = self._session_dir
-        trace_range = xrange(pending_compression.start, pending_compression.end + 1)
+        trace_range = range(pending_compression.start, pending_compression.end + 1)
 
         files = ['%s.%s' % (i, HistoryItem._EXTENSION) for i in trace_range]
         files = [os.path.join(session_dir, filename) for filename in files]

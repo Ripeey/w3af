@@ -159,7 +159,7 @@ def crawl(target):
             infoMsg += " for target URL '%s'" % target
         logger.info(infoMsg)
 
-        for i in xrange(conf.crawlDepth):
+        for i in range(conf.crawlDepth):
             threadData.shared.count = 0
             threadData.shared.length = len(threadData.shared.unprocessed)
             numThreads = min(conf.threads, len(threadData.shared.unprocessed))

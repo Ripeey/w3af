@@ -733,7 +733,7 @@ class Agent(object):
         unionQuery = self.prefixQuery("UNION ALL SELECT ", prefix=prefix)
 
         if limited:
-            unionQuery += ','.join(char if _ != position else '(SELECT %s)' % query for _ in xrange(0, count))
+            unionQuery += ','.join(char if _ != position else '(SELECT %s)' % query for _ in range(0, count))
             unionQuery += fromTable
             unionQuery = self.suffixQuery(unionQuery, comment, suffix)
 
@@ -761,7 +761,7 @@ class Agent(object):
             position = 0
             char = NULL
 
-        for element in xrange(0, count):
+        for element in range(0, count):
             if element > 0:
                 unionQuery += ','
 
@@ -779,7 +779,7 @@ class Agent(object):
         if multipleUnions:
             unionQuery += " UNION ALL SELECT "
 
-            for element in xrange(count):
+            for element in range(count):
                 if element > 0:
                     unionQuery += ','
 

@@ -41,7 +41,7 @@ class HashDB(object):
                 threadData.hashDBCursor = connection.cursor()
                 threadData.hashDBCursor.execute("CREATE TABLE IF NOT EXISTS storage (id INTEGER PRIMARY KEY, value TEXT)")
                 connection.commit()
-            except (Exception, ex):
+            except Exception as ex:
                 errMsg = "error occurred while opening a session "
                 errMsg += "file '%s' ('%s')" % (self.filepath, getSafeExString(ex))
                 raise SqlmapConnectionException(errMsg)
@@ -77,7 +77,7 @@ class HashDB(object):
             hash_ = HashDB.hashKey(key)
             retVal = self._write_cache.get(hash_)
             if not retVal:
-                for _ in xrange(HASHDB_RETRIEVE_RETRIES):
+                for _ in range(HASHDB_RETRIEVE_RETRIES):
                     try:
                         for row in self.cursor.execute("SELECT value FROM storage WHERE id=?", (hash_,)):
                             retVal = row[0]

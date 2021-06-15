@@ -304,7 +304,7 @@ class clusterGraphWidget(w3afDotWindow):
             
             try:
                 callable_object = self._create_callable_object(custom_code)
-            except (Exception, e):
+            except Exception as e:
                 # TODO: instead of hiding..., which may consume memory...
                 #       why don't killing?
                 self.hide()
@@ -315,7 +315,7 @@ class clusterGraphWidget(w3afDotWindow):
             try:
                 dotcode = self._generateDotCode(response_list,
                                                 distance_function=callable_object)
-            except (Exception, e):
+            except Exception as e:
                 # TODO: instead of hiding..., which may consume memory...
                 # why don't killing?
                 self.hide()
@@ -367,7 +367,7 @@ class clusterGraphWidget(w3afDotWindow):
         """
         distance = 0.1
         for i in [100, 200, 300, 400, 500]:
-            if a.get_code() in xrange(i, i + 100) and not b.get_code() in xrange(i, i + 100):
+            if a.get_code() in range(i, i + 100) and not b.get_code() in range(i, i + 100):
                 distance = 1
                 return distance
         return distance
@@ -388,7 +388,7 @@ class clusterGraphWidget(w3afDotWindow):
         if n == 0:
             yield []
         else:
-            for i in xrange(len(items)):
+            for i in range(len(items)):
                 for cc in self._xunique_combinations(items[i + 1:], n - 1):
                     yield [items[i]] + cc
 

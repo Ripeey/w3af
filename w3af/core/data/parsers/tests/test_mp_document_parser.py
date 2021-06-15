@@ -66,7 +66,7 @@ class TestMPDocumentParser(unittest.TestCase):
 
         try:
             self.mpdoc.get_document_parser_for(resp)
-        except (Exception, e):
+        except Exception as e:
             self.assertEqual(str(e), 'There is no parser for images.')
         else:
             self.assertTrue(False, 'Expected exception!')
@@ -145,7 +145,7 @@ class TestMPDocumentParser(unittest.TestCase):
             #
             # Lets timeout many sequentially
             #
-            for i in xrange(ITERATIONS):
+            for i in range(ITERATIONS):
                 http_resp = _build_http_response(html_trigger_delay % i, u'text/html')
 
                 try:
@@ -158,7 +158,7 @@ class TestMPDocumentParser(unittest.TestCase):
             #
             # Lets timeout randomly
             #
-            for i in xrange(ITERATIONS):
+            for i in range(ITERATIONS):
                 html = random.choice([html_trigger_delay, html_ok])
                 http_resp = _build_http_response(html % i, u'text/html')
 
@@ -172,7 +172,7 @@ class TestMPDocumentParser(unittest.TestCase):
             #
             # Lets parse things we know should work
             #
-            for i in xrange(ITERATIONS):
+            for i in range(ITERATIONS):
                 http_resp = _build_http_response(html_ok % i, u'text/html')
                 parser = self.mpdoc.get_document_parser_for(http_resp)
                 self.assertIsInstance(parser._parser, HTMLParser)
@@ -219,7 +219,7 @@ class TestMPDocumentParser(unittest.TestCase):
             #
             # Lets timeout many sequentially
             #
-            for i in xrange(ITERATIONS):
+            for i in range(ITERATIONS):
                 http_resp = _build_http_response(html_trigger_delay % i, u'text/html')
 
                 try:
@@ -232,7 +232,7 @@ class TestMPDocumentParser(unittest.TestCase):
             #
             # Lets timeout randomly
             #
-            for i in xrange(ITERATIONS):
+            for i in range(ITERATIONS):
                 html = random.choice([html_trigger_delay, html_ok])
                 http_resp = _build_http_response(html % i, u'text/html')
 
@@ -246,7 +246,7 @@ class TestMPDocumentParser(unittest.TestCase):
             #
             # Lets parse things we know should work
             #
-            for i in xrange(ITERATIONS):
+            for i in range(ITERATIONS):
                 http_resp = _build_http_response(html_ok % i, u'text/html')
                 parser = self.mpdoc.get_document_parser_for(http_resp)
                 self.assertIsInstance(parser._parser, HTMLParser)
@@ -416,7 +416,7 @@ class UseMemoryParser(object):
     def parse(self):
         memory_user = ''
 
-        for _ in xrange(1000000):
+        for _ in range(1000000):
             memory_user += 'A' * 256
 
     def clear(self):

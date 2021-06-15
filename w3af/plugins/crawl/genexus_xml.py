@@ -88,7 +88,7 @@ class genexus_xml(CrawlPlugin):
         om.out.debug('Parsing xml file with xml.dot.minidom.')
         try:
             dom = xml.dom.minidom.parseString(http_response.get_body())
-        except (Exception, e):
+        except Exception as e:
             msg = 'Error while parsing "%s": "%s"'
             args = (http_response.get_url(), e)
             om.out.debug(msg % args)

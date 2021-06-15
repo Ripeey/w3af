@@ -266,7 +266,7 @@ def _goInferenceProxy(expression, fromUser=False, batch=False, unpack=True, char
 
                 try:
                     try:
-                        for num in xrange(startLimit, stopLimit):
+                        for num in range(startLimit, stopLimit):
                             output = _goInferenceFields(expression, expressionFields, expressionFieldsList, payload, num=num, charsetType=charsetType, firstChar=firstChar, lastChar=lastChar, dump=dump)
                             outputs.append(output)
                     except OverflowError:

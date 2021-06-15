@@ -370,7 +370,7 @@ def unix_md5_passwd(password, salt, magic="$1$", **kwargs):
     ctx = password + magic + salt
     final = md5(password + salt + password).digest()
 
-    for pl in xrange(len(password),0,-16):
+    for pl in range(len(password),0,-16):
         if pl > 16:
             ctx = ctx + final[:16]
         else:
@@ -386,7 +386,7 @@ def unix_md5_passwd(password, salt, magic="$1$", **kwargs):
 
     final = md5(ctx).digest()
 
-    for i in xrange(1000):
+    for i in range(1000):
         ctx1 = ""
 
         if i & 1:
@@ -504,7 +504,7 @@ def wordpress_passwd(password, salt, count, prefix, **kwargs):
     cipher.update(password)
     hash_ = cipher.digest()
 
-    for i in xrange(count):
+    for i in range(count):
         _ = md5(hash_)
         _.update(password)
         hash_ = _.digest()
@@ -590,7 +590,7 @@ def attackCachedUsersPasswords():
             lut[hash_.lower()] = password
 
         for user in kb.data.cachedUsersPasswords.keys():
-            for i in xrange(len(kb.data.cachedUsersPasswords[user])):
+            for i in range(len(kb.data.cachedUsersPasswords[user])):
                 if (kb.data.cachedUsersPasswords[user][i] or "").strip():
                     value = kb.data.cachedUsersPasswords[user][i].lower().split()[0]
                     if value in lut:
@@ -618,7 +618,7 @@ def attackDumpedTable():
                 col_user = column
                 break
 
-        for i in xrange(count):
+        for i in range(count):
             if not found and i > HASH_RECOGNITION_QUIT_THRESHOLD:
                 break
 
@@ -669,7 +669,7 @@ def attackDumpedTable():
             debugMsg = "post-processing table dump"
             logger.debug(debugMsg)
 
-            for i in xrange(count):
+            for i in range(count):
                 for column in columns:
                     if not (column == col_user or column == '__infos__' or len(table[column]['values']) <= i):
                         value = table[column]['values'][i]
@@ -762,7 +762,7 @@ def _bruteProcessVariantA(attack_info, hash_regex, suffix, retVal, proc_id, proc
             except (UnicodeEncodeError, UnicodeDecodeError):
                 pass  # ignore possible encoding problems caused by some words in custom dictionaries
 
-            except (Exception, e):
+            except Exception as e:
                 warnMsg = "there was a problem while hashing entry: %s (%s). " % (repr(word), e)
                 warnMsg += "Please report by e-mail to '%s'" % DEV_EMAIL_ADDRESS
                 logger.critical(warnMsg)
@@ -836,7 +836,7 @@ def _bruteProcessVariantB(user, hash_, kwargs, hash_regex, suffix, retVal, found
             except (UnicodeEncodeError, UnicodeDecodeError):
                 pass  # ignore possible encoding problems caused by some words in custom dictionaries
 
-            except (Exception, e):
+            except Exception as e:
                 warnMsg = "there was a problem while hashing entry: %s (%s). " % (repr(word), e)
                 warnMsg += "Please report by e-mail to '%s'" % DEV_EMAIL_ADDRESS
                 logger.critical(warnMsg)
@@ -987,7 +987,7 @@ def dictionaryAttack(attack_dict):
 
                     kb.wordlists = dictPaths
 
-                except (Exception, ex):
+                except Exception as ex:
                     warnMsg = "there was a problem while loading dictionaries"
                     warnMsg += " ('%s')" % getSafeExString(ex)
                     logger.critical(warnMsg)
@@ -1030,7 +1030,7 @@ def dictionaryAttack(attack_dict):
                         retVal = _multiprocessing.Queue()
                         count = _multiprocessing.Value('i', _multiprocessing.cpu_count())
 
-                        for i in xrange(_multiprocessing.cpu_count()):
+                        for i in range(_multiprocessing.cpu_count()):
                             process = _multiprocessing.Process(target=_bruteProcessVariantA, args=(attack_info, hash_regex, suffix, retVal, i, count, kb.wordlists, custom_wordlist, conf.api))
                             processes.append(process)
 
@@ -1114,7 +1114,7 @@ def dictionaryAttack(attack_dict):
                             found_ = _multiprocessing.Value('i', False)
                             count = _multiprocessing.Value('i', _multiprocessing.cpu_count())
 
-                            for i in xrange(_multiprocessing.cpu_count()):
+                            for i in range(_multiprocessing.cpu_count()):
                                 process = _multiprocessing.Process(target=_bruteProcessVariantB, args=(user, hash_, kwargs, hash_regex, suffix, retVal, found_, i, count, kb.wordlists, custom_wordlist, conf.api))
                                 processes.append(process)
 

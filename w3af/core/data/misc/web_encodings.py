@@ -82,10 +82,10 @@ def generate_url_encoding_functions():
         {u';', u'?', u':', u'@', u'&', u'=', u'+', u'$', u','},
 
         # All not in printable
-        {unichr(c) for c in xrange(256) if unichr(c) not in string.printable},
+        {unichr(c) for c in range(256) if unichr(c) not in string.printable},
 
         # All not in digits, letters and dot
-        {unichr(c) for c in xrange(256) if unichr(c) not in string.digits + string.letters + u'.'},
+        {unichr(c) for c in range(256) if unichr(c) not in string.digits + string.ascii_letters + u'.'},
 
         # All characters are replaced
         HEX_MAP,

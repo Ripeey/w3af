@@ -76,7 +76,7 @@ class TestStrangeHeaders(unittest.TestCase):
 
         start = time.time()
 
-        for _ in xrange(5):
+        for _ in range(5):
             self.plugin.grep(request, resp_positive)
 
         spent = time.time() - start

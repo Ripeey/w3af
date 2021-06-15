@@ -2100,7 +2100,7 @@ class PstatsParser:
                 caller = self.get_function(fn)
                 call = Call(callee.id)
                 if isinstance(value, tuple):
-                    for i in xrange(0, len(value), 4):
+                    for i in range(0, len(value), 4):
                         nc, cc, tt, ct = value[i:i+4]
                         if CALLS in call:
                             call[CALLS] += cc

@@ -126,10 +126,10 @@ class ssn(GrepPlugin):
         if not group:
             return False
 
-        odd_one = xrange(1, 11, 2)
-        even_two = xrange(10, 100, 2)  # (10-98 even only)
-        even_three = xrange(2, 10, 2)
-        odd_four = xrange(11, 100, 2)  # (11-99 odd only)
+        odd_one = range(1, 11, 2)
+        even_two = range(10, 100, 2)  # (10-98 even only)
+        even_three = range(2, 10, 2)
+        odd_four = range(11, 100, 2)  # (11-99 odd only)
         le_group = lambda x: x <= group
         is_ssn = False
 

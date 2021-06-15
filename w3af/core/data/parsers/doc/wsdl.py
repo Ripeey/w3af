@@ -65,7 +65,7 @@ class WSDLParser(object):
                 self._proxy = SOAPpy.WSDL.Proxy(xmlData)
             except expat.ExpatError:
                 raise BaseFrameworkException('The body content is not a WSDL.')
-            except (Exception, e):
+            except Exception as e:
                 msg = 'The body content is not a WSDL.'
                 msg += ' Unhandled exception in SOAPpy: "' + str(e) + '".'
                 om.out.debug(msg)
@@ -132,7 +132,7 @@ class WSDLParser(object):
         else:
             res = []
             inps = self._proxy.methods[methodName].inparams
-            for param in xrange(len(inps)):
+            for param in range(len(inps)):
                 details = inps[param]
                 parameterObject = parameter()
                 parameterObject.set_name(str(details.name))

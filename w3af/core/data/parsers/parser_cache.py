@@ -343,7 +343,7 @@ class ParserCache(CacheStats):
             except (ScanMustStopException, e):
                 msg = 'The document parser is in an invalid state! %s'
                 raise ScanMustStopException(msg % e)
-            except (Exception, e):
+            except Exception as e:
                 # Act just like when there is no parser
                 msg = 'Unhandled exception running get_tags_by_filter("%s"): %s'
                 args = (http_response.get_url(), e)

@@ -38,7 +38,7 @@ class TestVulnsConstants(unittest.TestCase):
     def get_all_vulnerability_names(self):
         # Just skip the entire license header
         vulns_file = open(self.LOCATION)
-        for _ in xrange(21):
+        for _ in range(21):
             vulns_file.readline()
 
         return re.findall('[\'"](.*?)[\'"] ?:', vulns_file.read())

@@ -149,7 +149,7 @@ class TestInterceptProxy(unittest.TestCase):
                 results.put(he)
             except (KeyboardInterrupt, k):
                 exceptions.put(k)
-            except (Exception, e):
+            except Exception as e:
                 exceptions.put(e)
             else:
                 results.put(response)
@@ -159,7 +159,7 @@ class TestInterceptProxy(unittest.TestCase):
         result_queue = Queue.Queue()
         exceptions_queue = Queue.Queue()
 
-        for i in xrange(3):
+        for i in range(3):
             args = (i, self.proxy_opener, result_queue, exceptions_queue)
             send_thread = threading.Thread(target=send_request, args=args)
             send_thread.start()

@@ -72,7 +72,7 @@ class TestParserCache(unittest.TestCase):
     
     def test_issue_188_invalid_url(self):
         # https://github.com/andresriancho/w3af/issues/188
-        all_chars = ''.join([chr(i) for i in xrange(0, 255)])
+        all_chars = ''.join([chr(i) for i in range(0, 255)])
         response = HTTPResponse(200, all_chars, self.headers, self.url, self.url)
         self.dpc.get_document_parser_for(response)
 

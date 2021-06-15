@@ -234,7 +234,7 @@ class Connect(object):
         elif conf.dummy or conf.murphyRate and randomInt() % conf.murphyRate == 0:
             if conf.murphyRate:
                 time.sleep(randomInt() % (MAX_MURPHY_SLEEP_TIME + 1))
-            return getUnicode(randomStr(int(randomInt()), alphabet=[chr(_) for _ in xrange(256)]), {}, int(randomInt())), None, None if not conf.murphyRate else randomInt(3)
+            return getUnicode(randomStr(int(randomInt()), alphabet=[chr(_) for _ in range(256)]), {}, int(randomInt())), None, None if not conf.murphyRate else randomInt(3)
 
         threadData = getCurrentThreadData()
         with kb.locks.request:
@@ -540,7 +540,7 @@ class Connect(object):
                     if hasattr(conn.fp, '_sock'):
                         conn.fp._sock.close()
                     conn.close()
-                except (Exception, ex):
+                except Exception as ex:
                     warnMsg = "problem occurred during connection closing ('%s')" % getSafeExString(ex)
                     logger.warn(warnMsg)
 
@@ -817,7 +817,7 @@ class Connect(object):
                 for function in kb.tamperFunctions:
                     try:
                         payload = function(payload=payload, headers=auxHeaders)
-                    except (Exception, ex):
+                    except Exception as ex:
                         errMsg = "error occurred while running tamper "
                         errMsg += "function '%s' ('%s')" % (function.func_name, getSafeExString(ex))
                         raise SqlmapGenericException(errMsg)
@@ -883,7 +883,7 @@ class Connect(object):
                                 parts = payload.split(splitter)
                                 parts[0] = "%s%s" % (parts[0], suffix)
                                 parts[-1] = "%s%s=%s%s" % (DEFAULT_GET_POST_DELIMITER, match.group("name"), prefix, parts[-1])
-                                for i in xrange(1, len(parts) - 1):
+                                for i in range(1, len(parts) - 1):
                                     parts[i] = "%s%s=%s%s%s" % (DEFAULT_GET_POST_DELIMITER, match.group("name"), prefix, parts[i], suffix)
                                 payload = "".join(parts)
 
@@ -993,7 +993,7 @@ class Connect(object):
                         elif place == PLACE.POST and post:
                             post = _adjustParameter(post, conf.csrfToken, token)
 
-                for i in xrange(len(conf.httpHeaders)):
+                for i in range(len(conf.httpHeaders)):
                     if conf.httpHeaders[i][0].lower() == conf.csrfToken.lower():
                         conf.httpHeaders[i] = (conf.httpHeaders[i][0], token)
 

@@ -24,7 +24,7 @@ import w3af.core.controllers.output_manager as om
 from w3af.core.controllers.exceptions import BaseFrameworkException
 
 
-CTRL_CODES = range(1, 27)
+CTRL_CODES = list(range(1, 27))
 CTRL_CODES.remove(9)
 CTRL_CODES.remove(13)
 

@@ -163,7 +163,7 @@ class bug_report_menu(menu):
             return []
 
         all_edata = self._w3af.exception_handler.get_unique_exceptions()
-        suggestions = [str(i) for i in xrange(len(all_edata))]
+        suggestions = [str(i) for i in range(len(all_edata))]
 
         return suggest(suggestions, part)
 

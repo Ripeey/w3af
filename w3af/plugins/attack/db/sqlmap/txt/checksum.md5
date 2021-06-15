@@ -115,7 +115,7 @@ a861c303293e2e6665b02a57f67fc050  lib/utils/purge.py
 b6898e77038842c853932a6662c011be  lib/utils/sqlalchemy.py
 36b95bc7fa2cf4f005a86e516a8cba68  lib/utils/timeout.py
 a3b51d28b0824d4d2333a3dd792497ac  lib/utils/versioncheck.py
-fe32db8f58f95da62f7f819cabadfdd1  lib/utils/xrange.py
+fe32db8f58f95da62f7f819cabadfdd1  lib/utils/range.py
 96d3299ecc915124a7e7648eaeecf6c7  plugins/dbms/access/connector.py
 1f648025091189b8b62ebf737d7044a9  plugins/dbms/access/enumeration.py
 0b2197bb4affacccf0c5914f2ad56759  plugins/dbms/access/filesystem.py

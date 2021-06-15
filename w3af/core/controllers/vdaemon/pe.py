@@ -52,7 +52,7 @@ class pe(object):
         """
         try:
             template = open(self._templateFileName, 'r').read()
-        except (Exception, e):
+        except Exception as e:
             raise BaseFrameworkException(
                 'Failed to open PE template file. Exception: ' + str(e))
         else:

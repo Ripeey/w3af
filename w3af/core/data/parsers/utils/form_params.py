@@ -513,7 +513,7 @@ class FormParameters(OrderedDict):
 
                 variants_total = min(variants_total, self.MAX_VARIANTS_TOTAL)
 
-                for _ in xrange(self.TOP_VARIANTS):
+                for _ in range(self.TOP_VARIANTS):
                     path = rand.randint(0, variants_total)
                     yield self._decode_path(path, matrix)
 
@@ -533,7 +533,7 @@ class FormParameters(OrderedDict):
                     variants_total = self._get_variants_count(matrix, mode)
 
                 # Now get all paths!
-                for path in xrange(variants_total):
+                for path in range(variants_total):
                     decoded_path = self._decode_path(path, matrix)
                     yield decoded_path
 
@@ -556,7 +556,7 @@ class FormParameters(OrderedDict):
         remainder = path
         decoded_path = []
 
-        for i in xrange(len(matrix) - 1):
+        for i in range(len(matrix) - 1):
             base = get_count(i)
             decoded_path.append(remainder / base)
             remainder = remainder % base

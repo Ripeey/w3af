@@ -100,7 +100,7 @@ def _selectInjection():
 
         points = []
 
-        for i in xrange(0, len(kb.injections)):
+        for i in range(0, len(kb.injections)):
             place = kb.injections[i].place
             parameter = kb.injections[i].parameter
             ptype = kb.injections[i].ptype

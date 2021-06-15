@@ -279,7 +279,7 @@ class TestFormParams(unittest.TestCase):
         # of parameters
         form_params = []
 
-        for i in xrange(50):
+        for i in range(50):
             form_params.append({'type': 'select',
                                 'name': 'cars_%s' % i,
                                 'values': ('volvo_%s' % i,
@@ -316,7 +316,7 @@ class TestFormParams(unittest.TestCase):
         get_all_variants = lambda: set(repr(fv) for fv in
                                        new_form.get_variants(mode=MODE_ALL))
         variants = get_all_variants()
-        for i in xrange(10):
+        for i in range(10):
             self.assertEquals(variants, get_all_variants())
 
     def test_empty_select_all(self):

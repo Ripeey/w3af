@@ -160,7 +160,7 @@ class TestCORSOrigin(PluginTest):
         allow_origin = 'http://w3af.org/'
         allow_credentials = 'false'
 
-        for i in xrange(InfoSet.MAX_INFO_INSTANCES + 2):
+        for i in range(InfoSet.MAX_INFO_INSTANCES + 2):
 
             self.co._allow_methods(self.request, self.url, self.origin,
                                    self.response, allow_origin,

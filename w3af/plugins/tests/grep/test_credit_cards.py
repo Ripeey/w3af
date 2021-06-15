@@ -110,7 +110,7 @@ class TestCreditCards(unittest.TestCase):
         response = HTTPResponse(200, html, headers, url, url, _id=1)
         request = FuzzableRequest(url, method='GET')
 
-        for _ in xrange(5000):
+        for _ in range(5000):
             self.plugin.grep(request, response)
 
         self.assertEquals(len(kb.kb.get('credit_cards', 'credit_cards')), 1)

@@ -35,7 +35,7 @@ def use_memory_in_string(memory):
     block_size = 1024
     memory_user = ''
 
-    for _ in xrange(int(memory / block_size)):
+    for _ in range(int(memory / block_size)):
         memory_user += block_size * 'A'
 
     return len(memory_user)
@@ -58,7 +58,7 @@ class TestPebbleMemoryUsage(unittest.TestCase):
         results = []
         secs = 1
 
-        for _ in xrange(4):
+        for _ in range(4):
             future = pool.schedule(just_sleep, args=(secs,))
             results.append(future)
 
@@ -135,7 +135,7 @@ class TestPebbleMemoryUsage(unittest.TestCase):
         results = []
         secs = 1
 
-        for _ in xrange(4):
+        for _ in range(4):
             future = pool.schedule(just_sleep, args=(secs,))
             results.append(future)
 
@@ -154,7 +154,7 @@ class TestPebbleMemoryUsage(unittest.TestCase):
         results = []
         secs = 5
 
-        for _ in xrange(4):
+        for _ in range(4):
             future = pool.schedule(just_sleep, args=(secs,))
             results.append(future)
 
@@ -176,7 +176,7 @@ class TestPebbleMemoryUsage(unittest.TestCase):
         block_size = 1024
         memory_user = ''
 
-        for _ in xrange(int(self.MEMORY_LIMIT * 2.0 / block_size)):
+        for _ in range(int(self.MEMORY_LIMIT * 2.0 / block_size)):
             memory_user += block_size * 'A'
 
         # Now do the pool stuff
@@ -184,7 +184,7 @@ class TestPebbleMemoryUsage(unittest.TestCase):
         results = []
         secs = 5
 
-        for _ in xrange(4):
+        for _ in range(4):
             future = pool.schedule(just_sleep, args=(secs,))
             results.append(future)
 

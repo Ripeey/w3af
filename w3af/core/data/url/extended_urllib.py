@@ -416,7 +416,7 @@ class ExtendedUrllib(object):
         self._sleep_log = {}
 
         step = ACCEPTABLE_ERROR_RATE * 2
-        data = [(i, False) for i in xrange(0, 110, step)]
+        data = [(i, False) for i in range(0, 110, step)]
 
         self._sleep_log.update(data)
 
@@ -1398,7 +1398,7 @@ class ExtendedUrllib(object):
             msg = 'Remote URL %s is UNREACHABLE due to: "%s"'
             om.out.debug(msg % (root_url, e))
             return False
-        except (Exception, e):
+        except Exception as e:
             msg = 'Internal error makes URL %s UNREACHABLE due to: "%s"'
             om.out.debug(msg % (root_url, e))
             return False

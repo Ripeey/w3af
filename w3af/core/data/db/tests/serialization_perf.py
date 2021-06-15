@@ -39,7 +39,7 @@ def do_ultrajson(obj):
 def measure(funct, times, *args):
     start = time.time()
     
-    for _ in xrange(times):
+    for _ in range(times):
         funct(*args)
         
     return time.time() - start 

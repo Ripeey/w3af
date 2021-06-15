@@ -911,10 +911,10 @@ def cmdLineParser(argv=None):
             except (ValueError, ex):
                 raise SqlmapSyntaxException, "something went wrong during command line parsing ('%s')" % ex.message
 
-        for i in xrange(len(argv)):
+        for i in range(len(argv)):
             if argv[i] == "-hh":
                 argv[i] = "-h"
-            elif len(argv[i]) > 1 and all(ord(_) in xrange(0x2018, 0x2020) for _ in ((argv[i].split('=', 1)[-1].strip() or ' ')[0], argv[i][-1])):
+            elif len(argv[i]) > 1 and all(ord(_) in range(0x2018, 0x2020) for _ in ((argv[i].split('=', 1)[-1].strip() or ' ')[0], argv[i][-1])):
                 dataToStdout("[!] copy-pasting illegal (non-console) quote characters from Internet is, well, illegal (%s)\n" % argv[i])
                 raise SystemExit
             elif len(argv[i]) > 1 and u"\uff0c" in argv[i].split('=', 1)[-1]:
@@ -969,7 +969,7 @@ def cmdLineParser(argv=None):
             args.headers += delimiter + delimiter.join(extraHeaders)
 
         # Expand given mnemonic options (e.g. -z "ign,flu,bat")
-        for i in xrange(len(argv) - 1):
+        for i in range(len(argv) - 1):
             if argv[i] == "-z":
                 expandMnemonics(argv[i + 1], parser, args)
 

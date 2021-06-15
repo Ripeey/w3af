@@ -66,7 +66,7 @@ class TestHeaders(unittest.TestCase):
         self.assertEqual(unicode(headers), 'a: b\r\n')
 
     def test_str_strange(self):
-        header_value = ''.join(chr(i) for i in xrange(256))
+        header_value = ''.join(chr(i) for i in range(256))
         headers = Headers([(u'Hola', header_value)])
         
         # I don't assert in a stricter way because the output depends on

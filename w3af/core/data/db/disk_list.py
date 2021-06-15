@@ -280,12 +280,12 @@ class DiskList(object):
         disk_list_length = len(self)
 
         # TODO: This piece of code is VERY SLOW and can be improved. Please
-        # note that for each element that's selected by the xrange/step, we'll
+        # note that for each element that's selected by the range/step, we'll
         # SELECT on the original list and INSERT on the copy.
         #
         # We could find ways to make this in only one SELECT/INSERT, but the
         # main problem is when I add, remove, and then try to slice a DiskList
-        for i in xrange(start, stop, step):
+        for i in range(start, stop, step):
             if i >= disk_list_length:
                 break
             copy.append(self[i])

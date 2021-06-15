@@ -221,7 +221,7 @@ class form_auth(BruteforcePlugin):
         #
         random_user_pass = []
 
-        for _ in xrange(2):
+        for _ in range(2):
             user, password = rand_alnum(8), rand_alnum(8)
             self._fill_form(form, user, password)
 
@@ -244,7 +244,7 @@ class form_auth(BruteforcePlugin):
         #
         random_user_empty_pass = []
 
-        for _ in xrange(2):
+        for _ in range(2):
             user, password = rand_alnum(8), ''
             self._fill_form(form, user, password)
 

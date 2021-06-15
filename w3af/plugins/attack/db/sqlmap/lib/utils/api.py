@@ -239,7 +239,7 @@ class StdDbOut(object):
             # Delete partial output from IPC database if we have got a complete output
             if status == CONTENT_STATUS.COMPLETE:
                 if len(output) > 0:
-                    for index in xrange(len(output)):
+                    for index in range(len(output)):
                         conf.databaseCursor.execute("DELETE FROM data WHERE id = ?", (output[index][0],))
 
                 conf.databaseCursor.execute("INSERT INTO data VALUES(NULL, ?, ?, ?, ?)", (self.taskid, status, content_type, jsonize(value)))
@@ -754,7 +754,7 @@ def client(host=RESTAPI_DEFAULT_ADDRESS, port=RESTAPI_DEFAULT_PORT, username=Non
 
     try:
         _client(addr)
-    except (Exception, ex):
+    except Exception as ex:
         if not isinstance(ex, urllib2.HTTPError) or ex.code == httplib.UNAUTHORIZED:
             errMsg = "There has been a problem while connecting to the "
             errMsg += "REST-JSON API server at '%s' " % addr
@@ -806,7 +806,7 @@ def client(host=RESTAPI_DEFAULT_ADDRESS, port=RESTAPI_DEFAULT_PORT, username=Non
 
             try:
                 argv = ["sqlmap.py"] + shlex.split(command)[1:]
-            except (Exception, ex):
+            except Exception as ex:
                 logger.error("Error occurred while parsing arguments ('%s')" % ex)
                 taskid = None
                 continue

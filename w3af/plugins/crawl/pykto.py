@@ -346,7 +346,7 @@ class NiktoTestParser(object):
         """
         try:
             db_file = codecs.open(self.filename, "r", "utf-8" )
-        except (Exception, e):
+        except Exception as e:
             msg = 'Failed to open the scan database. Exception: "%s".'
             om.out.error(msg % e)
             raise StopIteration
@@ -452,7 +452,7 @@ class NiktoTestParser(object):
         #    fail_2 = splitted_line[9]
         #
         # If and only if they aren't response codes
-        for test_index in xrange(5,10):
+        for test_index in range(5,10):
             test_value = splitted_line[test_index]
             
             if len(test_value) == 3 and test_value.isdigit():

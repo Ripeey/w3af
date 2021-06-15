@@ -50,7 +50,7 @@ class BrowserThread(Process):
         """
 
         # Wait for the proxy to start
-        for i in xrange(120):
+        for i in range(120):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             try:
                 s.connect(('127.0.0.1', self.proxy_port))
@@ -75,7 +75,7 @@ class BrowserThread(Process):
                 req = urllib2.Request(url, payload)
                 try:
                     response = opener.open(req)
-                except (Exception, ex):
+                except Exception as ex:
                     self.responses.append(str(ex))
                 else:
                     self.responses.append(response.read())
@@ -87,14 +87,14 @@ class BrowserThread(Process):
 
                 try:
                     response = opener.open(full_url)
-                except (Exception, ex):
+                except Exception as ex:
                     self.responses.append(str(ex))
                 else:
                     self.responses.append(response.read())
 
         try:
             response = opener.open(TERMINATE_URL.url_string)
-        except (Exception, ex):
+        except Exception as ex:
             self.responses.append(str(ex))
         else:
             self.responses.append(response.read())

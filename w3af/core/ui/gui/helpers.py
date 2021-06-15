@@ -277,7 +277,7 @@ class IteratedQueue(RegistThread):
 
                 self.repository = self.repository[min_index:]
 
-                for pos in xrange(len(self.indexes)):
+                for pos in range(len(self.indexes)):
                     self.indexes[pos] -= min_index
 
     def qsize(self):
@@ -485,7 +485,7 @@ class DrawingAreaStringRepresentation(gtk.DrawingArea):
             #    Draw
             #
             for index, value in self.str_repr.iteritems():
-                for i in xrange(value):
+                for i in range(value):
                     self.window.draw_point(gc, index, self.height - i)
 
     def clear(self):

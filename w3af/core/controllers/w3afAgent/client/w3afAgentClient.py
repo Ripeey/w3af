@@ -248,13 +248,13 @@ class ConnectionManager(threading.Thread):
     def gen_connections(self, number):
         # Connect to the w3afAgentServer and store the connections in the
         # connection pool
-        for i in xrange(number - len(self._connections)):
+        for i in range(number - len(self._connections)):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             try:
                 s.connect((self._w3afAgentServer_address,
                           self._w3afAgentServer_port))
-            except (Exception, e):
+            except Exception as e:
                 log.debug('Failed to connect to the w3afAgentServer, exception: ' + str(e))
                 sys.exit(1)
             else:

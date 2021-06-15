@@ -136,7 +136,7 @@ class Enumeration(GenericEnumeration):
 
                 tables = []
 
-                for index in xrange(int(count)):
+                for index in range(int(count)):
                     _ = safeStringFormat((rootQuery.blind.query if query == rootQuery.blind.count else rootQuery.blind.query2 if query == rootQuery.blind.count2 else rootQuery.blind.query3).replace("%s", db), index)
 
                     table = inject.getValue(_, union=False, error=False)

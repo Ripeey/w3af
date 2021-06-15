@@ -54,7 +54,7 @@ class TestExceptionHandler(unittest.TestCase):
 
         try:
             raise Exception('unittest')
-        except (Exception, e):
+        except Exception as e:
             exec_info = sys.exc_info()
             enabled_plugins = ''
             self.exception_handler.handle(self.status,
@@ -86,10 +86,10 @@ class TestExceptionHandler(unittest.TestCase):
     @attr('smoke')
     def test_handle_multiple(self):
 
-        for _ in xrange(10):
+        for _ in range(10):
             try:
                 raise Exception('unittest')
-            except (Exception, e):
+            except Exception as e:
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 self.exception_handler.handle(self.status, e, exec_info,
@@ -112,10 +112,10 @@ class TestExceptionHandler(unittest.TestCase):
 
     def test_get_unique_exceptions(self):
 
-        for _ in xrange(10):
+        for _ in range(10):
             try:
                 raise Exception('unittest')
-            except (Exception, e):
+            except Exception as e:
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 self.exception_handler.handle(self.status, e, exec_info,
@@ -145,7 +145,7 @@ class TestExceptionHandler(unittest.TestCase):
         def test(ehandler):
             try:
                 test2()
-            except (Exception, e):
+            except Exception as e:
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 ehandler.handle(self.status, e, exec_info, enabled_plugins)
@@ -181,7 +181,7 @@ class TestExceptionHandler(unittest.TestCase):
         def test(ehandler):
             try:
                 test2()
-            except (Exception, e):
+            except Exception as e:
                 exec_info = sys.exc_info()
                 enabled_plugins = ''
                 ehandler.handle(self.status, e, exec_info, enabled_plugins)
@@ -237,7 +237,7 @@ class TestExceptionData(unittest.TestCase):
     def test_serialize_deserialize(self):
         try:
             raise KeyError
-        except (Exception, e):
+        except Exception as e:
             except_type, except_class, tb = sys.exc_info()
             enabled_plugins = '{}'
 
@@ -263,7 +263,7 @@ class TestExceptionData(unittest.TestCase):
     def test_fail_traceback_serialize(self):
         try:
             raise KeyError
-        except (Exception, e):
+        except Exception as e:
             except_type, except_class, tb = sys.exc_info()
             enabled_plugins = '{}'
 

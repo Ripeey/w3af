@@ -112,7 +112,7 @@ class MultiInTest(unittest.TestCase):
         COUNT = 5000
 
         def generator(count):
-            for _ in xrange(count):
+            for _ in range(count):
                 a = rand_number(5)
                 yield a
 
@@ -132,7 +132,7 @@ class MultiInTest(unittest.TestCase):
     def test_dup_keys(self):
 
         def generator(count):
-            for _ in xrange(count):
+            for _ in range(count):
                 a = rand_number(5)
                 yield a
 
@@ -157,7 +157,7 @@ class MultiInTest(unittest.TestCase):
         prefix = '0000000'
 
         def generator(count):
-            for _ in xrange(count):
+            for _ in range(count):
                 a = rand_number(5)
                 yield prefix + a
 

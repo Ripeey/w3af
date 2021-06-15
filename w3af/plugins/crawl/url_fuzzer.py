@@ -171,7 +171,7 @@ class url_fuzzer(CrawlPlugin):
         domain_path = url.get_domain_path()
 
         splitted_domain = domain.split('.')
-        for i in xrange(len(splitted_domain)):
+        for i in range(len(splitted_domain)):
             filename = '.'.join(splitted_domain[0: i + 1])
 
             for extension in self._backup_exts:

@@ -133,8 +133,8 @@ class test_all(unittest.TestCase):
             """
             To be profiled
             """
-            for _ in xrange(1):
-                for counter in xrange(1, 5):
+            for _ in range(1):
+                for counter in range(1, 5):
 
                     file_name = 'test-' + str(counter) + '.html'
                     file_path = os.path.join(ROOT_PATH, 'plugins', 'tests',

@@ -199,8 +199,8 @@ class TestFormAuthFailedLoginMatchWithStaticLargeResponse(GenericFormAuthTest):
             '    <input name="submit" type="submit" />'
             '</form>')
 
-    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
-    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
+    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
+    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
 
     def request_callback(self, request, uri, response_headers):
         response_headers['content-type'] = 'text/html'
@@ -260,8 +260,8 @@ class TestFormAuthFailedLoginMatchWithLargeRandomFailedResponse(GenericFormAuthT
             '    <input name="submit" type="submit" />'
             '</form>')
 
-    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
-    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
+    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
+    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
 
     def request_callback(self, request, uri, response_headers):
         response_headers['content-type'] = 'text/html'
@@ -326,8 +326,8 @@ class TestFormAuthFailedLoginMatchWithLargeRandomFailedResponseShortSuccess(Gene
             '    <input name="submit" type="submit" />'
             '</form>')
 
-    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
-    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
+    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
+    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
 
     def request_callback(self, request, uri, response_headers):
         response_headers['content-type'] = 'text/html'
@@ -393,8 +393,8 @@ class TestFormAuthFailedLoginMatchWithCAPTCHA(GenericFormAuthTest):
             '    <input name="submit" type="submit" />'
             '</form>')
 
-    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
-    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in xrange(100))
+    HEADER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
+    FOOTER = 'abc <b>def</b> xyz'.join('\n' for _ in range(100))
 
     def request_callback(self, request, uri, response_headers):
         response_headers['content-type'] = 'text/html'

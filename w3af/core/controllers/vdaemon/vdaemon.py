@@ -101,7 +101,7 @@ class vdaemon(object):
         try:
             executable_file_name = self._generate_exe(payload,
                                                       msfpayload_parameters)
-        except (Exception, e):
+        except Exception as e:
             raise BaseFrameworkException(
                 'Failed to create the payload file, error: "%s".' % str(e))
 
@@ -125,7 +125,7 @@ class vdaemon(object):
             else:
                 try:
                     self._exec_payload(remote_file_location)
-                except (Exception, e):
+                except Exception as e:
                     raise BaseFrameworkException('Failed to execute the executable file on the server, error: %s' % e)
                 else:
                     om.out.console('Successfully executed the MSF payload on the remote server.')

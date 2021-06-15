@@ -209,7 +209,7 @@ class w3afCore(object):
         try:
             # Just in case the GUI / Console forgot to do this...
             self.verify_environment()
-        except (Exception, e):
+        except Exception as e:
             error = ('verify_environment() raised an exception: "%s". This'
                      ' should never happen. Are you (UI developer) sure that'
                      ' you called verify_environment() *before* start() ?')
@@ -286,7 +286,7 @@ class w3afCore(object):
                      ' resolved:\n%s\n')
             om.out.error(error % wmse)
 
-        except (Exception, e):
+        except Exception as e:
             msg = 'Unhandled exception "%s", traceback:\n%s'
 
             if hasattr(e, 'original_traceback_string'):
@@ -446,7 +446,7 @@ class w3afCore(object):
         wait_max = 10
         loop_delay = 0.5
 
-        for _ in xrange(int(wait_max/loop_delay)):
+        for _ in range(int(wait_max/loop_delay)):
             if not self.status.is_running():
                 core_stop_time = epoch_to_string(stop_start_time)
                 msg = '%s were needed to stop the core.' % core_stop_time

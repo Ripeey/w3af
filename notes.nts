@@ -1,0 +1,9 @@
+# Note to self
+# doubt on output_manager/manager.py
+# import Queue > import queue
+# Queue > queue
+# ctx = threading # but idk shuda None on internet
+# threading/threadpool
+# threading/silent_join....
+
+# xrange > range

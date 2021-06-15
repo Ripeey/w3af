@@ -1083,7 +1083,7 @@ def randomInt(length=4, seed=None):
     else:
         choice = random.choice
 
-    return int("".join(choice(string.digits if _ != 0 else string.digits.replace('0', '')) for _ in xrange(0, length)))
+    return int("".join(choice(string.digits if _ != 0 else string.digits.replace('0', '')) for _ in range(0, length)))
 
 def randomStr(length=4, lowercase=False, alphabet=None, seed=None):
     """
@@ -1102,11 +1102,11 @@ def randomStr(length=4, lowercase=False, alphabet=None, seed=None):
         choice = random.choice
 
     if alphabet:
-        retVal = "".join(choice(alphabet) for _ in xrange(0, length))
+        retVal = "".join(choice(alphabet) for _ in range(0, length))
     elif lowercase:
-        retVal = "".join(choice(string.ascii_lowercase) for _ in xrange(0, length))
+        retVal = "".join(choice(string.ascii_lowercase) for _ in range(0, length))
     else:
-        retVal = "".join(choice(string.ascii_letters) for _ in xrange(0, length))
+        retVal = "".join(choice(string.ascii_letters) for _ in range(0, length))
 
     return retVal
 
@@ -1540,10 +1540,10 @@ def getLimitRange(count, plusOne=False):
             if isinstance(conf.limitStart, int) and conf.limitStart > 0 and conf.limitStart <= limitStop:
                 limitStart = conf.limitStart
 
-    retVal = xrange(limitStart, limitStop + 1) if plusOne else xrange(limitStart - 1, limitStop)
+    retVal = range(limitStart, limitStop + 1) if plusOne else range(limitStart - 1, limitStop)
 
     if reverse:
-        retVal = xrange(retVal[-1], retVal[0] - 1, -1)
+        retVal = range(retVal[-1], retVal[0] - 1, -1)
 
     return retVal
 
@@ -1672,39 +1672,39 @@ def getCharset(charsetType=None):
     asciiTbl = []
 
     if charsetType is None:
-        asciiTbl.extend(xrange(0, 128))
+        asciiTbl.extend(range(0, 128))
 
     # Binary
     elif charsetType == CHARSET_TYPE.BINARY:
         asciiTbl.extend([0, 1])
-        asciiTbl.extend(xrange(47, 50))
+        asciiTbl.extend(range(47, 50))
 
     # Digits
     elif charsetType == CHARSET_TYPE.DIGITS:
         asciiTbl.extend([0, 9])
-        asciiTbl.extend(xrange(47, 58))
+        asciiTbl.extend(range(47, 58))
 
     # Hexadecimal
     elif charsetType == CHARSET_TYPE.HEXADECIMAL:
         asciiTbl.extend([0, 1])
-        asciiTbl.extend(xrange(47, 58))
-        asciiTbl.extend(xrange(64, 71))
+        asciiTbl.extend(range(47, 58))
+        asciiTbl.extend(range(64, 71))
         asciiTbl.extend([87, 88])  # X
-        asciiTbl.extend(xrange(96, 103))
+        asciiTbl.extend(range(96, 103))
         asciiTbl.extend([119, 120])  # x
 
     # Characters
     elif charsetType == CHARSET_TYPE.ALPHA:
         asciiTbl.extend([0, 1])
-        asciiTbl.extend(xrange(64, 91))
-        asciiTbl.extend(xrange(96, 123))
+        asciiTbl.extend(range(64, 91))
+        asciiTbl.extend(range(96, 123))
 
     # Characters and digits
     elif charsetType == CHARSET_TYPE.ALPHANUM:
         asciiTbl.extend([0, 1])
-        asciiTbl.extend(xrange(47, 58))
-        asciiTbl.extend(xrange(64, 91))
-        asciiTbl.extend(xrange(96, 123))
+        asciiTbl.extend(range(47, 58))
+        asciiTbl.extend(range(64, 91))
+        asciiTbl.extend(range(96, 123))
 
     return asciiTbl
 
@@ -1786,7 +1786,7 @@ def safeStringFormat(format_, params):
         else:
             if any('%s' in _ for _ in conf.parameters.values()):
                 parts = format_.split(' ')
-                for i in xrange(len(parts)):
+                for i in range(len(parts)):
                     if PAYLOAD_DELIMITER in parts[i]:
                         parts[i] = parts[i].replace(PAYLOAD_DELIMITER, "")
                         parts[i] = "%s%s" % (parts[i], PAYLOAD_DELIMITER)
@@ -2243,7 +2243,7 @@ def getPartRun(alias=True):
 
         # Goes backwards through the stack to find the conf.dbmsHandler method
         # calling this function
-        for i in xrange(0, len(stack) - 1):
+        for i in range(0, len(stack) - 1):
             for regex in (r"self\.(get[^(]+)\(\)", r"conf\.dbmsHandler\.([^(]+)\(\)"):
                 match = re.search(regex, stack[i])
 
@@ -2338,12 +2338,12 @@ def pushValue(value):
     _ = None
     success = False
 
-    for i in xrange(PUSH_VALUE_EXCEPTION_RETRY_COUNT):
+    for i in range(PUSH_VALUE_EXCEPTION_RETRY_COUNT):
         try:
             getCurrentThreadData().valueStack.append(copy.deepcopy(value))
             success = True
             break
-        except (Exception, ex):
+        except Exception as ex:
             _ = ex
 
     if not success:
@@ -2802,7 +2802,7 @@ def findDynamicContent(firstPage, secondPage):
         blocks.insert(0, None)
         blocks.append(None)
 
-        for i in xrange(len(blocks) - 1):
+        for i in range(len(blocks) - 1):
             prefix = firstPage[blocks[i][0]:blocks[i][0] + blocks[i][2]] if blocks[i] else None
             suffix = firstPage[blocks[i + 1][0]:blocks[i + 1][0] + blocks[i + 1][2]] if blocks[i + 1] else None
 
@@ -3359,7 +3359,7 @@ def createGithubIssue(errMsg, excMsg):
 
         try:
             content = urllib2.urlopen(req).read()
-        except (Exception, ex):
+        except Exception as ex:
             content = None
 
         issueUrl = re.search(r"https://github.com/sqlmapproject/sqlmap/issues/\d+", content or "")
@@ -4082,7 +4082,7 @@ def evaluateCode(code, variables=None):
         exec(code, variables)
     except KeyboardInterrupt:
         raise
-    except (Exception, ex):
+    except Exception as ex:
         errMsg = "an error occurred while evaluating provided code ('%s') " % getSafeExString(ex)
         raise SqlmapGenericException(errMsg)
 
@@ -4369,7 +4369,7 @@ def zeroDepthSearch(expression, value):
     retVal = []
 
     depth = 0
-    for index in xrange(len(expression)):
+    for index in range(len(expression)):
         if expression[index] == '(':
             depth += 1
         elif expression[index] == ')':

@@ -43,7 +43,7 @@ from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.data.misc.encoding import smart_str_ignore
 
 
-ALL_CHARS = ''.join(chr(i) for i in xrange(256))
+ALL_CHARS = ''.join(chr(i) for i in range(256))
 TRANS_TABLE = string.maketrans(ALL_CHARS, ALL_CHARS)
 DELETE_CHARS = ''.join(['\\',
                         "'",

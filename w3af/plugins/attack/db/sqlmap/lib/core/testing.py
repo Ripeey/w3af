@@ -273,7 +273,7 @@ def runCase(parse):
         pass
     except (SqlmapBaseException, e):
         handled_exception = e
-    except (Exception, e):
+    except Exception as e:
         unhandled_exception = e
     finally:
         sys.stdout.seek(0)

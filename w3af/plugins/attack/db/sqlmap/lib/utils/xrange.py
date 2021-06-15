@@ -5,12 +5,12 @@ Copyright (c) 2006-2017 sqlmap developers (http://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-class xrange(object):
+class range(object):
     """
-    Advanced (re)implementation of xrange (supports slice/copy/etc.)
-    Reference: http://code.activestate.com/recipes/521885-a-pythonic-implementation-of-xrange/
+    Advanced (re)implementation of range (supports slice/copy/etc.)
+    Reference: http://code.activestate.com/recipes/521885-a-pythonic-implementation-of-range/
 
-    >>> foobar = xrange(1, 10)
+    >>> foobar = range(1, 10)
     >>> 7 in foobar
     True
     >>> 11 in foobar
@@ -27,7 +27,7 @@ class xrange(object):
         else:
             self._slice = slice(*args)
         if self._slice.stop is None:
-            raise TypeError("xrange stop must not be None")
+            raise TypeError("range stop must not be None")
 
     @property
     def start(self):
@@ -68,7 +68,7 @@ class xrange(object):
     def __getitem__(self, index):
         if isinstance(index, slice):
             start, stop, step = index.indices(self._len())
-            return xrange(self._index(start),
+            return range(self._index(start),
                           self._index(stop), step*self.step)
         elif isinstance(index, (int, long)):
             if index < 0:
@@ -81,7 +81,7 @@ class xrange(object):
 
             return self._index(fixed_index)
         else:
-            raise TypeError("xrange indices must be slices or integers")
+            raise TypeError("range indices must be slices or integers")
 
     def _index(self, i):
         return self.start + self.step * i

@@ -37,7 +37,7 @@ class list_processes(Payload):
 
         max_pid_proc = self.shell.read('/proc/sys/kernel/pid_max')[:-1]
         max_pid = min(max_pid_proc, max_pid_user)
-        pid_iter = xrange(1, int(max_pid))
+        pid_iter = range(1, int(max_pid))
         
         def fname_iter(pid_iter):
             for pid in pid_iter:

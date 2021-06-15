@@ -59,7 +59,7 @@ def safecharencode(value):
             retVal = retVal.replace(SLASH_MARKER, "\\\\")
             retVal = retVal.replace(HEX_ENCODED_PREFIX_MARKER, HEX_ENCODED_PREFIX)
     elif isinstance(value, list):
-        for i in xrange(len(value)):
+        for i in range(len(value)):
             retVal[i] = safecharencode(value[i])
 
     return retVal
@@ -90,7 +90,7 @@ def safechardecode(value, binary=False):
                 retVal = retVal.encode("utf8")
 
     elif isinstance(value, (list, tuple)):
-        for i in xrange(len(value)):
+        for i in range(len(value)):
             retVal[i] = safechardecode(value[i])
 
     return retVal

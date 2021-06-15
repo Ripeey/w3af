@@ -177,7 +177,7 @@ class Web:
         message = "which web application language does the web server "
         message += "support?\n"
 
-        for count in xrange(len(choices)):
+        for count in range(len(choices)):
             ext = choices[count]
             message += "[%d] %s%s\n" % (count + 1, ext.upper(), (" (default)" if default == ext else ""))
 

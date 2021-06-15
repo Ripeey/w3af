@@ -71,7 +71,7 @@ class TestDotListing(PluginTest):
         groups = set()
         files = set()
 
-        for i in xrange(1, 4):
+        for i in range(1, 4):
             file_name = file_name_fmt % i
             file_path = os.path.join(listing_files_path, file_name)
             file_content = open(file_path).read()

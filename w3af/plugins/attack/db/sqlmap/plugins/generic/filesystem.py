@@ -135,7 +135,7 @@ class Filesystem:
 
         if not single:
             if len(content) > chunkSize:
-                for i in xrange(0, len(content), chunkSize):
+                for i in range(0, len(content), chunkSize):
                     _ = content[i:i + chunkSize]
 
                     if encoding == "hex":

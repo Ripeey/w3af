@@ -109,16 +109,16 @@ class TestDiskSet(unittest.TestCase):
         threads = []
         _min = 0
         add_dups = False
-        for _max in xrange(0, 1100, 100):
+        for _max in range(0, 1100, 100):
 
-            th = threading.Thread(target=worker, args=(xrange(_min, _max),))
+            th = threading.Thread(target=worker, args=(range(_min, _max),))
             threads.append(th)
 
             # For testing the uniqueness of DiskSets
             add_dups = not add_dups
             if add_dups:
                 th = threading.Thread(
-                    target=worker, args=(xrange(_min, _max),))
+                    target=worker, args=(range(_min, _max),))
                 threads.append(th)
 
             _min = _max
@@ -129,7 +129,7 @@ class TestDiskSet(unittest.TestCase):
         for th in threads:
             th.join()
 
-        for i in xrange(0, 1000):
+        for i in range(0, 1000):
             self.assertTrue(i in ds, i)
 
         ds_as_list = list(ds)

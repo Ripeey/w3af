@@ -68,7 +68,7 @@ class TestOrderedCachedQueue(unittest.TestCase):
         q = OrderedCachedQueue(maxsize=2)
         hash_list = []
 
-        for i in xrange(5):
+        for i in range(5):
             fr = create_simple_fuzzable_request(i)
             hash_list.append(fr.get_hash())
             q.put(fr)
@@ -78,7 +78,7 @@ class TestOrderedCachedQueue(unittest.TestCase):
 
         self.assertNotEqual(unordered_hash_list, hash_list)
 
-        for i in xrange(4):
+        for i in range(4):
             fr = q.get()
             self.assertEqual(fr.get_hash(), hash_list[i])
 
@@ -153,7 +153,7 @@ class TestOrderedCachedQueue(unittest.TestCase):
         self.assertEqual(0.0, q.get_input_rpm())
         self.assertEqual(0.0, q.get_output_rpm())
 
-        for i in xrange(4):
+        for i in range(4):
             q.put(create_simple_fuzzable_request(i))
             # 20 RPM
             time.sleep(3)
@@ -163,7 +163,7 @@ class TestOrderedCachedQueue(unittest.TestCase):
         self.assertGreater(q.get_input_rpm(), 19)
         self.assertLess(q.get_input_rpm(), 20)
 
-        for i in xrange(4):
+        for i in range(4):
             q.get()
             # 60 RPM
             time.sleep(1)

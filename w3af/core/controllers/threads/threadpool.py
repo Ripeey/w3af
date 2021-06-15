@@ -282,7 +282,7 @@ class Worker(object):
 
             try:
                 result = (True, func(*args, **kwds))
-            except (Exception, e):
+            except Exception as e:
                 add_traceback_string(e)
                 result = (False, e)
 
@@ -355,7 +355,7 @@ class Pool(ThreadPool):
             assert max_queued_tasks - 1 > 0, 'max_queued_tasks needs to be at least 2'
 
         self._setup_queues(max_queued_tasks - 1)
-        self._taskqueue = Queue.Queue(maxsize=1)
+        self._taskqueue = queue.Queue(maxsize=1)
 
         self._cache = {}
         self._state = RUN
@@ -479,8 +479,8 @@ class Pool(ThreadPool):
         self._repopulate_pool()
 
     def _setup_queues(self, max_queued_tasks):
-        self._inqueue = Queue.Queue(maxsize=max_queued_tasks)
-        self._outqueue = Queue.Queue()
+        self._inqueue = queue.Queue(maxsize=max_queued_tasks)
+        self._outqueue = queue.Queue()
         self._quick_put = self._inqueue.put
         self._quick_get = self._outqueue.get
 
@@ -544,7 +544,7 @@ class Pool(ThreadPool):
         """
         delay = 0.1
 
-        for _ in xrange(int(timeout / delay)):
+        for _ in range(int(timeout / delay)):
             if (self._inqueue.qsize() == 0 and
                     self._outqueue.qsize() == 0 and
                     self._taskqueue.qsize() == 0):

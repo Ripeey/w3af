@@ -180,7 +180,7 @@ class digit_sum(CrawlPlugin):
         split = self._find_digits(a_string)
 
         if len(split) <= 2 * self._max_digit_sections:
-            for i in xrange(len(split)):
+            for i in range(len(split)):
                 if split[i].isdigit():
                     split[i] = str(int(split[i]) + 1)
                     res.append(''.join(split))

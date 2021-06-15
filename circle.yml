@@ -9,7 +9,7 @@ machine:
     - docker
 
   python:
-    version: 2.7.18
+    version: 3.9
 
   post:
     # This was required to avoid issues with different builds of python being
@@ -77,14 +77,14 @@ dependencies:
     # test ID which was running when circleci killed the build. Using that ID
     # and the output of this tool, you'll be able to pinpoint which test was
     # using a lot of memory.
-    - python2.7 w3af/core/controllers/ci/nosetests_wrapper/show-test-ids.py
+    - python3 w3af/core/controllers/ci/nosetests_wrapper/show-test-ids.py
 
     # Might need more waiting for the docker-compose up command to finish
     - w3af/tests/waitfor-test-dependencies.py
 
   post:
-    - pip2.7 --version
-    - pip2.7 freeze
+    - pip3 --version
+    - pip3 freeze
 
 
 test:

@@ -129,7 +129,7 @@ def pivotDumpTable(table, colList, count=None, blind=True):
         return unArrayizeValue(inject.getValue(query, blind=blind, time=blind, union=not blind, error=not blind))
 
     try:
-        for i in xrange(count):
+        for i in range(count):
             if breakRetrieval:
                 break
 

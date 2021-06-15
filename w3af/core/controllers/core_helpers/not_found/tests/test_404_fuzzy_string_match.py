@@ -191,9 +191,9 @@ class Test404FuzzyStringMatch(unittest.TestCase):
 
         lchunk = int(len(orig_str) / noise_num)
         str_with_noise = ''
-        chunks = [orig_str[x:x+lchunk] for x in xrange(1, len(orig_str), lchunk)]
+        chunks = [orig_str[x:x+lchunk] for x in range(1, len(orig_str), lchunk)]
 
-        for i in xrange(len(chunks)):
+        for i in range(len(chunks)):
             noise = ''.join(random.choice(printable) for _ in range(each_noise_len))
             str_with_noise += '%s%s' % (chunks[i], noise)
 

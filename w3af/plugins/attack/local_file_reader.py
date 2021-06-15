@@ -231,7 +231,7 @@ class FileReaderShell(ReadShell):
         try:
             #FIXME: This only works in Linux!
             response = self._read_with_b64('/etc/passwd')
-        except (Exception, e):
+        except Exception as e:
             msg = 'Not using base64 wrapper for reading because of ' \
                   'exception: "%s"'
             om.out.debug(msg % e)
@@ -259,7 +259,7 @@ class FileReaderShell(ReadShell):
         if self._use_base64_wrapper:
             try:
                 return self._read_with_b64(filename)
-            except (Exception, e):
+            except Exception as e:
                 om.out.debug('read_with_b64 failed: "%s"' % e)
 
         return self._read_basic(filename)

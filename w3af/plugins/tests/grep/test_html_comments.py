@@ -107,7 +107,7 @@ class TestHTMLCommentsUnit(unittest.TestCase):
 
         response = HTTPResponse(200, body, headers, url, url, _id=1)
 
-        for _ in xrange(500):
+        for _ in range(500):
             self.plugin.grep(request, response)
 
         info_sets = kb.kb.get('html_comments', 'interesting_comments')

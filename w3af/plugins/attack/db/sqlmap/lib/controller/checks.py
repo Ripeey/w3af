@@ -871,9 +871,9 @@ def checkFalsePositives(injection):
 
         kb.injection = injection
 
-        for i in xrange(conf.level):
+        for i in range(conf.level):
             while True:
-                randInt1, randInt2, randInt3 = (_() for j in xrange(3))
+                randInt1, randInt2, randInt3 = (_() for j in range(3))
 
                 randInt1 = min(randInt1, randInt2, randInt3)
                 randInt3 = max(randInt1, randInt2, randInt3)
@@ -1390,7 +1390,7 @@ def identifyWaf():
         try:
             logger.debug("checking for WAF/IPS/IDS product '%s'" % product)
             found = function(_)
-        except (Exception, ex):
+        except Exception as ex:
             errMsg = "exception occurred while running "
             errMsg += "WAF script for '%s' ('%s')" % (product, getSafeExString(ex))
             logger.critical(errMsg)

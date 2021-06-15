@@ -217,7 +217,7 @@ class TestXUrllib(unittest.TestCase):
         http_request_e = 0
         scan_must_stop_e = 0
 
-        for _ in xrange(MAX_ERROR_COUNT):
+        for _ in range(MAX_ERROR_COUNT):
             try:
                 self.uri_opener.GET(url)
             except HTTPRequestException:
@@ -225,7 +225,7 @@ class TestXUrllib(unittest.TestCase):
             except (ScanMustStopException, smse):
                 scan_must_stop_e += 1
                 break
-            except (Exception, e):
+            except Exception as e:
                 msg = 'Not expecting "%s".'
                 self.assertTrue(False, msg % e.__class__.__name__)
 
@@ -400,7 +400,7 @@ class TestXUrllib(unittest.TestCase):
         trace_fmt = 'db_unittest-%s_traces/'
         temp_dir = get_temp_dir()
         
-        for i in xrange(100):
+        for i in range(100):
             test_db_path = os.path.join(temp_dir, db_fmt % i)
             test_trace_path = os.path.join(temp_dir, trace_fmt % i)
             self.assertFalse(os.path.exists(test_db_path), test_db_path)

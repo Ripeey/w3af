@@ -28,7 +28,7 @@ def is_online(url, match_string):
         content = urllib2.urlopen(url).read()
     except urllib2.HTTPError, e:
         content = e.read()
-    except (Exception, e):
+    except Exception as e:
         print('%s is offline (%s)' % (url, e.__class__.__name__))
         return False
 
@@ -50,7 +50,7 @@ def waitfor_test_dependencies():
     print('Waiting for dependencies to be up...\n\n')
     is_available = []
 
-    for _ in xrange(LOOPS):
+    for _ in range(LOOPS):
         time.sleep(DELAY)
 
         for url, match_string in TEST_DEPENDENCIES:
@@ -71,7 +71,7 @@ def wait_until_stable():
     print('\n\nWaiting for dependencies to be stable...\n\n')
     test_results = {}
 
-    for _ in xrange(LOOPS):
+    for _ in range(LOOPS):
         time.sleep(DELAY)
 
         for url, match_string in TEST_DEPENDENCIES:

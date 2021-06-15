@@ -826,7 +826,7 @@ ATTR_VALUE_ESCAPES = {
 }
 
 ATTR_VALUE_ESCAPES.update(dict((unichr(i), '&lt;character code=&quot;%04x&quot;/&gt;' % i)
-                               for i in xrange(sys.maxunicode)
+                               for i in range(sys.maxunicode)
                                if is_unicode_escape(i)))
 
 ATTR_VALUE_ESCAPES_IGNORE = {'\n', '\r'}
@@ -891,7 +891,7 @@ TEXT_VALUE_ESCAPES = {
 }
 
 TEXT_VALUE_ESCAPES.update(dict((unichr(i), '<character code="%04x"/>' % i)
-                               for i in xrange(sys.maxunicode)
+                               for i in range(sys.maxunicode)
                                if is_unicode_escape(i)))
 
 TEXT_VALUE_ESCAPES_IGNORE = {'\n', '\r'}

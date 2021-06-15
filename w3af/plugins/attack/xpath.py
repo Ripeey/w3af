@@ -205,7 +205,7 @@ class xpath(AttackPlugin):
         try:
             base_res = self._uri_opener.send_mutant(mutant)
 
-            for _ in xrange(count):
+            for _ in range(count):
                 req_x = self._uri_opener.send_mutant(mutant)
                 diff_ratio += difflib.SequenceMatcher(None, base_res.get_body(),
                                                       req_x.get_body()).ratio()
@@ -403,7 +403,7 @@ class XPathReader(Shell):
         
         mod_get_char = return_args(self.get_char_in_pos)
         imap_unordered = self.worker_pool.imap_unordered
-        len_iter = xrange(data_len)
+        len_iter = range(data_len)
         
         for (pos,), char in imap_unordered(mod_get_char, len_iter):
             data[pos] = char
@@ -428,7 +428,7 @@ class XPathReader(Shell):
         """
         mutant = self.get_mutant()
 
-        for c in xrange(32, 127):
+        for c in range(32, 127):
 
             orig_value = mutant.get_token_original_value()
             skip_len = len(orig_value) + len(self.STR_DELIM) + len(' ')

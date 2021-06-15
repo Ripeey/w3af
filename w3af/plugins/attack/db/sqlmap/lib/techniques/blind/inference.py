@@ -55,7 +55,7 @@ from lib.core.threads import runThreads
 from lib.core.unescaper import unescaper
 from lib.request.connect import Connect as Request
 from lib.utils.progress import ProgressBar
-from lib.utils.xrange import xrange
+from lib.utils.range import range
 
 def bisection(payload, expression, length=None, charsetType=None, firstChar=None, lastChar=None, dump=False):
     """
@@ -343,18 +343,18 @@ def bisection(payload, expression, length=None, charsetType=None, firstChar=None
                     if result:
                         minValue = posValue
 
-                        if not isinstance(charTbl, xrange):
+                        if not isinstance(charTbl, range):
                             charTbl = charTbl[position:]
                         else:
-                            # xrange() - extended virtual charset used for memory/space optimization
-                            charTbl = xrange(charTbl[position], charTbl[-1] + 1)
+                            # range() - extended virtual charset used for memory/space optimization
+                            charTbl = range(charTbl[position], charTbl[-1] + 1)
                     else:
                         maxValue = posValue
 
-                        if not isinstance(charTbl, xrange):
+                        if not isinstance(charTbl, range):
                             charTbl = charTbl[:position]
                         else:
-                            charTbl = xrange(charTbl[0], charTbl[position])
+                            charTbl = range(charTbl[0], charTbl[position])
 
                     if len(charTbl) == 1:
                         if maxValue == 1:
@@ -365,11 +365,11 @@ def bisection(payload, expression, length=None, charsetType=None, firstChar=None
                             # If the original charTbl was [0,..,127] new one
                             # will be [128,..,(128 << 4) - 1] or from 128 to 2047
                             # and instead of making a HUGE list with all the
-                            # elements we use a xrange, which is a virtual
+                            # elements we use a range, which is a virtual
                             # list
                             if expand and shiftTable:
-                                charTbl = xrange(maxChar + 1, (maxChar + 1) << shiftTable.pop())
-                                originalTbl = xrange(charTbl)
+                                charTbl = range(maxChar + 1, (maxChar + 1) << shiftTable.pop())
+                                originalTbl = range(charTbl)
                                 maxChar = maxValue = charTbl[-1]
                                 minChar = minValue = charTbl[0]
                             else:
@@ -487,7 +487,7 @@ def bisection(payload, expression, length=None, charsetType=None, firstChar=None
                                 startCharIndex = 0
                                 endCharIndex = 0
 
-                                for i in xrange(length):
+                                for i in range(length):
                                     if currentValue[i] is not None:
                                         endCharIndex = max(endCharIndex, i)
 
@@ -498,10 +498,10 @@ def bisection(payload, expression, length=None, charsetType=None, firstChar=None
 
                                 count = threadData.shared.start
 
-                                for i in xrange(startCharIndex, endCharIndex + 1):
+                                for i in range(startCharIndex, endCharIndex + 1):
                                     output += '_' if currentValue[i] is None else currentValue[i]
 
-                                for i in xrange(length):
+                                for i in range(length):
                                     count += 1 if currentValue[i] is not None else 0
 
                                 if startCharIndex > 0:

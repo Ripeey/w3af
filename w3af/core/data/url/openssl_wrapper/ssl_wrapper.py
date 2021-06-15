@@ -173,7 +173,7 @@ class SSLSocket(object):
         dns_name = []
         general_names = SubjectAltName()
 
-        for i in xrange(x509.get_extension_count()):
+        for i in range(x509.get_extension_count()):
             ext = x509.get_extension(i)
             ext_name = ext.get_short_name()
 
@@ -186,7 +186,7 @@ class SSLSocket(object):
             for name in decoded_dat:
                 if not isinstance(name, SubjectAltName):
                     continue
-                for entry in xrange(len(name)):
+                for entry in range(len(name)):
                     component = name.getComponentByPosition(entry)
                     if component.getName() != 'dNSName':
                         continue

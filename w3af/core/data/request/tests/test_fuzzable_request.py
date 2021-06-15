@@ -73,7 +73,7 @@ class TestFuzzableRequest(unittest.TestCase):
         self.assertEqual(fr.dump(), expected.encode('utf-8'))
 
     def test_dump_case03(self):
-        header_value = ''.join(chr(i) for i in xrange(256))
+        header_value = ''.join(chr(i) for i in range(256))
         
         expected = u'\r\n'.join([u'GET http://w3af.com/a/b/c.php HTTP/1.1',
                                  u'Hola: %s' % smart_unicode(header_value),
