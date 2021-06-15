@@ -9,7 +9,7 @@ import re
 import time
 import types
 import urllib2
-import urlparse
+from urllib.parse import urlparse
 
 from StringIO import StringIO
 

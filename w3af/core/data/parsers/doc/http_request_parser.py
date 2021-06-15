@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import urlparse
+from urllib.parse import urlparse
 
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.dc.headers import Headers

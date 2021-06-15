@@ -8,7 +8,7 @@ See the file 'LICENSE' for copying permission
 import httplib
 import os
 import re
-import urlparse
+from urllib.parse import urlparse
 import tempfile
 import time
 

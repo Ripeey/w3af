@@ -122,7 +122,7 @@ class TestURLParser(unittest.TestCase):
         them properly.
 
         The issue comes from a call to urlparse.urljoin:
-            >>> import urlparse
+            >>> from urllib.parse import urlparse
             >>> urlparse.urljoin('http://foo.com/', 'spam-bar://eggs.com')
             'spam-bar://eggs.com'
 

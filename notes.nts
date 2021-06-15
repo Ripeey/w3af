@@ -1,9 +1,29 @@
 # Note to self
+# change requirements to 3x mostly 3,9
+# updated dependencies
+# fixed all versions
+# updated for parrot
+# still `halberd` needs new repo as no py3
+# esmre bugged so replaced for parrot to Python3-esmre in apt CORE instead
+# ntlm 1.0.1 fucked up pip3 removed completely and updated to latest
+# lotta prints and exception update
+
+
+# packages and syntax update
+# modules update based on python3 switched from 2
+# more module updates trying to fix parameters
+# ... lot more idk
 # doubt on output_manager/manager.py
 # import Queue > import queue
 # Queue > queue
 # ctx = threading # but idk shuda None on internet
+# monkey patch weird
 # threading/threadpool
 # threading/silent_join....
-
 # xrange > range
+
+
+# fix __builtin__ > builtins
+# fix all exception, ex to (as ex) and e to (as e)
+# fix OverflowError for 1e100 to threading.TIMEOUT_MAX const instead
+#

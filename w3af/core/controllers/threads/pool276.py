@@ -610,7 +610,7 @@ class Pool(object):
         # workers because we don't want workers to be restarted behind our back.
         debug('joining worker handler')
         if threading.current_thread() is not worker_handler:
-            worker_handler.join(1e100)
+            worker_handler.join(threading.TIMEOUT_MAX)
 
         # Terminate workers which haven't already finished.
         if pool and hasattr(pool[0], 'terminate'):
@@ -625,11 +625,11 @@ class Pool(object):
 
         debug('joining task handler')
         if threading.current_thread() is not task_handler:
-            task_handler.join(1e100)
+            task_handler.join(threading.TIMEOUT_MAX)
 
         debug('joining result handler')
         if threading.current_thread() is not result_handler:
-            result_handler.join(1e100)
+            result_handler.join(threading.TIMEOUT_MAX)
 
         if pool and hasattr(pool[0], 'terminate'):
             debug('joining pool workers')

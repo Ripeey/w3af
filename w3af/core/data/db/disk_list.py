@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 #magic
-import __builtin__
+import builtins
 
 import hashlib
 import pickle
@@ -150,7 +150,7 @@ class DiskList(object):
         return result
 
     def _is_builtin(self, value):
-        if type(value).__name__ in __builtin__.__dict__:
+        if type(value).__name__ in builtins.__dict__:
             return True
 
         elif value is None:

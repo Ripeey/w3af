@@ -9,7 +9,7 @@ import codecs
 import os
 import re
 import urllib2
-import urlparse
+from urllib.parse import urlparse
 
 from xml.dom.minidom import Document
 

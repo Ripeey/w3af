@@ -465,7 +465,7 @@ class SQLiteExecutor(Process):
 
             try:
                 result = handler(*args, **kwds)
-            except sqlite3.OperationalError, e:
+            except sqlite3.OperationalError as e:
                 # I don't like this string match, but it seems that the
                 # exception doesn't have any error code to match
                 if 'no such table' in str(e):

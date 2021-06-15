@@ -13,7 +13,7 @@ import subprocess
 import sys
 import tempfile
 import time
-import urlparse
+from urllib.parse import urlparse
 
 from lib.core.common import Backend
 from lib.core.common import getSafeExString

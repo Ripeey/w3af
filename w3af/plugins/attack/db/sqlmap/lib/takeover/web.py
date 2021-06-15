@@ -10,7 +10,7 @@ import posixpath
 import re
 import StringIO
 import tempfile
-import urlparse
+from urllib.parse import urlparse
 
 from extra.cloak.cloak import decloak
 from lib.core.agent import agent

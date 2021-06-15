@@ -21,7 +21,7 @@ import tempfile
 import threading
 import time
 import urllib2
-import urlparse
+from urllib.parse import urlparse
 
 import lib.controller.checks
 import lib.core.common

@@ -31,7 +31,7 @@ import time
 import types
 import urllib
 import urllib2
-import urlparse
+from urllib.parse import urlparse
 import unicodedata
 
 from ConfigParser import DEFAULTSECT

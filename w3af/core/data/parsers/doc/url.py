@@ -25,7 +25,7 @@ import copy
 import socket
 import urllib
 
-import urlparse
+from urllib.parse import urlparse
 
 from functools import wraps
 from collections import OrderedDict

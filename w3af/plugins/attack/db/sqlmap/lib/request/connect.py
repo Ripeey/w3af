@@ -18,7 +18,7 @@ import struct
 import time
 import traceback
 import urllib2
-import urlparse
+from urllib.parse import urlparse
 
 try:
     import websocket
