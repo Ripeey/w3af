@@ -3,10 +3,11 @@
 # updated dependencies
 # fixed all versions
 # updated for parrot
+# replaced distro module
 # still `halberd` needs new repo as no py3
 # esmre bugged so replaced for parrot to Python3-esmre in apt CORE instead
 # ntlm 1.0.1 fucked up pip3 removed completely and updated to latest
-# lotta prints and exception update
+# lotta prints, file, and exception update
 
 
 # packages and syntax update
@@ -22,8 +23,12 @@
 # threading/silent_join....
 # xrange > range
 
-
+# urlparse > urllib
 # fix __builtin__ > builtins
 # fix all exception, ex to (as ex) and e to (as e)
-# fix OverflowError for 1e100 to threading.TIMEOUT_MAX const instead
-#
+# fix OverflowError for 1e100 to threading.TIMEOUT_MAX const instead#
+
+
+# zip_longest 
+# encoding; _unicode=str, _str=bytes from unicode, str
+# html.entities

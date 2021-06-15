@@ -179,7 +179,7 @@ class URL(DiskItem):
     DOMAIN_LABEL_PATTERN = r'(?![0-9]+$)(?!-)[a-zA-Z0-9_-]{1,63}(?<!-)'
     DOMAIN_PATTERN = r'^({label})(\.{label})*\.?$'.format(label=DOMAIN_LABEL_PATTERN)
     RE_DOMAIN = re.compile(DOMAIN_PATTERN)
-    SET_DOMAIN_RE = re.compile('[a-z0-9-.]+([a-z0-9-]+)*$')
+    SET_DOMAIN_RE = re.compile(r'[a-z0-9-.]+([a-z0-9-]+)*$')
 
     __slots__ = (
                  # URL attributes
@@ -195,14 +195,14 @@ class URL(DiskItem):
                  '_encoding',
 
                  # Easy access via properties
-                 'scheme',
+                 'scheme'
                  'netloc',
                  'path',
                  'params',
                  'querystring',
                  'fragment',)
 
-    def __init__(self, data, encoding=DEFAULT_ENCODING):
+    def __init__(self, data, encoding=DEFAULT_ENCODING, _scheme = None):
         """
         :param data: Either a string representing a URL or a 6-elems tuple
             representing the URL components:
@@ -214,7 +214,7 @@ class URL(DiskItem):
         # The different parts of the url
         self._querystr = None
         self._fragment = None
-        self._scheme = None
+        self._scheme = set() or _scheme
         self._netloc = None
         self._path = None
         self._params = None

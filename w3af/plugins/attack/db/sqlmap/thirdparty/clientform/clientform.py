@@ -105,7 +105,7 @@ else:
         _logger.addHandler(handler)
 
 import sys, urllib, urllib2, types, mimetools, copy, urlparse, \
-       htmlentitydefs, re, random
+       html.entities, re, random
 from cStringIO import StringIO
 
 import sgmllib
@@ -254,20 +254,20 @@ def unescape_charref(data, encoding):
         return repl
 
 def get_entitydefs():
-    import htmlentitydefs
+    import html.entities
     from codecs import latin_1_decode
     entitydefs = {}
     try:
-        htmlentitydefs.name2codepoint
+        html.entities.name2codepoint
     except AttributeError:
         entitydefs = {}
-        for name, char in htmlentitydefs.entitydefs.items():
+        for name, char in html.entities.entitydefs.items():
             uc = latin_1_decode(char)[0]
             if uc.startswith("&#") and uc.endswith(";"):
                 uc = unescape_charref(uc[2:-1], None)
             entitydefs["&%s;" % name] = uc
     else:
-        for name, codepoint in htmlentitydefs.name2codepoint.items():
+        for name, codepoint in html.entities.name2codepoint.items():
             entitydefs["&%s;" % name] = unichr(codepoint)
     return entitydefs
 

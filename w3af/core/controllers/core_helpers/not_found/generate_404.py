@@ -246,7 +246,7 @@ def grouper(iterable, n, fillvalue=None):
     """
     # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx
     args = [iter(iterable)] * n
-    return itertools.izip_longest(fillvalue=fillvalue, *args)
+    return itertools.zip_longest(fillvalue=fillvalue, *args)
 
 
 def send_request_generate_404(uri_opener, http_response, debugging_id, exclude=None):

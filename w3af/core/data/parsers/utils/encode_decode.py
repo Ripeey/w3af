@@ -24,7 +24,7 @@ import re
 import urllib
 import sys
 
-from htmlentitydefs import name2codepoint
+from html.entities import name2codepoint
 
 from w3af.core.data.dc.utils.token import DataToken
 from w3af.core.data.misc.encoding import HTML_ENCODE
@@ -120,7 +120,7 @@ def urlencode(query, encoding, safe='/<>"\'=:()'):
         except TypeError:
             tb = sys.exc_info()[2]
             msg = "not a valid non-string sequence or mapping object"
-            raise TypeError, msg, tb
+            raise TypeError(msg, tb)
 
     l = []
 
