@@ -23,7 +23,7 @@ import re
 from w3af.plugins.tests.helper import PluginTest, PluginConfig, MockResponse
 
 
-BAD_SIG_URI = re.compile('.*(passwd|uname|passthru|xp_cmdshell|WINNT).*', re.I)
+BAD_SIG_URI = re.compile(r'.*(passwd|uname|passthru|xp_cmdshell|WINNT).*', re.I)
 
 
 class TestFoundAFD(PluginTest):
@@ -119,7 +119,7 @@ class TestNotFoundAFD(PluginTest):
         }
     }
 
-    MOCK_RESPONSES = [MockResponse(re.compile('.*'), 'Static page')]
+    MOCK_RESPONSES = [MockResponse(re.compile(r'.*'), 'Static page')]
 
     def test_afd_not_found_http(self):
         cfg = self._run_configs['cfg']

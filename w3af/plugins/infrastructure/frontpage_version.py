@@ -40,9 +40,9 @@ class frontpage_version(InfrastructurePlugin):
     Search FrontPage Server Info file and if it finds it will determine its version.
     :author: Viktor Gazdag ( woodspeed@gmail.com )
     """
-    VERSION_RE = re.compile('FPVersion="(.*?)"', re.IGNORECASE)
-    ADMIN_URL_RE = re.compile('FPAdminScriptUrl="(.*?)"', re.IGNORECASE)
-    AUTHOR_URL_RE = re.compile('FPAuthorScriptUrl="(.*?)"', re.IGNORECASE)
+    VERSION_RE = re.compile(r'FPVersion="(.*?)"', re.IGNORECASE)
+    ADMIN_URL_RE = re.compile(r'FPAdminScriptUrl="(.*?)"', re.IGNORECASE)
+    AUTHOR_URL_RE = re.compile(r'FPAuthorScriptUrl="(.*?)"', re.IGNORECASE)
 
     def __init__(self):
         InfrastructurePlugin.__init__(self)

@@ -123,7 +123,7 @@ class TestConsoleBugReport(ConsoleTestHelper):
         self.console._w3af.exception_handler.clear()
         
         # Close issue from github
-        issue_id_re = re.compile('https://github.com/andresriancho/w3af/issues/(\d*)')
+        issue_id_re = re.compile(r'https://github.com/andresriancho/w3af/issues/(\d*)')
         for line in self._mock_stdout.messages:
             mo = issue_id_re.search(line)
             if mo is not None:

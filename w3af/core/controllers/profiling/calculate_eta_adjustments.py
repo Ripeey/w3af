@@ -39,7 +39,7 @@ This tool requires a scan log for a finished scan!
 '''
 
 
-CALCULATED_ETA = re.compile('Calculated (.*?) ETA: (.*?) seconds. \(input speed:(.*?),'
+CALCULATED_ETA = re.compile(r'Calculated (.*?) ETA: (.*?) seconds. \(input speed:(.*?),'
                             ' output speed:(.*?), queue size: (.*?), adjustment known: (.*?),'
                             ' adjustment unknown: (.*?), average: (.*?), run time: .*?\)')
 

@@ -99,7 +99,7 @@ except NameError:
     from sets import Set as set
 
 #These hacks make Beautiful Soup able to parse XML with namespaces
-sgmllib.tagfind = re.compile('[a-zA-Z][-_.:a-zA-Z0-9]*')
+sgmllib.tagfind = re.compile(r'[a-zA-Z][-_.:a-zA-Z0-9]*')
 _markupbase._declname_match = re.compile(r'[a-zA-Z][-_.:a-zA-Z0-9]*\s*').match
 
 DEFAULT_OUTPUT_ENCODING = "utf-8"
@@ -436,7 +436,7 @@ class PageElement(object):
                 s = str(s)
         return s
 
-    BARE_AMPERSAND_OR_BRACKET = re.compile("([<>]|"
+    BARE_AMPERSAND_OR_BRACKET = re.compile(r"([<>]|"
                                            + "&(?!#\d+;|#x[0-9a-fA-F]+;|\w+;)"
                                            + ")")
 
@@ -1064,9 +1064,9 @@ class BeautifulStoneSoup(Tag, SGMLParser):
     QUOTE_TAGS = {}
     PRESERVE_WHITESPACE_TAGS = []
 
-    MARKUP_MASSAGE = [(re.compile('(<[^<>]*)/>'),
+    MARKUP_MASSAGE = [(re.compile(r'(<[^<>]*)/>'),
                        lambda x: x.group(1) + ' />'),
-                      (re.compile('<!\s+([^<>]*)>'),
+                      (re.compile(r'<!\s+([^<>]*)>'),
                        lambda x: '<!' + x.group(1) + '>')
                       ]
 
@@ -1575,7 +1575,7 @@ class BeautifulSoup(BeautifulStoneSoup):
                                 NESTABLE_LIST_TAGS, NESTABLE_TABLE_TAGS)
 
     # Used to detect the charset in a META tag; see start_meta
-    CHARSET_RE = re.compile("((^|;)\s*charset=)([^;]*)", re.M)
+    CHARSET_RE = re.compile(r"((^|;)\s*charset=)([^;]*)", re.M)
 
     def start_meta(self, attrs):
         """Beautiful Soup can detect a charset included in a META tag,
@@ -1827,7 +1827,7 @@ class UnicodeDammit:
         if self.smartQuotesTo and proposed.lower() in("windows-1252",
                                                       "iso-8859-1",
                                                       "iso-8859-2"):
-            markup = re.compile("([\x80-\x9f])").sub \
+            markup = re.compile(r"([\x80-\x9f])").sub \
                      (lambda x: self._subMSChar(x.group(1)),
                       markup)
 
@@ -1921,7 +1921,7 @@ class UnicodeDammit:
         xml_encoding_match = re.compile(
             '^<\?.*encoding=[\'"](.*?)[\'"].*\?>').match(xml_data)
         if not xml_encoding_match and isHTML:
-            regexp = re.compile('<\s*meta[^>]+charset=([^>]*?)[;\'">]', re.I)
+            regexp = re.compile(r'<\s*meta[^>]+charset=([^>]*?)[;\'">]', re.I)
             xml_encoding_match = regexp.search(xml_data)
         if xml_encoding_match is not None:
             xml_encoding = xml_encoding_match.groups()[0].lower()

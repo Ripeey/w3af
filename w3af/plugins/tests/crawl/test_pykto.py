@@ -80,30 +80,30 @@ class TestIsVulnerableHelper(unittest.TestCase):
         self.assertTrue(is_vuln.checks_only_response_code())
 
     def test_checks_only_response_code_case03(self):
-        is_vuln = IsVulnerableHelper(200, re.compile('a'), None, None, None)
+        is_vuln = IsVulnerableHelper(200, re.compile(r'a'), None, None, None)
         self.assertFalse(is_vuln.checks_only_response_code())
 
     def test_checks_only_response_code_case04(self):
-        is_vuln = IsVulnerableHelper(re.compile('a'), re.compile('b'),
+        is_vuln = IsVulnerableHelper(re.compile(r'a'), re.compile(r'b'),
                                      None, None, None)
         self.assertFalse(is_vuln.checks_only_response_code())
 
     def test_check_case01(self):
-        is_vuln = IsVulnerableHelper(re.compile('abc'), None, None, None, None)
+        is_vuln = IsVulnerableHelper(re.compile(r'abc'), None, None, None, None)
         url = URL('http://moth/')
         http_response = HTTPResponse(200, 'hello world abc def', Headers(),
                                      url, url)
         self.assertTrue(is_vuln.check(http_response))
 
     def test_check_case02(self):
-        is_vuln = IsVulnerableHelper(re.compile('xyz'), None, None, None, None)
+        is_vuln = IsVulnerableHelper(re.compile(r'xyz'), None, None, None, None)
         url = URL('http://moth/')
         http_response = HTTPResponse(200, 'hello world abc def', Headers(),
                                      url, url)
         self.assertFalse(is_vuln.check(http_response))
 
     def test_check_case03(self):
-        is_vuln = IsVulnerableHelper(re.compile('xyz'), re.compile('def'),
+        is_vuln = IsVulnerableHelper(re.compile(r'xyz'), re.compile(r'def'),
                                      None, None, None)
         url = URL('http://moth/')
         http_response = HTTPResponse(200, 'hello world abc def', Headers(),
@@ -111,7 +111,7 @@ class TestIsVulnerableHelper(unittest.TestCase):
         self.assertTrue(is_vuln.check(http_response))
 
     def test_check_case04(self):
-        is_vuln = IsVulnerableHelper(200, re.compile('def'),
+        is_vuln = IsVulnerableHelper(200, re.compile(r'def'),
                                      None, None, None)
         url = URL('http://moth/')
         http_response = HTTPResponse(200, 'hello world abc def', Headers(),
@@ -126,30 +126,30 @@ class TestIsVulnerableHelper(unittest.TestCase):
         self.assertTrue(is_vuln.check(http_response))
 
     def test_check_case06(self):
-        is_vuln = IsVulnerableHelper(200, 301, re.compile('hello'), None, None)
+        is_vuln = IsVulnerableHelper(200, 301, re.compile(r'hello'), None, None)
         url = URL('http://moth/')
         http_response = HTTPResponse(301, 'hello world abc def', Headers(),
                                      url, url)
         self.assertTrue(is_vuln.check(http_response))
 
     def test_check_case07(self):
-        is_vuln = IsVulnerableHelper(200, 301, re.compile('xyz'), None, None)
+        is_vuln = IsVulnerableHelper(200, 301, re.compile(r'xyz'), None, None)
         url = URL('http://moth/')
         http_response = HTTPResponse(301, 'hello world abc def', Headers(),
                                      url, url)
         self.assertFalse(is_vuln.check(http_response))
 
     def test_check_case08(self):
-        is_vuln = IsVulnerableHelper(200, 301, re.compile('def'),
-                                     re.compile('xyz'), re.compile('abc'))
+        is_vuln = IsVulnerableHelper(200, 301, re.compile(r'def'),
+                                     re.compile(r'xyz'), re.compile(r'abc'))
         url = URL('http://moth/')
         http_response = HTTPResponse(301, 'hello world abc def', Headers(),
                                      url, url)
         self.assertFalse(is_vuln.check(http_response))
 
     def test_check_case09(self):
-        is_vuln = IsVulnerableHelper(200, 301, re.compile('def'),
-                                     re.compile('xyz'), re.compile('spam'))
+        is_vuln = IsVulnerableHelper(200, 301, re.compile(r'def'),
+                                     re.compile(r'xyz'), re.compile(r'spam'))
         url = URL('http://moth/')
         http_response = HTTPResponse(301, 'hello world abc def', Headers(),
                                      url, url)
@@ -352,7 +352,7 @@ class TestNiktoTestParser(PluginTest):
         self.assertEqual(nikto_test.tune, '3')
         self.assertEqual(nikto_test.uri.url_string, 'http://moth/debug.seam')
         self.assertEqual(nikto_test.method, 'GET')
-        self.assertIsInstance(nikto_test.match_1, type(re.compile('')))
+        self.assertIsInstance(nikto_test.match_1, type(re.compile(r'')))
         self.assertEqual(nikto_test.match_1_or, None)
         self.assertEqual(nikto_test.match_1_and, None)
         self.assertEqual(nikto_test.fail_1, None)

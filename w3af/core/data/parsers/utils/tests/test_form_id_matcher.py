@@ -26,8 +26,8 @@ from w3af.core.data.parsers.utils.form_id_matcher import FormIDMatcher
 
 class TestFormIDMatcher(unittest.TestCase):
     def test_form_id_matcher_trivial(self):
-        action = re.compile('/comments')
-        hosted_at_url = re.compile('/products/.*')
+        action = re.compile(r'/comments')
+        hosted_at_url = re.compile(r'/products/.*')
 
         form_idm = FormIDMatcher(hosted_at_url=hosted_at_url,
                                  inputs=['comment'],

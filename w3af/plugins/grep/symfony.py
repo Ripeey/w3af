@@ -46,8 +46,8 @@ class symfony(GrepPlugin):
         self._symfony_detected = False
 
         # Compile only once
-        self._symfony_re = re.compile('symfony=', re.IGNORECASE)
-        self._csrf_token_re = re.compile('.*csrf_token', re.IGNORECASE)
+        self._symfony_re = re.compile(r'symfony=', re.IGNORECASE)
+        self._csrf_token_re = re.compile(r'.*csrf_token', re.IGNORECASE)
 
     def grep(self, request, response):
         """

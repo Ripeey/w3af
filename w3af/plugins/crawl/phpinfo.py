@@ -117,9 +117,9 @@ class phpinfo(CrawlPlugin):
     :author: Aung Khant (aungkhant[at]yehg.net)
     """
 
-    PHP_VERSION_RE = re.compile('(<tr class="h"><td>\n|alt="PHP Logo" /></a>)'
+    PHP_VERSION_RE = re.compile(r'(<tr class="h"><td>\n|alt="PHP Logo" /></a>)'
                                 '<h1 class="p">PHP Version (.*?)</h1>', re.I)
-    SYSTEM_RE = re.compile('System </td><td class="v">(.*?)</td></tr>', re.I)
+    SYSTEM_RE = re.compile(r'System </td><td class="v">(.*?)</td></tr>', re.I)
 
     def __init__(self):
         CrawlPlugin.__init__(self)

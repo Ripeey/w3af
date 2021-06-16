@@ -69,7 +69,7 @@ class TestFalsePositiveFindBackdoor2017_1(PluginTest):
 
     APACHE_403 = get_apache_403('/foobar', domain)
 
-    MOCK_RESPONSES = [MockResponse(re.compile('(.*)'), APACHE_403, status=403)]
+    MOCK_RESPONSES = [MockResponse(re.compile(r'(.*)'), APACHE_403, status=403)]
 
     def test_2017_false_positive_backdoor_1(self):
         cfg = run_configs['base']
@@ -90,7 +90,7 @@ class TestFalsePositiveFindBackdoor2017_2(PluginTest):
                                    '<a href="/forbidden/">403</a>'),
                       MockResponse('http://httpretty-mock/forbidden/c99shell.php',
                                    '<HTML><title>c99shell</title>'),
-                      MockResponse(re.compile('http://.*?/forbidden/.*'),
+                      MockResponse(re.compile(r'http://.*?/forbidden/.*'),
                                    APACHE_403, status=403)]
 
     def test_2017_false_positive_backdoor_2(self):

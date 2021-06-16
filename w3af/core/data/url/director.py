@@ -1,7 +1,7 @@
 import http.client
 import socket
 
-from urllib2 import (OpenerDirector, ProxyHandler, UnknownHandler, HTTPHandler,
+from urllib.request import (OpenerDirector, ProxyHandler, UnknownHandler, HTTPHandler,
                      HTTPDefaultErrorHandler, HTTPRedirectHandler,
                      HTTPErrorProcessor, HTTPSHandler, Request)
 

@@ -24,7 +24,7 @@ import re
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.data.dc.generic.kv_container import KeyValueContainer
 
-KEY_VALUE_RE = re.compile('(.*?)=(.*?);')
+KEY_VALUE_RE = re.compile(r'(.*?)=(.*?);')
 
 
 class Cookie(KeyValueContainer):

@@ -45,7 +45,7 @@ class ssi(AuditPlugin):
         # Internal variables
         self._persistent_multi_in = None
         self._expected_mutant_dict = DiskDict(table_prefix='ssi')
-        self._extract_expected_re = re.compile('[1-9]{5}')
+        self._extract_expected_re = re.compile(r'[1-9]{5}')
 
     def audit(self, freq, orig_response, debugging_id):
         """

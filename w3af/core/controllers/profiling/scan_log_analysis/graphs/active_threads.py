@@ -6,7 +6,7 @@ from utils.utils import (get_first_timestamp,
                          get_last_timestamp,
                          get_line_epoch)
 
-ACTIVE_THREADS = re.compile('The framework has (.*?) active threads.')
+ACTIVE_THREADS = re.compile(r'The framework has (.*?) active threads.')
 
 
 def get_active_threads_data(scan_log_filename, scan):

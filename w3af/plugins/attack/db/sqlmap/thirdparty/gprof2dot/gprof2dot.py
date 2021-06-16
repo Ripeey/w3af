@@ -1039,7 +1039,7 @@ class CallgrindParser(LineParser):
     - http://valgrind.org/docs/manual/cl-Format.html
     """
 
-    _call_re = re.compile('^calls=\s*(\d+)\s+((\d+|\+\d+|-\d+|\*)\s+)+$')
+    _call_re = re.compile(r'^calls=\s*(\d+)\s+((\d+|\+\d+|-\d+|\*)\s+)+$')
 
     def __init__(self, infile):
         LineParser.__init__(self, infile)
@@ -1201,7 +1201,7 @@ class CallgrindParser(LineParser):
 
         return True
 
-    _position_re = re.compile('^(?P<position>c?(?:ob|fl|fi|fe|fn))=\s*(?:\((?P<id>\d+)\))?(?:\s*(?P<name>.+))?')
+    _position_re = re.compile(r'^(?P<position>c?(?:ob|fl|fi|fe|fn))=\s*(?:\((?P<id>\d+)\))?(?:\s*(?P<name>.+))?')
 
     _position_table_map = {
         'ob': 'ob',

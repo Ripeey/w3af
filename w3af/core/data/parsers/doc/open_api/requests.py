@@ -38,7 +38,7 @@ import w3af.core.controllers.output_manager as om
 class RequestFactory(object):
 
     DEFAULT_CONTENT_TYPE = JSONContainer.JSON_CONTENT_TYPE
-    URL_PARTS_RE = re.compile('({[^}]+})')
+    URL_PARTS_RE = re.compile(r'({[^}]+})')
 
     def __init__(self, spec, api_resource_name, resource, operation_name,
                  operation, parameters):

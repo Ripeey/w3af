@@ -6,7 +6,7 @@ from utils.utils import (get_first_timestamp,
                          get_last_timestamp,
                          get_line_epoch)
 
-IDLE_CONSUMER_WORKERS = re.compile('\[.*? - .*?\] (.*?)% of (.*?) workers are idle.')
+IDLE_CONSUMER_WORKERS = re.compile(r'\[.*? - .*?\] (.*?)% of (.*?) workers are idle.')
 
 
 def get_consumer_pool_size_data(scan_log_filename, scan):

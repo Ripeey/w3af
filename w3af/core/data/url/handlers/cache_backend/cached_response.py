@@ -28,7 +28,7 @@ from w3af.core.data.url.handlers.cache_backend.settings import CACHE_LOCATION
 from w3af.core.data.url.handlers.cache_backend.utils import gen_hash
 
 
-class CachedResponse(StringIO.StringIO):
+class CachedResponse(StringIO):
     """
     An urllib2.response-like object for cached responses.
 

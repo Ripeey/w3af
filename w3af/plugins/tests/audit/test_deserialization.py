@@ -67,7 +67,7 @@ class TestDeserializePickle(PluginTest):
             body = 'Message received'
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [DeserializeMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [DeserializeMockResponse(re.compile(r'.*'), body=None,
                                               method='GET', status=200)]
 
     def test_found_deserialization_in_pickle(self):
@@ -101,7 +101,7 @@ class TestDeserializePickleNotBase64(PluginTest):
             body = 'Message received'
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [DeserializeMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [DeserializeMockResponse(re.compile(r'.*'), body=None,
                                               method='GET', status=200)]
 
     def test_found_deserialization_in_pickle(self):
@@ -141,7 +141,7 @@ class TestShouldInjectIsCalled(PluginTest):
             body = 'Message received'
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [DeserializeMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [DeserializeMockResponse(re.compile(r'.*'), body=None,
                                               method='GET', status=200)]
 
     def test_found_deserialization_in_pickle(self):

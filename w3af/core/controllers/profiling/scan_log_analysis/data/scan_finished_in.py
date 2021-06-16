@@ -5,7 +5,7 @@ from utils.utils import (get_first_timestamp,
                          get_last_timestamp,
                          epoch_to_string)
 
-SCAN_FINISHED_IN = re.compile('Scan finished in (.*).')
+SCAN_FINISHED_IN = re.compile(r'Scan finished in (.*).')
 
 
 def get_scan_finished_in(scan_log_filename, scan):

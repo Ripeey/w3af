@@ -6,7 +6,7 @@ from utils.utils import (get_first_timestamp,
                          get_last_timestamp,
                          get_line_epoch)
 
-WORKER_POOL_SIZE = re.compile('the worker pool size to (.*?) ')
+WORKER_POOL_SIZE = re.compile(r'the worker pool size to (.*?) ')
 
 
 def get_worker_pool_size_data(scan_log_filename, scan):

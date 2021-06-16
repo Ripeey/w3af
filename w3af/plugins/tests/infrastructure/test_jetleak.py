@@ -51,7 +51,7 @@ class TestJetLeak(PluginTest):
 
             return status, response_headers, body
 
-    MOCK_RESPONSES = [JettyMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [JettyMockResponse(re.compile(r'.*'), body=None,
                                         method='GET', status=200)]
 
     def test_vulnerable_jetty(self):
@@ -86,7 +86,7 @@ class TestNoJetLeak(PluginTest):
 
             return status, response_headers, body
 
-    MOCK_RESPONSES = [FixedJettyMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [FixedJettyMockResponse(re.compile(r'.*'), body=None,
                                              method='GET', status=200)]
 
     def test_fixed_jetty(self):

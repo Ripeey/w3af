@@ -175,7 +175,7 @@ class TestOpenAPINestedModelSpec(PluginTest):
                                                       NestedModel().get_specification(),
                                                       content_type='application/json'),
 
-                      SQLIMockResponse(re.compile('http://w3af.org/api/pets.*'),
+                      SQLIMockResponse(re.compile(r'http://w3af.org/api/pets.*'),
                                        body=None,
                                        method='GET',
                                        status=200)]
@@ -402,12 +402,12 @@ class TestOpenAPIFuzzURLParts(PluginTest):
                                    PetstoreSimpleModel().get_specification(),
                                    content_type='application/json'),
 
-                      SQLIMockResponse(re.compile('http://petstore.swagger.io/api/pets.*'),
+                      SQLIMockResponse(re.compile(r'http://petstore.swagger.io/api/pets.*'),
                                        body='{}',
                                        method='GET',
                                        status=200),
 
-                      SQLIMockResponse(re.compile('http://petstore.swagger.io/api/pets.*'),
+                      SQLIMockResponse(re.compile(r'http://petstore.swagger.io/api/pets.*'),
                                        body='{}',
                                        method='POST',
                                        status=200)

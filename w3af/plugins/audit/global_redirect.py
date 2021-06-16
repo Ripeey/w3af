@@ -42,8 +42,8 @@ class global_redirect(AuditPlugin):
     BASIC_PAYLOADS = {'http://www.%s/' % TEST_DOMAIN,
                       '//%s' % TEST_DOMAIN}
 
-    SCRIPT_RE = re.compile('<script.*?>(.*?)</script>', re.IGNORECASE | re.DOTALL)
-    META_URL_RE = re.compile('.*?; *?URL *?= *?(.*)', re.IGNORECASE | re.DOTALL)
+    SCRIPT_RE = re.compile(r'<script.*?>(.*?)</script>', re.IGNORECASE | re.DOTALL)
+    META_URL_RE = re.compile(r'.*?; *?URL *?= *?(.*)', re.IGNORECASE | re.DOTALL)
 
     JS_REDIR_GENERIC_FMT = ['window\.location.*?=.*?["\'].*?%s.*?["\']',
                             '(self|top)\.location.*?=.*?["\'].*?%s.*?["\']',

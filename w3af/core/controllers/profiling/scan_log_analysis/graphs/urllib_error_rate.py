@@ -7,7 +7,7 @@ from utils.utils import (get_first_timestamp,
                          get_last_timestamp,
                          get_line_epoch)
 
-EXTENDED_URLLIB_ERRORS_RE = re.compile('ExtendedUrllib error rate is at (.*?)%')
+EXTENDED_URLLIB_ERRORS_RE = re.compile(r'ExtendedUrllib error rate is at (.*?)%')
 
 
 def get_error_rate_data(scan_log_filename, scan):

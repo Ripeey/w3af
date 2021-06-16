@@ -36,7 +36,7 @@ class TestBufferOverflow(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [BOMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [BOMockResponse(re.compile(r'.*'), body=None,
                                      method='GET', status=200)]
 
     _run_config = {

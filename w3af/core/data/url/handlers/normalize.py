@@ -27,7 +27,7 @@ class NormalizeHandler(urllib.request.BaseHandler):
     Make sure that the HTTP request has some "required" headers.
     """
 
-    handler_order = urllib2.HTTPErrorProcessor.handler_order - 1
+    handler_order = urllib.request.HTTPErrorProcessor.handler_order - 1
 
     def http_request(self, request):
         #

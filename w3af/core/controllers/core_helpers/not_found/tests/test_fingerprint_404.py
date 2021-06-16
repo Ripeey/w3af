@@ -79,7 +79,7 @@ class Test404Detection(Generic404Test):
         # https://github.com/andresriancho/w3af/issues/3234
         #
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body="404 found", status=404)
 
         url = URL('http://w3af.com/d:a')
@@ -101,12 +101,12 @@ class Test404FalseNegative(Generic404Test):
                      'because we want to reproduce the bug\n')
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/foo/(.*)"),
+                               re.compile(r"w3af.com/foo/(.*)"),
                                body=server_error,
                                status=500)
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body=not_found,
                                status=404)
 
@@ -132,7 +132,7 @@ class Test404FalsePositiveLargeResponsesRandomShort(Generic404Test):
     def test_page_found_with_large_response_random(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -154,7 +154,7 @@ class Test404FalsePositiveLargeResponsesRandomShort(Generic404Test):
     def test_page_marked_as_404_with_large_response_random(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -195,7 +195,7 @@ class Test404With1ByteRandomShort(Generic404Test):
     def test_1byte_short_not_404(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -241,7 +241,7 @@ class Test404With1ByteRandomLarge(Generic404Test):
     def test_1byte_large_is_404(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -260,7 +260,7 @@ class Test404With1ByteRandomLarge(Generic404Test):
     def test_1byte_large_is_200(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -289,7 +289,7 @@ class Test404FalsePositiveLargeResponsesEqual404s(Generic404Test):
     def test_page_not_found_with_large_response(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -311,7 +311,7 @@ class Test404FalsePositiveLargeResponsesEqual404s(Generic404Test):
     def test_page_marked_as_404_with_large_response(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -342,7 +342,7 @@ class Test404FalsePositiveLargeResponsesWithCSRFToken(Generic404Test):
     def test_is_404_with_csrf_token(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body=self.request_callback,
                                status=200)
 
@@ -363,7 +363,7 @@ class Test404FalsePositiveLargeResponsesWithCSRFToken(Generic404Test):
     def test_exists_with_csrf_token_in_404_page(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body=self.request_callback,
                                status=200)
 
@@ -399,7 +399,7 @@ class Test404FalsePositiveLargeResponsesWithCSRFTokenPartiallyEqual(Generic404Te
     def test_false_positive(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body=self.request_callback,
                                status=200)
 
@@ -471,7 +471,7 @@ class Test404HandleIgnoredFilename(GenericIgnoredPartTest):
     def test_handle_ignored_filename(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -490,7 +490,7 @@ class Test404HandleIgnoredPath(GenericIgnoredPartTest):
     def test_handle_ignored_path(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -509,7 +509,7 @@ class Test404HandleIgnoredPathAndFilename(GenericIgnoredPartTest):
     def test_handle_ignored_path(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -528,7 +528,7 @@ class Test404HandleIgnoredPathDeep(GenericIgnoredPartTest):
     def test_handle_ignored_path(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 
@@ -550,7 +550,7 @@ class Test404HandleAllIs404(GenericIgnoredPartTest):
     def test_handle_really_a_404(self):
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile('w3af.com/(.*)'),
+                               re.compile(r'w3af.com/(.*)'),
                                body=self.request_callback,
                                status=200)
 

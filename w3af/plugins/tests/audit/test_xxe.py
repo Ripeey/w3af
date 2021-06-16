@@ -54,7 +54,7 @@ class TestXXESimple(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [XXEMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [XXEMockResponse(re.compile(r'.*'), body=None,
                                       method='GET', status=200)]
 
     def test_found_xxe(self):
@@ -106,7 +106,7 @@ class TestXXERemoteLoading(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [XXEMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [XXEMockResponse(re.compile(r'.*'), body=None,
                                       method='GET', status=200)]
 
     def test_found_xxe_with_remote(self):
@@ -150,7 +150,7 @@ class TestXXENegativeWithError(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [XXEMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [XXEMockResponse(re.compile(r'.*'), body=None,
                                       method='GET', status=200)]
 
     def test_not_found_xxe(self):
@@ -190,7 +190,7 @@ class TestXXENegativeNoError(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [XXEMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [XXEMockResponse(re.compile(r'.*'), body=None,
                                       method='GET', status=200)]
 
     def test_not_found_xxe(self):
@@ -235,7 +235,7 @@ class TestXXEInParameter(PluginTest):
 
             return self.status, response_headers, 'Invalid XML.'
 
-    MOCK_RESPONSES = [XXEMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [XXEMockResponse(re.compile(r'.*'), body=None,
                                       method='GET', status=200)]
 
     def test_found_xxe(self):

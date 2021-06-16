@@ -253,7 +253,7 @@ class TestRelativePathsIn404(PluginTest):
     GALERIA_HTML = open(os.path.join(TEST_ROOT, 'galeria-root.html')).read()
     INDEX_HTML = open(os.path.join(TEST_ROOT, 'index.html')).read()
 
-    MOCK_RESPONSES = [MockResponse(re.compile('http://mock/galeria/.*'),
+    MOCK_RESPONSES = [MockResponse(re.compile(r'http://mock/galeria/.*'),
                                    GALERIA_HTML),
                       MockResponse('http://mock/', 'Thanks.', method='POST'),
                       MockResponse('http://mock/', INDEX_HTML)]

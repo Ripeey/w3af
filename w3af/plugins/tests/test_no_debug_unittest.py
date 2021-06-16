@@ -42,7 +42,7 @@ class TestNoDebugUnittest(unittest.TestCase):
     
     def test_no_kb_access_from_plugin(self):
         
-        debug_scan = re.compile('self._scan(.*?, *debug)')
+        debug_scan = re.compile(r'self._scan(.*?, *debug)')
         
         for unittest_file in recursive_listdir(os.path.join(ROOT_PATH, 
                                                             'plugins',

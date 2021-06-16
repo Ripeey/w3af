@@ -44,7 +44,7 @@ class HttpEditor(gtk.VBox, Searchable):
     Special class for editing HTTP requests/responses.
     """
 
-    HTTP_HEAD_BODY_SPLIT_RE = re.compile('(\r\n\r\n|\n\n)')
+    HTTP_HEAD_BODY_SPLIT_RE = re.compile(r'(\r\n\r\n|\n\n)')
 
     def __init__(self, w3af):
         gtk.VBox.__init__(self)

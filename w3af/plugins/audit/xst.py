@@ -71,7 +71,7 @@ class xst(AuditPlugin):
         response = self._uri_opener.send_mutant(fr)
 
         # create a regex to test the response.
-        regex = re.compile("FakeHeader: *?XST", re.IGNORECASE)
+        regex = re.compile(r"FakeHeader: *?XST", re.IGNORECASE)
         if regex.search(response.get_body()):
             # If vulnerable record it. This will now become visible on
             # the KB Browser

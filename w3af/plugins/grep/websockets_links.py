@@ -32,7 +32,7 @@ from w3af.core.data.kb.info import Info
 
 WS_URL = 'ws://'
 WSS_URL = 'wss://'
-WEBSOCKETS_URL_RE = re.compile('["|\']{1}(wss?:\/\/'
+WEBSOCKETS_URL_RE = re.compile(r'["|\']{1}(wss?:\/\/'
                                '[\da-z\.-]+'
                                '(\.[a-z\.]{2,6})?'
                                '(\:\d{1,5})?'

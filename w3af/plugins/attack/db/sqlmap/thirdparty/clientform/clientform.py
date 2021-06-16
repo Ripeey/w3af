@@ -110,7 +110,7 @@ from io import StringIO
 
 import sgmllib
 # monkeypatch to fix http://www.python.org/sf/803422 :-(
-sgmllib.charref = re.compile("&#(x?[0-9a-fA-F]+)[^0-9a-fA-F]")
+sgmllib.charref = re.compile(r"&#(x?[0-9a-fA-F]+)[^0-9a-fA-F]")
 
 # HTMLParser.HTMLParser is recent, so live without it if it's not available
 # (also, sgmllib.SGMLParser is much more tolerant of bad HTML)

@@ -367,7 +367,7 @@ class Router(object):
         The first element is a string, the last two are callables or None. """
         self.filters[name] = func
 
-    rule_syntax = re.compile('(\\\\*)'
+    rule_syntax = re.compile(r'(\\\\*)'
         '(?:(?::([a-zA-Z_][a-zA-Z_0-9]*)?()(?:#(.*?)#)?)'
           '|(?:<([a-zA-Z_][a-zA-Z_0-9]*)?(?::([a-zA-Z_]*)'
             '(?::((?:\\\\.|[^\\\\>]+)+)?)?)?>))')
@@ -425,7 +425,7 @@ class Router(object):
             return
 
         try:
-            re_pattern = re.compile('^(%s)$' % pattern)
+            re_pattern = re.compile(r'^(%s)$' % pattern)
             re_match = re_pattern.match
         except re.error:
             raise RouteSyntaxError("Could not add Route: %s (%s)" %

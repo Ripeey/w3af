@@ -95,7 +95,7 @@ class TestStrategy(PluginTest):
         python_executable = sys.executable
 
         VULN_STRING = 'A Cross Site Scripting vulnerability was found at'
-        URL_VULN_RE = re.compile('%s: "(.*?)"' % VULN_STRING)
+        URL_VULN_RE = re.compile(r'%s: "(.*?)"' % VULN_STRING)
         all_previous_vulns = []
 
         loops = 2 if is_running_on_ci() else 10

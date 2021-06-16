@@ -32,7 +32,7 @@ class OutputManagerHandler(urllib.request.BaseHandler):
     Send the HTTP request and response to the output manager
     """
 
-    handler_order = urllib2.HTTPErrorProcessor.handler_order - 1
+    handler_order = urllib.request.HTTPErrorProcessor.handler_order - 1
 
     def http_response(self, request, response):
         self._log_req_resp(request, response)

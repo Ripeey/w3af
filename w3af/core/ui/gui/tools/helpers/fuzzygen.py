@@ -27,7 +27,7 @@ except ImportError:
     # this is to easy the test when executing this file directly
     BaseFrameworkException = Exception
 
-REPP = re.compile("\$.*?\$")
+REPP = re.compile(r"\$.*?\$")
 
 
 class FuzzyError(BaseFrameworkException):

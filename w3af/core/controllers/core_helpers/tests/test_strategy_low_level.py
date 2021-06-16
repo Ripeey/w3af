@@ -163,7 +163,7 @@ class TestStrategy(unittest.TestCase):
         core = w3afCore()
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body='301',
                                status=301,
                                adding_headers={'Location': 'https://w3af.com/'})
@@ -193,7 +193,7 @@ class TestStrategy(unittest.TestCase):
         core = w3afCore()
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body='301',
                                status=301,
                                adding_headers={'Location': 'http://www.w3af.com/'})
@@ -222,7 +222,7 @@ class TestStrategy(unittest.TestCase):
         core = w3afCore()
 
         httpretty.register_uri(httpretty.GET,
-                               re.compile("w3af.com/(.*)"),
+                               re.compile(r"w3af.com/(.*)"),
                                body='301',
                                status=301,
                                adding_headers={'Location': 'http://w3af.com/xyz'})

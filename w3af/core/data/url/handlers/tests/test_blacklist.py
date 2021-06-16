@@ -162,7 +162,7 @@ class TestBlacklistHandler(unittest.TestCase):
         blocked_url = URL(self.MOCK_URL_BLOCK)
         safe_url = URL(self.MOCK_URL_PASS)
 
-        ignore_regex = re.compile('.*block.*')
+        ignore_regex = re.compile(r'.*block.*')
         cf.cf.save('ignore_regex', ignore_regex)
 
         # Get an instance of the extended urllib and verify that the blacklist
@@ -203,7 +203,7 @@ class TestBlacklistHandler(unittest.TestCase):
 
         cf.cf.save('blacklist_http_request', [blocked_url])
 
-        ignore_regex = re.compile('.*blo.*')
+        ignore_regex = re.compile(r'.*blo.*')
         cf.cf.save('ignore_regex', ignore_regex)
 
         # Get an instance of the extended urllib and verify that the blacklist

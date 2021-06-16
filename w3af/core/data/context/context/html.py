@@ -130,8 +130,8 @@ class HtmlProcessingInstruction(BaseContext):
 
 class HTMLAttrQuoteGeneric(BaseContext):
 
-    JS_PATTERN = re.compile('^ *javascript:', re.IGNORECASE)
-    VB_PATTERN = re.compile('^ *vbscript:', re.IGNORECASE)
+    JS_PATTERN = re.compile(r'^ *javascript:', re.IGNORECASE)
+    VB_PATTERN = re.compile(r'^ *vbscript:', re.IGNORECASE)
 
     def __init__(self, payload, attr_name, attr_value):
         """

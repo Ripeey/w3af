@@ -6,10 +6,10 @@ from utils.utils import (get_first_timestamp,
                          get_last_timestamp,
                          get_line_epoch)
 
-SCAN_FINISHED_IN = re.compile('Scan finished in (.*).')
-JOIN_TIMES = re.compile('(.*?) took (.*?) seconds to join\(\)')
-SCAN_PROGRESS = re.compile('The scan will finish in .*? seconds \((.*?)% done\)')
-CALCULATED_ETA = re.compile('Calculated (.*?) ETA: (.*?) seconds')
+SCAN_FINISHED_IN = re.compile(r'Scan finished in (.*).')
+JOIN_TIMES = re.compile(r'(.*?) took (.*?) seconds to join\(\)')
+SCAN_PROGRESS = re.compile(r'The scan will finish in .*? seconds \((.*?)% done\)')
+CALCULATED_ETA = re.compile(r'Calculated (.*?) ETA: (.*?) seconds')
 CRAWL_INFRA_FINISHED = 'Producer CrawlInfra has finished'
 
 

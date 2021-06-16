@@ -7,7 +7,7 @@ from utils.utils import (get_first_timestamp,
                          get_last_timestamp,
                          get_line_epoch)
 
-CONNECTION_POOL_WAIT = re.compile('Waited (.*?)s for a connection to be available in the pool.')
+CONNECTION_POOL_WAIT = re.compile(r'Waited (.*?)s for a connection to be available in the pool.')
 
 
 def get_connection_pool_wait_data(scan_log_filename, scan):

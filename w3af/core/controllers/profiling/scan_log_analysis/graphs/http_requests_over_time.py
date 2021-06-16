@@ -4,7 +4,7 @@ import plotille
 from utils.graph import num_formatter
 from utils.utils import get_line_epoch, InvalidTimeStamp
 
-HTTP_CODE_RE = re.compile('returned HTTP code "(.*?)"')
+HTTP_CODE_RE = re.compile(r'returned HTTP code "(.*?)"')
 
 
 def get_http_requests_over_time_data(scan_log_filename, scan):

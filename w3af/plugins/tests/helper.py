@@ -50,7 +50,7 @@ from w3af.core.data.kb.info_set import InfoSet
 
 
 os.chdir(W3AF_LOCAL_PATH)
-RE_COMPILE_TYPE = type(re.compile(''))
+RE_COMPILE_TYPE = type(re.compile(r''))
 
 
 @attr('moth')

@@ -37,7 +37,7 @@ class ThreadStateObserver(StrategyObserver):
     """
     ANALYZE_EVERY = 30
     STACK_TRACE_MIN_TIME = 120
-    DISCOVER_WORKER_RE = re.compile('<bound method CrawlInfrastructure._discover_worker'
+    DISCOVER_WORKER_RE = re.compile(r'<bound method CrawlInfrastructure._discover_worker'
                                     ' of <CrawlInfrastructure\(CrawlInfraController,'
                                     ' started daemon .*?\)>>')
 

@@ -3,7 +3,7 @@ import re
 from utils.output import ListOutput, ListOutputItem
 
 
-NEW_URL_FOUND = re.compile('New URL found by (.*?) plugin')
+NEW_URL_FOUND = re.compile(r'New URL found by (.*?) plugin')
 
 
 def get_crawling_stats(scan_log_filename, scan):

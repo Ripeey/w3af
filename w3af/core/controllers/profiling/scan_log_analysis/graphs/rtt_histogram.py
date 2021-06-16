@@ -4,7 +4,7 @@ import plotille
 from utils.graph import num_formatter
 
 
-RTT_RE = re.compile('\(.*?rtt=(.*?),.*\)')
+RTT_RE = re.compile(r'\(.*?rtt=(.*?),.*\)')
 
 
 def get_rtt_histogram_data(scan_log_filename, scan):

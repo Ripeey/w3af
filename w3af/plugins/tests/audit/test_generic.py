@@ -41,7 +41,7 @@ class TestGenericOnly(PluginTest):
             return self.status, response_headers, body
 
     CONFIG = {'audit': (PluginConfig('generic'),)}
-    MOCK_RESPONSES = [GenericErrorMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [GenericErrorMockResponse(re.compile(r'.*'), body=None,
                                                method='GET', status=200)]
 
     def test_found_generic(self):
@@ -75,7 +75,7 @@ class TestGenericExtensive(PluginTest):
 
     CONFIG = {'audit': (PluginConfig('generic',
                                      ('extensive', True, PluginConfig.BOOL),),)}
-    MOCK_RESPONSES = [GenericErrorMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [GenericErrorMockResponse(re.compile(r'.*'), body=None,
                                                method='GET', status=200)]
 
     def test_found_generic_extensive(self):
@@ -109,7 +109,7 @@ class TestGenericSQLInjection(PluginTest):
 
     CONFIG = {'audit': (PluginConfig('generic'),
                         PluginConfig('sqli'))}
-    MOCK_RESPONSES = [SQLIMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [SQLIMockResponse(re.compile(r'.*'), body=None,
                                        method='GET', status=200)]
 
     def test_found_sqli_not_generic(self):

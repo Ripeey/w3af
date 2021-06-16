@@ -26,7 +26,7 @@ import w3af.core.controllers.output_manager as om
 from w3af.core.data.parsers.doc.cookie_parser import parse_cookie
 from w3af.core.data.misc.encoding import smart_unicode
 
-LINK_HEADER_RE = re.compile('<(.*?)>.*')
+LINK_HEADER_RE = re.compile(r'<(.*?)>.*')
 
 
 def extract_link_from_header_simple(http_response, header_name, header_value):

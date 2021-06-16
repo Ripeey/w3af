@@ -73,7 +73,7 @@ class TestWerkzeugDebuggerEnabled(PluginTest):
 
             return status, response_headers, body
 
-    MOCK_RESPONSES = [CustomMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [CustomMockResponse(re.compile(r'.*'), body=None,
                                          method='GET', status=200)]
 
     def test_vulnerable_werkzeug(self):
@@ -100,7 +100,7 @@ class TestWerkzeugDebuggerDisabled(PluginTest):
         }
     }
 
-    MOCK_RESPONSES = [MockResponse(re.compile('.*'), body='Regular response',
+    MOCK_RESPONSES = [MockResponse(re.compile(r'.*'), body='Regular response',
                                    method='GET', status=200)]
 
     def test_vulnerable_werkzeug(self):

@@ -53,7 +53,7 @@ class ResponseSplittingMockResponse(MockResponse):
 class TestResponseSplitting(PluginTest):
 
     target_url = 'http://w3af.org/?header='
-    target_url_re = re.compile('http://w3af\\.org/\\?header=.*')
+    target_url_re = re.compile(r'http://w3af\\.org/\\?header=.*')
 
     MOCK_RESPONSES = [ResponseSplittingMockResponse(target_url_re,
                                                     body='',
@@ -111,7 +111,7 @@ class ResponseSplittingParameterModifiesResponseMockResponse(MockResponse):
 
 class TestResponseSplittingParameterModifiesResponse(PluginTest):
     target_url = 'http://w3af.org/?header='
-    target_url_re = re.compile('http://w3af\\.org/\\?header=.*')
+    target_url_re = re.compile(r'http://w3af\\.org/\\?header=.*')
 
     MOCK_RESPONSES = [ResponseSplittingParameterModifiesResponseMockResponse(target_url_re,
                                                                              body='',
@@ -165,7 +165,7 @@ class ResponseSplittingHeaderMockResponse(MockResponse):
 
 class TestResponseSplittingHeader(PluginTest):
     target_url = 'http://w3af.org/'
-    target_url_re = re.compile('http://w3af\\.org/.*')
+    target_url_re = re.compile(r'http://w3af\\.org/.*')
 
     MOCK_RESPONSES = [ResponseSplittingHeaderMockResponse(target_url_re,
                                                           body='',

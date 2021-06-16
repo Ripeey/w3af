@@ -80,7 +80,7 @@ class TestHTMLOutput(PluginTest):
         self._validate_xhtml()
 
     def _from_html_get_vulns(self):
-        vuln_url_re = re.compile('<li>Vulnerable URL: <a href="(.*?)">')
+        vuln_url_re = re.compile(r'<li>Vulnerable URL: <a href="(.*?)">')
         vulns = []
 
         for line in open(self.OUTPUT_FILE):

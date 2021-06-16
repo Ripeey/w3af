@@ -47,7 +47,7 @@ class TestRosettaFlash(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [JSONPMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [JSONPMockResponse(re.compile(r'.*'), body=None,
                                         method='GET', status=200,
                                         content_type='application/javascript')]
 
@@ -87,7 +87,7 @@ class TestRosettaFlashFixed(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [JSONPMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [JSONPMockResponse(re.compile(r'.*'), body=None,
                                         method='GET', status=200,
                                         content_type='application/javascript')]
 

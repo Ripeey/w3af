@@ -3,11 +3,11 @@ import re
 from utils.output import KeyValueOutput
 
 
-ERRORS_RE = [re.compile('Unhandled exception "(.*?)"'),
-             re.compile('traceback', re.IGNORECASE),
-             re.compile('w3af-crash'),
-             re.compile('scan was able to continue by ignoring those'),
-             re.compile('The scan will stop')]
+ERRORS_RE = [re.compile(r'Unhandled exception "(.*?)"'),
+             re.compile(r'traceback', re.IGNORECASE),
+             re.compile(r'w3af-crash'),
+             re.compile(r'scan was able to continue by ignoring those'),
+             re.compile(r'The scan will stop')]
 
 IGNORES = ['The fuzzable request router loop will break']
 

@@ -52,7 +52,7 @@ class TestSSI(PluginTest):
 
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [SSIMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [SSIMockResponse(re.compile(r'.*'), body=None,
                                       method='GET', status=200)]
 
     def test_found_ssi(self):
@@ -81,7 +81,7 @@ class TestJinja2SSI(PluginTest):
             body = template.render()
             return self.status, response_headers, body
 
-    MOCK_RESPONSES = [SSIMockResponse(re.compile('.*'), body=None,
+    MOCK_RESPONSES = [SSIMockResponse(re.compile(r'.*'), body=None,
                                       method='GET', status=200)]
 
     def test_found_ssi(self):

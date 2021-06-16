@@ -43,3 +43,7 @@
 # Fix traceback raise, update vuln, jinja2 version, some urllib, http.client < httplib
 
 # Fix struct, clean socket warning, dbms filename encoding
+
+# Fix ntlm_auth, some urllib, cached_response stringio
+# Shift from mimetools to email
+# Add r prefix for regex

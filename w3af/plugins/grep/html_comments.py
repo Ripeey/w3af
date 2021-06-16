@@ -44,7 +44,7 @@ class html_comments(GrepPlugin):
     :author: Andres Riancho (andres.riancho@gmail.com)
     """
 
-    HTML_RE = re.compile('<[a-zA-Z]+ .*?>.*?</[a-zA-Z]+>')
+    HTML_RE = re.compile(r'<[a-zA-Z]+ .*?>.*?</[a-zA-Z]+>')
 
     HTML_FALSE_POSITIVES = {
         '[if IE]',
