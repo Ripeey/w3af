@@ -44,8 +44,8 @@ class analyze_cookies(GrepPlugin):
 
     :author: Andres Riancho (andres.riancho@gmail.com)
     """
-    SECURE_RE = re.compile('; *?secure([\s;, ]|$)', re.I)
-    HTTPONLY_RE = re.compile('; *?httponly([\s;, ]|$)', re.I)
+    SECURE_RE = re.compile(r'; *?secure([\s;, ]|$)', re.I)
+    HTTPONLY_RE = re.compile(r'; *?httponly([\s;, ]|$)', re.I)
 
     def __init__(self):
         GrepPlugin.__init__(self)
@@ -142,7 +142,7 @@ class analyze_cookies(GrepPlugin):
         be called once for each "Set-Cookie" header.
 
         BUGBUG: The urllib2 library concatenates , values of repeated headers.
-                See HTTPMessage.addheader() in httplib.py
+                See HTTPMessage.addheader() in http.client.py
 
         :param request: The HTTP request object.
         :param response: The HTTP response object

@@ -20,12 +20,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import urllib2
-import httplib
+import http.client
 
 import w3af.core.controllers.output_manager as om
 
 
-class certHTTPSConnection(httplib.HTTPSConnection):
+class certHTTPSConnection(http.client.HTTPSConnection):
     """
     An HTTPSConnection abstraction for easy integration with urllib2.
 
@@ -35,7 +35,7 @@ class certHTTPSConnection(httplib.HTTPSConnection):
     cert_file = None
 
     def __init__(self, host, port=None, strict=None):
-        httplib.HTTPSConnection.__init__(
+        http.client.HTTPSConnection.__init__(
             self, host, port, self.key_file, self.cert_file, strict)
         #om.out.debug('Called __init__ of certHTTPSConnection.')
 
@@ -78,7 +78,7 @@ class certHTTPSHandler(urllib2.HTTPSHandler):
 
     def https_open(self, req):
         # Original
-        #return self.do_open(httplib.HTTPSConnection, req)
+        #return self.do_open(http.client.HTTPSConnection, req)
 
         # My version :P
         certHTTPSConnection.cert_file = self.get_ssl_cert_file()

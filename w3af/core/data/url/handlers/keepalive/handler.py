@@ -29,7 +29,7 @@ modifications are:
 import time
 import socket
 import urllib2
-import httplib
+import http.client
 import OpenSSL
 import threading
 
@@ -181,7 +181,7 @@ class KeepAliveHandler(object):
             self._cm.remove_connection(conn, reason='OpenSSL.SSL.Error')
             raise
 
-        except (socket.error, httplib.HTTPException):
+        except (socket.error, http.client.HTTPException):
             # We better discard this connection
             self._cm.remove_connection(conn, reason='socket error')
             raise
@@ -265,7 +265,7 @@ class KeepAliveHandler(object):
             resp = conn.getresponse()
             # note: just because we got something back doesn't mean it
             # worked.  We'll check the version below, too.
-        except (socket.error, httplib.HTTPException), e:
+        except (socket.error, http.client.HTTPException), e:
             self._cm.remove_connection(conn, reason='socket error')
             resp = None
             reason = e

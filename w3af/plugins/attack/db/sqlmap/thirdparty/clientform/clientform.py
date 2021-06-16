@@ -3143,11 +3143,11 @@ class HTMLForm:
         url, data, hdrs = form.click_request_data()
         tup = urlparse(url)
         host, path = tup[1], urlparse.urlunparse((None, None)+tup[2:])
-        conn = httplib.HTTPConnection(host)
+        conn = http.client.HTTPConnection(host)
         if data:
-            httplib.request("POST", path, data, hdrs)
+            http.client.request("POST", path, data, hdrs)
         else:
-            httplib.request("GET", path, headers=hdrs)
+            http.client.request("GET", path, headers=hdrs)
         r = conn.getresponse()
 
         """

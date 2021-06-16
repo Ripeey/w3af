@@ -7,7 +7,7 @@ See the file 'LICENSE' for copying permission
 
 import binascii
 import compiler
-import httplib
+import http.client
 import json
 import keyword
 import logging
@@ -343,7 +343,7 @@ class Connect(object):
                 url = "%s?%s" % (url, get)
                 requestMsg += "?%s" % get
 
-            requestMsg += " %s" % httplib.HTTPConnection._http_vsn_str
+            requestMsg += " %s" % http.client.HTTPConnection._http_vsn_str
 
             # Prepare HTTP headers
             headers = forgeHeaders({HTTP_HEADER.COOKIE: cookie, HTTP_HEADER.USER_AGENT: ua, HTTP_HEADER.REFERER: referer, HTTP_HEADER.HOST: host})
@@ -406,7 +406,7 @@ class Connect(object):
                 page = ws.recv()
                 ws.close()
                 code = ws.status
-                status = httplib.responses[code]
+                status = http.client.responses[code]
                 class _(dict):
                     pass
                 responseHeaders = _(ws.getheaders())
@@ -602,22 +602,22 @@ class Connect(object):
                 logger.log(CUSTOM_LOGGING.TRAFFIC_IN, responseMsg)
 
             if ex.code != conf.ignoreCode:
-                if ex.code == httplib.UNAUTHORIZED:
+                if ex.code == http.client.UNAUTHORIZED:
                     errMsg = "not authorized, try to provide right HTTP "
                     errMsg += "authentication type and valid credentials (%d)" % code
                     raise SqlmapConnectionException(errMsg)
-                elif ex.code == httplib.NOT_FOUND:
+                elif ex.code == http.client.NOT_FOUND:
                     if raise404:
                         errMsg = "page not found (%d)" % code
                         raise SqlmapConnectionException(errMsg)
                     else:
                         debugMsg = "page not found (%d)" % code
                         singleTimeLogMessage(debugMsg, logging.DEBUG)
-                elif ex.code == httplib.GATEWAY_TIMEOUT:
+                elif ex.code == http.client.GATEWAY_TIMEOUT:
                     if ignoreTimeout:
                         return None if not conf.ignoreTimeouts else "", None, None
                     else:
-                        warnMsg = "unable to connect to the target URL (%d - %s)" % (ex.code, httplib.responses[ex.code])
+                        warnMsg = "unable to connect to the target URL (%d - %s)" % (ex.code, http.client.responses[ex.code])
                         if threadData.retriesCount < conf.retries and not kb.threadException:
                             warnMsg += ". sqlmap is going to retry the request"
                             logger.critical(warnMsg)
@@ -631,7 +631,7 @@ class Connect(object):
                     debugMsg = "got HTTP error code: %d (%s)" % (code, status)
                     logger.debug(debugMsg)
 
-        except (urllib2.URLError, socket.error, socket.timeout, httplib.HTTPException, struct.error, binascii.Error, ProxyError, SqlmapCompressionException, WebSocketException, TypeError, ValueError):
+        except (urllib2.URLError, socket.error, socket.timeout, http.client.HTTPException, struct.error, binascii.Error, ProxyError, SqlmapCompressionException, WebSocketException, TypeError, ValueError):
             tbMsg = traceback.format_exc()
 
             if checking:
@@ -959,7 +959,7 @@ class Connect(object):
                     token = match.group(1) if match else None
 
             if not token:
-                if conf.csrfUrl != conf.url and code == httplib.OK:
+                if conf.csrfUrl != conf.url and code == http.client.OK:
                     if headers and "text/plain" in headers.get(HTTP_HEADER.CONTENT_TYPE, ""):
                         token = page
 

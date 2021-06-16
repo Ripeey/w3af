@@ -7,7 +7,7 @@ See the file 'LICENSE' for copying permission
 """
 
 import contextlib
-import httplib
+import http.client
 import logging
 import os
 import re
@@ -755,7 +755,7 @@ def client(host=RESTAPI_DEFAULT_ADDRESS, port=RESTAPI_DEFAULT_PORT, username=Non
     try:
         _client(addr)
     except Exception as ex:
-        if not isinstance(ex, urllib2.HTTPError) or ex.code == httplib.UNAUTHORIZED:
+        if not isinstance(ex, urllib2.HTTPError) or ex.code == http.client.UNAUTHORIZED:
             errMsg = "There has been a problem while connecting to the "
             errMsg += "REST-JSON API server at '%s' " % addr
             errMsg += "(%s)" % ex

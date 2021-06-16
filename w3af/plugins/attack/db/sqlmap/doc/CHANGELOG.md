@@ -229,7 +229,7 @@
 * Major bug fix to correctly enumerate columns on Microsoft SQL Server;
 * Major bug fix so that when the user provide a SELECT statement to be processed with an asterisk as columns, now it also work if in the FROM there is no database name specified;
 * Minor bug fix to correctly dump table entries when the column is provided;
-* Minor bug fix to correctly handle session.error, session.timeout and httplib.BadStatusLine exceptions in HTTP requests;
+* Minor bug fix to correctly handle session.error, session.timeout and http.client.BadStatusLine exceptions in HTTP requests;
 * Minor bug fix to correctly catch connection exceptions and notify to the user also if they occur within a thread;
 * Increased default output level from 0 to 1;
 * Updated documentation.

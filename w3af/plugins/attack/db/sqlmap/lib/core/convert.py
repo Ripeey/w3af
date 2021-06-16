@@ -15,8 +15,9 @@ finally:
 import base64
 import json
 import re
-import StringIO
 import sys
+
+from io import StringIO
 
 from lib.core.settings import IS_WIN
 from lib.core.settings import UNICODE_ENCODING

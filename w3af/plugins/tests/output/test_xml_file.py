@@ -22,10 +22,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import os
 import base64
 import os.path
-import StringIO
 import unittest
 import xml.etree.ElementTree as ElementTree
 
+from io import StringIO
 from lxml import etree
 from nose.plugins.attrib import attr
 

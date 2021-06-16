@@ -11,7 +11,7 @@ import cookielib
 import copy
 import getpass
 import hashlib
-import httplib
+import http.client
 import inspect
 import json
 import locale
@@ -3179,11 +3179,11 @@ def showHttpErrorCodes():
 
     if kb.httpErrorCodes:
         warnMsg = "HTTP error codes detected during run:\n"
-        warnMsg += ", ".join("%d (%s) - %d times" % (code, httplib.responses[code] \
-          if code in httplib.responses else '?', count) \
+        warnMsg += ", ".join("%d (%s) - %d times" % (code, http.client.responses[code] \
+          if code in http.client.responses else '?', count) \
           for code, count in kb.httpErrorCodes.items())
         logger.warn(warnMsg)
-        if any((str(_).startswith('4') or str(_).startswith('5')) and _ != httplib.INTERNAL_SERVER_ERROR and _ != kb.originalCode for _ in kb.httpErrorCodes.keys()):
+        if any((str(_).startswith('4') or str(_).startswith('5')) and _ != http.client.INTERNAL_SERVER_ERROR and _ != kb.originalCode for _ in kb.httpErrorCodes.keys()):
             msg = "too many 4xx and/or 5xx HTTP error codes "
             msg += "could mean that some kind of protection is involved (e.g. WAF)"
             logger.debug(msg)

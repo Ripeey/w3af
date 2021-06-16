@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import threading
 import binascii
-import httplib
+import http.client
 import urllib
 import socket
 import ssl
@@ -57,12 +57,12 @@ class UniqueID(object):
         return '<%s(id:%s, req_count:%s, timeout:%s)>' % args
 
 
-class _HTTPConnection(httplib.HTTPConnection, UniqueID):
+class _HTTPConnection(http.client.HTTPConnection, UniqueID):
 
     def __init__(self, host, port=None, strict=None,
                  timeout=socket._GLOBAL_DEFAULT_TIMEOUT):
         UniqueID.__init__(self)
-        httplib.HTTPConnection.__init__(self, host, port, strict,
+        http.client.HTTPConnection.__init__(self, host, port, strict,
                                         timeout=timeout)
         self.is_fresh = True
         self.host_port = '%s:%s' % (self.host, self.port)
@@ -205,7 +205,7 @@ _protocols = [OpenSSL.SSL.SSLv3_METHOD,
 _protocols_lock = threading.RLock()
 
 
-class SSLNegotiatorConnection(httplib.HTTPSConnection, UniqueID):
+class SSLNegotiatorConnection(http.client.HTTPSConnection, UniqueID):
     """
     Connection class that enables usage of newer SSL protocols.
 
@@ -216,7 +216,7 @@ class SSLNegotiatorConnection(httplib.HTTPSConnection, UniqueID):
     """
     def __init__(self, *args, **kwargs):
         UniqueID.__init__(self)
-        httplib.HTTPSConnection.__init__(self, *args, **kwargs)
+        http.client.HTTPSConnection.__init__(self, *args, **kwargs)
         self.host_port = '%s:%s' % (self.host, self.port)
 
     def connect(self):

@@ -24,8 +24,8 @@ import sys
 import copy
 import pprint
 import tempfile
-import StringIO
 import distro, platform
+from io import StringIO
 
 from itertools import chain
 

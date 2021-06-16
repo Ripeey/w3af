@@ -22,8 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import ssl
 import socket
 import urllib
-import urllib2
-import httplib
+import http.client
 import OpenSSL
 import itertools
 
@@ -397,9 +396,9 @@ def get_exception_reason(error):
         # New exception type raised by keepalive handler
         return str(error)
 
-    # Exceptions may be of type httplib.HTTPException or socket.error
+    # Exceptions may be of type http.client.HTTPException or socket.error
     # We're interested on handling them in different ways
-    if isinstance(error, urllib2.URLError):
+    if isinstance(error, urllib.error.URLError):
         reason_err = error.reason
 
         if isinstance(reason_err, socket.error):
@@ -423,10 +422,10 @@ def get_exception_reason(error):
     if isinstance(error, HTTPRequestException):
         return error.value
 
-    if isinstance(error, httplib.BadStatusLine):
+    if isinstance(error, http.client.BadStatusLine):
         return 'Bad HTTP response status line: %s' % error.line
 
-    if isinstance(error, httplib.HTTPException):
+    if isinstance(error, http.client.HTTPException):
         #
         # Here we catch:
         #

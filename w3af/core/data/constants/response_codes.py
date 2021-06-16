@@ -1,7 +1,7 @@
 """
 response_codes.py
 
-Original: httplib.py
+Original: http.client.py
 
 Copyright 2006 Andres Riancho
 

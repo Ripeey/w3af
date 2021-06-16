@@ -36,3 +36,9 @@
 
 # Fix __slots__ conflicts class variable (unsure)
 # urllib, stringio submodule import fix 
+# switch ntlm3
+
+
+# NamedStringIO multi layout, more StringIO import fix, maketrans
+# Fix traceback raise, update vuln, jinja2 version, some urllib, http.client < httplib
+

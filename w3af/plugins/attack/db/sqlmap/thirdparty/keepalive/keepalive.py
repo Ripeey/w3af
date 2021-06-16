@@ -106,7 +106,7 @@ EXTRA ATTRIBUTES AND METHODS
 # $Id: keepalive.py,v 1.17 2006/12/08 00:14:16 mstenner Exp $
 
 import urllib2
-import httplib
+import http.client
 import socket
 import thread
 
@@ -238,7 +238,7 @@ class KeepAliveHandler:
                 self._cm.add(host, h, 0)
                 self._start_transaction(h, req)
                 r = h.getresponse()
-        except (socket.error, httplib.HTTPException), err:
+        except (socket.error, http.client.HTTPException), err:
             raise urllib2.URLError(err)
 
         if DEBUG: DEBUG.info("STATUS: %s, %s", r.status, r.reason)
@@ -274,7 +274,7 @@ class KeepAliveHandler:
             r = h.getresponse()
             # note: just because we got something back doesn't mean it
             # worked.  We'll check the version below, too.
-        except (socket.error, httplib.HTTPException):
+        except (socket.error, http.client.HTTPException):
             r = None
         except:
             # adding this block just in case we've missed
@@ -323,7 +323,7 @@ class KeepAliveHandler:
                     h.putrequest(req.get_method() or 'GET', req.selector, skip_host=req.has_header("Host"), skip_accept_encoding=req.has_header("Accept-encoding"))
                 else:
                     h.putrequest(req.get_method() or 'GET', req.get_selector(), skip_host=req.has_header("Host"), skip_accept_encoding=req.has_header("Accept-encoding"))
-        except (socket.error, httplib.HTTPException), err:
+        except (socket.error, http.client.HTTPException), err:
             raise urllib2.URLError(err)
 
         if not req.headers.has_key('Connection'):
@@ -369,7 +369,7 @@ class HTTPSHandler(KeepAliveHandler, urllib2.HTTPSHandler):
         try: return self._ssl_factory.get_https_connection(host)
         except AttributeError: return HTTPSConnection(host)
 
-class HTTPResponse(httplib.HTTPResponse):
+class HTTPResponse(http.client.HTTPResponse):
     # we need to subclass HTTPResponse in order to
     # 1) add readline() and readlines() methods
     # 2) add close_connection() methods
@@ -391,9 +391,9 @@ class HTTPResponse(httplib.HTTPResponse):
 
     def __init__(self, sock, debuglevel=0, strict=0, method=None):
         if method: # the httplib in python 2.3 uses the method arg
-            httplib.HTTPResponse.__init__(self, sock, debuglevel, method)
+            http.client.HTTPResponse.__init__(self, sock, debuglevel, method)
         else: # 2.2 doesn't
-            httplib.HTTPResponse.__init__(self, sock, debuglevel)
+            http.client.HTTPResponse.__init__(self, sock, debuglevel)
         self.fileno = sock.fileno
         self.code = None
         self._method = method
@@ -404,7 +404,7 @@ class HTTPResponse(httplib.HTTPResponse):
         self._url = None     # (same)
         self._connection = None # (same)
 
-    _raw_read = httplib.HTTPResponse.read
+    _raw_read = http.client.HTTPResponse.read
 
     def close(self):
         if self.fp:
@@ -468,11 +468,11 @@ class HTTPResponse(httplib.HTTPResponse):
         return list
 
 
-class HTTPConnection(httplib.HTTPConnection):
+class HTTPConnection(http.client.HTTPConnection):
     # use the modified response class
     response_class = HTTPResponse
 
-class HTTPSConnection(httplib.HTTPSConnection):
+class HTTPSConnection(http.client.HTTPSConnection):
     response_class = HTTPResponse
 
 #########################################################################

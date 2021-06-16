@@ -134,7 +134,7 @@ except IOError:
 
 # Lots of stdlib and builtin differences.
 if py3k:
-    import http.client as httplib
+    import http.client as http.client
     import _thread as thread
     from urllib.parse import urljoin, SplitResult as UrlSplitResult
     from urllib.parse import urlencode, quote as urlquote, unquote as urlunquote
@@ -153,7 +153,7 @@ if py3k:
     def _raise(*a):
         raise a[0](a[1]).with_traceback(a[2])
 else:  # 2.x
-    import httplib
+    import http.client
     import thread
     from urlparse import urljoin, SplitResult as UrlSplitResult
     from urllib import urlencode, quote as urlquote, unquote as urlunquote
@@ -3886,7 +3886,7 @@ DEBUG = False
 NORUN = False  # If set, run() does nothing. Used by load_app()
 
 #: A dict to map HTTP status codes (e.g. 404) to phrases (e.g. 'Not Found')
-HTTP_CODES = httplib.responses.copy()
+HTTP_CODES = http.client.responses.copy()
 HTTP_CODES[418] = "I'm a teapot"  # RFC 2324
 HTTP_CODES[428] = "Precondition Required"
 HTTP_CODES[429] = "Too Many Requests"

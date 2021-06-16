@@ -5,7 +5,7 @@ Copyright (c) 2006-2017 sqlmap developers (http://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-import httplib
+import http.client
 import os
 import re
 from urllib.parse import urlparse
@@ -70,7 +70,7 @@ def crawl(target):
                 except SqlmapSyntaxException:
                     errMsg = "invalid URL detected. skipping '%s'" % current
                     logger.critical(errMsg)
-                except httplib.InvalidURL, ex:
+                except http.client.InvalidURL, ex:
                     errMsg = "invalid URL detected ('%s'). skipping " % getSafeExString(ex)
                     errMsg += "URL '%s'" % current
                     logger.critical(errMsg)

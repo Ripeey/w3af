@@ -25,7 +25,6 @@ import random
 import copy
 
 from collections import OrderedDict
-from types import NoneType
 
 import w3af.core.controllers.output_manager as om
 
@@ -193,7 +192,7 @@ class FormParameters(OrderedDict):
         return self._action
 
     def set_action(self, action):
-        if not isinstance(action, (URL, NoneType)):
+        if not isinstance(action, (URL, None)):
             msg = 'The action of a Form must be of URL type.'
             raise TypeError(msg)
         self._action = action

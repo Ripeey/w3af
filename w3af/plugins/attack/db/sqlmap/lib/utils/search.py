@@ -5,7 +5,7 @@ Copyright (c) 2006-2017 sqlmap developers (http://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-import httplib
+import http.client
 import re
 import socket
 import urllib
@@ -70,7 +70,7 @@ def _search(dork):
         conn = urllib2.urlopen(req)
 
         requestMsg = "HTTP request:\nGET %s" % url
-        requestMsg += " %s" % httplib.HTTPConnection._http_vsn_str
+        requestMsg += " %s" % http.client.HTTPConnection._http_vsn_str
         logger.log(CUSTOM_LOGGING.TRAFFIC_OUT, requestMsg)
 
         page = conn.read()
@@ -95,7 +95,7 @@ def _search(dork):
             warnMsg += "an error page information (%s)" % getSafeExString(ex)
             logger.critical(warnMsg)
             return None
-    except (urllib2.URLError, httplib.error, socket.error, socket.timeout, socks.ProxyError):
+    except (urllib2.URLError, http.client.error, socket.error, socket.timeout, socks.ProxyError):
         errMsg = "unable to connect to Google"
         raise SqlmapConnectionException(errMsg)
 
@@ -132,7 +132,7 @@ def _search(dork):
             conn = urllib2.urlopen(req)
 
             requestMsg = "HTTP request:\nGET %s" % url
-            requestMsg += " %s" % httplib.HTTPConnection._http_vsn_str
+            requestMsg += " %s" % http.client.HTTPConnection._http_vsn_str
             logger.log(CUSTOM_LOGGING.TRAFFIC_OUT, requestMsg)
 
             page = conn.read()

@@ -5,7 +5,7 @@ Copyright (c) 2006-2017 sqlmap developers (http://sqlmap.org/)
 See the file 'LICENSE' for copying permission
 """
 
-import httplib
+import http.client
 import urllib2
 
 from lib.core.data import conf
@@ -20,4 +20,4 @@ class HTTPSPKIAuthHandler(urllib2.HTTPSHandler):
 
     def getConnection(self, host, timeout=None):
         # Reference: https://docs.python.org/2/library/ssl.html#ssl.SSLContext.load_cert_chain
-        return httplib.HTTPSConnection(host, cert_file=self.auth_file, key_file=self.auth_file, timeout=conf.timeout)
+        return http.client.HTTPSConnection(host, cert_file=self.auth_file, key_file=self.auth_file, timeout=conf.timeout)

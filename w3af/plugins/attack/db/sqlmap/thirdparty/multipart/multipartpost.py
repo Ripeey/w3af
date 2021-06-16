@@ -24,11 +24,11 @@ import mimetools
 import mimetypes
 import os
 import stat
-import StringIO
 import sys
 import urllib
 import urllib2
 
+from io import StringIO
 from lib.core.exception import SqlmapDataException
 
 

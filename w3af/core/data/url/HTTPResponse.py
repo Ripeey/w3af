@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import re
 import zlib
 import copy
-import httplib
+import http.client
 import urllib2
 import threading
 from itertools import imap
@@ -89,7 +89,7 @@ class HTTPResponse(DiskItem):
         """
         :param code: HTTP code
         :param read: HTTP body text; typically a string
-        :param headers: HTTP headers, typically a dict or a httplib.HTTPMessage
+        :param headers: HTTP headers, typically a dict or a http.client.HTTPMessage
         :param geturl: URL object instance
         :param original_url: URL object instance
         :param msg: HTTP message
@@ -166,9 +166,9 @@ class HTTPResponse(DiskItem):
     def from_httplib_resp(cls, httplibresp, original_url=None, binary_response=False):
         """
         Factory function. Build a HTTPResponse object from a
-        httplib.HTTPResponse instance
+        http.client.HTTPResponse instance
     
-        :param httplibresp: httplib.HTTPResponse instance
+        :param httplibresp: http.client.HTTPResponse instance
         :param original_url: Optional 'url_object' instance.
     
         :return: A HTTPResponse instance
@@ -459,7 +459,7 @@ class HTTPResponse(DiskItem):
         :param headers: The headers dict.
         """
         # Fix lowercase in header names from HTTPMessage
-        if isinstance(headers, httplib.HTTPMessage):
+        if isinstance(headers, http.client.HTTPMessage):
             self._headers = Headers()
             for header in headers.headers:
                 key, value = header.split(':', 1)

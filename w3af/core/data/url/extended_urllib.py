@@ -25,7 +25,7 @@ import urllib
 import socket
 import OpenSSL
 import urllib2
-import httplib
+import http.client
 import threading
 import traceback
 import functools
@@ -972,7 +972,7 @@ class ExtendedUrllib(object):
                 BadStatusLine), e:
             return self._handle_send_socket_error(req, e, grep, original_url)
         
-        except (urllib2.URLError, httplib.HTTPException, HTTPRequestException), e:
+        except (urllib2.URLError, http.client.HTTPException, HTTPRequestException), e:
             return self._handle_send_urllib_error(req, e, grep, original_url)
         
         else:

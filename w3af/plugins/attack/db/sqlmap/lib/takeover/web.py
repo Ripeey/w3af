@@ -8,8 +8,8 @@ See the file 'LICENSE' for copying permission
 import os
 import posixpath
 import re
-import StringIO
 import tempfile
+from io import StringIO
 from urllib.parse import urlparse
 
 from extra.cloak.cloak import decloak

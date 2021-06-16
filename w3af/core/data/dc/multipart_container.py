@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import cgi
-import StringIO
+from io import StringIO
 
 from w3af.core.data.dc.generic.form import Form
 from w3af.core.data.dc.utils.multipart import get_boundary, encode_as_multipart

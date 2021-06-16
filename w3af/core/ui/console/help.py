@@ -25,6 +25,7 @@ from string import Template
 from xml.dom.minidom import *
 
 try:
+    # for py3
     import xml.etree.ElementTree as ET
 except ImportError:
     try:
@@ -32,8 +33,8 @@ except ImportError:
         import elementtree.ElementTree as ET
     except ImportError:
         import sys
-        print 'It seems that your python installation doesn\'t have element tree',
-        print 'installed. Please install it and run w3af again.'
+        print('It seems that your python installation doesn\'t have element tree')
+        print('installed. Please install it and run w3af again.')
         sys.exit(-9)
 
 from w3af import ROOT_PATH

@@ -85,7 +85,7 @@ class SSLSocket(object):
         doesn't have a 'dup'. Not exactly sure WHY this is, but
         this is backed up by comments in socket.py and SSL/connection.c
 
-        Since httplib.HTTPSResponse/HTTPConnection depend on the
+        Since http.client.HTTPSResponse/HTTPConnection depend on the
         socket being duplicated when they close it, we refcount the
         socket object and don't actually close until its count is 0.
         """

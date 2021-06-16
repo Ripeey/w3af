@@ -6,7 +6,7 @@ See the file 'LICENSE' for copying permission
 """
 
 import copy
-import httplib
+import http.client
 import logging
 import os
 import random
@@ -1532,7 +1532,7 @@ def checkConnection(suppressOutput=False):
             warnMsg += "any addressing issues"
             singleTimeWarnMessage(warnMsg)
 
-        if any(code in kb.httpErrorCodes for code in (httplib.NOT_FOUND, )):
+        if any(code in kb.httpErrorCodes for code in (http.client.NOT_FOUND, )):
             errMsg = getSafeExString(ex)
             logger.critical(errMsg)
 

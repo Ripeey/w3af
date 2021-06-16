@@ -1,4 +1,4 @@
-import httplib
+import http.client
 import socket
 
 from urllib2 import (OpenerDirector, ProxyHandler, UnknownHandler, HTTPHandler,

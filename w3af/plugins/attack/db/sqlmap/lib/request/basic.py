@@ -9,9 +9,10 @@ import codecs
 import gzip
 import logging
 import re
-import StringIO
 import struct
 import zlib
+
+from io import StringIO
 
 from lib.core.common import Backend
 from lib.core.common import extractErrorMessage
