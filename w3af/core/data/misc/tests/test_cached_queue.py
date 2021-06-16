@@ -91,7 +91,7 @@ class TestCachedQueue(unittest.TestCase):
         self.assertRaises(Exception, q.get, block=False)
 
         q.put(1)
-        self.assertEquals(q.get(), 1)
+        self.assertEqual(q.get(), 1)
 
     def test_simple_rpm_speed(self):
         q = CachedQueue()

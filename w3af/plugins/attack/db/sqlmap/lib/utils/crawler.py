@@ -70,7 +70,7 @@ def crawl(target):
                 except SqlmapSyntaxException:
                     errMsg = "invalid URL detected. skipping '%s'" % current
                     logger.critical(errMsg)
-                except http.client.InvalidURL, ex:
+                except http.client.InvalidURL as ex:
                     errMsg = "invalid URL detected ('%s'). skipping " % getSafeExString(ex)
                     errMsg += "URL '%s'" % current
                     logger.critical(errMsg)
@@ -78,7 +78,7 @@ def crawl(target):
                 if not kb.threadContinue:
                     break
 
-                if isinstance(content, unicode):
+                if isinstance(content, str):
                     try:
                         match = re.search(r"(?si)<html[^>]*>(.+)</html>", content)
                         if match:

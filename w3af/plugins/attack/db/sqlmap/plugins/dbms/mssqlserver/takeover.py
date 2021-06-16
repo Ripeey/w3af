@@ -48,7 +48,7 @@ class Takeover(GenericTakeover):
                   }
         addrs = None
 
-        for versionSp, data in returns.items():
+        for versionSp, data in list(returns.items()):
             version, sp = versionSp.split("-")
             sp = int(sp)
 

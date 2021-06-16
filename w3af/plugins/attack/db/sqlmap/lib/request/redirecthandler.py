@@ -8,7 +8,7 @@ See the file 'LICENSE' for copying permission
 import re
 import time
 import types
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from urllib.parse import urlparse
 
 from io import StringIO
@@ -34,7 +34,7 @@ from lib.core.threads import getCurrentThreadData
 from lib.request.basic import decodePage
 from lib.request.basic import parseResponse
 
-class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
+class SmartRedirectHandler(urllib.request.HTTPRedirectHandler):
     def _get_header_redirect(self, headers):
         retVal = None
 
@@ -67,7 +67,7 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
 
     def _redirect_request(self, req, fp, code, msg, headers, newurl):
         newurl = newurl.replace(' ', '%20')
-        return urllib2.Request(newurl, data=req.data, headers=req.headers, origin_req_host=req.get_origin_req_host())
+        return urllib.request.Request(newurl, data=req.data, headers=req.headers, origin_req_host=req.get_origin_req_host())
 
     def http_error_302(self, req, fp, code, msg, headers):
         start = time.time()
@@ -97,7 +97,7 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
         redirectMsg += "[#%d] (%d %s):\r\n" % (threadData.lastRequestUID, code, getUnicode(msg))
 
         if headers:
-            logHeaders = "\r\n".join("%s: %s" % (getUnicode(key.capitalize() if isinstance(key, basestring) else key), getUnicode(value)) for (key, value) in headers.items())
+            logHeaders = "\r\n".join("%s: %s" % (getUnicode(key.capitalize() if isinstance(key, str) else key), getUnicode(value)) for (key, value) in list(headers.items()))
         else:
             logHeaders = ""
 
@@ -131,8 +131,8 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
                 else:
                     req.headers[HTTP_HEADER.COOKIE] = re.sub(r"%s{2,}" % delimiter, delimiter, ("%s%s%s" % (re.sub(r"\b%s=[^%s]*%s?" % (re.escape(_.split('=')[0]), delimiter, delimiter), "", req.headers[HTTP_HEADER.COOKIE]), delimiter, _)).strip(delimiter))
             try:
-                result = urllib2.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
-            except urllib2.HTTPError, e:
+                result = urllib.request.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
+            except urllib.error.HTTPError as e:
                 result = e
 
                 # Dirty hack for http://bugs.python.org/issue15701
@@ -170,6 +170,6 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
 
     def _infinite_loop_check(self, req):
         if hasattr(req, 'redirect_dict') and (req.redirect_dict.get(req.get_full_url(), 0) >= MAX_SINGLE_URL_REDIRECTIONS or len(req.redirect_dict) >= MAX_TOTAL_REDIRECTIONS):
-            errMsg = "infinite redirect loop detected (%s). " % ", ".join(item for item in req.redirect_dict.keys())
+            errMsg = "infinite redirect loop detected (%s). " % ", ".join(item for item in list(req.redirect_dict.keys()))
             errMsg += "Please check all provided parameters and/or provide missing ones"
             raise SqlmapConnectionException(errMsg)

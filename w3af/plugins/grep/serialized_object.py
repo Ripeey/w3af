@@ -70,7 +70,7 @@ class serialized_object(GrepPlugin):
             if self._should_skip_analysis(parameter_value):
                 continue
 
-            for language, regular_expressions in self.SERIALIZED_OBJECT_RE.iteritems():
+            for language, regular_expressions in self.SERIALIZED_OBJECT_RE.items():
                 for serialized_object_re in regular_expressions:
 
                     self._analyze_param(request,

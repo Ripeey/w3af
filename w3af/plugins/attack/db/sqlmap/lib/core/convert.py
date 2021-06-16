@@ -22,6 +22,7 @@ from io import StringIO
 from lib.core.settings import IS_WIN
 from lib.core.settings import UNICODE_ENCODING
 from lib.core.settings import PICKLE_REDUCE_WHITELIST
+from functools import reduce
 
 def base64decode(value):
     """
@@ -81,7 +82,7 @@ def base64unpickle(value, unsafe=False):
         if len(self.stack) > 1:
             func = self.stack[-2]
             if func not in PICKLE_REDUCE_WHITELIST:
-                raise Exception, "abusing reduce() is bad, Mkay!"
+                raise Exception("abusing reduce() is bad, Mkay!")
         self.load_reduce()
 
     def loads(str):
@@ -130,7 +131,7 @@ def unicodeencode(value, encoding=None):
     """
 
     retVal = value
-    if isinstance(value, unicode):
+    if isinstance(value, str):
         try:
             retVal = value.encode(encoding or UNICODE_ENCODING)
         except UnicodeEncodeError:
@@ -166,11 +167,11 @@ def htmlunescape(value):
     """
 
     retVal = value
-    if value and isinstance(value, basestring):
+    if value and isinstance(value, str):
         codes = (("&lt;", '<'), ("&gt;", '>'), ("&quot;", '"'), ("&nbsp;", ' '), ("&amp;", '&'), ("&apos;", "'"))
         retVal = reduce(lambda x, y: x.replace(y[0], y[1]), codes, retVal)
         try:
-            retVal = re.sub(r"&#x([^ ;]+);", lambda match: unichr(int(match.group(1), 16)), retVal)
+            retVal = re.sub(r"&#x([^ ;]+);", lambda match: chr(int(match.group(1), 16)), retVal)
         except ValueError:
             pass
     return retVal
@@ -204,7 +205,7 @@ def stdoutencode(data):
         else:
             retVal = data.encode(sys.stdout.encoding)
     except:
-        retVal = data.encode(UNICODE_ENCODING) if isinstance(data, unicode) else data
+        retVal = data.encode(UNICODE_ENCODING) if isinstance(data, str) else data
 
     return retVal
 

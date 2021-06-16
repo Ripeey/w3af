@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import time
 import unittest
-import SocketServer
+import socketserver
 
 from nose.plugins.attrib import attr
 from mock import Mock
@@ -245,7 +245,7 @@ class TestXUrllibTimeout(unittest.TestCase):
         self.assertRaises(Exception, self.uri_opener.GET, timeout_url)
 
 
-class Ok200SmallDelayHandler(SocketServer.BaseRequestHandler):
+class Ok200SmallDelayHandler(socketserver.BaseRequestHandler):
     body = 'abc'
     sleep = 0.1
 
@@ -258,7 +258,7 @@ class Ok200SmallDelayHandler(SocketServer.BaseRequestHandler):
                              '\r\n' + self.body)
 
 
-class Ok200SmallDelayWithLongTriggeredTimeoutHandler(SocketServer.BaseRequestHandler):
+class Ok200SmallDelayWithLongTriggeredTimeoutHandler(socketserver.BaseRequestHandler):
     body = 'abc'
     regular_sleep = 0.1
     long_sleep = 7.0

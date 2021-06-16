@@ -8,8 +8,8 @@ See the file 'LICENSE' for copying permission
 import http.client
 import re
 import socket
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 
 from lib.core.common import getSafeExString
 from lib.core.common import getUnicode
@@ -51,8 +51,8 @@ def _search(dork):
     headers[HTTP_HEADER.ACCEPT_ENCODING] = HTTP_ACCEPT_ENCODING_HEADER_VALUE
 
     try:
-        req = urllib2.Request("https://www.google.com/ncr", headers=headers)
-        conn = urllib2.urlopen(req)
+        req = urllib.request.Request("https://www.google.com/ncr", headers=headers)
+        conn = urllib.request.urlopen(req)
     except Exception as ex:
         errMsg = "unable to connect to Google ('%s')" % getSafeExString(ex)
         raise SqlmapConnectionException(errMsg)
@@ -66,8 +66,8 @@ def _search(dork):
     url += "&start=%d" % ((gpage - 1) * 100)
 
     try:
-        req = urllib2.Request(url, headers=headers)
-        conn = urllib2.urlopen(req)
+        req = urllib.request.Request(url, headers=headers)
+        conn = urllib.request.urlopen(req)
 
         requestMsg = "HTTP request:\nGET %s" % url
         requestMsg += " %s" % http.client.HTTPConnection._http_vsn_str
@@ -87,7 +87,7 @@ def _search(dork):
             responseMsg += "%s\n%s\n" % (responseHeaders, page)
 
         logger.log(CUSTOM_LOGGING.TRAFFIC_IN, responseMsg)
-    except urllib2.HTTPError, e:
+    except urllib.error.HTTPError as e:
         try:
             page = e.read()
         except Exception as ex:
@@ -95,11 +95,11 @@ def _search(dork):
             warnMsg += "an error page information (%s)" % getSafeExString(ex)
             logger.critical(warnMsg)
             return None
-    except (urllib2.URLError, http.client.error, socket.error, socket.timeout, socks.ProxyError):
+    except (urllib.error.URLError, http.client.error, socket.error, socket.timeout, socks.ProxyError):
         errMsg = "unable to connect to Google"
         raise SqlmapConnectionException(errMsg)
 
-    retVal = [urllib.unquote(match.group(1) or match.group(2)) for match in re.finditer(GOOGLE_REGEX, page, re.I)]
+    retVal = [urllib.parse.unquote(match.group(1) or match.group(2)) for match in re.finditer(GOOGLE_REGEX, page, re.I)]
 
     if not retVal and "detected unusual traffic" in page:
         warnMsg = "Google has detected 'unusual' traffic from "
@@ -128,8 +128,8 @@ def _search(dork):
             regex = DUCKDUCKGO_REGEX
 
         try:
-            req = urllib2.Request(url, headers=headers)
-            conn = urllib2.urlopen(req)
+            req = urllib.request.Request(url, headers=headers)
+            conn = urllib.request.urlopen(req)
 
             requestMsg = "HTTP request:\nGET %s" % url
             requestMsg += " %s" % http.client.HTTPConnection._http_vsn_str
@@ -149,7 +149,7 @@ def _search(dork):
                 responseMsg += "%s\n%s\n" % (responseHeaders, page)
 
             logger.log(CUSTOM_LOGGING.TRAFFIC_IN, responseMsg)
-        except urllib2.HTTPError, e:
+        except urllib.error.HTTPError as e:
             try:
                 page = e.read()
             except socket.timeout:
@@ -161,7 +161,7 @@ def _search(dork):
             errMsg = "unable to connect"
             raise SqlmapConnectionException(errMsg)
 
-        retVal = [urllib.unquote(match.group(1)) for match in re.finditer(regex, page, re.I | re.S)]
+        retVal = [urllib.parse.unquote(match.group(1)) for match in re.finditer(regex, page, re.I | re.S)]
 
     return retVal
 

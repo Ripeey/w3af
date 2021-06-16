@@ -111,7 +111,7 @@ class rfi(AttackPlugin):
                 webserver.start_webserver(self._listen_address,
                                           self._listen_port,
                                           webroot_path)
-            except socket.error, se:
+            except socket.error as se:
                 msg = 'Failed to start the local web server to exploit the'\
                       ' RFI vulnerability, the exception was: "%s".'
                 om.out.error(msg % se)

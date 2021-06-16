@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 import w3af.core.controllers.output_manager as om
 import w3af.core.data.kb.knowledge_base as kb
@@ -181,7 +181,7 @@ class afd(InfrastructurePlugin):
                'exec xp_cmdshell dir',
                '<script>alert(1)</script>']
 
-        res = [urllib.quote_plus(x) for x in res]
+        res = [urllib.parse.quote_plus(x) for x in res]
 
         return res
 

@@ -6,7 +6,7 @@ See the file 'LICENSE' for copying permission
 """
 
 import base64
-import BaseHTTPServer
+import http.server
 import datetime
 import http.client
 import re
@@ -115,7 +115,7 @@ class Request:
             "httpVersion": self.httpVersion,
             "method": self.method,
             "url": self.url,
-            "headers": [dict(name=key.capitalize(), value=value) for key, value in self.headers.items()],
+            "headers": [dict(name=key.capitalize(), value=value) for key, value in list(self.headers.items())],
             "cookies": [],
             "queryString": [],
             "headersSize": -1,
@@ -190,7 +190,7 @@ class Response:
             "httpVersion": self.httpVersion,
             "status": self.status,
             "statusText": self.statusText,
-            "headers": [dict(name=key.capitalize(), value=value) for key, value in self.headers.items() if key.lower() != "uri"],
+            "headers": [dict(name=key.capitalize(), value=value) for key, value in list(self.headers.items()) if key.lower() != "uri"],
             "cookies": [],
             "content": content,
             "headersSize": -1,
@@ -209,7 +209,7 @@ class FakeSocket:
     def makefile(self, *args, **kwargs):
         return self._file
 
-class HTTPRequest(BaseHTTPServer.BaseHTTPRequestHandler):
+class HTTPRequest(http.server.BaseHTTPRequestHandler):
     # Original source:
     # https://stackoverflow.com/questions/4685217/parse-raw-http-headers
 

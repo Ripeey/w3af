@@ -23,7 +23,7 @@ import os
 import re
 import queue
 
-from itertools import izip, repeat
+from itertools import repeat
 
 import w3af.core.controllers.output_manager as om
 import w3af.core.data.kb.knowledge_base as kb
@@ -155,7 +155,7 @@ class content_negotiation(CrawlPlugin):
         :return: A list of new fuzzable requests.
         """
         wl_url_generator = self._wordlist_url_generator()
-        args_generator = izip(wl_url_generator, repeat(Headers()))
+        args_generator = zip(wl_url_generator, repeat(Headers()))
 
         # Send the requests using threads:
         for base_url, alternates in self.worker_pool.map_multi_args(

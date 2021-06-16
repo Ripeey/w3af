@@ -508,7 +508,7 @@ class FilterOptions(gtk.HBox, Preferences):
         super(FilterOptions, self).show()
 
     def _init_optionsView(self):
-        for section, optList in self.options.items():
+        for section, optList in list(self.options.items()):
             frame = gtk.Frame()
             label = gtk.Label('<b>%s</b>' % self.sections[section])
             label.set_use_markup(True)
@@ -534,7 +534,7 @@ class FilterOptions(gtk.HBox, Preferences):
     def _changedWidget(self, widg, like_initial):
         # check if all widgets are valid
         invalid = []
-        for section, optList in self.options.items():
+        for section, optList in list(self.options.items()):
             for opt in optList:
                 if hasattr(opt.widg, "is_valid"):
                     if not opt.widg.is_valid():
@@ -550,7 +550,7 @@ class FilterOptions(gtk.HBox, Preferences):
             return
 
         # Get the value from the GTK widget and set it to the option object
-        for section, optList in self.options.items():
+        for section, optList in list(self.options.items()):
             for opt in optList:
                 opt.set_value(opt.widg.get_value())
         self.parentWidg.find_request_response()

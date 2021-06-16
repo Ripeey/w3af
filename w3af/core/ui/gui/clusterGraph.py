@@ -429,19 +429,19 @@ class clusterGraphWidget(w3afDotWindow):
         """
         # Find max
         max = 0
-        for d in dist_dict.values():
+        for d in list(dist_dict.values()):
             if d > max:
                 max = d
 
         # Find min
-        min = dist_dict.values()[0]
-        for d in dist_dict.values():
+        min = list(dist_dict.values())[0]
+        for d in list(dist_dict.values()):
             if d < min:
                 min = d
 
         # Find avg
         sum = 0
-        for d in dist_dict.values():
+        for d in list(dist_dict.values()):
             sum += d
         avg = sum / len(dist_dict)
 

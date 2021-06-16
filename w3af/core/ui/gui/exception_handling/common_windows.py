@@ -73,7 +73,7 @@ class bug_report_worker(threading.Thread):
         The thread's main method, where all the magic happens.
         """
         for bug in self.bugs_to_report:
-            result = apply(self.bug_report_function, bug)
+            result = self.bug_report_function(*bug)
             self.output.put(result)
 
         self.output.put(self.FINISHED)

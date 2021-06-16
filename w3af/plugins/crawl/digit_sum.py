@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import re
 import copy
 
-from itertools import izip, repeat
+from itertools import repeat
 
 from w3af.core.controllers.plugins.crawl_plugin import CrawlPlugin
 from w3af.core.controllers.misc.fuzzy_string_cmp import fuzzy_not_equal
@@ -80,7 +80,7 @@ class digit_sum(CrawlPlugin):
             fr_generator = self._mangle_digits(fuzzable_request)
             response_repeater = repeat(original_response)
 
-            args = izip(fr_generator, response_repeater)
+            args = zip(fr_generator, response_repeater)
 
             self.worker_pool.map_multi_args(self._do_request, args)
 

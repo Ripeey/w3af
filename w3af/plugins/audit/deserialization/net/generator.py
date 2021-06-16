@@ -95,7 +95,7 @@ def main(payloads):
         except Exception as e:
             args = (payload, e)
             msg = 'Failed to create %s.json, exception: "%s"'
-            print(msg % args)
+            print((msg % args))
             print('\n\n\n')
             continue
 
@@ -105,7 +105,7 @@ def main(payloads):
                               "offsets": o2}}
 
         open('%s.json' % payload, 'w').write(json.dumps(payload_json, indent=4))
-        print('Successfully created %s.json' % payload)
+        print(('Successfully created %s.json' % payload))
         print('\n\n\n')
 
 

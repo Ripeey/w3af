@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import re
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import w3af.core.controllers.output_manager as om
 import w3af.core.data.constants.severity as severity
@@ -110,7 +110,7 @@ class xssed_dot_com(InfrastructurePlugin):
             # Ugly but required because of how xssed.com writes stuff
             xss_url = xss_url.replace('<br>', '')
             xss_url = htmldecode(xss_url)
-            xss_url = urllib2.unquote(xss_url)
+            xss_url = urllib.parse.unquote(xss_url)
             xss_url = URL(xss_url)
 
             if self.UNFIXED in xss_report_response.get_body():

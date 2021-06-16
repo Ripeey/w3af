@@ -125,7 +125,7 @@ class KBTree(gtk.TreeView):
 
         # make sure we update the knowledge base view
         kb.kb.add_observer(VulnerabilityObserver(self))
-        gobject.timeout_add(100, self._update_tree().next)
+        gobject.timeout_add(100, self._update_tree().__next__)
         self.postcheck = False
             
         self.show()

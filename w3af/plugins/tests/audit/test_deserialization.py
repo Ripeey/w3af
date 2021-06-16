@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import os
 import re
 import json
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import pickle
 import base64
 import unittest
@@ -49,7 +49,7 @@ class TestDeserializePickle(PluginTest):
 
     class DeserializeMockResponse(MockResponse):
         def get_response(self, http_request, uri, response_headers):
-            uri = urllib.unquote(uri)
+            uri = urllib.parse.unquote(uri)
             b64message = uri[uri.find('=') + 1:]
 
             try:
@@ -74,13 +74,13 @@ class TestDeserializePickle(PluginTest):
         self._scan(self.target_url, test_config)
         vulns = self.kb.get('deserialization', 'deserialization')
 
-        self.assertEquals(1, len(vulns), vulns)
+        self.assertEqual(1, len(vulns), vulns)
 
         # Now some tests around specific details of the found vuln
         vuln = vulns[0]
 
-        self.assertEquals('message', vuln.get_token_name())
-        self.assertEquals('Insecure deserialization', vuln.get_name())
+        self.assertEqual('message', vuln.get_token_name())
+        self.assertEqual('Insecure deserialization', vuln.get_name())
 
 
 class TestDeserializePickleNotBase64(PluginTest):
@@ -89,7 +89,7 @@ class TestDeserializePickleNotBase64(PluginTest):
 
     class DeserializeMockResponse(MockResponse):
         def get_response(self, http_request, uri, response_headers):
-            uri = urllib.unquote(uri)
+            uri = urllib.parse.unquote(uri)
             message = uri[uri.find('=') + 1:]
 
             try:
@@ -108,13 +108,13 @@ class TestDeserializePickleNotBase64(PluginTest):
         self._scan(self.target_url, test_config)
         vulns = self.kb.get('deserialization', 'deserialization')
 
-        self.assertEquals(1, len(vulns), vulns)
+        self.assertEqual(1, len(vulns), vulns)
 
         # Now some tests around specific details of the found vuln
         vuln = vulns[0]
 
-        self.assertEquals('message', vuln.get_token_name())
-        self.assertEquals('Insecure deserialization', vuln.get_name())
+        self.assertEqual('message', vuln.get_token_name())
+        self.assertEqual('Insecure deserialization', vuln.get_name())
 
 
 class TestShouldInjectIsCalled(PluginTest):
@@ -123,7 +123,7 @@ class TestShouldInjectIsCalled(PluginTest):
 
     class DeserializeMockResponse(MockResponse):
         def get_response(self, http_request, uri, response_headers):
-            uri = urllib.unquote(uri)
+            uri = urllib.parse.unquote(uri)
             b64message = uri[uri.find('=') + 1:]
 
             try:
@@ -148,7 +148,7 @@ class TestShouldInjectIsCalled(PluginTest):
         self._scan(self.target_url, test_config)
         vulns = self.kb.get('deserialization', 'deserialization')
 
-        self.assertEquals(0, len(vulns), vulns)
+        self.assertEqual(0, len(vulns), vulns)
 
 
 class TestShouldInject(unittest.TestCase):

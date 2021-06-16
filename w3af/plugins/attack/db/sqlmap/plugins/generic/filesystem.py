@@ -69,7 +69,7 @@ class Filesystem:
             sameFile = None
 
             if isNumPosStrValue(remoteFileSize):
-                remoteFileSize = long(remoteFileSize)
+                remoteFileSize = int(remoteFileSize)
                 localFile = getUnicode(localFile, encoding=sys.getfilesystemencoding() or UNICODE_ENCODING)
                 sameFile = False
 

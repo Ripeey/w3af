@@ -63,7 +63,7 @@ class test_all(unittest.TestCase):
         file_path = os.path.join(ROOT_PATH, 'plugins', 'tests', 'grep',
                                  'data', 'w3af.png')        
         body = open(file_path).read()
-        hdrs = Headers({'Content-Type': 'image/png'}.items())
+        hdrs = Headers(list({'Content-Type': 'image/png'}.items()))
         response = HTTPResponse(200, body, hdrs, self.url_inst, self.url_inst,
                                 _id=random.randint(1, 5000))
         request = FuzzableRequest(self.url_inst)
@@ -87,7 +87,7 @@ class test_all(unittest.TestCase):
                                  'data', 'w3af.png')        
         body = open(file_path).read()
         # Here is the change from the previous test:
-        hdrs = Headers({'Content-Type': 'text/html'}.items())
+        hdrs = Headers(list({'Content-Type': 'text/html'}.items()))
         response = HTTPResponse(200, body, hdrs, self.url_inst, self.url_inst,
                                 _id=random.randint(1, 5000))
         request = FuzzableRequest(self.url_inst)
@@ -141,7 +141,7 @@ class test_all(unittest.TestCase):
                                              'grep', 'data', file_name)
 
                     body = open(file_path).read()
-                    hdrs = Headers({'Content-Type': 'text/html'}.items())
+                    hdrs = Headers(list({'Content-Type': 'text/html'}.items()))
                     response = HTTPResponse(200, body, hdrs,
                                             URL(self.url_str + str(counter)),
                                             URL(self.url_str + str(counter)),

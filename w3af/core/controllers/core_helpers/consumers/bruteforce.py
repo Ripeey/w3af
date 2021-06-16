@@ -108,7 +108,8 @@ class bruteforce(BaseConsumer):
                                          (plugin, work_unit,),
                                          callback=self._plugin_finished_cb)
 
-    def _plugin_finished_cb(self, ((plugin, input_fuzzable_request), plugin_result)):
+    def _plugin_finished_cb(self, xxx_todo_changeme):
+        ((plugin, input_fuzzable_request), plugin_result) = xxx_todo_changeme
         for new_fuzzable_request in plugin_result:
             self._out_queue.put((plugin.get_name(),
                                  input_fuzzable_request,

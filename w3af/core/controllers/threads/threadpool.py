@@ -248,7 +248,7 @@ class Worker(object):
                 'worker_id': self.id}
 
     def __call__(self, inqueue, outqueue, initializer=None, initargs=(), maxtasks=None):
-        assert maxtasks is None or (type(maxtasks) in (int, long) and maxtasks > 0)
+        assert maxtasks is None or (type(maxtasks) in (int, int) and maxtasks > 0)
 
         put = outqueue.put
         get = inqueue.get
@@ -506,7 +506,7 @@ class Pool(ThreadPool):
         their specified lifetime.  Returns True if any workers were cleaned up.
         """
         cleaned = False
-        for i in reversed(range(len(self._pool))):
+        for i in reversed(list(range(len(self._pool)))):
             worker = self._pool[i]
             if worker.exitcode is not None:
                 # worker exited

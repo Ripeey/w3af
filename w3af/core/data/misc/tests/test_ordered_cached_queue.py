@@ -145,7 +145,7 @@ class TestOrderedCachedQueue(unittest.TestCase):
         self.assertRaises(Exception, q.get, block=False)
 
         q.put(create_simple_fuzzable_request(1))
-        self.assertEquals(read_fuzzable_request_parameter(q.get()), 1)
+        self.assertEqual(read_fuzzable_request_parameter(q.get()), 1)
 
     def test_simple_rpm_speed(self):
         q = OrderedCachedQueue()
@@ -230,7 +230,7 @@ def create_simple_fuzzable_request(unique_id):
     unique_id = str(unique_id)
 
     url = URL('http://w3af.com/')
-    headers = Headers([(u'Hello', u'World')])
+    headers = Headers([('Hello', 'World')])
     post_data = KeyValueContainer(init_val=[('a', [unique_id])])
 
     return FuzzableRequest(url,

@@ -150,7 +150,7 @@ class CoreStrategy(object):
                 # too
                 self._w3af_core.worker_pool.finish()
 
-            raise exc_info[0], exc_info[1], exc_info[2]
+            raise exc_info[0](exc_info[1]).with_traceback(exc_info[2])
 
         else:
             # Wait for all consumers to finish
@@ -280,12 +280,12 @@ class CoreStrategy(object):
         _input = [self._seed_producer,
                   self._discovery_consumer,
                   self._bruteforce_consumer]
-        _input = filter(None, _input)
+        _input = [_f for _f in _input if _f]
 
         output = [self._audit_consumer,
                   self._discovery_consumer,
                   self._bruteforce_consumer]
-        output = filter(None, output)
+        output = [_f for _f in output if _f]
 
         # Only check if these have exceptions and bring them to the main
         # thread in order to be handled by the ExceptionHandler and the
@@ -293,7 +293,7 @@ class CoreStrategy(object):
         _other = [self._audit_consumer,
                   self._auth_consumer,
                   self._grep_consumer]
-        _other = filter(None, _other)
+        _other = [_f for _f in _other if _f]
 
         finished = set()
         consumer_forced_end = set()

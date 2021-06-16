@@ -29,7 +29,7 @@ from w3af.core.data.dc.query_string import QueryString
 class TestQueryString(unittest.TestCase):
 
     def test_str_simple(self):
-        self.assertEquals(str(QueryString([])), '')
+        self.assertEqual(str(QueryString([])), '')
 
     def test_str_with_equal(self):
         t1 = str(QueryString([('a', ['>']), ('b', ['a==1 && z >= 2', '3>2'])]))
@@ -77,12 +77,12 @@ class TestQueryString(unittest.TestCase):
         unpickled_qs = pickle.loads(pickled_qs)
 
         self.assertEqual(dc, unpickled_qs)
-        self.assertEqual(dc.keys(), unpickled_qs.keys())
-        self.assertEqual(dc.keys(), ['a'])
+        self.assertEqual(list(dc.keys()), list(unpickled_qs.keys()))
+        self.assertEqual(list(dc.keys()), ['a'])
         self.assertEqual(dc.get_token().get_name(), 'a')
 
     def test_encoding_special_unicode(self):
-        qs = QueryString([('a', [u'✓'])])
+        qs = QueryString([('a', ['✓'])])
         qs.set_token(('a', 0))
 
         self.assertEqual(str(qs), 'a=%E2%9C%93')
@@ -91,7 +91,7 @@ class TestQueryString(unittest.TestCase):
         qs_1 = QueryString([('a', ['1'])])
         qs_2 = QueryString([('b', ['2'])])
 
-        for key, values in qs_2.iteritems():
+        for key, values in qs_2.items():
             qs_1[key] = values
 
         self.assertEqual(qs_1['b'], ['2'])

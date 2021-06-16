@@ -64,7 +64,7 @@ job_counter = itertools.count()
 
 
 def mapstar(args):
-    return map(*args)
+    return list(map(*args))
 
 #
 # Code run by worker processes
@@ -161,14 +161,14 @@ def create_detailed_pickling_error(exception, instance):
 
     if hasattr(instance, '__dict__'):
         # Objects have dicts with all the attributes
-        for k, v in instance.__dict__.iteritems():
+        for k, v in instance.__dict__.items():
             if not can_pickle(v):
                 attribute = k
                 break
 
     elif isinstance(instance, dict):
         # Similar to the above but we don't have __dict__
-        for k, v in instance.iteritems():
+        for k, v in instance.items():
             if not can_pickle(v):
                 attribute = k
                 break
@@ -286,7 +286,7 @@ class Pool(object):
         their specified lifetime.  Returns True if any workers were cleaned up.
         """
         cleaned = False
-        for i in reversed(range(len(self._pool))):
+        for i in reversed(list(range(len(self._pool)))):
             worker = self._pool[i]
             if worker.exitcode is not None:
                 # worker exited
@@ -647,7 +647,7 @@ class ApplyResult(object):
 
     def __init__(self, cache, callback):
         self._cond = threading.Condition(threading.Lock())
-        self._job = job_counter.next()
+        self._job = next(job_counter)
         self._cache = cache
         self._ready = False
         self._callback = callback
@@ -746,7 +746,7 @@ class IMapIterator(object):
 
     def __init__(self, cache):
         self._cond = threading.Condition(threading.Lock())
-        self._job = job_counter.next()
+        self._job = next(job_counter)
         self._cache = cache
         self._items = collections.deque()
         self._index = 0

@@ -883,10 +883,10 @@ def cmdLineParser(argv=None):
                 command = None
 
                 try:
-                    command = raw_input("sqlmap-shell> ").strip()
+                    command = input("sqlmap-shell> ").strip()
                     command = getUnicode(command, encoding=sys.stdin.encoding)
                 except (KeyboardInterrupt, EOFError):
-                    print
+                    print()
                     raise SqlmapShellQuitException
 
                 if not command:
@@ -909,7 +909,7 @@ def cmdLineParser(argv=None):
                 for arg in shlex.split(command):
                     argv.append(getUnicode(arg, encoding=sys.stdin.encoding))
             except (ValueError, ex):
-                raise SqlmapSyntaxException, "something went wrong during command line parsing ('%s')" % ex.message
+                raise SqlmapSyntaxException("something went wrong during command line parsing ('%s')" % ex.message)
 
         for i in range(len(argv)):
             if argv[i] == "-hh":
@@ -917,7 +917,7 @@ def cmdLineParser(argv=None):
             elif len(argv[i]) > 1 and all(ord(_) in range(0x2018, 0x2020) for _ in ((argv[i].split('=', 1)[-1].strip() or ' ')[0], argv[i][-1])):
                 dataToStdout("[!] copy-pasting illegal (non-console) quote characters from Internet is, well, illegal (%s)\n" % argv[i])
                 raise SystemExit
-            elif len(argv[i]) > 1 and u"\uff0c" in argv[i].split('=', 1)[-1]:
+            elif len(argv[i]) > 1 and "\uff0c" in argv[i].split('=', 1)[-1]:
                 dataToStdout("[!] copy-pasting illegal (non-console) comma characters from Internet is, well, illegal (%s)\n" % argv[i])
                 raise SystemExit
             elif re.search(r"\A-\w=.+", argv[i]):
@@ -930,7 +930,7 @@ def cmdLineParser(argv=None):
                 argv[i] = argv[i][:-1]
                 conf.skipThreadCheck = True
             elif argv[i] == "--version":
-                print VERSION_STRING.split('/')[-1]
+                print(VERSION_STRING.split('/')[-1])
                 raise SystemExit
             elif argv[i] in ("-h", "--help"):
                 advancedHelp = False
@@ -985,14 +985,14 @@ def cmdLineParser(argv=None):
 
         return args
 
-    except (OptionError, TypeError), e:
+    except (OptionError, TypeError) as e:
         parser.error(e)
 
     except SystemExit:
         # Protection against Windows dummy double clicking
         if IS_WIN:
             dataToStdout("\nPress Enter to continue...")
-            raw_input()
+            input()
         raise
 
     debugMsg = "parsing command line"

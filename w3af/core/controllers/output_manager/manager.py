@@ -412,7 +412,7 @@ class OutputManager(Process):
         # Given that we don't want to convert to utf8 inside every plugin
         # before sending to a file, we do it here
         for arg in args:
-            if isinstance(arg, unicode):
+            if isinstance(arg, str):
                 arg = arg.encode(UTF8, 'replace')
 
             encoded_params.append(arg)
@@ -442,7 +442,7 @@ class OutputManager(Process):
             
             try:
                 opl_func_ptr = getattr(o_plugin, action_name)
-                apply(opl_func_ptr, args, kwds)
+                opl_func_ptr(*args, **kwds)
             except (Exception, exception):
                 self._handle_output_plugin_exception(o_plugin, exception)
 
@@ -504,7 +504,7 @@ class OutputManager(Process):
         plugin = factory('w3af.plugins.output.%s' % plugin_name)
         plugin.set_w3af_core(self._w3af_core)
 
-        if plugin_name in self._plugin_options.keys():
+        if plugin_name in list(self._plugin_options.keys()):
             plugin.set_options(self._plugin_options[plugin_name])
 
         return plugin

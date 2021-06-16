@@ -127,4 +127,4 @@ class MultipartContainer(Form):
 
         Is not going to work.
         """
-        return self.items() == other.items()
+        return list(self.items()) == list(other.items())

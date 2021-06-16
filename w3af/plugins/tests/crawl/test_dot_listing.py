@@ -56,7 +56,7 @@ class TestDotListing(PluginTest):
         expected_urls = ('/', '/.listing', '/wasadhiya-7.mp3')
         urls = self.kb.get_all_known_urls()
 
-        self.assertEquals(
+        self.assertEqual(
             set(str(u) for u in urls),
             set((self.target_url + end) for end in expected_urls)
         )

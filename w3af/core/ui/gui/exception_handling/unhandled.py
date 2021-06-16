@@ -75,7 +75,7 @@ def handle_keyboardinterrupt(w3af_core):
             repr_alive.sort()
             return pprint.pformat(repr_alive)
         
-        print(nice_thread_repr(threading.enumerate()))
+        print((nice_thread_repr(threading.enumerate())))
     om.manager.set_output_plugins(['console'])
     om.out.console(_('\nStopping after Ctrl+C. Thanks for using w3af, bye!'))
     om.manager.process_all_messages()

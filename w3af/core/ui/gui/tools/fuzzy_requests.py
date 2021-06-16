@@ -113,7 +113,7 @@ class PreviewWindow(entries.RememberingWindow):
 
     def page_change(self, page):
         while len(self.pages) <= page:
-            it = self.generator.next()
+            it = next(self.generator)
             self.pages.append(it)
         (txtup, txtdn) = self.pages[page]
         self.panes.show_raw(txtup, txtdn)
@@ -397,7 +397,7 @@ class FuzzyRequests(entries.RememberingWindow):
             return True
 
         try:
-            realreq, realbody = requestGenerator.next()
+            realreq, realbody = next(requestGenerator)
         except StopIteration:
             # finished with all the requests!
             self._send_stop()

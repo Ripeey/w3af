@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import ssl
 import socket
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import http.client
 import OpenSSL
 import itertools
@@ -286,7 +286,7 @@ def get_clean_body_impl(body, strings_to_replace_list, multi_encode=True,
 
         # unquote, just in case the plugin did an extra encoding of some type.
         # what we want to do here is get the original version of the string
-        unicode_to_repl_unquoted = urllib.unquote_plus(unicode_to_repl)
+        unicode_to_repl_unquoted = urllib.parse.unquote_plus(unicode_to_repl)
 
         unicodes_to_replace_set.add(unicode_to_repl)
         unicodes_to_replace_set.add(unicode_to_repl_unquoted)

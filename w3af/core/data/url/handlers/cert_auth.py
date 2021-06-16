@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import http.client
 
 import w3af.core.controllers.output_manager as om
@@ -40,12 +40,12 @@ class certHTTPSConnection(http.client.HTTPSConnection):
         #om.out.debug('Called __init__ of certHTTPSConnection.')
 
 
-class certHTTPSHandler(urllib2.HTTPSHandler):
+class certHTTPSHandler(urllib.request.HTTPSHandler):
     """
     An https handler for urllib2 that knows what to do with cert and key files.
     """
     def __init__(self, debuglevel=0):
-        urllib2.HTTPSHandler.__init__(self, debuglevel)
+        urllib.request.HTTPSHandler.__init__(self, debuglevel)
         self._sslCertFile = None
         self._sslKeyFile = None
         om.out.debug('Called __init__ of certHTTPSHandler.')

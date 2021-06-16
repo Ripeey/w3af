@@ -84,8 +84,8 @@ class SpecificationHandler(object):
         if self.spec is None:
             return
 
-        for api_resource_name, resource in self.spec.resources.items():
-            for operation_name, operation in resource.operations.items():
+        for api_resource_name, resource in list(self.spec.resources.items()):
+            for operation_name, operation in list(resource.operations.items()):
                 operations = self._set_operation_params(operation)
 
                 for _operation in operations:

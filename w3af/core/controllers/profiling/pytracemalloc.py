@@ -40,7 +40,7 @@ if user_wants_pytracemalloc():
         # http://pytracemalloc.readthedocs.org/install.html
         import tracemalloc
     except (ImportError, ie):
-        print('Failed to import tracemalloc: %s' % ie)
+        print(('Failed to import tracemalloc: %s' % ie))
         sys.exit(-1)
 
 

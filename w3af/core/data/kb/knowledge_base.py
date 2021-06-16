@@ -354,7 +354,7 @@ class BasicKnowledgeBase(object):
         Those operations will call this method to translate the plugin instance
         into a string.
         """
-        if isinstance(data, basestring):
+        if isinstance(data, str):
             return data
         else:
             return data.get_name()
@@ -720,7 +720,7 @@ class DBKnowledgeBase(BasicKnowledgeBase):
         """
         # Note that I copy the items list in order to iterate though it without
         # any issues like the size changing
-        for _, observer in self.observers.items()[:]:
+        for _, observer in list(self.observers.items())[:]:
             functor = getattr(observer, method)
             functor(*args, **kwargs)
 

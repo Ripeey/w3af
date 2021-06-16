@@ -267,7 +267,7 @@ class SQLMapWrapper(object):
     
     def direct(self, params):
         
-        if isinstance(params, basestring):
+        if isinstance(params, str):
             extra_params = shlex.split(params)
         else:
             extra_params = params
@@ -351,7 +351,7 @@ class Target(object):
             fmt = 'Invalid type %s for uri parameter in Target ctor.'
             raise TypeError(fmt % type(uri))
 
-        if post_data is not None and not isinstance(post_data, basestring):
+        if post_data is not None and not isinstance(post_data, str):
             fmt = 'Invalid type %s for post_data parameter in Target ctor.'
             raise TypeError(fmt % type(post_data))
         

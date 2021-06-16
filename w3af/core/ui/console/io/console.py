@@ -141,7 +141,7 @@ except Exception as e:
         import msvcrt
         from w3af.core.ui.console.io.winctrl import *
     except (Exception, a):
-        print(str(e + '\n' + a))
+        print((str(e + '\n' + a)))
         # We arent on windows nor unix
         raise BaseFrameworkException(
             'w3af support for OS X isn\'t available yet! Please contribute.')

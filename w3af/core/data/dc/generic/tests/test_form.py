@@ -72,8 +72,8 @@ class TestForm(unittest.TestCase):
 
         for form_copy, _ in form.iter_bound_tokens():
             self.assertIsInstance(form_copy, Form)
-            self.assertEquals(form_copy.items(), form.items())
-            self.assertEquals(form_copy.get_parameter_type('username'),
+            self.assertEqual(list(form_copy.items()), list(form.items()))
+            self.assertEqual(form_copy.get_parameter_type('username'),
                               INPUT_TYPE_PASSWD)
 
     def test_mutant_smart_fill_with_file(self):
@@ -134,7 +134,7 @@ class TestForm(unittest.TestCase):
 
         pickled_form = pickle.loads(pickle.dumps(form))
 
-        self.assertEqual(pickled_form.items(), form.items())
+        self.assertEqual(list(pickled_form.items()), list(form.items()))
 
     def test_cpickle_unsync(self):
         form_params = FormParameters()
@@ -146,7 +146,7 @@ class TestForm(unittest.TestCase):
 
         pickled_form = pickle.loads(pickle.dumps(form))
 
-        self.assertEqual(pickled_form.items(), form.items())
+        self.assertEqual(list(pickled_form.items()), list(form.items()))
 
     def test_keep_sync(self):
         form_params = FormParameters()

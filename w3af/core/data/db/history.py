@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-from __future__ import with_statement
+
 
 import os
 import time
@@ -195,7 +195,7 @@ class HistoryItem(object):
 
         sql += ' LIMIT ' + str(result_limit)
         try:
-            for row in self._db.select(sql, where.values()):
+            for row in self._db.select(sql, list(where.values())):
                 item = self.__class__()
                 item._load_from_row(row)
                 result.append(item)
@@ -611,7 +611,7 @@ class HistoryItem(object):
         :return: None
         """
         session_dir = self._session_dir
-        trace_range = range(pending_compression.start, pending_compression.end + 1)
+        trace_range = list(range(pending_compression.start, pending_compression.end + 1))
 
         files = ['%s.%s' % (i, HistoryItem._EXTENSION) for i in trace_range]
         files = [os.path.join(session_dir, filename) for filename in files]

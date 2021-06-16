@@ -361,7 +361,7 @@ class NiktoTestParser(object):
             #
             # A line could generate more than one request...
             # (think about @CGIDIRS)
-            for nikto_test in itertools.ifilter(self._filter_special,
+            for nikto_test in filter(self._filter_special,
                                                 self._parse_db_line(line)):
                 yield (nikto_test,)
                 
@@ -430,7 +430,7 @@ class NiktoTestParser(object):
                  response matched (match_1, match_1_or, match_1_and, fail_1,
                  fail_2).
         """
-        if not isinstance(line, unicode):
+        if not isinstance(line, str):
             raise TypeError('Database information needs to be sent as unicode.')
         
         line = line.strip()
@@ -504,7 +504,7 @@ class NiktoTestParser(object):
         v_list_replace = [v_list for var, v_list in VAR_LIST if var in uri]
         variable_replace = [var for var, v_list in VAR_LIST if var in uri]
 
-        for prod_result in apply(itertools.product, v_list_replace):
+        for prod_result in itertools.product(*v_list_replace):
 
             current_uri = self._replace_JUNK(uri)
 

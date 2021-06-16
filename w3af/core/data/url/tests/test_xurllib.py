@@ -25,7 +25,7 @@ import time
 import queue
 import types
 import unittest
-import SocketServer
+import socketserver
 from multiprocessing.dummy import Process
 
 import httpretty
@@ -167,7 +167,7 @@ class TestXUrllib(unittest.TestCase):
 
     def test_post_special_chars(self):
         url = URL(get_moth_http('/audit/xss/simple_xss_form.py'))
-        test_data = u'abc<def>"-á-'
+        test_data = 'abc<def>"-á-'
 
         data = URLEncodedForm()
         data['text'] = [test_data]
@@ -380,7 +380,7 @@ class TestXUrllib(unittest.TestCase):
         self.uri_opener.pause(False)
 
         http_response = output.get()
-        self.assertNotIsInstance(http_response, types.NoneType,
+        self.assertNotIsInstance(http_response, type(None),
                                  'Error in send thread.')
         
         th.join()
@@ -408,7 +408,7 @@ class TestXUrllib(unittest.TestCase):
     
     def test_special_char_header(self):
         url = URL(get_moth_http('/core/headers/echo-headers.py'))
-        header_content = u'name=ábc'
+        header_content = 'name=ábc'
         headers = Headers([('Cookie', header_content)])
         http_response = self.uri_opener.GET(url, cache=False, headers=headers)
         self.assertIn(header_content, http_response.body)
@@ -476,20 +476,20 @@ class TestXUrllib(unittest.TestCase):
         self.assertLessEqual(elapsed_time, _max)
 
 
-class EmptyTCPHandler(SocketServer.BaseRequestHandler):
+class EmptyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
         self.request.sendall('')
 
 
-class TimeoutTCPHandler(SocketServer.BaseRequestHandler):
+class TimeoutTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
         time.sleep(60)
         self.request.sendall('')
 
 
-class Ok200Handler(SocketServer.BaseRequestHandler):
+class Ok200Handler(socketserver.BaseRequestHandler):
     body = 'abc'
 
     def handle(self):

@@ -63,7 +63,7 @@ class TestDiskList(unittest.TestCase):
         dl.append(2)
         dl.append(3)
         
-        self.assertEqual(unicode(dl), u'<DiskList [1, 2, 3]>')
+        self.assertEqual(str(dl), '<DiskList [1, 2, 3]>')
             
     @attr('smoke')
     def test_string(self):
@@ -83,13 +83,13 @@ class TestDiskList(unittest.TestCase):
     def test_unicode(self):
         dl = DiskList()
 
-        dl.append(u'à')
-        dl.append(u'המלצת השבוע')
-        dl.append([u'à', ])
+        dl.append('à')
+        dl.append('המלצת השבוע')
+        dl.append(['à', ])
 
-        self.assertEqual(dl[0], u'à')
-        self.assertEqual(dl[1], u'המלצת השבוע')
-        self.assertEqual(dl[2], [u'à', ])
+        self.assertEqual(dl[0], 'à')
+        self.assertEqual(dl[1], 'המלצת השבוע')
+        self.assertEqual(dl[2], ['à', ])
 
     @attr('smoke')
     def test_urlobject(self):
@@ -247,7 +247,7 @@ class TestDiskList(unittest.TestCase):
         threads = []
         _min = 0
         for _max in range(0, 1100, 100):
-            th = threading.Thread(target=worker, args=(range(_min, _max),))
+            th = threading.Thread(target=worker, args=(list(range(_min, _max)),))
             threads.append(th)
             _min = _max
 
@@ -264,7 +264,7 @@ class TestDiskList(unittest.TestCase):
         self.assertEqual(len(dl_as_list), len(set(dl_as_list)))
 
         dl_as_list.sort()
-        self.assertEqual(dl_as_list, range(1000))
+        self.assertEqual(dl_as_list, list(range(1000)))
 
     def test_remove_table(self):
         disk_list = DiskList()

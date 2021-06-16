@@ -72,7 +72,7 @@ def to_mutable(arbitrary_python_obj):
         return arbitrary_python_obj
 
     elif isinstance(arbitrary_python_obj, dict):
-        for key, oapo in arbitrary_python_obj.iteritems():
+        for key, oapo in arbitrary_python_obj.items():
             arbitrary_python_obj[key] = to_mutable(oapo)
 
         return arbitrary_python_obj
@@ -113,7 +113,7 @@ def _json_iter_setters(marbitrary_python_obj, key_names=None):
 
         value = marbitrary_python_obj.get_value()
 
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             key_names = key_names[:]
             key_names.append(KEY_STRING)
             yield '-'.join(key_names), value, marbitrary_python_obj.set_value
@@ -151,7 +151,7 @@ def _json_iter_setters(marbitrary_python_obj, key_names=None):
                 yield k, v, s
 
     elif isinstance(marbitrary_python_obj, dict):
-        for key, value in marbitrary_python_obj.iteritems():
+        for key, value in marbitrary_python_obj.items():
             array_key_names = key_names[:]
             array_key_names.append(KEY_OBJECT)
             array_key_names.append(key)

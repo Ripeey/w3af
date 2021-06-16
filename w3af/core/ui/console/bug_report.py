@@ -121,7 +121,7 @@ class bug_report_menu(menu):
 
         # default to reporting all exceptions if none was specified
         if not report_bug_eids:
-            report_bug_eids = range(len(all_edata))
+            report_bug_eids = list(range(len(all_edata)))
 
         for num, eid in enumerate(report_bug_eids):
             edata = all_edata[eid]

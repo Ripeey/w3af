@@ -60,8 +60,8 @@ class PhishTankHandler(object):
         self.entry_writer = csv.writer(output_csv_file, delimiter=' ',
                                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-        self.url = u''
-        self.phish_detail_url = u''
+        self.url = ''
+        self.phish_detail_url = ''
 
         self.inside_entry = False
         self.inside_URL = False
@@ -77,12 +77,12 @@ class PhishTankHandler(object):
         elif name == 'url':
             self.inside_URL = True
             # But when it sends the information in data(), it uses unicode
-            self.url = u''
+            self.url = ''
 
         elif name == 'phish_detail_url':
             self.inside_detail = True
             # But when it sends the information in data(), it uses unicode
-            self.phish_detail_url = u''
+            self.phish_detail_url = ''
 
         return
 

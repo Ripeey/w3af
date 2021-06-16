@@ -403,7 +403,7 @@ class XPathReader(Shell):
         
         mod_get_char = return_args(self.get_char_in_pos)
         imap_unordered = self.worker_pool.imap_unordered
-        len_iter = range(data_len)
+        len_iter = list(range(data_len))
         
         for (pos,), char in imap_unordered(mod_get_char, len_iter):
             data[pos] = char

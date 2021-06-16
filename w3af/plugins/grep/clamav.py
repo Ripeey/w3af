@@ -157,7 +157,7 @@ class clamav(GrepPlugin):
 
         return response, result
     
-    def _report_result(self, (response, scan_result)):
+    def _report_result(self, xxx_todo_changeme):
         """
         This method stores the scan result in the KB, called as a callback for
         the _scan_http_response method.
@@ -166,6 +166,7 @@ class clamav(GrepPlugin):
         :param scan_result: The result object from _scan_http_response
         :return: None
         """
+        (response, scan_result) = xxx_todo_changeme
         if scan_result is None:
             return
 

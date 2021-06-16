@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-from __future__ import print_function
+
 
 import os
 import sys
@@ -256,7 +256,7 @@ class w3afCore(object):
             else:
                 raise
 
-        except threading.ThreadError, te:
+        except threading.ThreadError as te:
             handle_threading_error(self.status.scans_completed, te)
 
         except (HTTPRequestException, hre):

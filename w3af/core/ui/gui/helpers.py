@@ -313,14 +313,14 @@ class BroadcastWrapper(object):
 # This is a helper for debug, you just should connect the
 # 'event' event to this debugHandler
 
-event_types = [i for i in vars(gtk.gdk).values() if type(i)
+event_types = [i for i in list(vars(gtk.gdk).values()) if type(i)
                is gtk.gdk.EventType]
 
 
 def debugHandler(widget, event, *a):
     """Just connect it to the 'event' event."""
     if event.type in event_types:
-        print event.type.value_nick
+        print(event.type.value_nick)
 
 
 class Throbber(gtk.ToolButton):
@@ -484,7 +484,7 @@ class DrawingAreaStringRepresentation(gtk.DrawingArea):
             #
             #    Draw
             #
-            for index, value in self.str_repr.iteritems():
+            for index, value in self.str_repr.items():
                 for i in range(value):
                     self.window.draw_point(gc, index, self.height - i)
 

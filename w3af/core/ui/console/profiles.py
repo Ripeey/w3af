@@ -72,7 +72,7 @@ class ProfilesMenu(menu):
             om.out.console('No parameters expected')
         else:
             table = [['Profile', 'Description'], []]
-            for profileInstance in self._profiles.values():
+            for profileInstance in list(self._profiles.values()):
                 table.append(
                     [profileInstance.get_name(), profileInstance.get_desc()])
 
@@ -128,7 +128,7 @@ class ProfilesMenu(menu):
 
     def _para_use(self, params, part):
         if not params:
-            return suggest(self._profiles.keys(), part)
+            return suggest(list(self._profiles.keys()), part)
         return []
 
     _para_save_as = _para_use

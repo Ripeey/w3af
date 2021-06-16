@@ -121,7 +121,7 @@ class ConsoleUI(object):
         QUESTION = 'Do you accept the terms and conditions? [N|y] '
         msg = DISCLAIMER + '\n\n' + QUESTION
         try:
-            user_response = raw_input(msg)
+            user_response = input(msg)
         except (KeyboardInterrupt, EOFError):
             print('')
             user_response = ''
@@ -371,7 +371,7 @@ class ConsoleUI(object):
             self._paste(prefix)
         elif len(completions) > 0:
             term.writeln()
-            for variant in map(lambda c: c[1], completions):
+            for variant in [c[1] for c in completions]:
                 term.write(variant + ' ')
             term.writeln()
 

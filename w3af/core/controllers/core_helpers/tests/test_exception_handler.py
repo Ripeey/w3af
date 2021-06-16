@@ -73,15 +73,15 @@ class TestExceptionHandler(unittest.TestCase):
 
         self.assertTrue(edata.get_summary().startswith(self.EXCEPT_START))
         self.assertTrue('traceback' in edata.get_details())
-        self.assertEquals(edata.plugin, 'plugin')
-        self.assertEquals(edata.phase, 'phase')
-        self.assertEquals(edata.fuzzable_request, 'http://www.w3af.org/')
-        self.assertEquals(edata.filename, 'test_exception_handler.py')
-        self.assertEquals(edata.exception_msg, str(e))
-        self.assertEquals(edata.exception_class, e.__class__.__name__)
+        self.assertEqual(edata.plugin, 'plugin')
+        self.assertEqual(edata.phase, 'phase')
+        self.assertEqual(edata.fuzzable_request, 'http://www.w3af.org/')
+        self.assertEqual(edata.filename, 'test_exception_handler.py')
+        self.assertEqual(edata.exception_msg, str(e))
+        self.assertEqual(edata.exception_class, e.__class__.__name__)
         # This is very very very dependant on changes to this file, but it was
         # the only way to do it without much effort
-        self.assertEquals(edata.lineno, 50)
+        self.assertEqual(edata.lineno, 50)
 
     @attr('smoke')
     def test_handle_multiple(self):
@@ -105,10 +105,10 @@ class TestExceptionHandler(unittest.TestCase):
 
         self.assertTrue(edata.get_summary().startswith(self.EXCEPT_START))
         self.assertTrue('traceback' in edata.get_details())
-        self.assertEquals(edata.plugin, 'plugin')
-        self.assertEquals(edata.phase, 'phase')
-        self.assertEquals(edata.fuzzable_request, 'http://www.w3af.org/')
-        self.assertEquals(edata.filename, 'test_exception_handler.py')
+        self.assertEqual(edata.plugin, 'plugin')
+        self.assertEqual(edata.phase, 'phase')
+        self.assertEqual(edata.fuzzable_request, 'http://www.w3af.org/')
+        self.assertEqual(edata.filename, 'test_exception_handler.py')
 
     def test_get_unique_exceptions(self):
 
@@ -132,10 +132,10 @@ class TestExceptionHandler(unittest.TestCase):
 
         self.assertTrue(edata.get_summary().startswith(self.EXCEPT_START))
         self.assertTrue('traceback' in edata.get_details())
-        self.assertEquals(edata.plugin, 'plugin')
-        self.assertEquals(edata.phase, 'phase')
-        self.assertEquals(edata.fuzzable_request, 'http://www.w3af.org/')
-        self.assertEquals(edata.filename, 'test_exception_handler.py')
+        self.assertEqual(edata.plugin, 'plugin')
+        self.assertEqual(edata.phase, 'phase')
+        self.assertEqual(edata.fuzzable_request, 'http://www.w3af.org/')
+        self.assertEqual(edata.filename, 'test_exception_handler.py')
 
     def test_handle_threads_calls(self):
         
@@ -162,13 +162,13 @@ class TestExceptionHandler(unittest.TestCase):
 
         self.assertTrue(edata.get_summary().startswith(self.EXCEPT_START))
         self.assertTrue('traceback' in edata.get_details())
-        self.assertEquals(edata.plugin, 'plugin')
-        self.assertEquals(edata.phase, 'phase')
-        self.assertEquals(edata.fuzzable_request, 'http://www.w3af.org/')
-        self.assertEquals(edata.filename, 'test_exception_handler.py')
+        self.assertEqual(edata.plugin, 'plugin')
+        self.assertEqual(edata.phase, 'phase')
+        self.assertEqual(edata.fuzzable_request, 'http://www.w3af.org/')
+        self.assertEqual(edata.filename, 'test_exception_handler.py')
         # This is very very very dependant on changes to this file, but it was
         # the only way to do it without much effort
-        self.assertEquals(edata.lineno, 137)
+        self.assertEqual(edata.lineno, 137)
 
     def test_handle_multi_calls(self):
 
@@ -195,7 +195,7 @@ class TestExceptionHandler(unittest.TestCase):
 
         # This is very very very dependant on changes to this file, but it was
         # the only way to do it without much effort
-        self.assertEquals(edata.lineno, 170)
+        self.assertEqual(edata.lineno, 170)
 
 
 class FakeStatus(CoreStatus):
@@ -205,7 +205,7 @@ class FakeStatus(CoreStatus):
 class TestExceptionData(unittest.TestCase):
 
     def get_fuzzable_request(self):
-        headers = Headers([(u'Hello', u'World')])
+        headers = Headers([('Hello', 'World')])
         post_data = KeyValueContainer(init_val=[('a', ['b'])])
         url = URL('http://w3af.org')
         return FuzzableRequest(url, method='GET', post_data=post_data,

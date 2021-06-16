@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import threading
 import binascii
 import http.client
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import socket
 import ssl
 import os
@@ -139,13 +139,13 @@ class ProxyHTTPConnection(_HTTPConnection):
     def proxy_setup(self, url):
         # request is called before connect, so can interpret url and get
         # real host/port to be used to make CONNECT request to proxy
-        proto, rest = urllib.splittype(url)
+        proto, rest = urllib.parse.splittype(url)
         if proto is None:
             raise ValueError('Unknown URL type: %s' % url)
 
         # get host and port
-        host_port, rest = urllib.splithost(rest)
-        host, port = urllib.splitport(host_port)
+        host_port, rest = urllib.parse.splithost(rest)
+        host, port = urllib.parse.splitport(host_port)
         self._real_host = host
 
         # if port is not defined try to get from proto
@@ -169,7 +169,7 @@ class ProxyHTTPConnection(_HTTPConnection):
                            'Connection': 'keep-alive',
                            'Host': host_port}
 
-        for header_name, header_value in connect_headers.items():
+        for header_name, header_value in list(connect_headers.items()):
             self.send('%s: %s%s' % (header_name, header_value, new_line))
 
         self.send(new_line)
@@ -256,7 +256,7 @@ class SSLNegotiatorConnection(http.client.HTTPSConnection, UniqueID):
                                    ssl_version=protocol,
                                    server_hostname=self.host,
                                    timeout=self.timeout)
-        except ssl.SSLError, ssl_exc:
+        except ssl.SSLError as ssl_exc:
             msg = "SSL connection error occurred with protocol %s: '%s'"
             debug(msg % (protocol, ssl_exc.__class__.__name__))
 

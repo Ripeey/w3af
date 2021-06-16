@@ -50,12 +50,12 @@ def are_variants(uri, other_uri):
         dc = uri.querystring
         odc = other_uri.querystring
 
-        if dc.keys() != odc.keys():
+        if list(dc.keys()) != list(odc.keys()):
             return False
 
         for vself, vother in zip_longest(
-            chain(*dc.values()),
-            chain(*odc.values()),
+            chain(*list(dc.values())),
+            chain(*list(odc.values())),
             fillvalue=None
         ):
             if None in (vself, vother) or \

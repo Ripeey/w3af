@@ -181,7 +181,7 @@ class clusterCellData(gtk.TreeView):
 
         # Start with the treeview and liststore creation
         dynamicListStoreTypes = [str for i in range(len(self._column_names))]
-        self.liststore = apply(gtk.ListStore, dynamicListStoreTypes)
+        self.liststore = gtk.ListStore(*dynamicListStoreTypes)
 
         gtk.TreeView.__init__(self, self.liststore)
 
@@ -384,7 +384,7 @@ class clusterCellData(gtk.TreeView):
         # I'm talking about the self._colDict[ current_column ]!
         currentId = self.liststore[path[0]][self._colDict[view_column]]
         # Search the Id and show the data
-        print 'I should show the data for', currentId, 'in a different window.'
+        print('I should show the data for', currentId, 'in a different window.')
 
     def _getInfoForId(self, id):
         """

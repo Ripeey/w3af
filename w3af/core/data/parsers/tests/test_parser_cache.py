@@ -38,7 +38,7 @@ class TestParserCache(unittest.TestCase):
     
     def setUp(self):
         self.url = URL('http://w3af.com')
-        self.headers = Headers([(u'content-type', u'text/html')])
+        self.headers = Headers([('content-type', 'text/html')])
         self.dpc = ParserCache()
 
     def tearDown(self):
@@ -93,7 +93,7 @@ class TestParserCache(unittest.TestCase):
             # Trigger the timeout
             #
             html = '<html>DelayedParser!</html>'
-            http_resp = _build_http_response(html, u'text/html')
+            http_resp = _build_http_response(html, 'text/html')
 
             timeout_mock.return_value = 1
             max_workers_mock.return_value = 1
@@ -122,7 +122,7 @@ class TestParserCache(unittest.TestCase):
 
     def _is_timeout_exception_message(self, toe, http_resp):
         msg = 'Reached timeout parsing "http://w3af.com/".'
-        self.assertEquals(str(toe), msg)
+        self.assertEqual(str(toe), msg)
 
     def test_get_tags_by_filter_simple(self):
         html = '<a href="/def">abc</a>'

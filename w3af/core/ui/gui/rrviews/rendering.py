@@ -125,9 +125,9 @@ class GtkHtmlRenderingView(RenderingView):
             # can't display
             pass
         except Exception as e:
-            print(_('gtkhtml2 exception:'), type(e), str(e))
-            print _('Please report this issue here:')
-            print 'https://github.com/andresriancho/w3af/issues/new'
+            print((_('gtkhtml2 exception:'), type(e), str(e)))
+            print(_('Please report this issue here:'))
+            print('https://github.com/andresriancho/w3af/issues/new')
 
     def clear(self):
         """Clear view."""
@@ -153,7 +153,7 @@ class MozRenderingView(RenderingView):
         # mimeType = obj.content_type
         if obj.is_text_or_html():
             self._renderingWidget.render_data(obj.get_body(
-            ), long(len(obj.get_body())), str(obj.get_uri()), mime_type)
+            ), int(len(obj.get_body())), str(obj.get_uri()), mime_type)
 
     def clear(self):
         """Clear view."""

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import threading
 import unittest
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import queue
 import time
 
@@ -52,10 +52,10 @@ class TestInterceptProxy(unittest.TestCase):
 
         # Build the proxy opener
         proxy_url = 'http://%s:%s' % (self.IP, port)
-        proxy_handler = urllib2.ProxyHandler({'http': proxy_url,
+        proxy_handler = urllib.request.ProxyHandler({'http': proxy_url,
                                               'https': proxy_url})
-        self.proxy_opener = urllib2.build_opener(proxy_handler,
-                                                 urllib2.HTTPHandler)
+        self.proxy_opener = urllib.request.build_opener(proxy_handler,
+                                                 urllib.request.HTTPHandler)
     
     def tearDown(self):
         self._proxy.stop()
@@ -79,7 +79,7 @@ class TestInterceptProxy(unittest.TestCase):
         def send_request(proxy_opener, result_queue):
             try:
                 proxy_opener.open(get_moth_http())
-            except urllib2.HTTPError, he:
+            except urllib.error.HTTPError as he:
                 # Catch the 403 from the local proxy when the user
                 # drops the HTTP request.
                 result_queue.put(he)
@@ -108,7 +108,7 @@ class TestInterceptProxy(unittest.TestCase):
         def send_request(proxy_opener, result_queue):
             try:
                 response = proxy_opener.open(get_moth_http())
-            except urllib2.HTTPError, he:
+            except urllib.error.HTTPError as he:
                 # Catch the 403 from the local proxy when the user
                 # drops the HTTP request.
                 result_queue.put(he)
@@ -143,7 +143,7 @@ class TestInterceptProxy(unittest.TestCase):
 
             try:
                 response = proxy_opener.open(url, timeout=10)
-            except urllib2.HTTPError, he:
+            except urllib.error.HTTPError as he:
                 # Catch the 403 from the local proxy when the user
                 # drops the HTTP request.
                 results.put(he)

@@ -97,7 +97,7 @@ class grep(BaseConsumer):
         self._log_queue_sizes_calls = 0
 
         self._consumer_plugin_dict = dict((plugin.get_name(), plugin) for plugin in self._consumer_plugins)
-        self._first_plugin_name = self._consumer_plugin_dict.keys()[0]
+        self._first_plugin_name = list(self._consumer_plugin_dict.keys())[0]
 
         self._request_response_lru = SynchronizedLRUDict(thread_pool_size * 3)
         self._request_response_processes = dict()

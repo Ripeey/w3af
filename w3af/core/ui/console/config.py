@@ -66,7 +66,7 @@ class ConfigMenu(menu):
         self._group_options_by_tabid()
         
         table = [['Setting', 'Value', 'Modified', 'Description']]
-        for tabid in self._tabbed_options.keys():
+        for tabid in list(self._tabbed_options.keys()):
             tab_opts = self._tabbed_options[tabid]
 
             for opt_name in tab_opts:
@@ -139,7 +139,7 @@ class ConfigMenu(menu):
     
     def _cmd_save(self, tokens):
         try:
-            for unsaved_opt_name, unsaved_val in self._unsaved_options.iteritems():
+            for unsaved_opt_name, unsaved_val in self._unsaved_options.items():
                 self._options[unsaved_opt_name].set_value(unsaved_val)
 
             # Save the options using the corresponding setter

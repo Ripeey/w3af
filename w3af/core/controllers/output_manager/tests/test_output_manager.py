@@ -64,7 +64,7 @@ class TestOutputManager(unittest.TestCase):
 
     def test_output_plugins_actions_with_unicode_message(self):
         """Call all actions on output plugins using a unicode message"""
-        msg = u'<< ÑñçÇyruZZ!! <<'
+        msg = '<< ÑñçÇyruZZ!! <<'
         utf8_encoded_msg = msg.encode('utf8')
 
         for action in TestOutputManager.OUTPUT_PLUGIN_ACTIONS:

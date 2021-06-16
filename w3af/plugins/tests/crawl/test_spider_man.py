@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import time
 import socket
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 from multiprocessing.dummy import Process
 
@@ -61,8 +61,8 @@ class BrowserThread(Process):
 
         proxy_cfg = {'http': 'http://127.0.0.1:%s/' % self.proxy_port,
                      'https': 'http://127.0.0.1:%s/' % self.proxy_port}
-        proxy_support = urllib2.ProxyHandler(proxy_cfg)
-        opener = urllib2.build_opener(proxy_support)
+        proxy_support = urllib.request.ProxyHandler(proxy_cfg)
+        opener = urllib.request.build_opener(proxy_support)
         # Avoid this, it might influence other tests!
         #urllib2.install_opener(opener)
 
@@ -72,7 +72,7 @@ class BrowserThread(Process):
             url = self.url_resolver(path)
 
             if method == 'POST':
-                req = urllib2.Request(url, payload)
+                req = urllib.request.Request(url, payload)
                 try:
                     response = opener.open(req)
                 except Exception as ex:

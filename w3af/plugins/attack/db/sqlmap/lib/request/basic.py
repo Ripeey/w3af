@@ -56,12 +56,12 @@ def forgeHeaders(items=None, base=None):
 
     items = items or {}
 
-    for _ in items.keys():
+    for _ in list(items.keys()):
         if items[_] is None:
             del items[_]
 
     headers = OrderedDict(base or conf.httpHeaders)
-    headers.update(items.items())
+    headers.update(list(items.items()))
 
     class _str(str):
         def capitalize(self):
@@ -72,7 +72,7 @@ def forgeHeaders(items=None, base=None):
 
     _ = headers
     headers = OrderedDict()
-    for key, value in _.items():
+    for key, value in list(_.items()):
         success = False
 
         for _ in headers:
@@ -99,7 +99,7 @@ def forgeHeaders(items=None, base=None):
 
                 if ("%s=" % getUnicode(cookie.name)) in getUnicode(headers[HTTP_HEADER.COOKIE]):
                     if conf.loadCookies:
-                        conf.httpHeaders = filter(None, ((item if item[0] != HTTP_HEADER.COOKIE else None) for item in conf.httpHeaders))
+                        conf.httpHeaders = [_f for _f in ((item if item[0] != HTTP_HEADER.COOKIE else None) for item in conf.httpHeaders) if _f]
                     elif kb.mergeCookies is None:
                         message = "you provided a HTTP %s header value. " % HTTP_HEADER.COOKIE
                         message += "The target URL provided its own cookies within "
@@ -212,7 +212,7 @@ def checkCharEncoding(encoding, warn=True):
     # Reference: http://www.iana.org/assignments/character-sets
     # Reference: http://docs.python.org/library/codecs.html
     try:
-        codecs.lookup(encoding.encode(UNICODE_ENCODING) if isinstance(encoding, unicode) else encoding)
+        codecs.lookup(encoding.encode(UNICODE_ENCODING) if isinstance(encoding, str) else encoding)
     except (LookupError, ValueError):
         if warn:
             warnMsg = "unknown web page charset '%s'. " % encoding
@@ -222,7 +222,7 @@ def checkCharEncoding(encoding, warn=True):
 
     if encoding:
         try:
-            unicode(randomStr(), encoding)
+            str(randomStr(), encoding)
         except:
             if warn:
                 warnMsg = "invalid web page charset '%s'" % encoding
@@ -255,12 +255,12 @@ def decodePage(page, contentEncoding, contentType):
     if not page or (conf.nullConnection and len(page) < 2):
         return getUnicode(page)
 
-    if isinstance(contentEncoding, basestring) and contentEncoding:
+    if isinstance(contentEncoding, str) and contentEncoding:
         contentEncoding = contentEncoding.lower()
     else:
         contentEncoding = ""
 
-    if isinstance(contentType, basestring) and contentType:
+    if isinstance(contentType, str) and contentType:
         contentType = contentType.lower()
     else:
         contentType = ""
@@ -311,7 +311,7 @@ def decodePage(page, contentEncoding, contentType):
         kb.pageEncoding = conf.encoding
 
     # can't do for all responses because we need to support binary files too
-    if not isinstance(page, unicode) and "text/" in contentType:
+    if not isinstance(page, str) and "text/" in contentType:
         if kb.heuristicMode:
             kb.pageEncoding = kb.pageEncoding or checkCharEncoding(getHeuristicCharEncoding(page))
             page = getUnicode(page, kb.pageEncoding)
@@ -341,14 +341,14 @@ def decodePage(page, contentEncoding, contentType):
                 def _(match):
                     retVal = match.group(0)
                     try:
-                        retVal = unichr(int(match.group(1)))
+                        retVal = chr(int(match.group(1)))
                     except ValueError:
                         pass
                     return retVal
                 page = re.sub(r"&#(\d+);", _, page)
 
             # e.g. &zeta;
-            page = re.sub(r"&([^;]+);", lambda _: unichr(htmlEntities[_.group(1)]) if htmlEntities.get(_.group(1), 0) > 255 else _.group(0), page)
+            page = re.sub(r"&([^;]+);", lambda _: chr(htmlEntities[_.group(1)]) if htmlEntities.get(_.group(1), 0) > 255 else _.group(0), page)
 
     return page
 

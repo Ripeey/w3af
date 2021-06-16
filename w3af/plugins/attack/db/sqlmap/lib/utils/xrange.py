@@ -68,9 +68,9 @@ class range(object):
     def __getitem__(self, index):
         if isinstance(index, slice):
             start, stop, step = index.indices(self._len())
-            return range(self._index(start),
-                          self._index(stop), step*self.step)
-        elif isinstance(index, (int, long)):
+            return list(range(self._index(start),
+                          self._index(stop), step*self.step))
+        elif isinstance(index, int):
             if index < 0:
                 fixed_index = index + self._len()
             else:

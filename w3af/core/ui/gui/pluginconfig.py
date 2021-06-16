@@ -335,7 +335,7 @@ class PluginTree(gtk.TreeView):
 
         # if anything is changed, you can not start scanning
         isallok = all([all(
-            children.values()) for children in self.config_status.values()])
+            children.values()) for children in list(self.config_status.values())])
         self.mainwin.scanok.change(self, isallok)
 
     def _get_plugin_inst(self, path):

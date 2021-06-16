@@ -188,7 +188,7 @@ class ProfileList(gtk.TreeView):
 
                 # compare it
                 savedconfig = self.pluginsConfigs[(ptype, pname)]
-                for (k, origv) in savedconfig.items():
+                for (k, origv) in list(savedconfig.items()):
                     newv = str(opts[k])
                     if newv != origv:
                         return True

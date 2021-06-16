@@ -75,7 +75,7 @@ class json_file(OutputPlugin):
         :param options_dict: A dict with the options for every plugin.
         """
         # TODO: Improve so it contains the plugin configuration too
-        for plugin_type, enabled in plugins_dict.iteritems():
+        for plugin_type, enabled in plugins_dict.items():
             self._enabled_plugins[plugin_type] = enabled        
 
     def flush(self):
@@ -106,7 +106,7 @@ class json_file(OutputPlugin):
             except AttributeError:
                 return None
 
-        findings = filter(None, [_get_desc(x) for x in kb.kb.get_all_findings_iter()])
+        findings = [_f for _f in [_get_desc(x) for x in kb.kb.get_all_findings_iter()] if _f]
         known_urls = [str(x) for x in kb.kb.get_all_known_urls()]
                         
         items = []

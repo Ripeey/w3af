@@ -33,7 +33,7 @@ def get_scan_info_from_id(scan_id):
 
 
 def get_new_scan_id():
-    return len(SCANS.keys())
+    return len(list(SCANS.keys()))
 
 
 def create_temp_profile(scan_profile):

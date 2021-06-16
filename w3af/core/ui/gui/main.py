@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-from __future__ import absolute_import
+
 
 # Now that I know that I have them, import them!
 import gtk
@@ -65,8 +65,8 @@ from w3af.core.ui.gui.tools.proxywin import ProxiedRequests
 
 # This is just general info, to help people know their system and report more
 # complete bugs
-print "Starting w3af, running on:"
-print get_versions()
+print("Starting w3af, running on:")
+print(get_versions())
 
 # pylint: disable=E1101
 # Threading initializer
@@ -223,8 +223,8 @@ class MainApp(object):
         try:
             self.generalconfig = shelve.open(genconfigfile)
         except Exception as e:
-            print ("WARNING: something bad happened when trying to open the"
-                   " general config! File: %s. Problem: %s" % (genconfigfile, e))
+            print(("WARNING: something bad happened when trying to open the"
+                   " general config! File: %s. Problem: %s" % (genconfigfile, e)))
             self.generalconfig = FakeShelve()
 
         window_size = self.generalconfig.get("mainwindow-size", (1024, 768))
@@ -784,7 +784,7 @@ class MainApp(object):
         :param sensit: if it's active or not
         """
         # the View menu
-        for menu in self.menuViews.values():
+        for menu in list(self.menuViews.values()):
             menu.set_sensitive(sensit)
         self.is_running = sensit
 
@@ -841,7 +841,7 @@ class MainApp(object):
         self.w3af.helpChapters["main"] = self.helpChapter[page_num]
 
         self.viewSignalRecipient = None
-        for name, menu in self.menuViews.items():
+        for name, menu in list(self.menuViews.items()):
             if name == page:
                 menu.set_sensitive(self.is_running)
                 menu.set_visible(True)
@@ -852,7 +852,7 @@ class MainApp(object):
         if page not in self.menuViews:
             # even when we don't have no view, we should put
             # anyone, but disabled
-            fake = self.menuViews.items()[0][1]
+            fake = list(self.menuViews.items())[0][1]
             fake.set_sensitive(False)
             fake.set_visible(True)
 

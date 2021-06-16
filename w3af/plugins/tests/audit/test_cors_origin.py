@@ -64,7 +64,7 @@ class TestCORSOriginScan(PluginTest):
         cfg = self._run_configs['cfg']
         self._scan(cfg['target'], cfg['plugins'])
         vulns = self.kb.get('cors_origin', 'cors_origin')
-        self.assertEquals(2, len(vulns), vulns)
+        self.assertEqual(2, len(vulns), vulns)
 
         EXPECTED_NAMES = ['Insecure Access-Control-Allow-Origin',
                           'Insecure Access-Control-Allow-Origin']

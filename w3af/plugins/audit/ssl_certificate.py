@@ -163,7 +163,7 @@ class ssl_certificate(AuditPlugin):
             """
             try:
                 peer_cert = ssl_sock.getpeercert()
-            except ssl.SSLError, ssl_error:
+            except ssl.SSLError as ssl_error:
                 om.out.debug('Failed to retrieve the peer certificate: "%s"' % ssl_error)
                 return
 
@@ -260,7 +260,7 @@ class ssl_certificate(AuditPlugin):
 
         try:
             s.connect((domain, port))
-        except socket.error, se:
+        except socket.error as se:
             msg = 'Failed to connect to %s:%s. Socket error: "%s"'
             args = (domain, port, se)
             om.out.debug(msg % args)

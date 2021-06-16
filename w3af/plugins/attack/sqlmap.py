@@ -195,7 +195,7 @@ class RunFunctor(Process):
         self.process = FakeProcess()
         
     def run(self):
-        cmd, process = apply(self.functor, self.params)
+        cmd, process = self.functor(*self.params)
 
         if process is None:
             # Something really bad happen with sqlmap

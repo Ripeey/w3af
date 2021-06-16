@@ -159,7 +159,7 @@ class Enumeration(GenericEnumeration):
             errMsg += "for the database users"
             raise SqlmapNoneDataException(errMsg)
 
-        for user, privileges in kb.data.cachedUsersRoles.items():
+        for user, privileges in list(kb.data.cachedUsersRoles.items()):
             if isAdminFromPrivileges(privileges):
                 areAdmins.add(user)
 

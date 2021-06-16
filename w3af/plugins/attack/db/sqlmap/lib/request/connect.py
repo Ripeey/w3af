@@ -17,7 +17,7 @@ import string
 import struct
 import time
 import traceback
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from urllib.parse import urlparse
 
 try:
@@ -291,12 +291,12 @@ class Connect(object):
         status = None
 
         _ = urlparse.urlsplit(url)
-        requestMsg = u"HTTP request [#%d]:\r\n%s " % (threadData.lastRequestUID, method or (HTTPMETHOD.POST if post is not None else HTTPMETHOD.GET))
+        requestMsg = "HTTP request [#%d]:\r\n%s " % (threadData.lastRequestUID, method or (HTTPMETHOD.POST if post is not None else HTTPMETHOD.GET))
         requestMsg += getUnicode(("%s%s" % (_.path or "/", ("?%s" % _.query) if _.query else "")) if not any((refreshing, crawling, checking)) else url)
-        responseMsg = u"HTTP response "
-        requestHeaders = u""
+        responseMsg = "HTTP response "
+        requestHeaders = ""
         responseHeaders = None
-        logHeaders = u""
+        logHeaders = ""
         skipLogTraffic = False
 
         raise404 = raise404 and not kb.ignoreNotFound
@@ -388,7 +388,7 @@ class Connect(object):
             if auxHeaders:
                 headers = forgeHeaders(auxHeaders, headers)
 
-            for key, value in headers.items():
+            for key, value in list(headers.items()):
                 del headers[key]
                 value = unicodeencode(value, kb.pageEncoding)
                 for char in (r"\r", r"\n"):
@@ -401,7 +401,7 @@ class Connect(object):
             if websocket_:
                 ws = websocket.WebSocket()
                 ws.settimeout(timeout)
-                ws.connect(url, header=("%s: %s" % _ for _ in headers.items() if _[0] not in ("Host",)), cookie=cookie)  # WebSocket will add Host field of headers automatically
+                ws.connect(url, header=("%s: %s" % _ for _ in list(headers.items()) if _[0] not in ("Host",)), cookie=cookie)  # WebSocket will add Host field of headers automatically
                 ws.send(urldecode(post or ""))
                 page = ws.recv()
                 ws.close()
@@ -410,9 +410,9 @@ class Connect(object):
                 class _(dict):
                     pass
                 responseHeaders = _(ws.getheaders())
-                responseHeaders.headers = ["%s: %s\r\n" % (_[0].capitalize(), _[1]) for _ in responseHeaders.items()]
+                responseHeaders.headers = ["%s: %s\r\n" % (_[0].capitalize(), _[1]) for _ in list(responseHeaders.items())]
 
-                requestHeaders += "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, basestring) else key), getUnicode(value)) for (key, value) in responseHeaders.items()])
+                requestHeaders += "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, str) else key), getUnicode(value)) for (key, value) in list(responseHeaders.items())])
                 requestMsg += "\r\n%s" % requestHeaders
 
                 if post is not None:
@@ -429,9 +429,9 @@ class Connect(object):
                     req = MethodRequest(url, post, headers)
                     req.set_method(method)
                 else:
-                    req = urllib2.Request(url, post, headers)
+                    req = urllib.request.Request(url, post, headers)
 
-                requestHeaders += "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, basestring) else key), getUnicode(value)) for (key, value) in req.header_items()])
+                requestHeaders += "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, str) else key), getUnicode(value)) for (key, value) in req.header_items()])
 
                 if not getRequestHeader(req, HTTP_HEADER.COOKIE) and conf.cj:
                     conf.cj._policy._now = conf.cj._now = int(time.time())
@@ -465,7 +465,7 @@ class Connect(object):
                             for char in (r"\r", r"\n"):
                                 cookie.value = re.sub(r"(%s)([^ \t])" % char, r"\g<1>\t\g<2>", cookie.value)
 
-                conn = urllib2.urlopen(req)
+                conn = urllib.request.urlopen(req)
 
                 if not kb.authHeader and getRequestHeader(req, HTTP_HEADER.AUTHORIZATION) and (conf.authType or "").lower() == AUTH_TYPE.BASIC.lower():
                     kb.authHeader = getRequestHeader(req, HTTP_HEADER.AUTHORIZATION)
@@ -553,7 +553,7 @@ class Connect(object):
             else:
                 raise
 
-        except urllib2.HTTPError, ex:
+        except urllib.error.HTTPError as ex:
             page = None
             responseHeaders = None
 
@@ -575,7 +575,7 @@ class Connect(object):
             except:
                 pass
             finally:
-                page = page if isinstance(page, unicode) else getUnicode(page)
+                page = page if isinstance(page, str) else getUnicode(page)
 
             code = ex.code
             status = getUnicode(ex.msg)
@@ -587,7 +587,7 @@ class Connect(object):
             responseMsg += "[#%d] (%d %s):\r\n" % (threadData.lastRequestUID, code, status)
 
             if responseHeaders:
-                logHeaders = "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, basestring) else key), getUnicode(value)) for (key, value) in responseHeaders.items()])
+                logHeaders = "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, str) else key), getUnicode(value)) for (key, value) in list(responseHeaders.items())])
 
             logHTTPTraffic(requestMsg, "%s%s\r\n\r\n%s" % (responseMsg, logHeaders, (page or "")[:MAX_CONNECTION_CHUNK_SIZE]), start, time.time())
 
@@ -631,7 +631,7 @@ class Connect(object):
                     debugMsg = "got HTTP error code: %d (%s)" % (code, status)
                     logger.debug(debugMsg)
 
-        except (urllib2.URLError, socket.error, socket.timeout, http.client.HTTPException, struct.error, binascii.Error, ProxyError, SqlmapCompressionException, WebSocketException, TypeError, ValueError):
+        except (urllib.error.URLError, socket.error, socket.timeout, http.client.HTTPException, struct.error, binascii.Error, ProxyError, SqlmapCompressionException, WebSocketException, TypeError, ValueError):
             tbMsg = traceback.format_exc()
 
             if checking:
@@ -726,9 +726,9 @@ class Connect(object):
                 raise SqlmapConnectionException(warnMsg)
 
         finally:
-            if isinstance(page, basestring) and not isinstance(page, unicode):
+            if isinstance(page, str) and not isinstance(page, str):
                 if HTTP_HEADER.CONTENT_TYPE in (responseHeaders or {}) and not re.search(TEXT_CONTENT_TYPE_REGEX, responseHeaders[HTTP_HEADER.CONTENT_TYPE]):
-                    page = unicode(page, errors="ignore")
+                    page = str(page, errors="ignore")
                 else:
                     page = getUnicode(page)
             socket.setdefaulttimeout(conf.timeout)
@@ -750,7 +750,7 @@ class Connect(object):
             responseMsg += "[#%d] (%d %s):\r\n" % (threadData.lastRequestUID, code, status)
 
         if responseHeaders:
-            logHeaders = "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, basestring) else key), getUnicode(value)) for (key, value) in responseHeaders.items()])
+            logHeaders = "\r\n".join(["%s: %s" % (getUnicode(key.capitalize() if isinstance(key, str) else key), getUnicode(value)) for (key, value) in list(responseHeaders.items())])
 
         if not skipLogTraffic:
             logHTTPTraffic(requestMsg, "%s%s\r\n\r\n%s" % (responseMsg, logHeaders, (page or "")[:MAX_CONNECTION_CHUNK_SIZE]), start, time.time())
@@ -804,7 +804,7 @@ class Connect(object):
 
         if conf.httpHeaders:
             headers = OrderedDict(conf.httpHeaders)
-            contentType = max(headers[_] if _.upper() == HTTP_HEADER.CONTENT_TYPE.upper() else None for _ in headers.keys())
+            contentType = max(headers[_] if _.upper() == HTTP_HEADER.CONTENT_TYPE.upper() else None for _ in list(headers.keys()))
 
             if (kb.postHint or conf.skipUrlEncode) and postUrlEncode:
                 postUrlEncode = False
@@ -819,11 +819,11 @@ class Connect(object):
                         payload = function(payload=payload, headers=auxHeaders)
                     except Exception as ex:
                         errMsg = "error occurred while running tamper "
-                        errMsg += "function '%s' ('%s')" % (function.func_name, getSafeExString(ex))
+                        errMsg += "function '%s' ('%s')" % (function.__name__, getSafeExString(ex))
                         raise SqlmapGenericException(errMsg)
 
-                    if not isinstance(payload, basestring):
-                        errMsg = "tamper function '%s' returns " % function.func_name
+                    if not isinstance(payload, str):
+                        errMsg = "tamper function '%s' returns " % function.__name__
                         errMsg += "invalid payload type ('%s')" % type(payload)
                         raise SqlmapValueException(errMsg)
 
@@ -981,7 +981,7 @@ class Connect(object):
                     if not conf.csrfUrl:
                         errMsg += ". You can try to rerun by providing "
                         errMsg += "a valid value for option '--csrf-url'"
-                    raise SqlmapTokenException, errMsg
+                    raise SqlmapTokenException(errMsg)
 
             if token:
                 token = token.strip("'\"")
@@ -1029,7 +1029,7 @@ class Connect(object):
             else:
                 query = None
 
-            for item in filter(None, (get, post if not kb.postHint else None, query)):
+            for item in [_f for _f in (get, post if not kb.postHint else None, query) if _f]:
                 for part in item.split(delimiter):
                     if '=' in part:
                         name, value = part.split('=', 1)
@@ -1086,7 +1086,7 @@ class Connect(object):
             originals.update(variables)
             evaluateCode(conf.evalCode, variables)
 
-            for variable in variables.keys():
+            for variable in list(variables.keys()):
                 if variable.endswith(EVALCODE_KEYWORD_SUFFIX):
                     value = variables[variable]
                     del variables[variable]
@@ -1099,9 +1099,9 @@ class Connect(object):
 
             uri = variables["uri"]
 
-            for name, value in variables.items():
+            for name, value in list(variables.items()):
                 if name != "__builtins__" and originals.get(name, "") != value:
-                    if isinstance(value, (basestring, int)):
+                    if isinstance(value, (str, int)):
                         found = False
                         value = getUnicode(value, UNICODE_ENCODING)
 

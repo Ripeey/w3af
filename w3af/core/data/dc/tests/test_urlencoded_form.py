@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import unittest
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import copy
 import pickle
 
@@ -137,8 +137,8 @@ class TestURLEncodedForm(unittest.TestCase):
 
         form = URLEncodedForm(form_params)
 
-        self.assertEqual(urllib.unquote(str(form)).decode('utf-8'),
-                         u'c=ñçÑÇ&address=bsas&v=áéíóú')
+        self.assertEqual(urllib.parse.unquote(str(form)).decode('utf-8'),
+                         'c=ñçÑÇ&address=bsas&v=áéíóú')
 
     def test_form_str_radio_select(self):
         form_dict = form_with_radio + form_with_checkbox + form_select_cars
@@ -171,4 +171,4 @@ class TestURLEncodedForm(unittest.TestCase):
         self.assertEqual(form, unpickled_form)
         self.assertEqual(form.get_token(), unpickled_form.get_token())
         self.assertIsNotNone(unpickled_form.get_token())
-        self.assertEqual(unpickled_form.keys(), ['a', 'c'])
+        self.assertEqual(list(unpickled_form.keys()), ['a', 'c'])

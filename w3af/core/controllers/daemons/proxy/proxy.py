@@ -145,7 +145,7 @@ class Proxy(Process):
         # Start the proxy server
         try:
             self._server = ProxyServer(self._config)
-        except socket.error, se:
+        except socket.error as se:
             raise ProxyException('Socket error while starting proxy: "%s"'
                                  % se.strerror)
         except (ProxyServerError, pse):

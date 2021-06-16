@@ -238,7 +238,7 @@ class Plugin(Configurable):
         #
         # Now the real code:
         func = return_args(func, **kwds)
-        args = zip(repeat(func), iterable)
+        args = list(zip(repeat(func), iterable))
 
         for result in imap_unordered(awre, args):
             # re-raise the thread exception in the main thread with this method

@@ -19,12 +19,12 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-from __future__ import with_statement
+
 
 import time
 
 from copy import deepcopy
-from itertools import izip, repeat
+from itertools import repeat
 
 import w3af.core.data.kb.knowledge_base as kb
 import w3af.core.controllers.output_manager as om
@@ -152,7 +152,7 @@ class form_auth(BruteforcePlugin):
         return session
 
     def _bruteforce_pool(self, mutant, login_failed_res, generator, session, debugging_id):
-        args_iter = izip(repeat(mutant),
+        args_iter = zip(repeat(mutant),
                          repeat(login_failed_res),
                          generator,
                          repeat(session),

@@ -90,7 +90,7 @@ class StartUpConfig(object):
         return self._last_commit_id
 
     def set_last_commit_id(self, commit_id):
-        if not isinstance(commit_id, basestring):
+        if not isinstance(commit_id, str):
             raise TypeError('Expected string got %s instead.' % type(commit_id))
         
         self._last_commit_id = commit_id

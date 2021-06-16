@@ -43,9 +43,9 @@ class UIUpdater(object):
         vmngr = getattr(self, '__vmngr', None)
         if vmngr is None:
             vmngr = VersionMgr(log=self._logger)
-            [setattr(vmngr, n, c) for n, c in self._callbacks.items()]
+            [setattr(vmngr, n, c) for n, c in list(self._callbacks.items())]
             [vmngr.register(ev, val[0], val[1]) for ev, val in
-             self._registries.items()]
+             list(self._registries.items())]
             setattr(self, '__vmngr', vmngr)
         return vmngr
 

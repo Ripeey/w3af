@@ -44,11 +44,11 @@ def generate_404_without_filename():
 
 
 def generate_404_without_name(extension):
-    return u'%s.%s' % (rand_alnum(5), extension)
+    return '%s.%s' % (rand_alnum(5), extension)
 
 
 def generate_404_for_short_filename(filename, extension):
-    mod_filename = u'%s%s' % (rand_alnum(4), filename)
+    mod_filename = '%s%s' % (rand_alnum(4), filename)
     return append_extension_if_exists(mod_filename, extension)
 
 
@@ -141,13 +141,13 @@ def append_extension_if_exists(filename, extension):
     final_result = filename
 
     if extension is not None:
-        final_result += u'.%s' % extension
+        final_result += '.%s' % extension
 
     return final_result
 
 
 def split_filename(filename):
-    split = filename.rsplit(u'.', 1)
+    split = filename.rsplit('.', 1)
 
     if len(split) == 2:
         orig_filename, extension = split

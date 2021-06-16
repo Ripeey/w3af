@@ -8,7 +8,7 @@ See the file 'LICENSE' for copying permission
 import codecs
 import os
 import re
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from urllib.parse import urlparse
 
 from xml.dom.minidom import Document
@@ -28,11 +28,11 @@ def updateMSSQLXML():
     infoMsg = "[INFO] retrieving data from '%s'" % MSSQL_VERSIONS_URL
     print(infoMsg)
     try:
-        req = urllib2.Request(MSSQL_VERSIONS_URL)
-        f = urllib2.urlopen(req)
+        req = urllib.request.Request(MSSQL_VERSIONS_URL)
+        f = urllib.request.urlopen(req)
         mssqlVersionsHtmlString = f.read()
         f.close()
-    except urllib2.URLError:
+    except urllib.error.URLError:
         __mssqlPath = urlparse.urlsplit(MSSQL_VERSIONS_URL)
         __mssqlHostname = __mssqlPath[1]
 

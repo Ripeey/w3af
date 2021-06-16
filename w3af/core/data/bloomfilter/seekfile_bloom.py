@@ -86,7 +86,7 @@ class FileSeekBloomFilter(GenericBloomFilter):
         """
         :return: A string representation of @key.
         """
-        return unicode(key).encode("utf-8")
+        return str(key).encode("utf-8")
     
     def generate_bits_for_key(self, key):
         """

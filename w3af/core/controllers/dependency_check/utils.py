@@ -30,7 +30,7 @@ def verify_python_version():
     if major == 3:
         if minor <= 6:
             msg = 'Error: Python 3.%s found but Python 3.6 or higher required.'
-            print(msg % minor)
+            print((msg % minor))
     elif major < 3:
         msg = ('It seems that you are running w3af using Python2, which is not'
                ' supported in python-3 version of w3af.\nTo force w3af to be'

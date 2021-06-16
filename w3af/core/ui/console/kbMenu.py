@@ -84,7 +84,7 @@ class kbMenu(menu):
         if len(params):
             return []
 
-        return suggest(self.__getters.keys(), part)
+        return suggest(list(self.__getters.keys()), part)
 
     def _cmd_add(self, params):
         if len(params) == 0:

@@ -448,9 +448,9 @@ def _resumeHashDBValues():
         if isinstance(injection, InjectionDict) and injection.place in conf.paramDict and \
             injection.parameter in conf.paramDict[injection.place]:
 
-            if not conf.tech or intersect(conf.tech, injection.data.keys()):
-                if intersect(conf.tech, injection.data.keys()):
-                    injection.data = dict(_ for _ in injection.data.items() if _[0] in conf.tech)
+            if not conf.tech or intersect(conf.tech, list(injection.data.keys())):
+                if intersect(conf.tech, list(injection.data.keys())):
+                    injection.data = dict(_ for _ in list(injection.data.items()) if _[0] in conf.tech)
 
                 if injection not in kb.injections:
                     kb.injections.append(injection)
@@ -479,7 +479,7 @@ def _resumeDBMS():
 
     if conf.dbms:
         check = True
-        for aliases, _, _, _ in DBMS_DICT.values():
+        for aliases, _, _, _ in list(DBMS_DICT.values()):
             if conf.dbms.lower() in aliases and dbms not in aliases:
                 check = False
                 break
@@ -546,7 +546,7 @@ def _setResultsFile():
         conf.resultsFilename = os.path.join(paths.SQLMAP_OUTPUT_PATH, time.strftime(RESULTS_FILE_FORMAT).lower())
         try:
             conf.resultsFP = openFile(conf.resultsFilename, "a", UNICODE_ENCODING, buffering=0)
-        except (OSError, IOError), ex:
+        except (OSError, IOError) as ex:
             try:
                 warnMsg = "unable to create results file '%s' ('%s'). " % (conf.resultsFilename, getUnicode(ex))
                 handle, conf.resultsFilename = tempfile.mkstemp(prefix=MKSTEMP_PREFIX.RESULTS, suffix=".csv")
@@ -577,7 +577,7 @@ def _createFilesDir():
 
     if not os.path.isdir(conf.filePath):
         try:
-            os.makedirs(conf.filePath, 0755)
+            os.makedirs(conf.filePath, 0o755)
         except (OSError, ex):
             tempDir = tempfile.mkdtemp(prefix="sqlmapfiles")
             warnMsg = "unable to create files directory "
@@ -599,7 +599,7 @@ def _createDumpDir():
 
     if not os.path.isdir(conf.dumpPath):
         try:
-            os.makedirs(conf.dumpPath, 0755)
+            os.makedirs(conf.dumpPath, 0o755)
         except (OSError, ex):
             tempDir = tempfile.mkdtemp(prefix="sqlmapdump")
             warnMsg = "unable to create dump directory "
@@ -620,7 +620,7 @@ def _createTargetDirs():
 
     try:
         if not os.path.isdir(paths.SQLMAP_OUTPUT_PATH):
-            os.makedirs(paths.SQLMAP_OUTPUT_PATH, 0755)
+            os.makedirs(paths.SQLMAP_OUTPUT_PATH, 0o755)
 
         _ = os.path.join(paths.SQLMAP_OUTPUT_PATH, randomStr())
         open(_, "w+b").close()
@@ -629,7 +629,7 @@ def _createTargetDirs():
         if conf.outputDir:
             warnMsg = "using '%s' as the output directory" % paths.SQLMAP_OUTPUT_PATH
             logger.warn(warnMsg)
-    except (OSError, IOError), ex:
+    except (OSError, IOError) as ex:
         try:
             tempDir = tempfile.mkdtemp(prefix="sqlmapoutput")
         except (Exception, _):
@@ -650,8 +650,8 @@ def _createTargetDirs():
 
     try:
         if not os.path.isdir(conf.outputPath):
-            os.makedirs(conf.outputPath, 0755)
-    except (OSError, IOError, TypeError), ex:
+            os.makedirs(conf.outputPath, 0o755)
+    except (OSError, IOError, TypeError) as ex:
         try:
             tempDir = tempfile.mkdtemp(prefix="sqlmapoutput")
         except (Exception, _):
@@ -718,7 +718,7 @@ def initTargetEnv():
         _setDBMS()
 
     if conf.data:
-        class _(unicode):
+        class _(str):
             pass
 
         kb.postUrlEncode = True

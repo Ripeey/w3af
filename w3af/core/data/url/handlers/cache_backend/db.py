@@ -81,7 +81,7 @@ class SQLCachedResponse(CachedResponse):
         # Now save them
         try:
             hi.save()
-        except sqlite3.Error, e:
+        except sqlite3.Error as e:
             msg = 'A sqlite3 error was raised: "%s".' % e
             
             if 'disk' in str(e).lower():

@@ -45,6 +45,7 @@ from lib.core.settings import PAYLOAD_DELIMITER
 from lib.core.settings import REPLACEMENT_MARKER
 from lib.core.settings import SLEEP_TIME_MARKER
 from lib.core.unescaper import unescaper
+from functools import reduce
 
 class Agent(object):
     """
@@ -552,7 +553,7 @@ class Agent(object):
             table = table.split(conf.db)[-1].strip('.')
         try:
             columns = kb.data.cachedColumns[safeSQLIdentificatorNaming(conf.db)][safeSQLIdentificatorNaming(table, True)]
-            for name, type_ in columns.items():
+            for name, type_ in list(columns.items()):
                 if type_ and type_.upper() in DUMP_DATA_PREPROCESS.get(Backend.getDbms(), {}) and name == field:
                     retVal = DUMP_DATA_PREPROCESS[Backend.getDbms()][type_.upper()] % name
                     break

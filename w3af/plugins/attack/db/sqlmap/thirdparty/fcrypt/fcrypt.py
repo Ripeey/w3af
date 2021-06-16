@@ -513,7 +513,7 @@ def _body(ks, E0, E1):
     # Copy global variable into locals for loop.
     SP0, SP1, SP2, SP3, SP4, SP5, SP6, SP7 = _SPtrans
 
-    inner = range(0, _ITERATIONS*2, 2)
+    inner = list(range(0, _ITERATIONS*2, 2))
     l = r = 0
     for j in range(25):
         l,r = r,l

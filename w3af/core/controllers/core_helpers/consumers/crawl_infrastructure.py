@@ -222,8 +222,8 @@ class CrawlInfrastructure(BaseConsumer):
 
     @task_decorator
     def _plugin_finished_cb(self,
-                            function_id,
-                            ((plugin, fuzzable_request), plugin_result)):
+                            function_id, xxx_todo_changeme):
+        ((plugin, fuzzable_request), plugin_result) = xxx_todo_changeme
         if not self._running:
             return
 
@@ -354,14 +354,14 @@ class CrawlInfrastructure(BaseConsumer):
 
         tmp_url_list = ['- %s' % u.url_string for u in tmp_url_list]
         tmp_url_list.sort()
-        map(om.out.information, tmp_url_list)
+        list(map(om.out.information, tmp_url_list))
 
         # Now I simply print the list that I have after the filter.
         om.out.information('The list of fuzzable requests is:')
 
-        tmp_fr = [u'- %s' % unicode(fr) for fr in all_known_fuzzable_requests]
+        tmp_fr = ['- %s' % str(fr) for fr in all_known_fuzzable_requests]
         tmp_fr.sort()
-        map(om.out.information, tmp_fr)
+        list(map(om.out.information, tmp_fr))
 
     def _should_stop_discovery(self):
         """

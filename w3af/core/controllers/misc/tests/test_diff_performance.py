@@ -20,7 +20,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-from __future__ import print_function
+
 
 import os
 import time
@@ -60,7 +60,7 @@ class TestDiffPerformance(unittest.TestCase):
         self._print_result(result)
 
     def _print_result(self, result):
-        results = result.items()
+        results = list(result.items())
         results.sort(lambda a, b: a[1] < b[1])
 
         print()

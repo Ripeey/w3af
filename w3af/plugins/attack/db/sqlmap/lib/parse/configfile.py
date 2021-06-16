@@ -91,7 +91,7 @@ def configFileParser(configFile):
         errMsg += "(direct, url, logFile, bulkFile, googleDork, requestFile, sitemapUrl or wizard)"
         raise SqlmapMissingMandatoryOptionException(errMsg)
 
-    for family, optionData in optDict.items():
-        for option, datatype in optionData.items():
+    for family, optionData in list(optDict.items()):
+        for option, datatype in list(optionData.items()):
             datatype = unArrayizeValue(datatype)
             configFileProxy(family, option, datatype)

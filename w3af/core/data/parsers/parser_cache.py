@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-from __future__ import with_statement, print_function
+
 
 import atexit
 import threading
@@ -74,7 +74,7 @@ class ParserCache(CacheStats):
         mp_doc_parser.stop_workers()
 
         # Make sure the parsers clear all resources
-        for parser in self._cache.itervalues():
+        for parser in self._cache.values():
             if hasattr(parser, 'clear'):
                 parser.clear()
 

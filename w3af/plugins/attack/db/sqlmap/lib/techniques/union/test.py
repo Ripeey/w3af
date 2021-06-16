@@ -115,8 +115,8 @@ def _findUnionCharCount(comment, place, parameter, value, prefix, suffix, where=
 
         if not isNullValue(kb.uChar):
             for regex in (kb.uChar, r'>\s*%s\s*<' % kb.uChar):
-                contains = [(count, re.search(regex, _ or "", re.IGNORECASE) is not None) for count, _ in pages.items()]
-                if len(filter(lambda _: _[1], contains)) == 1:
+                contains = [(count, re.search(regex, _ or "", re.IGNORECASE) is not None) for count, _ in list(pages.items())]
+                if len([_ for _ in contains if _[1]]) == 1:
                     retVal = filter(lambda _: _[1], contains)[0][0]
                     break
 
@@ -163,7 +163,7 @@ def _unionPosition(comment, place, parameter, prefix, suffix, count, where=PAYLO
     validPayload = None
     vector = None
 
-    positions = range(0, count)
+    positions = list(range(0, count))
 
     # Unbiased approach for searching appropriate usable column
     random.shuffle(positions)

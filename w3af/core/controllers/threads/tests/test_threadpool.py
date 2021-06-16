@@ -44,7 +44,7 @@ class TestWorkerPool(unittest.TestCase):
 
             return foo
 
-        answers = worker_pool.imap_unordered(raise_on_1, range(3))
+        answers = worker_pool.imap_unordered(raise_on_1, list(range(3)))
 
         try:
             [i for i in answers]

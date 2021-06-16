@@ -126,7 +126,7 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         return state
 
     def __setstate__(self, state):
-        [setattr(self, k, v) for k, v in state.iteritems()]
+        [setattr(self, k, v) for k, v in state.items()]
 
     def get_default_headers(self):
         """
@@ -150,13 +150,13 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         """
         :return: An instance of FuzzableRequest from the provided parameters.
         """
-        if isinstance(url, basestring):
+        if isinstance(url, str):
             url = URL(url)
 
         if post_data == '':
             post_data = None
 
-        elif isinstance(post_data, basestring):
+        elif isinstance(post_data, str):
             post_data = dc_from_hdrs_post(headers, post_data)
 
         return cls(url, method=method, headers=headers, post_data=post_data)
@@ -180,7 +180,7 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         """
         headers = request.headers
         headers.update(request.unredirected_hdrs)
-        headers = Headers(headers.items())
+        headers = Headers(list(headers.items()))
 
         post_data = request.get_data() or ''
 
@@ -329,8 +329,8 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         """
         :return: A string representation of this fuzzable request.
         """
-        short_fmt = u'Method: %s | %s'
-        long_fmt = u'Method: %s | %s | %s: (%s)'
+        short_fmt = 'Method: %s | %s'
+        long_fmt = 'Method: %s | %s | %s: (%s)'
 
         if self.get_raw_data():
             parameters = self.get_raw_data().get_param_names()
@@ -342,7 +342,7 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         if not parameters:
             output = short_fmt % (self.get_method(), self.get_url())
         else:
-            jparams = u', '.join(parameters)
+            jparams = ', '.join(parameters)
             output = long_fmt % (self.get_method(), self.get_url(),
                                  dc_type, jparams)
 
@@ -439,7 +439,7 @@ class FuzzableRequest(RequestMixIn, DiskItem):
                 # We don't care if they don't exist
                 pass
 
-        for k, v in self.get_default_headers().items():
+        for k, v in list(self.get_default_headers().items()):
             # Ignore any keys which are already defined in the user-specified
             # headers
             kvalue, kreal = headers.iget(k, None)
@@ -500,7 +500,7 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         """
         if isinstance(cookie, Cookie):
             self._cookie = cookie
-        elif isinstance(cookie, basestring):
+        elif isinstance(cookie, str):
             self._cookie = Cookie(cookie)
         elif cookie is None:
             self._cookie = Cookie()
@@ -574,8 +574,8 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         """
         wire_headers = Headers()
 
-        for k, v in chain(self._headers.items(),
-                          self.get_post_data_headers().items()):
+        for k, v in chain(list(self._headers.items()),
+                          list(self.get_post_data_headers().items())):
 
             # Please note that here we're overwriting the headers from the
             # fuzzable request with the headers from the data container,

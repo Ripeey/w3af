@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import gtk
 import gobject
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import sys
 import re
 import queue

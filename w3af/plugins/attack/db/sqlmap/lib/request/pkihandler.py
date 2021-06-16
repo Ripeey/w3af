@@ -6,13 +6,13 @@ See the file 'LICENSE' for copying permission
 """
 
 import http.client
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 from lib.core.data import conf
 
-class HTTPSPKIAuthHandler(urllib2.HTTPSHandler):
+class HTTPSPKIAuthHandler(urllib.request.HTTPSHandler):
     def __init__(self, auth_file):
-        urllib2.HTTPSHandler.__init__(self)
+        urllib.request.HTTPSHandler.__init__(self)
         self.auth_file = auth_file
 
     def https_open(self, req):

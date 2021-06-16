@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import SocketServer
+import socketserver
 import threading
 import socket
 import time
@@ -44,7 +44,7 @@ class RawSSLDaemon(UpperDaemon):
         self.ssl_version = ssl_version
 
     def run(self):
-        self.server = SocketServer.TCPServer(self.server_address, self.handler,
+        self.server = socketserver.TCPServer(self.server_address, self.handler,
                                              bind_and_activate=False)
 
         key_file = os.path.join(os.path.dirname(__file__), 'unittest.key')
