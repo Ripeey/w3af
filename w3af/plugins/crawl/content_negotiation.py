@@ -61,7 +61,7 @@ class content_negotiation(CrawlPlugin):
         #
         # Note that this queue can have ~20 items in the worse case scenario
         # it is not a risk to store it all in memory
-        self._to_bruteforce = Queue.Queue()
+        self._to_bruteforce = queue.Queue()
 
         # Run N checks to verify if content negotiation is enabled
         self._tries_left = 3

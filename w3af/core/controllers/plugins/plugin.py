@@ -59,7 +59,7 @@ class Plugin(Configurable):
         self._w3af_core = None
         self.worker_pool = None
 
-        self.output_queue = Queue.Queue()
+        self.output_queue = queue.Queue()
         self._plugin_lock = threading.RLock()
 
     def set_worker_pool(self, worker_pool):

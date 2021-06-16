@@ -103,7 +103,7 @@ class SmartQueue(QueueSpeedMeasurement):
     """
     def __init__(self, maxsize=0, name='Unknown'):
         super(SmartQueue, self).__init__()
-        self.q = Queue.Queue(maxsize=maxsize)
+        self.q = queue.Queue(maxsize=maxsize)
 
         self._name = name
 

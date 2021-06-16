@@ -86,7 +86,7 @@ class TestInterceptProxy(unittest.TestCase):
         
         self._proxy.set_trap(True)
         
-        result_queue = Queue.Queue()
+        result_queue = queue.Queue()
         send_thread = threading.Thread(target=send_request, args=(self.proxy_opener,
                                                                   result_queue))
         send_thread.start()
@@ -117,7 +117,7 @@ class TestInterceptProxy(unittest.TestCase):
 
         self._proxy.set_trap(True)
         
-        result_queue = Queue.Queue()
+        result_queue = queue.Queue()
         send_thread = threading.Thread(target=send_request, args=(self.proxy_opener,
                                                                   result_queue))
         send_thread.start()
@@ -156,8 +156,8 @@ class TestInterceptProxy(unittest.TestCase):
 
         self._proxy.set_trap(True)
 
-        result_queue = Queue.Queue()
-        exceptions_queue = Queue.Queue()
+        result_queue = queue.Queue()
+        exceptions_queue = queue.Queue()
 
         for i in range(3):
             args = (i, self.proxy_opener, result_queue, exceptions_queue)

@@ -33,8 +33,8 @@ class InterceptProxy(Proxy):
     interface to perform all its magic ;)
     """
 
-    DEFAULT_NO_TRAP = '.*\.(gif|jpg|png|css|js|ico|swf|axd|tif)$'
-    DEFAULT_TRAP = '.*'
+    DEFAULT_NO_TRAP = r'.*\.(gif|jpg|png|css|js|ico|swf|axd|tif)$'
+    DEFAULT_TRAP = r'.*'
 
     def __init__(self, ip, port, url_opener):
         """
@@ -48,8 +48,8 @@ class InterceptProxy(Proxy):
                        name='LocalProxyThread')
 
         # Internal vars
-        self.requests_pending_modification = Queue.Queue()
-        self.requests_already_modified = Queue.Queue()
+        self.requests_pending_modification = queue.Queue()
+        self.requests_already_modified = queue.Queue()
 
         # User configured parameters
         self.methods_to_trap = set()

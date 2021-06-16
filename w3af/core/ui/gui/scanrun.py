@@ -396,7 +396,7 @@ class URLsGraph(gtk.VBox):
             return True
 
         # let's draw!
-        q = Queue.Queue()
+        q = queue.Queue()
         evt = Event()
         th = Process(target=self._draw_real, args=(q, evt), name='GTKDraw')
         th.start()
@@ -508,7 +508,7 @@ class URLsTree(gtk.TreeView):
         self.treeholder = {}
 
         # get the queue and go live
-        self.urls = Queue.Queue()
+        self.urls = queue.Queue()
         kb.kb.add_observer(URLObserver(self))
         gobject.timeout_add(250, self.add_url)
         self.show()

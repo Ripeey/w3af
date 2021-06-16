@@ -187,7 +187,7 @@ class RunFunctor(Process):
         
         self.functor = functor
         self.params = params
-        self.user_input = Queue.Queue()
+        self.user_input = queue.Queue()
         
         class FakeProcess(object):
             def poll(self):

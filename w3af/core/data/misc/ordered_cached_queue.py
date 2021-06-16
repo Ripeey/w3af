@@ -64,7 +64,7 @@ class OrderedCachedQueue(Queue.Queue, QueueSpeedMeasurement):
         # We want to send zero to the maxsize of the Queue implementation
         # here because we can write an infinite number of items. But keep
         # in mind that we don't really use the queue storage in any way
-        Queue.Queue.__init__(self, maxsize=0)
+        queue.Queue.__init__(self, maxsize=0)
 
     def get_name(self):
         return self.name

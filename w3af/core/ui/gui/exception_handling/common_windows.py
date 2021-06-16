@@ -66,7 +66,7 @@ class bug_report_worker(threading.Thread):
         
         self.bug_report_function = bug_report_function
         self.bugs_to_report = bugs_to_report
-        self.output = Queue.Queue()
+        self.output = queue.Queue()
 
     def run(self):
         """

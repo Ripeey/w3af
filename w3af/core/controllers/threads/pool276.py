@@ -196,7 +196,7 @@ class Pool(object):
     def __init__(self, processes=None, initializer=None, initargs=(),
                  maxtasksperchild=None):
         self._setup_queues()
-        self._taskqueue = Queue.Queue()
+        self._taskqueue = queue.Queue()
         self._cache = {}
         self._state = RUN
         self._maxtasksperchild = maxtasksperchild
@@ -837,8 +837,8 @@ class ThreadPool(Pool):
         Pool.__init__(self, processes, initializer, initargs)
 
     def _setup_queues(self):
-        self._inqueue = Queue.Queue()
-        self._outqueue = Queue.Queue()
+        self._inqueue = queue.Queue()
+        self._outqueue = queue.Queue()
         self._quick_put = self._inqueue.put
         self._quick_get = self._outqueue.get
 

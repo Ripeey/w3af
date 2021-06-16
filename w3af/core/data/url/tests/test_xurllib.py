@@ -342,7 +342,7 @@ class TestXUrllib(unittest.TestCase):
         self.assertRaises(ScanMustStopByUserRequest, self.uri_opener.GET, url)
 
     def test_pause(self):
-        output = Queue.Queue()
+        output = queue.Queue()
         self.uri_opener.pause(True)
 
         def send(uri_opener, output):
@@ -360,7 +360,7 @@ class TestXUrllib(unittest.TestCase):
         self.assertRaises(Queue.Empty, output.get, True, 2)
 
     def test_pause_unpause(self):
-        output = Queue.Queue()
+        output = queue.Queue()
         self.uri_opener.pause(True)
 
         def send(uri_opener, output):

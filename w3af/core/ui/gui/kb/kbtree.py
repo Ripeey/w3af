@@ -97,7 +97,7 @@ class KBTree(gtk.TreeView):
 
         # this structure will keep the items that were inserted into the tree
         self.treeholder = []
-        self.pending_insert = Queue.Queue()
+        self.pending_insert = queue.Queue()
         self.need_complete_tree_update = False
         
         # container for exploitable vulns.

@@ -35,7 +35,7 @@ class MessageConsumer(object):
 
         # get the messages
         subscribe_to_messages(self._message_observer)
-        self.messages = Queue.Queue()
+        self.messages = queue.Queue()
         gobject.idle_add(self._process_queue().__next__)
         
     def _message_observer(self, message):
