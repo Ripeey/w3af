@@ -42,3 +42,4 @@
 # NamedStringIO multi layout, more StringIO import fix, maketrans
 # Fix traceback raise, update vuln, jinja2 version, some urllib, http.client < httplib
 
+# Fix struct, clean socket warning, dbms filename encoding

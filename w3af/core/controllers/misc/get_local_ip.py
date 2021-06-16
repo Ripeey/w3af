@@ -34,11 +34,11 @@ def get_local_ip(target=None):
     """
     connect_target = '4.4.4.2' if target is None else target
     try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        #   UDP is connection-less, no packets are sent to 4.4.4.2
-        #   I use port 80, but could use any port
-        sock.connect((connect_target, 80))
-        local_address = sock.getsockname()[0]
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+            #   UDP is connection-less, no packets are sent to 4.4.4.2
+            #   I use port 80, but could use any port
+            sock.connect((connect_target, 80))
+            local_address = sock.getsockname()[0]
     except Exception:
         return None
     else:

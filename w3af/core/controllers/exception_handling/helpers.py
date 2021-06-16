@@ -57,7 +57,7 @@ def gettempdir():
     return tempfile.gettempdir()
 
 
-def get_distro.linux_distribution():
+def get_platform_dist():
     """
     :return: A human readable representation of distro.linux_distribution() , unknown if
              the module returned none / ''
@@ -88,7 +88,7 @@ def get_versions():
     w3af_version = '\n    '.join(get_w3af_version().split('\n'))
     
     versions = versions % (sys.version.replace('\n', ''),
-                           get_distro.linux_distribution(),
+                           get_platform_dist(),
                            gtk_version,
                            pygtk_version,
                            w3af_version)
