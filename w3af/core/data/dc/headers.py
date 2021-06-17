@@ -35,7 +35,6 @@ class Headers(NonRepeatKeyValueContainer):
     """
     def __init__(self, init_val=(), encoding=UTF8):
         cleaned_vals = self.clean_values(init_val)
-
         super(Headers, self).__init__(cleaned_vals,
                                       encoding,
                                       relaxed_order=True)
@@ -151,6 +150,7 @@ class Headers(NonRepeatKeyValueContainer):
 
     # pylint: disable=E0102
     def __setitem__(self, k, v):
+
         if isinstance(k, str):
             k = smart_unicode(k, encoding=self.encoding)
         else:

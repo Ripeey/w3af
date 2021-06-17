@@ -34,10 +34,12 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      PIPDependency('chardet', 'chardet', '3.0.4'),
                      PIPDependency('tblib', 'tblib', '0.2.0'),
                      PIPDependency('pdfminer', 'pdfminer', '20191125'),
-                     PIPDependency('OpenSSL', 'pyOpenSSL', '18.0.0'),
+                     PIPDependency('OpenSSL', 'pyOpenSSL', '20.0.1'),
                      PIPDependency('ndg', 'ndg-httpsclient', '0.4.0'),
 
                      PIPDependency('distro', 'distro', '1.5.0'),
+                     # We "outsource" the HTTP proxy feature to mitmproxy
+                     PIPDependency('mitmproxy', 'mitmproxy', '6.0.2'),
                      # We need 0.1.8 because of mitmproxy
                      PIPDependency('pyasn1', 'pyasn1', '0.4.8'),
                      # changed cause libxml/xmlversion.h error
@@ -45,13 +47,16 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      PIPDependency('scapy.config', 'scapy', '2.4.0'),
                      PIPDependency('guess_language', 'guess-language', '0.2'),
                      PIPDependency('cluster', 'cluster', '1.1.1b3'),
-                     PIPDependency('msgpack', 'msgpack', '0.5.6'),
+                     PIPDependency('msgpack', 'msgpack', '1.0.2'),
                      # break pip3 v 1.1.0 isnt updated to their version 3 sadly
-                     PIPDependency('ntlm', 'python-ntlm3', '1.0.2'),
+                     PIPDependency('ntlm3', 'python-ntlm3', '1.0.2'),
                      # no support for python3 anymore
                      #PIPDependency('Halberd', 'halberd', '0.2.4'),
-                     PIPDependency('darts.lib.utils', 'darts.util.lru', '0.5'),
-                     PIPDependency('jinja2', 'Jinja2', '3.0.1'),
+
+                     # remove and shifting to python3-darts.lib.utils.lru
+                     #PIPDependency('darts.lib.utils', 'darts.util.lru', '0.5-5'),
+                     
+                     PIPDependency('jinja2', 'Jinja2', '2.11.3'),
                      PIPDependency('vulndb', 'vulndb', '0.1.3'),
                      PIPDependency('markdown', 'markdown', '3.3.4'),
 
@@ -65,15 +70,13 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      # Console colors
                      PIPDependency('termcolor', 'termcolor', '1.1.0'),
 
-                     # We "outsource" the HTTP proxy feature to mitmproxy
-                     PIPDependency('mitmproxy', 'mitmproxy', '0.13'),
-
-                     # ruamel.ordereddict No longer needed as theres
-                     # collections.OrderedDict 
+                     # collections.OrderedDict used instead now as build fails
+                     # https://gist.github.com/andresriancho/cf2fa1ce239b30f37bd9
+                     #PIPDependency('ruamel.ordereddict', 'ruamel.ordereddict', '0.4.9'),
 
                      # Only used by the REST API, but in the future the console
                      # and GUI will consume it so it's ok to put this here
-                     PIPDependency('Flask', 'Flask', '0.10.1'),
+                     PIPDependency('Flask', 'Flask', '1.1.4'),
                      PIPDependency('yaml', 'PyYAML', '5.4.1'),
 
                      # tldextract extracts the tld from any domain name

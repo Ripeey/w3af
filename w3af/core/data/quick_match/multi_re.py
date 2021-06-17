@@ -88,7 +88,7 @@ class MultiRE(object):
             #   Now we extract the string literals (longer than hint_len only) from
             #   the regular expressions and populate the acora index
             #
-            regex_hints = esmre.hints(regex)
+            regex_hints = esmre.hints(str(regex))
             regex_keywords = esmre.shortlist(regex_hints)
 
             if not regex_keywords:

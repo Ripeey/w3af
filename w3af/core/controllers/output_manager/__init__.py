@@ -63,3 +63,4 @@ manager = OutputManager()
 
 # Logs to into the logging process through out.debug() , out.error() , etc.
 out = log_sink_factory(manager.get_in_queue())
+

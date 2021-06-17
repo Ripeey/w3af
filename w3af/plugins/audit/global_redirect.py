@@ -39,18 +39,23 @@ class global_redirect(AuditPlugin):
     TEST_DOMAIN = 'w3af.org'
 
     EXTENDED_PAYLOADS = None
-    BASIC_PAYLOADS = {'http://www.%s/' % TEST_DOMAIN,
-                      '//%s' % TEST_DOMAIN}
+    BASIC_PAYLOADS = {r'http://www.%s/' % TEST_DOMAIN,
+                      r'//%s' % TEST_DOMAIN}
 
     SCRIPT_RE = re.compile(r'<script.*?>(.*?)</script>', re.IGNORECASE | re.DOTALL)
     META_URL_RE = re.compile(r'.*?; *?URL *?= *?(.*)', re.IGNORECASE | re.DOTALL)
 
-    JS_REDIR_GENERIC_FMT = ['window\.location.*?=.*?["\'].*?%s.*?["\']',
-                            '(self|top)\.location.*?=.*?["\'].*?%s.*?["\']',
-                            'window\.location\.(replace|assign)\(["\'].*?%s.*?["\']\)']
-    REDIR_TO_TEST_DOMAIN_JS_RE = [re.compile(r % TEST_DOMAIN) for r in JS_REDIR_GENERIC_FMT]
-    JS_REDIR_RE = [re.compile(r % '') for r in JS_REDIR_GENERIC_FMT]
+    JS_REDIR_GENERIC_FMT = [r'window\.location.*?=.*?["\'].*?%s.*?["\']',
+                            r'(self|top)\.location.*?=.*?["\'].*?%s.*?["\']',
+                            r'window\.location\.(replace|assign)\(["\'].*?%s.*?["\']\)']
 
+    REDIR_TO_TEST_DOMAIN_JS_RE = []
+    JS_REDIR_RE = []
+    
+    def __init__(self):
+        self.REDIR_TO_TEST_DOMAIN_JS_RE = [re.compile(_ % self.TEST_DOMAIN) for _ in self.JS_REDIR_GENERIC_FMT]
+        self.JS_REDIR_RE = [re.compile(_ % '') for _ in self.JS_REDIR_GENERIC_FMT]
+    
     def audit(self, freq, orig_response, debugging_id):
         """
         Tests an URL for global redirect vulnerabilities.

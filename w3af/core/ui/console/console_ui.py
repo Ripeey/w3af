@@ -19,6 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
+
 import os
 import sys
 import shlex
@@ -134,6 +135,10 @@ class ConsoleUI(object):
             return True
 
         return False
+    def rescfg(self):
+        startup_cfg = StartUpConfig()
+        startup_cfg.reset()
+        return True
 
     def sh(self, name='w3af', callback=None):
         """
@@ -499,6 +504,7 @@ class ConsoleUI(object):
                                      'exitmessages.txt')
         f = open(messages_file, 'r')
         lines = f.readlines()
+        f.close()
         idx = random.randrange(len(lines))
         line = lines[idx]
         return '\n' + line

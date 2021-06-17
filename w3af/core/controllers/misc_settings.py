@@ -91,6 +91,7 @@ class MiscSettings(Configurable):
         # work perfectly in all plugins that need a reverse connection
         # (rfi_proxy)
         #
+
         local_address = get_local_ip()
         if not local_address:
             local_address = '127.0.0.1'  # do'h!

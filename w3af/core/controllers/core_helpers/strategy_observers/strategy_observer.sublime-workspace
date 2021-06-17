@@ -1,0 +1,435 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ed",
+				"edit_inline_text"
+			],
+			[
+				"edit_",
+				"edit_message_text"
+			],
+			[
+				"e",
+				"exceptions"
+			],
+			[
+				"web",
+				"webbrowser"
+			],
+			[
+				"re",
+				"render"
+			],
+			[
+				"la",
+				"labled"
+			],
+			[
+				"al",
+				"alternative"
+			],
+			[
+				"alter",
+				"alternative"
+			],
+			[
+				"se",
+				"sentense"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"utf-",
+				"utf-8"
+			],
+			[
+				"pr",
+				"print"
+			],
+			[
+				"su",
+				"supported_tts_lang"
+			],
+			[
+				"__",
+				"__aioses"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"asyn",
+				"asyncio"
+			],
+			[
+				"pri",
+				"print_r()"
+			],
+			[
+				"file_",
+				"file_get_contents"
+			],
+			[
+				"url",
+				"urlencode()"
+			],
+			[
+				"json",
+				"json_encode()"
+			],
+			[
+				"str_re",
+				"str_replace()"
+			],
+			[
+				"as",
+				"asyncio"
+			],
+			[
+				"aio",
+				"aiohttp"
+			],
+			[
+				"tran",
+				"Translation"
+			],
+			[
+				"ser",
+				"service_url"
+			],
+			[
+				"true",
+				"true"
+			],
+			[
+				"update",
+				"update_type"
+			],
+			[
+				"preg",
+				"preg_split"
+			],
+			[
+				"user",
+				"userbase"
+			],
+			[
+				"new",
+				"new_firstname"
+			],
+			[
+				"menu",
+				"menustr"
+			],
+			[
+				"is_nu",
+				"is_numeric"
+			],
+			[
+				"mar",
+				"margin-top\tproperty"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"prin",
+				"print_r"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"[(v.run_command(\"undo\")) for v in window.views()]"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ripe/Desktop/w3af/w3af/core/data/misc/cached_queue.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/misc/ordered_cached_queue.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/misc/smart_queue.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/tests/test_xurllib.py",
+		"/home/ripe/Desktop/w3af/w3af/core/ui/gui/exception_handling/common_windows.py",
+		"/home/ripe/Desktop/w3af/w3af/core/ui/gui/kb/kbtree.py",
+		"/home/ripe/Desktop/w3af/w3af/core/ui/gui/output/message_consumer.py",
+		"/home/ripe/Desktop/w3af/w3af/core/ui/gui/scanrun.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/sqlmap.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/crawl/content_negotiation.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/misc/diff.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/thirdparty/beautifulsoup/beautifulsoup.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/daemons/proxy/intercept_proxy.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/daemons/proxy/tests/test_intercept_proxy.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/plugins/plugin.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/threads/pool276.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/threads/tests/test_is_main_thread.py",
+		"/home/ripe/Desktop/w3af/notes.nts",
+		"/home/ripe/Desktop/url.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/core_helpers/not_found/tests/test_fingerprint_404.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/core_helpers/strategy_observers/thread_state_observer.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/core_helpers/tests/test_strategy.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/core_helpers/tests/test_strategy_low_level.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/misc/common_attack_methods.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/calculate_eta_adjustments.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/bruteforce.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/consumer_join_times.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/crawl_graph.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/crawling_stats.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/errors.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/file_sizes.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/http_requests.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/scan_finished_in.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/data/wall_time.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/active_threads.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/audit_queue_size.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/connection_pool_wait.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/consumer_pool_size.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/crawl_queue_size.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/grep_queue_size.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/http_requests_over_time.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/not_found_cache_rate.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/parser_memory_limit.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/progress_delta.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/rtt.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/rtt_histogram.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/should_grep_stats.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/timeout.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/urllib_error_rate.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/profiling/scan_log_analysis/graphs/worker_pool_size.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/context/context/html.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/dc/cookie.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/misc/base64_nopadding.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/options/list_option.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/parsers/doc/open_api/requests.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/parsers/doc/sgml.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/parsers/utils/header_link_extract.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/parsers/utils/tests/test_form_id_matcher.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/search_engines/tests/test_google.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/handlers/tests/test_blacklist.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/HTTPResponse.py",
+		"/home/ripe/Desktop/w3af/w3af/core/ui/console/tests/test_bug_report.py",
+		"/home/ripe/Desktop/w3af/w3af/core/ui/gui/httpeditor.py",
+		"/home/ripe/Desktop/w3af/w3af/core/ui/gui/tools/helpers/fuzzygen.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/thirdparty/bottle/bottle.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/thirdparty/clientform/clientform.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/thirdparty/colorama/ansitowin32.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/thirdparty/gprof2dot/gprof2dot.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap_wrapper.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/audit/global_redirect.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/audit/ssi.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/audit/xst.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/crawl/phpinfo.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/crawl/pykto.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/dom_xss.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/hash_analysis.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/html_comments.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/motw.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/password_profiling_plugins/html.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/serialized_object.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/symfony.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/grep/websockets_links.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/infrastructure/detect_reverse_proxy.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/infrastructure/dns_wildcard.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/infrastructure/frontpage_version.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/infrastructure/xssed_dot_com.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_buffer_overflow.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_deserialization.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_generic.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_redos.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_response_splitting.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_rosetta_flash.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_ssi.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/audit/test_xxe.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/crawl/test_find_backdoors.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/crawl/test_open_api.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/crawl/test_pykto.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/crawl/test_web_spider.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/crawl/test_wordpress_enumerate_users.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/helper.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/infrastructure/test_afd.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/infrastructure/test_jetleak.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/infrastructure/test_werkzeug_debugger.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/output/test_html_file.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/tests/test_no_debug_unittest.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/parsers/parser_cache.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/core_helpers/consumers/grep.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/handlers/blacklist.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/handlers/errors.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/handlers/normalize.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/director.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/handlers/ntlm_auth.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/handlers/cache_backend/cached_response.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/handlers/output_manager.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/exception_handling/helpers.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/db/dbms.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/misc/io.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/misc/get_local_ip.py",
+		"/home/ripe/Desktop/w3af/w3af/core/controllers/misc/get_net_iface.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/lib/core/dicts.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/helpers.py",
+		"/home/ripe/Desktop/w3af/w3af/core/data/url/openssl_wrapper/ssl_wrapper.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/doc/CHANGELOG.md",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/lib/controller/checks.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/lib/core/common.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/lib/core/option.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/lib/parse/sitemap.py",
+		"/home/ripe/Desktop/w3af/w3af/plugins/attack/db/sqlmap/lib/request/connect.py"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 110.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 132.0
+	},
+	"pinned_build_system": "",
+	"project": "strategy_observer.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 498.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 356.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

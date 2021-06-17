@@ -30,7 +30,7 @@ from w3af.core.data.misc.smart_queue import QueueSpeedMeasurement
 from w3af.core.controllers.core_helpers.consumers.constants import POISON_PILL
 
 
-class OrderedCachedQueue(Queue.Queue, QueueSpeedMeasurement):
+class OrderedCachedQueue(queue.Queue, QueueSpeedMeasurement):
     """
     This queue implements all the features explained in CachedQueue (see
     cached_queue.py) plus it will order the items in the queue as they are

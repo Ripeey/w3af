@@ -37,7 +37,8 @@ class dav(AuditPlugin):
 
     :author: Andres Riancho (andres.riancho@gmail.com)
     """
-
+    #removeME
+    #print('\n'.join(str(Headers.__mro__).split(',')))
     CONTENT_TYPE = Headers([('content-type',
                              'application/xml; charset="utf-8"')])
 

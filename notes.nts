@@ -8,7 +8,7 @@
 # esmre bugged so replaced for parrot to Python3-esmre in apt CORE instead
 # ntlm 1.0.1 fucked up pip3 removed completely and updated to latest
 # lotta prints, file, and exception update
-
+# switched new collection orderedDict as build fails
 
 # packages and syntax update
 # modules update based on python3 switched from 2
@@ -47,3 +47,9 @@
 # Fix ntlm_auth, some urllib, cached_response stringio
 # Shift from mimetools to email
 # Add r prefix for regex
+# mass fix queue import, fix queue '_semlock' bug, fix startup configuration agreement.
+#
+
+
+# console gives no direct error atleast, now only handled errors, fixed header cause by OrderedDict
+# fix TEST_URL missing, clean deprecation escape warning, string as left operand, HTMLParseError remove

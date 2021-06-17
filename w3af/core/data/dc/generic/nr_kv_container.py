@@ -34,7 +34,7 @@ from w3af.core.data.dc.utils.filter_printable import filter_non_printable
 
 ERR_MSG_NO_REP = 'Unsupported init_val "%s", expected format is [("b", "2")]'
 
-
+# As Collection OD's are default relaxed so switched
 class NonRepeatKeyValueContainer(DataContainer, OrderedDict):
     """
     This class represents a data container for data which doesn't allow
@@ -48,8 +48,8 @@ class NonRepeatKeyValueContainer(DataContainer, OrderedDict):
     """
     def __init__(self, init_val=(), encoding=UTF8, relaxed_order=False):
         DataContainer.__init__(self, encoding=encoding)
-        OrderedDict.__init__(self, relax=relaxed_order)
-
+        OrderedDict.__init__(self)
+        
         if isinstance(init_val, NonRepeatKeyValueContainer):
             self.update(init_val)
         elif isinstance(init_val, dict):

@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import zlib
 
 # pylint: disable=E0401
-from darts.lib.utils.lru import SynchronizedLRUDict
+from w3af.core.data.misc.lru3 import SynchronizedLRUDict
 # pylint: enable=E0401
 
 from w3af.core.controllers.core_helpers.not_found.response import FourOhFourResponse

@@ -49,7 +49,6 @@ class pluginsMenu(menu):
             self.addChild(t, pluginsTypeMenu)
 #            self._help.add_help_entry(t, "List %s plugins" % t, 'plugins')
         self.__loadPluginTypesHelp(types)
-
 #        self._help.add_help_entry('list', "List plugins by their type", 'commands')
 #        self._help.add_help_entry('config', "Config plugins (same as <type> config>)", 'commands')
 

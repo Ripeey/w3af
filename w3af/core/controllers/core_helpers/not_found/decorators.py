@@ -24,7 +24,7 @@ import threading
 import functools
 
 # pylint: disable=E0401
-from darts.lib.utils.lru import LRUDict
+from w3af.core.data.misc.lru3 import LRUDict
 # pylint: enable=E0401
 
 import w3af.core.controllers.output_manager as om

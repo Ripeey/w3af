@@ -42,9 +42,9 @@ class archive_dot_org(CrawlPlugin):
     :author: Darren Bilby, thanks for the good idea!
     """
 
-    ARCHIVE_START_URL = 'http://web.archive.org/web/*/%s'
-    INTERESTING_URLS_RE = '<a href="(http://web\.archive\.org/web/\d*?/https?://%s/.*?)"'
-    NOT_IN_ARCHIVE = '<p>Wayback Machine doesn&apos;t have that page archived.</p>'
+    ARCHIVE_START_URL = r'http://web.archive.org/web/*/%s'
+    INTERESTING_URLS_RE = r'<a href="(http://web\.archive\.org/web/\d*?/https?://%s/.*?)"'
+    NOT_IN_ARCHIVE = r'<p>Wayback Machine doesn&apos;t have that page archived.</p>'
 
     def __init__(self):
         CrawlPlugin.__init__(self)

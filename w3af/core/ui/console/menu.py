@@ -49,7 +49,7 @@ class menu(object):
         self._console = console
         self._children = {}
         self._child_call = False
-        
+
         self._load_help('common')
         helpMainRepository.load_help('keys', self._keysHelp)
 

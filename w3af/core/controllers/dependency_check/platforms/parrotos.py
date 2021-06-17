@@ -11,6 +11,8 @@ class ParrotOS(Ubuntu1204):
 
     # extra pip faulty addon
     Ubuntu1204.CORE_SYSTEM_PACKAGES.append('python3-esmre')
+    # no work for now
+    #Ubuntu1204.CORE_SYSTEM_PACKAGES.append('python3-darts.lib.utils.lru')
 
     SYSTEM_PACKAGES = {CORE: Ubuntu1204.CORE_SYSTEM_PACKAGES,
                        GUI: Ubuntu1204.GUI_SYSTEM_PACKAGES}

@@ -34,7 +34,7 @@ from w3af.core.data.dc.utils.filter_printable import filter_non_printable
 
 ERR_MSG = 'Unsupported init_val "%s", expected format is [(u"b", [u"2", u"3"])]'
 
-
+# As Collection OD's are default relaxed so let's hope theres no error as switched from ruamelOD
 class KeyValueContainer(DataContainer, OrderedDict):
     """
     This class represents a data container. It's basically the way
@@ -45,7 +45,7 @@ class KeyValueContainer(DataContainer, OrderedDict):
     def __init__(self, init_val=(), encoding=UTF8):
         DataContainer.__init__(self, encoding=encoding)
         OrderedDict.__init__(self)
-
+        
         if isinstance(init_val, KeyValueContainer):
             self.update(init_val)
         elif isinstance(init_val, dict):

@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import functools
 
-
 class LogSink(object):
     """
     The log sink receives log messages in different threads/processes and sends
@@ -76,10 +75,17 @@ class LogSink(object):
         @see: http://docs.python.org/library/functools.html for help on partial.
         @see: METHODS defined at the top of this class
         """
+
         method = self.METHODS.get(name, None)
 
         if method is None:
             msg = "'LogSink' object has no attribute '%s'"
             raise AttributeError(msg % name)
 
-        return method
+        #removeME - A log patch for temp (returns method)
+        def patchLog(*args):
+            trace = str(args) if args else ''
+            from w3af import logger
+            logger.error_log(trace) if name in ('error', 'log_crash') else logger.log(trace)
+            return method
+        return patchLog

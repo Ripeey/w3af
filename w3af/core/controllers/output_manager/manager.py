@@ -24,6 +24,7 @@ import sys
 import time
 import queue
 import threading
+import multiprocessing
 
 from multiprocessing.dummy import Process
 from functools import wraps
@@ -110,7 +111,7 @@ class OutputManager(Process):
         self._plugin_options = {}
 
         # Internal variables
-        self.in_queue = SilentJoinableQueue(ctx = threading)
+        self.in_queue = SilentJoinableQueue(ctx = multiprocessing)
         self._w3af_core = None
         self._last_output_flush = None
         self._is_shutting_down = False

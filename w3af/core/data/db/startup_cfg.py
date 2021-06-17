@@ -154,9 +154,18 @@ class StartUpConfig(object):
         """
         Saves current values to cfg file
         """
-        with open(self._start_cfg_file, 'wb') as configfile:
+        
+        with open(self._start_cfg_file, 'w') as configfile:
             self._config.write(configfile)
     
+    def reset(self):
+        """
+        Resets current cfg file
+        """
+        if os.path.exists(self._start_cfg_file):
+            os.remove(self._start_cfg_file)
+
+
     ### PROPERTIES #
     
     freq = property(get_freq)

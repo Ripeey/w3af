@@ -35,7 +35,7 @@ from collections import deque
 from http.client import BadStatusLine
 
 # pylint: disable=E0401
-from darts.lib.utils.lru import SynchronizedLRUDict
+from w3af.core.data.misc.lru3 import SynchronizedLRUDict
 # pylint: enable=E0401
 
 import w3af.core.controllers.output_manager as om
