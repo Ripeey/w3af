@@ -56,7 +56,7 @@ class InterceptProxyHandler(ProxyHandler):
                                                         trace=trace)
 
         # Send the response (success|error) to the browser
-        http_response = self._to_libmproxy_response(flow.request, http_response)
+        http_response = self._to_mitmproxy_response(flow.request, http_response)
         flow.reply(http_response)
 
     def on_request_drop(self, http_request):

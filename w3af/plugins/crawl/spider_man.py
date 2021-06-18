@@ -211,7 +211,7 @@ class LoggingHandler(ProxyHandler):
             om.out.information(msg % cookie_value)
 
         # Send the response (success|error) to the browser
-        http_response = self._to_libmproxy_response(flow.request, http_response)
+        http_response = self._to_mitmproxy_response(flow.request, http_response)
         flow.reply(http_response)
 
     def _is_terminate_favicon(self, http_request):

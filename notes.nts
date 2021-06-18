@@ -48,8 +48,9 @@
 # Shift from mimetools to email
 # Add r prefix for regex
 # mass fix queue import, fix queue '_semlock' bug, fix startup configuration agreement.
-#
 
-
+# Add new rewrote lru3, updated startup cfg, added new remove config file command.
 # console gives no direct error atleast, now only handled errors, fixed header cause by OrderedDict
 # fix TEST_URL missing, clean deprecation escape warning, string as left operand, HTMLParseError remove
+
+# Some fix and shift to latest mitmproxy

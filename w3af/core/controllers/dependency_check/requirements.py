@@ -112,8 +112,11 @@ CORE_PIP_PACKAGES = [PIPDependency('pyclamd', 'pyClamd', '0.4.0'),
                      # subprocess32 "it is guaranteed to be reliable when used
                      # in threaded applications". Needed this to fix issues in
                      # retirejs that spawns processes from threads
-                     PIPDependency('subprocess32', 'subprocess32', '3.5.4')
+                     PIPDependency('subprocess32', 'subprocess32', '3.5.4'),
 
+
+                     #removeME temporary to remove warnings as mitmproxy uses 1.5
+                     PIPDependency('blinker','blinker','1.5.dev0')
                      ]
 
 GUI_PIP_EXTRAS = [PIPDependency('xdot', 'xdot', '0.6')]

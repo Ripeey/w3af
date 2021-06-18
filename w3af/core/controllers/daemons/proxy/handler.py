@@ -22,9 +22,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import threading
 import traceback
 
-from netlib.odict import ODictCaseless
-from libmproxy.controller import Master
-from libmproxy.protocol.http import HTTPResponse as LibMITMProxyHTTPResponse
+from mitmproxy.net import http
+from mitmproxy.master import Master
+from mitmproxy.http import HTTPResponse as MITMProxyHTTPResponse
 
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.url.HTTPRequest import HTTPRequest
@@ -38,18 +38,18 @@ class ProxyHandler(Master):
     """
     All HTTP traffic goes through these (main) methods:
 
-        * handle_request(request libmproxy.http.HTTPRequest) - if we return
+        * handle_request(request mitmproxy.http.HTTPRequest) - if we return
           HTTPResponse here then proxy just response to client
 
-        * handle_response(response libmproxy.http.HTTPResponse) - is called
+        * handle_response(response mitmproxy.http.HTTPResponse) - is called
           before sending response to client
 
-        * handle_error(err libmproxy.proxy.primitives.Error)
+        * handle_error(err mitmproxy.proxy.primitives.Error)
 
     More hooks are available and can be used to intercept/modify HTTP traffic,
     see mitmproxy docs for more information.
 
-    http://mitmproxy.org/doc/scripting/libmproxy.html
+    http://mitmproxy.org/doc/scripting/mitmproxy.html
     http://mitmproxy.org/doc/
     """
 
@@ -60,7 +60,7 @@ class ProxyHandler(Master):
 
     def _to_w3af_request(self, request):
         """
-        Convert libmproxy.http.HTTPRequest to
+        Convert mitmproxy.http.HTTPRequest to
         w3af.core.data.url.HTTPRequest.HTTPRequest
         """
         url = '%s://%s:%s%s' % (request.scheme, request.host,
@@ -71,10 +71,10 @@ class ProxyHandler(Master):
                            headers=list(request.headers.items()),
                            method=request.method)
 
-    def _to_libmproxy_response(self, request, response):
+    def _to_mitmproxy_response(self, request, response):
         """
         Convert w3af.core.data.url.HTTPResponse.HTTPResponse  to
-        libmproxy.http.HTTPResponse
+        mitmproxy.http.HTTPResponse
         """
         charset = response.charset
 
@@ -86,7 +86,7 @@ class ProxyHandler(Master):
             header_value = smart_str(header_value, charset, errors='ignore')
             header_items.append((header_name, header_value))
 
-        headers = ODictCaseless(header_items)
+        headers = http.Headers(header_items)
 
         # This is an important step! The ExtendedUrllib will gunzip the body
         # for us, which is great, but we need to change the content-encoding
@@ -94,11 +94,11 @@ class ProxyHandler(Master):
         # HTTP client using the proxy from failing
         headers['content-encoding'] = ['identity']
 
-        return LibMITMProxyHTTPResponse(request.httpversion,
-                                        response.get_code(),
-                                        str(response.get_msg()),
-                                        headers,
-                                        body)
+        return MITMProxyHTTPResponse(http_version = request.httpversion,
+                                    status_code = response.get_code(),
+                                    reason = str(response.get_msg()),
+                                    headers = headers,
+                                    content = body)
 
     def _send_http_request(self, http_request, grep=True):
         """
@@ -116,7 +116,7 @@ class ProxyHandler(Master):
                            grep=grep,
                            # This is an important one, which needs to be
                            # properly documented. What happens here is that
-                           # libmproxy receives a request from xurllib
+                           # mitmproxy receives a request from xurllib
                            # configured to send requests via proxy, and then
                            # another xurllib with the same proxy config tries
                            # to forward the request. Since it has a proxy config
@@ -158,7 +158,7 @@ class ProxyHandler(Master):
         This method handles EVERY request that was send by the browser, we
         decide if the request needs to be trapped and queue it if needed.
 
-        :param flow: A libmproxy flow containing the request
+        :param flow: A mitmproxy flow containing the request
         """
         self.parent_process.total_handled_requests += 1
 
@@ -178,7 +178,7 @@ class ProxyHandler(Master):
             * Send it to the wire using our uri_opener
             * Set the response
 
-        :param flow: A libmproxy flow containing the request
+        :param flow: A mitmproxy flow containing the request
         """
         http_request = self._to_w3af_request(flow.request)
 
@@ -191,5 +191,5 @@ class ProxyHandler(Master):
                                                         trace=trace)
 
         # Send the response (success|error) to the browser
-        http_response = self._to_libmproxy_response(flow.request, http_response)
+        http_response = self._to_mitmproxy_response(flow.request, http_response)
         flow.reply(http_response)

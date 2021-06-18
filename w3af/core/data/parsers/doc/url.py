@@ -236,7 +236,7 @@ class URL(DiskItem):
             msg = 'Invalid encoding "%s" when creating URL.'
             raise ValueError(msg % encoding)
 
-        parsed = urlparse.urlparse(data)
+        parsed = urlparse(data)
         #
         # This is the case when someone creates a URL like
         # this: URL('www.w3af.com')
@@ -499,7 +499,7 @@ class URL(DiskItem):
 
         # "re-init" the object
         (self.scheme, self.netloc, self.path,
-         self.params, _, self.fragment) = urlparse.urlparse(fixed_url)
+         self.params, _, self.fragment) = urlparse(fixed_url)
 
     def get_port(self):
         """
