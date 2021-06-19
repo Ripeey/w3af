@@ -122,7 +122,7 @@ class pluginsTypeMenu(menu):
                     self._name, p).get_options()
             except Exception as e:
                 om.out.error('Error while reading plugin options: "%s"' % e)
-                sys.exit(-8)
+                #sys.exit(-8)
             else:
                 self._plugins[p] = len(options)
         self._configs = {}

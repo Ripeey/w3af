@@ -108,7 +108,7 @@ class vdaemon(object):
         try:
             remote_file_location = self._send_exe_to_server(
                 executable_file_name)
-        except (BaseFrameworkException, e):
+        except BaseFrameworkException as e:
             error_msg = 'Failed to send the payload file, error: "%s".'
             raise BaseFrameworkException(error_msg % e)
         else:

@@ -87,7 +87,8 @@ class table(object):
         shifts = [w - mw for mw, w in zip(minLengths, self._widthes)]
         #length = len(shifts)
         borrow = list(zip(self._colsRange, shifts))
-        borrow.sort(lambda a, b: cmp(a[1], b[1]))
+        # replace cmp()
+        borrow.sort(key = lambda _: (_[0]>_[1])-(_[0]<_[1]))
         delta = [0] * self._colsNum
 
         donorIdx = self._colsNum - 1
@@ -128,11 +129,9 @@ class table(object):
                                                              self._widthes)]
         emptyLines = [' ' * w for w in self._widthes]
         maxHeight = max(list(map(len, columns)))
-        columns = [col + [er] * (maxHeight - len(col)) for (col,
-                                                            er) in zip(columns, emptyLines)]
+        columns = [col + [er] * (maxHeight - len(col)) for (col, er) in zip(columns, emptyLines)]
 
         # width = sum(widthes) + (len(columns)-1)*3 + 4
         s = self._separator
         for rowNum in range(0, maxHeight):
-            om.out.console(s + ' '
-                           + (' ' + s + ' ').join([col[rowNum] for col in columns]) + ' ' + s)
+            om.out.console(s + ' ' + (' ' + s + ' ').join([col[rowNum] for col in columns]) + ' ' + s)

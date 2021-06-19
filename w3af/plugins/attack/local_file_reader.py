@@ -111,7 +111,7 @@ class local_file_reader(AttackPlugin):
         try:
             response_a = self._uri_opener.send_mutant(orig_mutant)
             response_b = self._uri_opener.send_mutant(copy_mutant)
-        except (BaseFrameworkException, e):
+        except BaseFrameworkException as e:
             om.out.error(str(e))
             return False
         else:
@@ -138,7 +138,7 @@ class local_file_reader(AttackPlugin):
         try:
             response_a = self._uri_opener.send_mutant(mutant)
             response_b = self._uri_opener.send_mutant(mutant)
-        except (BaseFrameworkException, e):
+        except BaseFrameworkException as e:
             om.out.error(str(e))
             return False
 
@@ -292,7 +292,7 @@ class FileReaderShell(ReadShell):
 
         try:
             response = self._uri_opener.send_mutant(mutant)
-        except (BaseFrameworkException, e):
+        except BaseFrameworkException as e:
             msg = 'Error "%s" while sending request to remote host. Try again.'
             return msg % e
 

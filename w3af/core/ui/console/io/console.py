@@ -68,7 +68,7 @@ def backspace():
 def getch(buf=None):
     try:
         ch = read(1)
-    except (eyboardInterrupt):
+    except KeyboardInterrupt:
         return getch(buf)
     if ch == SEQ_PREFIX:
         buf = [ch]
@@ -97,7 +97,8 @@ def ioctl_GWINSZ(fd):  # TABULATION FUNCTIONS
         import termios
         import struct
         cr = struct.unpack('hh',
-                           fcntl.ioctl(fd, termios.TIOCGWINSZ, '1234'))
+                fcntl.ioctl(fd, termios.TIOCGWINSZ, '1234')
+        )
     except:
         return None
     return cr
@@ -140,10 +141,9 @@ except Exception as e:
     try:
         import msvcrt
         from w3af.core.ui.console.io.winctrl import *
-    except (Exception, a):
-        print((str(e + '\n' + a)))
+    except Exception as a:
+        print(str(e + '\n' + a))
         # We arent on windows nor unix
-        raise BaseFrameworkException(
-            'w3af support for OS X isn\'t available yet! Please contribute.')
+        raise BaseFrameworkException('w3af support for OS X isn\'t available yet! Please contribute.')
 
 #extKeys = [KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT]

@@ -295,7 +295,7 @@ class ConsoleUI(object):
                 menu = None
                 self.exit()
 
-            except (BaseFrameworkException, e):
+            except BaseFrameworkException as e:
                 menu = None
                 om.out.console(e.value)
 

@@ -508,7 +508,7 @@ class ThreadedURLImpact(threading.Thread):
                     try:
                         tmp_result = plugin.audit_return_vulns(self.request)
                         plugin.end()
-                    except (BaseFrameworkException, e):
+                    except BaseFrameworkException as e:
                         om.out.error(str(e))
                     else:
                         #
@@ -528,7 +528,7 @@ class ThreadedURLImpact(threading.Thread):
                 try:
                     self.result = plugin.audit_return_vulns(self.request)
                     plugin.end()
-                except (BaseFrameworkException, e):
+                except BaseFrameworkException as e:
                     om.out.error(str(e))
                 else:
                     #

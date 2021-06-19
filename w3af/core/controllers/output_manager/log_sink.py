@@ -83,9 +83,13 @@ class LogSink(object):
             raise AttributeError(msg % name)
 
         #removeME - A log patch for temp (returns method)
+        """
         def patchLog(*args):
             trace = str(args) if args else ''
             from w3af import logger
             logger.error_log(trace) if name in ('error', 'log_crash') else logger.log(trace)
             return method
         return patchLog
+        """
+        return method
+

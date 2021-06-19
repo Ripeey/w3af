@@ -74,7 +74,7 @@ class payload_transfer_factory(object):
         try:
             if not inbound_port:
                 inbound_port = self._es.get_inbound_port()
-        except (BaseFrameworkException, w3):
+        except BaseFrameworkException as w3:
             msg = ('The extrusion scan failed, no reverse connect transfer '
                    'methods can be used. Trying inband echo transfer method.'
                    ' Error: "%s"')

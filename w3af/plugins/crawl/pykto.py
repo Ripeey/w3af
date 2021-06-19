@@ -150,7 +150,7 @@ class pykto(CrawlPlugin):
 
         try:
             http_response = function_ptr(nikto_test.uri)
-        except (BaseFrameworkException, e):
+        except BaseFrameworkException as e:
             msg = ('An exception was raised while requesting "%s", the error'
                    ' message is: "%s".')
             om.out.error(msg % (nikto_test.uri, e))

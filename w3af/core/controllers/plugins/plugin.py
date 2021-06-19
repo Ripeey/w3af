@@ -323,7 +323,7 @@ class UrlOpenerProxy(object):
         def url_opener_proxy(*args, **kwargs):
             try:
                 return attr(*args, **kwargs)
-            except (HTTPRequestException, hre):
+            except HTTPRequestException as hre:
                 #
                 # We get here when **one** HTTP request fails. When more than
                 # one exception fails the URL opener will raise a different

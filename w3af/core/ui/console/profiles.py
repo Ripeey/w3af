@@ -60,7 +60,7 @@ class ProfilesMenu(menu):
 
             try:
                 self._w3af.profiles.use_profile(profile, workdir=workdir)
-            except (BaseFrameworkException, w3):
+            except BaseFrameworkException as w3:
                 om.out.console(str(w3))
 
             om.out.console('The plugins configured by the scan profile have '

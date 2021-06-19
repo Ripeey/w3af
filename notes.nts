@@ -54,3 +54,4 @@
 # fix TEST_URL missing, clean deprecation escape warning, string as left operand, HTMLParseError remove
 
 # Some fix and shift to latest mitmproxy
+# Fix table errors, some syntax

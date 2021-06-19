@@ -1500,7 +1500,7 @@ class ExtendedUrllib(object):
         for eplugin in self._evasion_plugins:
             try:
                 request = eplugin.modify_request(request)
-            except (BaseFrameworkException, e):
+            except BaseFrameworkException as e:
                 msg = 'Evasion plugin "%s" failed to modify the request: "%s"'
                 args = (eplugin.get_name(), e)
                 om.out.error(msg % args)

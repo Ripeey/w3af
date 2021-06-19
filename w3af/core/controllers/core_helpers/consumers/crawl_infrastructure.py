@@ -528,7 +528,7 @@ class CrawlInfrastructure(BaseConsumer):
 
         try:
             result = plugin.discover_wrapper(fuzzable_request, debugging_id)
-        except (BaseFrameworkException, e):
+        except BaseFrameworkException as e:
             msg = 'An exception was found while running "%s" with "%s": "%s" (did: %s)'
             args = (plugin.get_name(), fuzzable_request, debugging_id)
             om.out.error(msg % args, e)

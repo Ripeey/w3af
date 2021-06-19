@@ -175,7 +175,7 @@ def add_traceback_string(_exception):
 
         try:
             ...
-        except (PoolException, pe):
+        except PoolException as pe:
             if isinstance(pe.original_exception, TypeError):
                 ...
 
