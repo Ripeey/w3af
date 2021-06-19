@@ -35,7 +35,6 @@ from w3af.core.ui.console.profiles import ProfilesMenu
 from w3af.core.ui.console.exploit import exploit
 from w3af.core.ui.console.config import ConfigMenu
 from w3af.core.ui.console.kbMenu import kbMenu
-from w3af.core.ui.console.bug_report import bug_report_menu
 from w3af.core.ui.console.util import mapDict
 from w3af.core.ui.console.tables import table
 
@@ -65,7 +64,6 @@ class rootMenu(menu):
             'misc-settings': (ConfigMenu, MiscSettings()),
             'http-settings': (ConfigMenu, self._w3af.uri_opener.settings),
             'profiles': ProfilesMenu,
-            'bug-report': bug_report_menu,
             'exploit': exploit,
             'kb': kbMenu
         })

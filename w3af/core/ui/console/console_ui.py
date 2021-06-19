@@ -37,7 +37,7 @@ try:
     from w3af.core.ui.console.callbackMenu import callbackMenu
     from w3af.core.ui.console.util import commonPrefix
     from w3af.core.ui.console.history import historyTable
-    from w3af.core.ui.console.auto_update.auto_update import ConsoleUIUpdater
+    # from w3af.core.ui.console.auto_update.auto_update import ConsoleUIUpdater
     
     from w3af.core.data.constants.disclaimer import DISCLAIMER
     from w3af.core.data.db.startup_cfg import StartUpConfig
@@ -94,8 +94,8 @@ class ConsoleUI(object):
         """
         Root menu init routine.
         """
-        cons_upd = ConsoleUIUpdater(force=do_upd)
-        cons_upd.update()
+        # cons_upd = ConsoleUIUpdater(force=do_upd)
+        # cons_upd.update()
         # Core initialization
         self._w3af = w3afCore()
         self._w3af.plugins.set_plugins(['console'], 'output')
