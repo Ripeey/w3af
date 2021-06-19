@@ -116,11 +116,13 @@ class pluginsTypeMenu(menu):
         menu.__init__(self, name, console, w3af, parent)
         plugins = w3af.plugins.get_plugin_list(name)
         self._plugins = {}  # name to number of options
+        import traceback
         for p in plugins:
             try:
                 options = self._w3af.plugins.get_plugin_inst(
                     self._name, p).get_options()
             except Exception as e:
+                traceback.print_exc()
                 om.out.error('Error while reading plugin options: "%s"' % e)
                 sys.exit(-8)
             else:
