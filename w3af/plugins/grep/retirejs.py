@@ -496,7 +496,10 @@ class retirejs(GrepPlugin):
 
         # The dependency check script guarantees that there will always be
         # at least one installation of the retirejs command.
-        return paths_to_retire[0]
+        if paths_to_retire:
+            return paths_to_retire[0]
+        else:
+            return None
 
     def get_options(self):
         """
