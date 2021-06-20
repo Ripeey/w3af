@@ -35,7 +35,6 @@ from w3af.core.ui.console.profiles import ProfilesMenu
 from w3af.core.ui.console.exploit import exploit
 from w3af.core.ui.console.config import ConfigMenu
 from w3af.core.ui.console.kbMenu import kbMenu
-#from w3af.core.ui.console.bug_report import bug_report_menu
 from w3af.core.ui.console.util import mapDict
 from w3af.core.ui.console.tables import table
 
@@ -56,8 +55,8 @@ class rootMenu(menu):
     def __init__(self, name, console, core, parent=None):
         menu.__init__(self, name, console, core, parent)
         self._load_help('root')
-        #   At first, there is no scan thread
         self._scan_thread = None
+        self.verify_status = False
 
         mapDict(self.addChild, {
             'plugins': pluginsMenu,
@@ -110,6 +109,9 @@ class rootMenu(menu):
     def wait_for_start(self):
         delay = 0.1
 
+        if not self.verify_status:
+            return False
+
         for _ in range(int(self.MAX_WAIT_FOR_START / delay)):
             if self._w3af.status.is_running():
                 return True
@@ -138,8 +140,9 @@ class rootMenu(menu):
         """
         try:
             self._w3af.plugins.init_plugins()
-            self._w3af.verify_environment()
-            self._w3af.start()
+            self.verify_status = self._w3af.verify_environment()
+            if self.verify_status:
+                self._w3af.start()
         except BaseFrameworkException as w3:
             om.out.error(str(w3))
         except ScanMustStopException as w3:

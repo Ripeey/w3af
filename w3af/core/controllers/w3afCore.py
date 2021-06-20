@@ -35,7 +35,6 @@ import w3af.core.controllers.output_manager as om
 from w3af.core.controllers.threads.threadpool import Pool
 from w3af.core.controllers.threads.is_main_thread import is_main_thread
 from w3af.core.controllers.threads.monkey_patch_debug import monkey_patch_debug, remove_monkey_patch_debug
-from w3af.core.controllers.misc.get_w3af_version import get_w3af_version_minimal
 from w3af.core.controllers.core_helpers.profiles import CoreProfiles
 from w3af.core.controllers.core_helpers.plugins import CorePlugins
 from w3af.core.controllers.core_helpers.target import CoreTarget
@@ -501,10 +500,14 @@ class w3afCore(object):
         if not self.plugins.initialized:
             msg = ('You must call the plugins.init_plugins() method before'
                    ' calling start().')
-            raise BaseFrameworkException(msg)
+            print(msg) # TODO edit print here
+            return False
+            # raise BaseFrameworkException(msg)
 
         if not self.target.has_valid_configuration():
-            raise BaseFrameworkException('No target URI configured.')
+            print("No target URI") # TODO edit print here
+            return False
+            # raise BaseFrameworkException('No target URI configured.')
 
         if not len(self.plugins.get_enabled_plugins('audit')) \
            and not len(self.plugins.get_enabled_plugins('crawl')) \
@@ -512,7 +515,10 @@ class w3afCore(object):
            and not len(self.plugins.get_enabled_plugins('grep')):
 
             msg = 'No audit, grep or crawl plugins configured to run.'
-            raise BaseFrameworkException(msg)
+            print(msg) # TODO edit print here
+            return False
+            # raise BaseFrameworkException(msg)
+        return True
 
     def _terminate_worker_pool(self):
         om.out.debug('Called _terminate_worker_pool()')
