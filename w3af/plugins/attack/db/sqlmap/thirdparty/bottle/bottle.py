@@ -144,7 +144,7 @@ if py3k:
     import pickle
     from io import BytesIO
     from configparser import ConfigParser, Error as ConfigParserError
-    basestring = str
+    str = str
     unicode = str
     json_loads = lambda s: json_lds(touni(s))
     callable = lambda x: hasattr(x, '__call__')
@@ -875,7 +875,7 @@ class Bottle(object):
         skiplist = makelist(skip)
 
         def decorator(callback):
-            if isinstance(callback, basestring): callback = load(callback)
+            if isinstance(callback, str): callback = load(callback)
             for rule in makelist(path) or yieldroutes(callback):
                 for verb in makelist(method):
                     verb = verb.upper()
@@ -1756,7 +1756,7 @@ class BaseResponse(object):
 
         if secret:
             value = touni(cookie_encode((name, value), secret))
-        elif not isinstance(value, basestring):
+        elif not isinstance(value, str):
             raise TypeError('Secret key missing for non-string Cookie.')
 
         # Cookie size plus options must not exceed 4kb.
@@ -2263,7 +2263,7 @@ class ConfigDict(dict):
             {'some.namespace.key': 'value'}
         """
         for key, value in source.items():
-            if isinstance(key, basestring):
+            if isinstance(key, str):
                 nskey = (namespace + '.' + key).strip('.')
                 if isinstance(value, dict):
                     self.load_dict(value, namespace=nskey)
@@ -2278,7 +2278,7 @@ class ConfigDict(dict):
             namespace. Apart from that it works just as the usual dict.update().
             Example: ``update('some.namespace', key='value')`` """
         prefix = ''
-        if a and isinstance(a[0], basestring):
+        if a and isinstance(a[0], str):
             prefix = a[0].strip('.') + '.'
             a = a[1:]
         for key, value in dict(*a, **ka).items():
@@ -2290,7 +2290,7 @@ class ConfigDict(dict):
         return self[key]
 
     def __setitem__(self, key, value):
-        if not isinstance(key, basestring):
+        if not isinstance(key, str):
             raise TypeError('Key has type %r (not a string)' % type(key))
         value = self.meta_get(key, 'filter', lambda x: x)(value)
         if key in self and self[key] is value:
@@ -2501,7 +2501,7 @@ class FileUpload(object):
             :param overwrite: If True, replace existing files. (default: False)
             :param chunk_size: Bytes to read at a time. (default: 64kb)
         """
-        if isinstance(destination, basestring):  # Except file-likes here
+        if isinstance(destination, str):  # Except file-likes here
             if os.path.isdir(destination):
                 destination = os.path.join(destination, self.filename)
             if not overwrite and os.path.exists(destination):
@@ -2639,7 +2639,7 @@ def http_date(value):
         value = value.utctimetuple()
     elif isinstance(value, (int, float)):
         value = time.gmtime(value)
-    if not isinstance(value, basestring):
+    if not isinstance(value, str):
         value = time.strftime("%a, %d %b %Y %H:%M:%S GMT", value)
     return value
 
@@ -3291,13 +3291,13 @@ def run(app=None,
     try:
         if debug is not None: _debug(debug)
         app = app or default_app()
-        if isinstance(app, basestring):
+        if isinstance(app, str):
             app = load_app(app)
         if not callable(app):
             raise ValueError("Application is not callable: %r" % app)
 
         for plugin in plugins or []:
-            if isinstance(plugin, basestring):
+            if isinstance(plugin, str):
                 plugin = load(plugin)
             app.install(plugin)
 
@@ -3306,7 +3306,7 @@ def run(app=None,
 
         if server in server_names:
             server = server_names.get(server)
-        if isinstance(server, basestring):
+        if isinstance(server, str):
             server = load(server)
         if isinstance(server, type):
             server = server(host=host, port=port, **kargs)

@@ -37,7 +37,7 @@ SLASH_MARKER = "__SLASH__"
 
 def safecharencode(value):
     """
-    Returns safe representation of a given basestring value
+    Returns safe representation of a given str value
 
     >>> safecharencode(u'test123')
     u'test123'

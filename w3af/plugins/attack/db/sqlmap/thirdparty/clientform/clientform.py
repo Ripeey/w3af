@@ -3142,7 +3142,7 @@ class HTMLForm:
         import httplib, urlparse
         url, data, hdrs = form.click_request_data()
         tup = urlparse(url)
-        host, path = tup[1], urlparse.urlunparse((None, None)+tup[2:])
+        host, path = tup[1], urllib.parse.urlunparse((None, None)+tup[2:])
         conn = http.client.HTTPConnection(host)
         if data:
             http.client.request("POST", path, data, hdrs)

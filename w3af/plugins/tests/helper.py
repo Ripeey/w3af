@@ -270,7 +270,7 @@ class PluginTest(unittest.TestCase):
 
     def _set_target(self, target, verify_targets):
         if not isinstance(target, (str, tuple)):
-            raise TypeError('Expected basestring or tuple in scan target.')
+            raise TypeError('Expected str or tuple in scan target.')
         
         if isinstance(target, tuple):
             target = tuple([URL(u) for u in target])
