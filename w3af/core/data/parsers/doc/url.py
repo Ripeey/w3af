@@ -751,7 +751,7 @@ class URL(DiskItem):
         :return: A URL that represents the current URL without URL
                  encoded characters.
         """
-        unquoted_url = urllib.unquote(str(self))
+        unquoted_url = urllib.parse.unquote(str(self))
         enc = self._encoding
         return URL(unquoted_url.decode(enc, 'ignore'), enc)
 
@@ -768,7 +768,7 @@ class URL(DiskItem):
             qs = '?' + str(self.querystring)
             self_str = self_str[:qs_start_index]
 
-        return '%s%s' % (urllib.quote(self_str, safe=self.SAFE_CHARS), qs)
+        return '%s%s' % (urllib.parse.quote(self_str, safe=self.SAFE_CHARS), qs)
 
     def get_directories(self):
         """
