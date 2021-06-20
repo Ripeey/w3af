@@ -134,14 +134,8 @@ def smart_unicode(s,
     return s
 
 
-def smart_str(s,
-              encoding=DEFAULT_ENCODING,
-              errors='strict',
-
-              # http://jamesls.com/micro-optimizations-in-python-code-speeding-up-lookups.html
-              _isinstance=isinstance,
-              _unicode=str,
-              _str=bytes):
+def smart_str(s, encoding=DEFAULT_ENCODING, errors='strict', _isinstance=isinstance, _unicode=str, _str=bytes):
+    # http://jamesls.com/micro-optimizations-in-python-code-speeding-up-lookups.html
     """
     Return a byte-string version of 's', encoded as specified in 'encoding'.
     """
