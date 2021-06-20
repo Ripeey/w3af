@@ -3,6 +3,9 @@
 *~
 *.swp
 
+# deprecated 
+*-remove-*
+
 # Notes
 *.nts
 
