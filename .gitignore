@@ -5,6 +5,7 @@
 
 # Notes
 *.nts
+
 # C extensions
 *.so
 

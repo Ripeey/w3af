@@ -21,12 +21,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 from w3af.core.data.bloomfilter.wrappers import GenericBloomFilter
-from w3af.core.controllers.dependency_check.platforms.mac import MacOSX
+#from w3af.core.controllers.dependency_check.platforms.mac import MacOSX
 
 # This import can't fail, it is pure-python love ;)
 from w3af.core.data.bloomfilter.seekfile_bloom import FileSeekBloomFilter\
     as FileSeekFilter
-
+'''
 if MacOSX.is_current_platform():
     # Awful workaround for Mac OS X:
     # https://github.com/andresriancho/w3af/issues/485
@@ -46,24 +46,25 @@ if MacOSX.is_current_platform():
     """
     print(OSX_MSG)
 else:
-    try:
-        # This might fail since it is a C library that only works in Linux
-        from pybloomfilter import BloomFilter as CMmapFilter
+'''
+try:
+    # This might fail since it is a C library that only works in Linux
+    from pybloomfilter import BloomFilter as CMmapFilter
 
-        # There were reports of the C mmap filter not working properly in OSX,
-        # just in case, I'm testing here...
-        temp_file = GenericBloomFilter.get_temp_file()
-        try:
-            bf = CMmapFilter(1000, 0.01, temp_file)
-            bf.add(1)
-            assert 1 in bf
-            assert 2 not in bf
-        except:
-            WrappedBloomFilter = FileSeekFilter
-        else:
-            WrappedBloomFilter = CMmapFilter
+    # There were reports of the C mmap filter not working properly in OSX,
+    # just in case, I'm testing here...
+    temp_file = GenericBloomFilter.get_temp_file()
+    try:
+        bf = CMmapFilter(1000, 0.01, temp_file)
+        bf.add(1)
+        assert 1 in bf
+        assert 2 not in bf
     except:
         WrappedBloomFilter = FileSeekFilter
+    else:
+        WrappedBloomFilter = CMmapFilter
+except:
+    WrappedBloomFilter = FileSeekFilter
 
 
 class BloomFilter(GenericBloomFilter):

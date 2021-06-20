@@ -76,7 +76,7 @@ def check_uri_syntax(uri, host=None):
         msg += ' and the host. Invalid URI: %s.'
         raise BaseFrameworkException(msg % uri)
 
-    res = urlparse.urlunparse((scheme, domain, path, params, qs, fragment))
+    res = urllib.parse.urlunparse((scheme, domain, path, params, qs, fragment))
     return res
 
 

@@ -2300,7 +2300,7 @@ def getUnicode(value, encoding=None, noneToNull=False):
         try:
             return str(value)
         except UnicodeDecodeError:
-            return str(str(value), errors="ignore")  # encoding ignored for non-basestring instances
+            return str(str(value), errors="ignore")  # encoding ignored for non-str instances
 
 def longestCommonPrefix(*sequences):
     """

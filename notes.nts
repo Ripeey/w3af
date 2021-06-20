@@ -55,3 +55,5 @@
 
 # Some fix and shift to latest mitmproxy
 # Fix table errors, some syntax
+
+# fix base str, fix parsers url, temp fix rfind issue, unicode fix, removed some files,
