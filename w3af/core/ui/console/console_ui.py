@@ -236,7 +236,6 @@ class ConsoleUI(object):
             else:
                 self._paste(key)
         except Exception as e:
-            # TODO
             traceback.print_exc()
 
     def _backOrExit(self):
@@ -327,7 +326,7 @@ class ConsoleUI(object):
 
     def _delWord(self):
         filt = str.isspace
-        while (True):
+        while True:
             if self._position == 0:
                 break
 
@@ -336,8 +335,7 @@ class ConsoleUI(object):
             if filt(char):
                 self._onBackspace()
             elif filt == str.isspace:
-                filt = str.isalnum(char) and str.isalnum \
-                    or (lambda s: not s.isalnum())
+                filt = str.isalnum(char) and str.isalnum or (lambda s: not s.isalnum())
             else:
                 break
 
