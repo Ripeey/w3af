@@ -257,27 +257,27 @@ class w3afCore(object):
         except threading.ThreadError as te:
             handle_threading_error(self.status.scans_completed, te)
 
-        except HTTPRequestException as hre:
-            # TODO: These exceptions should never reach this level
-            #       adding the exception handler to raise them and fix any
-            #       instances where it happens.
-            raise
-
-        except ScanMustStopByUserRequest as sbur:
-            # I don't have to do anything here, since the user is the one that
-            # requested the scanner to stop. From here the code continues at the
-            # "finally" clause, which simply shows a message saying that the
-            # scan finished.
-            om.out.information('%s' % sbur)
-
-        except ScanMustStopByUnknownReasonExc:
-            #
-            # If the extended_urllib module raises this type of exception we'll
-            # just re-raise. This leads to the exception_handler catching the
-            # exception, and if we're lucky users reporting it to our issue
-            # tracker
-            #
-            raise
+        # except HTTPRequestException as hre:
+        #     # TODO: These exceptions should never reach this level
+        #     #       adding the exception handler to raise them and fix any
+        #     #       instances where it happens.
+        #     raise
+        #
+        # except ScanMustStopByUserRequest as sbur:
+        #     # I don't have to do anything here, since the user is the one that
+        #     # requested the scanner to stop. From here the code continues at the
+        #     # "finally" clause, which simply shows a message saying that the
+        #     # scan finished.
+        #     om.out.information('%s' % sbur)
+        #
+        # except ScanMustStopByUnknownReasonExc:
+        #     #
+        #     # If the extended_urllib module raises this type of exception we'll
+        #     # just re-raise. This leads to the exception_handler catching the
+        #     # exception, and if we're lucky users reporting it to our issue
+        #     # tracker
+        #     #
+        #     raise
 
         except ScanMustStopException as wmse:
             traceback.print_exc()
@@ -286,8 +286,8 @@ class w3afCore(object):
             om.out.error(error % wmse)
 
         except Exception as e:
+            traceback.print_exc()
             msg = 'Unhandled exception "%s", traceback:\n%s'
-
             if hasattr(e, 'original_traceback_string'):
                 # pylint: disable=E1101
                 traceback_string = e.original_traceback_string
