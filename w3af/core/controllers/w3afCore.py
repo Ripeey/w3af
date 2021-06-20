@@ -280,6 +280,7 @@ class w3afCore(object):
             raise
 
         except ScanMustStopException as wmse:
+            traceback.print_exc()
             error = ('The following error was detected and could not be'
                      ' resolved:\n%s\n')
             om.out.error(error % wmse)
