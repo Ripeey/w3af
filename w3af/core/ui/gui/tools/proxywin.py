@@ -306,7 +306,7 @@ class ProxiedRequests(entries.RememberingWindow):
         
         try:
             self.proxy = InterceptProxy(ip, int(port), self.w3af.uri_opener)
-        except (ProxyException, w3):
+        except ProxyException as w3:
             if not silent:
                 self.show_alert(_(str(w3)))
             raise w3

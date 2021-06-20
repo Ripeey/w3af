@@ -81,7 +81,7 @@ class spider_man(CrawlPlugin):
                                        plugin=self,
                                        target_domain=fuzzable_request.get_url().get_domain(),
                                        name='SpiderManProxyThread')
-        except (ProxyException, proxy_exc):
+        except ProxyException as proxy_exc:
             om.out.error('%s' % proxy_exc)
         
         else:
