@@ -31,6 +31,7 @@ class table(object):
     a clever method of drawing the tables. Ok, clever enough for our purposes.
     :author: Alexander Berezhnoy (alexander.berezhnoy |at| gmail.com)
     """
+
     def __init__(self, rows):
         """
         :param rows: array of arrays
@@ -48,8 +49,7 @@ class table(object):
         self._initRelWidthes(termWidth)
         self._justify()
         sl = len(self._separator)
-        self._tableWidth = sum(self._widthes) + \
-            self._colsNum * (sl + 2) + sl
+        self._tableWidth = sum(self._widthes) + self._colsNum * (sl + 2) + sl
 
         self.draw_br()
         for row in self._rows:
@@ -64,7 +64,7 @@ class table(object):
         ls = len(self._separator)
         space = termWidth - self._colsNum * (ls + 2) - ls  # Useful space
 
-        #maximal length of content for every column
+        # maximal length of content for every column
         maxLengths = [max([max(list(map(len, row[i].split('\n')))) for row in self._rows if len(row) > 0])
                       for i in self._colsRange]
         sumMaxLen = sum(maxLengths)
@@ -85,10 +85,10 @@ class table(object):
         minLengths = [max([max(list(map(len, row[i].split() + ['']))) for row in self._rows if len(row) > 0])
                       for i in range(self._colsNum)]
         shifts = [w - mw for mw, w in zip(minLengths, self._widthes)]
-        #length = len(shifts)
+        # length = len(shifts)
         borrow = list(zip(self._colsRange, shifts))
         # replace cmp()
-        borrow.sort(key = lambda _: (_[0]>_[1])-(_[0]<_[1]))
+        borrow.sort(key=lambda _: (_[0] > _[1]) - (_[0] < _[1]))
         delta = [0] * self._colsNum
 
         donorIdx = self._colsNum - 1
@@ -118,8 +118,7 @@ class table(object):
 
     def draw_br(self, char='-'):
         ls = len(self._separator)
-        om.out.console(self._separator + char * (self._tableWidth -
-                       2 * ls) + self._separator)
+        om.out.console(self._separator + char * (self._tableWidth - 2 * ls) + self._separator)
 
     def draw_row(self, row):
         if len(row) == 0:
