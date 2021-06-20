@@ -24,7 +24,6 @@ import uuid
 import urllib.request, urllib.parse, urllib.error
 import socket
 import OpenSSL
-import urllib.request, urllib.error, urllib.parse
 import http.client
 import threading
 import traceback
@@ -488,7 +487,7 @@ class ExtendedUrllib(object):
                 # Raise the exception to stop the scan, this exception will be
                 # raised all the time until we un-set the self._user_stopped
                 # attribute
-                msg = 'The user stopped the scan.'
+                msg = f'The user stopped the scan.'
                 raise ScanMustStopByUserRequest(msg)
 
             # Handle errors (HTTP timeout, etc.)
