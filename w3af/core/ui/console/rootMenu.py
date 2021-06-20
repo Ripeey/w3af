@@ -109,8 +109,13 @@ class rootMenu(menu):
     def wait_for_start(self):
         delay = 0.1
 
-        if not self.verify_status:
-            return False
+        # FIXME the verify_status is called in subprocess
+        # self._scan_thread = Process(target=self._real_start)
+        # So the value is likely can't be assigned
+        # program returns user stops
+        # The 2 lines bellow are used to check if required variables are passed so no need to wait long delay
+        # if not self.verify_status:
+        #     return False
 
         for _ in range(int(self.MAX_WAIT_FOR_START / delay)):
             if self._w3af.status.is_running():
