@@ -120,7 +120,7 @@ class GtkHtmlRenderingView(RenderingView):
             document.write_stream(obj.get_body())
             document.close_stream()
             self._renderingWidget.set_document(document)
-        except (ValueError, ve):
+        except ValueError as ve:
             # I get here when the mime type is an image or something that I
             # can't display
             pass

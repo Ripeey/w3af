@@ -123,7 +123,7 @@ class ConsoleUI(object):
         msg = DISCLAIMER + '\n\n' + QUESTION
         try:
             user_response = input(msg)
-        except (KeyboardInterrupt, EOFError):
+        except KeyboardInterrupt as EOFError:
             print('')
             user_response = ''
 
@@ -449,7 +449,7 @@ class ConsoleUI(object):
 
         try:
             result = shlex.split(line)
-        except (ValueError, ve):
+        except ValueError as ve:
             term.write(str(ve) + '\n')
             return []
         else:

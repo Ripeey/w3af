@@ -92,7 +92,7 @@ class http_vs_https_dist(InfrastructurePlugin):
         # usage (which is specially big in scapy module, just when importing)
         try:
             from scapy.all import traceroute
-        except (ImportError, ie):
+        except ImportError as ie:
             om.out.debug('There was an error importing scapy.all: "%s"' % ie)
             return
 

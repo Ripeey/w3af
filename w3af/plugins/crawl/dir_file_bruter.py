@@ -145,7 +145,7 @@ class dir_file_bruter(CrawlPlugin):
 
             try:
                 new_url = base_path.url_join(line)
-            except (ValueError, ve):
+            except ValueError as ve:
                 msg = 'The "%s" line at "%s" generated an invalid URL: %s'
                 om.out.debug(msg % (line, file_name, ve))
             else:

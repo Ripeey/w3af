@@ -547,7 +547,7 @@ class Metasploit:
                     if len(inp) > 0:
                         try:
                             send_all(proc, inp)
-                        except (EOFError, IOError):
+                        except EOFError as IOError:
                             # Probably the child has exited
                             pass
                 else:
@@ -556,7 +556,7 @@ class Metasploit:
                     if stdin_fd in ready_fds[0]:
                         try:
                             send_all(proc, blockingReadFromFD(stdin_fd))
-                        except (EOFError, IOError):
+                        except EOFError as IOError:
                             # Probably the child has exited
                             pass
 

@@ -87,7 +87,7 @@ class json_file(OutputPlugin):
 
         try:
             output_handler = open(self.output_file, 'wb')
-        except (IOError, ioe):
+        except IOError as ioe:
             msg = 'Failed to open the output file for writing: "%s"'
             om.out.error(msg % ioe)
             return

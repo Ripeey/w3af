@@ -171,7 +171,7 @@ def search(dork):
 
     try:
         return _search(dork)
-    except (SqlmapBaseException, ex):
+    except SqlmapBaseException as ex:
         if conf.proxyList:
             logger.critical(getSafeExString(ex))
 

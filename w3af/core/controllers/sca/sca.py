@@ -94,7 +94,7 @@ class PhpSCA(object):
         # Code AST
         try:
             self._ast_code = parser.parse(code, lexer=lexer)
-        except (SyntaxError, se):
+        except SyntaxError as se:
             raise CodeSyntaxError("Error while parsing the code")
 
         # Convenient definition of new node type

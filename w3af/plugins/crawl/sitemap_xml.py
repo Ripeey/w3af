@@ -83,7 +83,7 @@ class sitemap_xml(CrawlPlugin):
 
             try:
                 url = URL(url)
-            except (ValueError, ve):
+            except ValueError as ve:
                 msg = 'Sitemap file at %s has an invalid URL: "%s"'
                 args = (response.get_url(), ve)
                 om.out.debug(msg % args)

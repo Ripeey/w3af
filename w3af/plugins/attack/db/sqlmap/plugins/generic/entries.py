@@ -428,7 +428,7 @@ class Entries:
                         logger.critical(errMsg)
                     conf.dumper.dbTableValues(kb.data.dumpedTable)
 
-            except (SqlmapConnectionException, ex):
+            except SqlmapConnectionException as ex:
                 errMsg = "connection exception detected in dumping phase "
                 errMsg += "('%s')" % getSafeExString(ex)
                 logger.critical(errMsg)

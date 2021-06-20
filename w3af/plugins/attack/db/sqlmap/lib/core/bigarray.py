@@ -84,7 +84,7 @@ class BigArray(list):
             try:
                 with open(self.chunks[-1], "rb") as f:
                     self.chunks[-1] = pickle.loads(zlib.decompress(f.read()))
-            except (IOError, ex):
+            except IOError as ex:
                 errMsg = "exception occurred while retrieving data "
                 errMsg += "from a temporary file ('%s')" % ex.message
                 raise SqlmapSystemException(errMsg)
@@ -123,7 +123,7 @@ class BigArray(list):
             try:
                 with open(self.chunks[index], "rb") as f:
                     self.cache = Cache(index, pickle.loads(zlib.decompress(f.read())), False)
-            except (IOError, ex):
+            except IOError as ex:
                 errMsg = "exception occurred while retrieving data "
                 errMsg += "from a temporary file ('%s')" % ex.message
                 raise SqlmapSystemException(errMsg)

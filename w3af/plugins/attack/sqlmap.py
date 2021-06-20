@@ -292,7 +292,7 @@ class SQLMapShell(ReadShell):
         """
         try:
             self._rOS = read_os_detection(self.read)
-        except (OSDetectionException, osde):
+        except OSDetectionException as osde:
             om.out.debug('%s' % osde)
             self._rOS = 'unknown'
         

@@ -104,7 +104,7 @@ class seed(Process):
             except (ScanMustStopException, w3):
                 om.out.error('The target server is unreachable. Stopping.')
                 raise w3
-            except (HTTPRequestException, hre):
+            except HTTPRequestException as hre:
                 msg = 'The target URL: "%s" is unreachable. Exception: "%s".'
                 om.out.error(msg % (url, hre))
             except Exception as e:

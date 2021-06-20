@@ -124,7 +124,7 @@ class Proc:
     def open(self, *args):
         try:
             return open(self.path(*args))
-        except (IOError, OSError):
+        except IOError as OSError:
             val = sys.exc_info()[1]
             if (val.errno == errno.ENOENT or # kernel thread or process gone
                 val.errno == errno.EPERM):
@@ -385,7 +385,7 @@ def get_memory_usage( pids_to_show, split_args, include_self=False, only_self=Fa
 
         try:
             cmd = getCmdName(pid, split_args)
-        except (LookupError, OSError):
+        except LookupError as OSError:
             #operation not permitted
             #permission denied
             #kernel threads don't have exe links or
@@ -394,7 +394,7 @@ def get_memory_usage( pids_to_show, split_args, include_self=False, only_self=Fa
 
         try:
             private, shared, mem_id = getMemStats(pid)
-        except (RuntimeError, OSError):
+        except RuntimeError as OSError:
             continue #process gone
         if shareds.get(cmd):
             if have_pss: #add shared portion of PSS together
@@ -453,7 +453,7 @@ def verify_environment():
 
     try:
         kv = kernel_ver()
-    except (IOError, OSError):
+    except IOError as OSError:
         val = sys.exc_info()[1]
         if val.errno == errno.ENOENT:
             sys.stderr.write(

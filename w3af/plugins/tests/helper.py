@@ -89,7 +89,7 @@ class PluginTest(unittest.TestCase):
             
             try:
                 url = URL(self.target_url)
-            except (ValueError, ve):
+            except ValueError as ve:
                 msg = ('When using MOCK_RESPONSES you need to set the'
                        ' target_url attribute to a valid URL, exception was:'
                        ' "%s".')

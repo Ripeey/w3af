@@ -16,7 +16,7 @@ try:
 
     # problems on FreeBSD (Reference: http://www.eggheadcafe.com/microsoft/Python/35880259/multiprocessing-on-freebsd.aspx)
     _ = multiprocessing.Queue()
-except (ImportError, OSError):
+except ImportError as OSError:
     pass
 else:
     try:
@@ -759,7 +759,7 @@ def _bruteProcessVariantA(attack_info, hash_regex, suffix, retVal, proc_id, proc
             except KeyboardInterrupt:
                 raise
 
-            except (UnicodeEncodeError, UnicodeDecodeError):
+            except UnicodeEncodeError as UnicodeDecodeError:
                 pass  # ignore possible encoding problems caused by some words in custom dictionaries
 
             except Exception as e:
@@ -833,7 +833,7 @@ def _bruteProcessVariantB(user, hash_, kwargs, hash_regex, suffix, retVal, found
             except KeyboardInterrupt:
                 raise
 
-            except (UnicodeEncodeError, UnicodeDecodeError):
+            except UnicodeEncodeError as UnicodeDecodeError:
                 pass  # ignore possible encoding problems caused by some words in custom dictionaries
 
             except Exception as e:
@@ -1059,7 +1059,7 @@ def dictionaryAttack(attack_dict):
                         try:
                             process.terminate()
                             process.join()
-                        except (OSError, AttributeError):
+                        except OSError as AttributeError:
                             pass
 
                 finally:
@@ -1153,7 +1153,7 @@ def dictionaryAttack(attack_dict):
                             try:
                                 process.terminate()
                                 process.join()
-                            except (OSError, AttributeError):
+                            except OSError as AttributeError:
                                 pass
 
                     finally:

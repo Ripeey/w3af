@@ -134,7 +134,7 @@ class request(object):
 
                     # we were able to read from the socket, append and try again
                     data += temp
-            except (KeyboardInterrupt, e):
+            except KeyboardInterrupt as e:
                 raise e
 
             except socket.sslerror as ssl_err:

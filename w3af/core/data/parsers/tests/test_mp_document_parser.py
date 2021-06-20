@@ -97,7 +97,7 @@ class TestMPDocumentParser(unittest.TestCase):
 
             try:
                 self.mpdoc.get_document_parser_for(http_resp)
-            except (TimeoutError, toe):
+            except TimeoutError as toe:
                 self._is_timeout_exception_message(toe, om_mock, http_resp)
             else:
                 self.assertTrue(False)
@@ -150,7 +150,7 @@ class TestMPDocumentParser(unittest.TestCase):
 
                 try:
                     self.mpdoc.get_document_parser_for(http_resp)
-                except (TimeoutError, toe):
+                except TimeoutError as toe:
                     self._is_timeout_exception_message(toe, om_mock, http_resp)
                 else:
                     self.assertTrue(False)
@@ -164,7 +164,7 @@ class TestMPDocumentParser(unittest.TestCase):
 
                 try:
                     parser = self.mpdoc.get_document_parser_for(http_resp)
-                except (TimeoutError, toe):
+                except TimeoutError as toe:
                     self._is_timeout_exception_message(toe, om_mock, http_resp)
                 else:
                     self.assertIsInstance(parser._parser, HTMLParser)
@@ -224,7 +224,7 @@ class TestMPDocumentParser(unittest.TestCase):
 
                 try:
                     self.mpdoc.get_document_parser_for(http_resp)
-                except (TimeoutError, toe):
+                except TimeoutError as toe:
                     self._is_timeout_exception_message(toe, om_mock, http_resp)
                 else:
                     self.assertTrue(False)
@@ -238,7 +238,7 @@ class TestMPDocumentParser(unittest.TestCase):
 
                 try:
                     parser = self.mpdoc.get_document_parser_for(http_resp)
-                except (TimeoutError, toe):
+                except TimeoutError as toe:
                     self._is_timeout_exception_message(toe, om_mock, http_resp)
                 else:
                     self.assertIsInstance(parser._parser, HTMLParser)
@@ -277,7 +277,7 @@ class TestMPDocumentParser(unittest.TestCase):
 
             try:
                 self.mpdoc.get_document_parser_for(http_resp)
-            except (MemoryError, me):
+            except MemoryError as me:
                 self.assertIn('OOM issues', str(me))
             else:
                 self.assertTrue(False)

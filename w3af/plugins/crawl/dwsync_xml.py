@@ -92,7 +92,7 @@ class dwsync_xml(CrawlPlugin):
                 _file = file_entry.getAttribute('name')
                 url = domain_path.url_join(_file)
                 parsed_url_list.add(url)
-            except (ValueError, ve):
+            except ValueError as ve:
                 msg = 'dwsync file had an invalid URL: "%s"'
                 om.out.debug(msg % ve)
             except Exception as e:

@@ -544,7 +544,7 @@ class Connect(object):
                     warnMsg = "problem occurred during connection closing ('%s')" % getSafeExString(ex)
                     logger.warn(warnMsg)
 
-        except (SqlmapConnectionException, ex):
+        except SqlmapConnectionException as ex:
             if conf.proxyList and not kb.threadException:
                 warnMsg = "unable to connect to the target URL ('%s')" % ex
                 logger.critical(warnMsg)
@@ -1058,7 +1058,7 @@ class Connect(object):
             while True:
                 try:
                     compiler.parse(unicodeencode(conf.evalCode.replace(';', '\n')))
-                except (SyntaxError, ex):
+                except SyntaxError as ex:
                     if ex.text:
                         original = replacement = ex.text.strip()
                         if '=' in original:

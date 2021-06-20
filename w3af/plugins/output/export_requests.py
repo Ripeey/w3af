@@ -60,7 +60,7 @@ class export_requests(OutputPlugin):
 
         try:
             out_file = open(filename, 'w')
-        except (IOError, ioe):
+        except IOError as ioe:
             msg = 'Failed to open the output file for writing: "%s"'
             om.out.error(msg % ioe)
             return

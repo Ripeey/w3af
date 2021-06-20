@@ -1038,7 +1038,7 @@ def Expression(t, x, stop=None):
                                         Expression(t, x, COMMA)]))
                             if not t.match(COMMA): break
                         t.mustMatch(RIGHT_CURLY)
-                except (BreakOutOfObjectInit, e): pass
+                except BreakOutOfObjectInit as e: pass
                 operands.append(n)
                 t.scanOperand = False
                 x.curlyLevel -= 1
@@ -1105,7 +1105,7 @@ def Expression(t, x, stop=None):
             # the while loop and let the t.scanOperand logic handle errors.
             else:
                 raise BreakOutOfLoops
-    except (BreakOutOfLoops, e): pass
+    except BreakOutOfLoops as e: pass
 
     if x.hookLevel != hl:
         raise t.newSyntaxError("Missing : after ?")

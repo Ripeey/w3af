@@ -1216,7 +1216,7 @@ class BaseRequest(object):
                 return None
             try:
                 return json_loads(b)
-            except (ValueError, TypeError):
+            except ValueError as TypeError:
                 raise HTTPError(400, 'Invalid JSON')
         return None
 
@@ -2100,7 +2100,7 @@ class FormsDict(MultiDict):
         """ Return the value as a unicode string, or the default. """
         try:
             return self._fix(self[name], encoding)
-        except (UnicodeError, KeyError):
+        except UnicodeError as KeyError:
             return default
 
     def __getattr__(self, name, default=unicode()):
@@ -2660,7 +2660,7 @@ def parse_auth(header):
         if method.lower() == 'basic':
             user, pwd = touni(base64.b64decode(tob(data))).split(':', 1)
             return user, pwd
-    except (KeyError, ValueError):
+    except KeyError as ValueError:
         return None
 
 
@@ -3332,7 +3332,7 @@ def run(app=None,
             server.run(app)
     except KeyboardInterrupt:
         pass
-    except (SystemExit, MemoryError):
+    except SystemExit as MemoryError:
         raise
     except:
         if not reloader: raise

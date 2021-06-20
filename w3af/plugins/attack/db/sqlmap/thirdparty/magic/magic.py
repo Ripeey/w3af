@@ -199,7 +199,7 @@ try:
     magic_compile.restype = c_int
     magic_compile.argtypes = [magic_t, c_char_p]
 
-except (ImportError, OSError):
+except ImportError as OSError:
     from_file = from_buffer = lambda *args, **kwargs: "unknown"
 
 MAGIC_NONE = 0x000000 # No flags

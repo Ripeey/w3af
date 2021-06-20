@@ -45,7 +45,7 @@ if user_wants_psutil():
     try:
         # User's don't need this module
         import psutil
-    except (ImportError, ie):
+    except ImportError as ie:
         print(('Failed to import psutil: %s' % ie))
         sys.exit(-1)
 

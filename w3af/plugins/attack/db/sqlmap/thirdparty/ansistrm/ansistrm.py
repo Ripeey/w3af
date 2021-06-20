@@ -64,7 +64,7 @@ class ColorizingStreamHandler(logging.StreamHandler):
             stream.write(getattr(self, 'terminator', '\n'))
 
             self.flush()
-        except (KeyboardInterrupt, SystemExit):
+        except KeyboardInterrupt as SystemExit:
             raise
         except IOError:
             pass

@@ -1948,7 +1948,7 @@ class UnicodeDammit:
         try:
             codecs.lookup(charset)
             codec = charset
-        except (LookupError, ValueError):
+        except LookupError as ValueError:
             pass
         return codec
 

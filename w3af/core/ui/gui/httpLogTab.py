@@ -478,7 +478,7 @@ class httpLogTab(RememberingHPaned):
             # from disk and if they aren't there an exception will rise
             history_item.request
             history_item.response
-        except (IOError, ioe):
+        except IOError as ioe:
             self._show_message(_('Error'), str(ioe))
             return
 

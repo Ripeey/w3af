@@ -128,7 +128,7 @@ class buffer_overflow(AuditPlugin):
             response = self._uri_opener.send_mutant(mutant,
                                                     debugging_id=debugging_id,
                                                     grep=grep)
-        except (BaseFrameworkException, ScanMustStopException):
+        except BaseFrameworkException as ScanMustStopException:
             desc = ('A potential (most probably a false positive than a bug)'
                     ' buffer-overflow was found when requesting: "%s", using'
                     ' HTTP method %s. The data sent was: "%s".')
