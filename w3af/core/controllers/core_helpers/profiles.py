@@ -36,8 +36,7 @@ class CoreProfiles(object):
     def __init__(self, w3af_core):
         self._w3af_core = w3af_core
 
-    def save_current_to_new_profile(self, profile_name, profile_desc='',
-                                    self_contained=False):
+    def save_current_to_new_profile(self, profile_name, profile_desc='', self_contained=False):
         """
         Saves current config to a newly created profile.
 
@@ -215,12 +214,8 @@ class CoreProfiles(object):
             for plugin_name in set(plugin_names) - set(unknown_plugins):
 
                 try:
-                    plugin_options = profile_inst.get_plugin_options(
-                        plugin_type,
-                        plugin_name)
-                    self._w3af_core.plugins.set_plugin_options(plugin_type,
-                                                               plugin_name,
-                                                               plugin_options)
+                    plugin_options = profile_inst.get_plugin_options(plugin_type, plugin_name)
+                    self._w3af_core.plugins.set_plugin_options(plugin_type, plugin_name, plugin_options)
                 except BaseFrameworkException as w3e:
                     msg = ('Setting the options for plugin "%s.%s" raised an'
                            ' exception due to unknown or invalid configuration'
