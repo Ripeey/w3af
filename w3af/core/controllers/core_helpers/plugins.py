@@ -209,7 +209,7 @@ class CorePlugins(object):
             'bruteforce': partial(self._set_plugin_generic, 'bruteforce'),
             'auth': partial(self._set_plugin_generic, 'auth'),
             'infrastructure': partial(self._set_plugin_generic, 'infrastructure'),
-            'evasion': self._set_evasion_plugins,
+            # 'evasion': self._set_evasion_plugins,
         }
 
         set_dict[plugin_type](plugin_names)
