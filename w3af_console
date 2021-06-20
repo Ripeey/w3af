@@ -12,7 +12,7 @@ import re
 #dependency_check()
 
 from w3af.core.ui.console.console_ui import ConsoleUI
-#from w3af.core.controllers.misc.get_w3af_version import get_w3af_version
+from w3af.core.controllers.misc.get_w3af_version import get_w3af_version
 import w3af.core.controllers.output_manager as om
 
 

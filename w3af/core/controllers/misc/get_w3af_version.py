@@ -23,11 +23,7 @@ import os
 
 from w3af import ROOT_PATH
 from w3af.core.controllers.misc.decorators import memoized
-from w3af.core.controllers.auto_update.utils import (is_git_repo, to_short_id,
-                                                     get_latest_commit,
-                                                     get_latest_commit_date,
-                                                     get_current_branch,
-                                                     is_dirty_repo)
+# from w3af.core.controllers.auto_update.utils import (is_git_repo, to_short_id, get_latest_commit, get_latest_commit_date, get_current_branch, is_dirty_repo)
 
 VERSION_FILE = os.path.join(ROOT_PATH, 'core', 'data', 'constants',
                             'version.txt')
@@ -37,7 +33,7 @@ def get_minimalistic_version():
     with open(VERSION_FILE) as vf:
         return vf.read().strip()
 
-
+'''
 @memoized
 def get_w3af_version_as_dict():
     """
@@ -83,3 +79,25 @@ def get_w3af_version_minimal():
     """
     version_dict = get_w3af_version_as_dict()
     return '%(version)s / %(revision)s / %(branch)s' % version_dict
+'''
+def get_w3af_version_as_dict():
+    """
+    :return: All the version information in a dict
+    """
+    return {'version': '%(version)s' % get_minimalistic_version()}
+
+def get_w3af_version():
+    """
+    :return: A string with the w3af version.
+    """
+    return ('w3af - Web Application Attack and Audit Framework\n'
+            'Details:This is a Python3 fork version\n'
+            'Version: %s\n') % get_minimalistic_version()
+
+def get_w3af_version_minimal():
+    """
+    :return: A string with the w3af version.
+    """
+
+    return '%(version)s' % get_minimalistic_version()
+
