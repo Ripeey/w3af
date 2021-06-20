@@ -255,14 +255,14 @@ class w3afAgentServer(Process):
         try:
             self._cm = ConnectionManager(self._ip_address, self._listen_port)
             self._cm.start()
-        except (BaseFrameworkException, w3):
+        except BaseFrameworkException as w3:
             self._error = 'Failed to start connection manager inside w3afAgentServer, exception: ' + str(w3)
         else:
             try:
                 self._TCPRelay = TCPRelay(
                     self._ip_address, self._socks_port, self._cm)
                 self._TCPRelay.start()
-            except (BaseFrameworkException, w3):
+            except BaseFrameworkException as w3:
                 self._error = 'Failed to start TCPRelay inside w3afAgentServer, exception: "%s"' % w3
                 self._cm.stop()
             else:

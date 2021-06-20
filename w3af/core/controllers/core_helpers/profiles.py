@@ -221,7 +221,7 @@ class CoreProfiles(object):
                     self._w3af_core.plugins.set_plugin_options(plugin_type,
                                                                plugin_name,
                                                                plugin_options)
-                except (BaseFrameworkException, w3e):
+                except BaseFrameworkException as w3e:
                     msg = ('Setting the options for plugin "%s.%s" raised an'
                            ' exception due to unknown or invalid configuration'
                            ' parameters. %s')

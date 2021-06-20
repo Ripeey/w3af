@@ -395,7 +395,7 @@ class PortScanShell(Shell):
 
         try:
             http_response = self._uri_opener.send_mutant(mutant)
-        except (BaseFrameworkException, w3):
+        except BaseFrameworkException as w3:
             return 'Exception from the remote web application: "%s"' % w3
         except Exception as e:
             return 'Unhandled exception, "%s"' % e
@@ -480,7 +480,7 @@ class RFIShell(ExecShell, PortScanShell):
 
         try:
             http_res = self._uri_opener.send_mutant(mutant)
-        except (BaseFrameworkException, w3):
+        except BaseFrameworkException as w3:
             return 'Exception from the remote web application: "%s"' % w3
         except Exception as e:
             return 'Unhandled exception from the remote web application: "%s"' % e

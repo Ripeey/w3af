@@ -554,7 +554,7 @@ def _setResultsFile():
                 conf.resultsFP = openFile(conf.resultsFilename, "w+", UNICODE_ENCODING, buffering=0)
                 warnMsg += "Using temporary file '%s' instead" % conf.resultsFilename
                 logger.warn(warnMsg)
-            except (IOError, _):
+            except IOError as _:
                 errMsg = "unable to write to the temporary directory ('%s'). " % _
                 errMsg += "Please make sure that your disk is not full and "
                 errMsg += "that you have sufficient write permissions to "
@@ -632,7 +632,7 @@ def _createTargetDirs():
     except (OSError, IOError) as ex:
         try:
             tempDir = tempfile.mkdtemp(prefix="sqlmapoutput")
-        except (Exception, _):
+        except Exception as _:
             errMsg = "unable to write to the temporary directory ('%s'). " % _
             errMsg += "Please make sure that your disk is not full and "
             errMsg += "that you have sufficient write permissions to "
@@ -654,7 +654,7 @@ def _createTargetDirs():
     except (OSError, IOError, TypeError) as ex:
         try:
             tempDir = tempfile.mkdtemp(prefix="sqlmapoutput")
-        except (Exception, _):
+        except Exception as _:
             errMsg = "unable to write to the temporary directory ('%s'). " % _
             errMsg += "Please make sure that your disk is not full and "
             errMsg += "that you have sufficient write permissions to "

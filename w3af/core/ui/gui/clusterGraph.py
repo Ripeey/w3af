@@ -183,7 +183,7 @@ class distance_function_selector(entries.RememberingWindow):
             window = clusterGraphWidget(
                 self.w3af, self.data, distance_function=selected_function,
                 custom_code=custom_code)
-        except (BaseFrameworkException, w3):
+        except BaseFrameworkException as w3:
             msg = str(w3)
             dlg = gtk.MessageDialog(None, gtk.DIALOG_MODAL,
                                     gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, msg)
