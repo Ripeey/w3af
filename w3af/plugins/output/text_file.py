@@ -254,9 +254,8 @@ class text_file(OutputPlugin):
             to_print += self._create_plugin_info(plugin_type, plugins_dict[plugin_type], options_dict[plugin_type])
 
         # And now the target information
-        str_targets = ', '.join(smart_str_ignore(u.url_string) for u in cf.cf.get('targets'))
         to_print += 'target\n'
-        to_print += '    set target ' + str_targets + '\n'
+        to_print += f"    set target {cf.cf.get('targets')}\n"
         to_print += '    back'
 
         to_print = to_print.replace('\n', '\n' + timestamp) + '\n'
