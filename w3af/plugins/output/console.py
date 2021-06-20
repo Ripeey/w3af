@@ -74,9 +74,7 @@ class console(OutputPlugin):
         self.use_colors = True
 
     def _make_printable(self, a_string):
-        a_string = str(a_string)
-        a_string = a_string.replace('\n', '\n\r')
-        return ''.join(ch for ch in a_string if ch in string.printable)
+        return a_string.decode('utf-8')
 
     def _print_to_stdout(self, message, newline, severity=None):
         message = self._make_printable(message)
