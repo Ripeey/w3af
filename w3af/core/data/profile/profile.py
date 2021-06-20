@@ -297,6 +297,10 @@ class profile(object):
                 if _type == plugin_type and name == plugin_name:
                     for option in self._config.options(section):
                         try:
+                            # DEBUG dmknght REMOVEME Add traceback and print to debug crash when set profiles
+                            import traceback
+                            print(f"Debug: option: {option}, section: {section}")
+                            # End of debug lines
                             value = self._config.get(section, option)
                         except KeyError:
                             # We should never get here...
@@ -304,6 +308,10 @@ class profile(object):
                                    ' "%s" plugin.')
                             args = (option, plugin_name)
                             raise BaseFrameworkException(msg % args)
+                        # DEBUG dmknght REMOVEME Add traceback and print to debug crash when set profiles
+                        except:
+                            traceback.print_exc()
+                        # End of debug lines
                         else:
                             options_list[option].set_value(value)
 
