@@ -222,7 +222,7 @@ class w3afCore(object):
 
         self._first_scan = False
 
-        om.out.debug('Starting the scan using w3af version %s' % get_w3af_version_minimal())
+        om.out.debug('Starting the scan')
 
         try:
             self.strategy.start()
