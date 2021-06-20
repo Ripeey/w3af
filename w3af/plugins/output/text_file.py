@@ -77,7 +77,7 @@ class text_file(OutputPlugin):
         
         try:
             self._log = open(self._output_file_name,  'w')
-        except (IOError, io):
+        except IOError as io:
             msg = 'Can\'t open report file "%s" for writing, error: %s.'
             args = (os.path.abspath(self._output_file_name), io.strerror)
             raise BaseFrameworkException(msg % args)

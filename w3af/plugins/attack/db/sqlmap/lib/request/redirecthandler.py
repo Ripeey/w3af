@@ -76,7 +76,7 @@ class SmartRedirectHandler(urllib.request.HTTPRedirectHandler):
 
         try:
             content = fp.read(MAX_CONNECTION_TOTAL_SIZE)
-        except (Exception, msg):
+        except Exception as msg:
             dbgMsg = "there was a problem while retrieving "
             dbgMsg += "redirect response content (%s)" % msg
             logger.debug(dbgMsg)

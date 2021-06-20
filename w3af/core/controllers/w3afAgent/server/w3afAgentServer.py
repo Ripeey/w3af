@@ -89,7 +89,7 @@ class ConnectionManager(Process):
         while self._keep_running:
             try:
                 newsock, address = self.sock.accept()
-            except (KeyboardInterrupt, k):
+            except KeyboardInterrupt as k:
                 om.out.console('Exiting.')
                 break
             except socket.error:
