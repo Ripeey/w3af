@@ -1004,7 +1004,7 @@ def _setWafFunctions():
                 if filename[:-3] in sys.modules:
                     del sys.modules[filename[:-3]]
                 module = __import__(filename[:-3].encode(sys.getfilesystemencoding() or UNICODE_ENCODING))
-            except (ImportError, msg):
+            except ImportError as msg:
                 raise SqlmapSyntaxException("cannot import WAF script '%s' (%s)" % (filename[:-3], msg))
 
             _ = dict(inspect.getmembers(module))
@@ -2177,17 +2177,17 @@ def _normalizeOptions(inputOptions):
             if type_ == OPTION_TYPE.BOOLEAN:
                 try:
                     value = bool(value)
-                except (TypeError, ValueError):
+                except TypeError as ValueError:
                     value = False
             elif type_ == OPTION_TYPE.INTEGER:
                 try:
                     value = int(value)
-                except (TypeError, ValueError):
+                except TypeError as ValueError:
                     value = 0
             elif type_ == OPTION_TYPE.FLOAT:
                 try:
                     value = float(value)
-                except (TypeError, ValueError):
+                except TypeError as ValueError:
                     value = 0.0
 
             inputOptions[key] = value

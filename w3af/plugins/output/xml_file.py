@@ -199,7 +199,7 @@ class xml_file(OutputPlugin):
 
         try:
             self._add_scan_status_to_context(context)
-        except (RuntimeError, rte):
+        except RuntimeError as rte:
             # In some very strange scenarios we get this error:
             #
             #   Can NOT call get_run_time before start()
@@ -505,7 +505,7 @@ class FindingsCache(object):
 
         try:
             node = lz4.frame.decompress(open(filename, 'rb').read())
-        except (IOError, RuntimeError):
+        except IOError as RuntimeError:
             return None
 
         return node.decode('utf-8')
@@ -566,7 +566,7 @@ class CachedXMLNode(XMLNode):
 
         try:
             node = lz4.frame.decompress(open(filename, 'rb').read())
-        except (IOError, RuntimeError):
+        except IOError as RuntimeError:
             return None
 
         return node.decode('utf-8')

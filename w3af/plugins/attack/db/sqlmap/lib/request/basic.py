@@ -213,7 +213,7 @@ def checkCharEncoding(encoding, warn=True):
     # Reference: http://docs.python.org/library/codecs.html
     try:
         codecs.lookup(encoding.encode(UNICODE_ENCODING) if isinstance(encoding, str) else encoding)
-    except (LookupError, ValueError):
+    except LookupError as ValueError:
         if warn:
             warnMsg = "unknown web page charset '%s'. " % encoding
             warnMsg += "Please report by e-mail to '%s'" % DEV_EMAIL_ADDRESS
@@ -279,7 +279,7 @@ def decodePage(page, contentEncoding, contentType):
                     raise Exception("size too large")
 
             page = data.read()
-        except (Exception, msg):
+        except Exception as msg:
             if "<html" not in page:  # in some cases, invalid "Content-Encoding" appears for plain HTML (should be ignored)
                 errMsg = "detected invalid data for declared content "
                 errMsg += "encoding '%s' ('%s')" % (contentEncoding, msg)

@@ -496,7 +496,7 @@ def error_handler(url):
             fo.close()
             try: status, reason = fo.status, fo.reason
             except AttributeError: status, reason = None, None
-        except (IOError, e):
+        except IOError as e:
             print("  EXCEPTION: %s" % e)
             raise
         else:
@@ -614,7 +614,7 @@ def test_timeout(url):
 def test(url, N=10):
     print("checking error hander (do this on a non-200)")
     try: error_handler(url)
-    except (IOError, e):
+    except IOError as e:
         print("exiting - exception will prevent further tests")
         sys.exit()
     print()

@@ -94,7 +94,7 @@ class text_file(OutputPlugin):
             # Images aren't ascii, so this file that logs every request/response,
             # will be binary.
             self._http = open(self._http_file_name, 'wb')
-        except (IOError, io):
+        except IOError as io:
             msg = 'Can\'t open HTTP report file "%s" for writing, error: %s.'
             args = (os.path.abspath(self._http_file_name), io.strerror)
             raise BaseFrameworkException(msg % args)

@@ -115,7 +115,7 @@ class ProfilesMenu(menu):
         # Validate the profile name
         try:
             Profile.is_valid_profile_name(profile_name)
-        except (BaseFrameworkException, bfe):
+        except BaseFrameworkException as bfe:
             om.out.console('%s' % bfe)
             return
 

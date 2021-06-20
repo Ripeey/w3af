@@ -101,7 +101,7 @@ class genexus_xml(CrawlPlugin):
             try:
                 url = url.childNodes[0].data
                 url = base_url.url_join(url)
-            except (ValueError, ve):
+            except ValueError as ve:
                 msg = '"%s" file had an invalid URL "%s"'
                 om.out.debug(msg % (file_name, ve))
             except:

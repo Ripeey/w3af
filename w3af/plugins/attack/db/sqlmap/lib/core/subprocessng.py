@@ -120,7 +120,7 @@ class Popen(subprocess.Popen):
                     nAvail = maxsize
                 if nAvail > 0:
                     (errCode, read) = ReadFile(x, nAvail, None)
-            except (ValueError, NameError):
+            except ValueError as NameError:
                 return self._close(which)
             except (subprocess.pywintypes.error, Exception) as why:
                 if why[0] in (109, errno.ESHUTDOWN):
@@ -140,7 +140,7 @@ class Popen(subprocess.Popen):
 
             try:
                 written = os.write(self.stdin.fileno(), input)
-            except (OSError, why):
+            except OSError as why:
                 if why[0] == errno.EPIPE:  # broken pipe
                     return self._close('stdin')
                 raise

@@ -1396,7 +1396,7 @@ class ExtendedUrllib(object):
 
         try:
             self.send(req, grep=False)
-        except (HTTPRequestException, e):
+        except HTTPRequestException as e:
             msg = 'Remote URL %s is UNREACHABLE due to: "%s"'
             om.out.debug(msg % (root_url, e))
             return False

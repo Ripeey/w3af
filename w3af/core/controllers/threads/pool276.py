@@ -118,7 +118,7 @@ def worker(inqueue, outqueue, initializer=None, initargs=(), maxtasks=None):
     while maxtasks is None or (maxtasks and completed < maxtasks):
         try:
             task = get()
-        except (EOFError, IOError):
+        except EOFError as IOError:
             debug('worker got EOFError or IOError -- exiting')
             break
 
@@ -481,7 +481,7 @@ class Pool(object):
         while 1:
             try:
                 task = get()
-            except (IOError, EOFError):
+            except IOError as EOFError:
                 debug('result handler got EOFError/IOError -- exiting')
                 return
 
@@ -508,7 +508,7 @@ class Pool(object):
         while cache and thread._state != TERMINATE:
             try:
                 task = get()
-            except (IOError, EOFError):
+            except IOError as EOFError:
                 debug('result handler got EOFError/IOError -- exiting')
                 return
 
@@ -536,7 +536,7 @@ class Pool(object):
                     if not outqueue._reader.poll():
                         break
                     get()
-            except (IOError, EOFError):
+            except IOError as EOFError:
                 pass
 
         debug('result handler exiting: len(cache)=%s, thread._state=%s',

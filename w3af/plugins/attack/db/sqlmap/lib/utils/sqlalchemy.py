@@ -56,7 +56,7 @@ class SQLAlchemy(GenericConnector):
 
                 engine = _sqlalchemy.create_engine(conf.direct, connect_args={"check_same_thread": False} if self.dialect == "sqlite" else {})
                 self.connector = engine.connect()
-            except (TypeError, ValueError):
+            except TypeError as ValueError:
                 if "_get_server_version_info" in traceback.format_exc():
                     try:
                         import pymssql
@@ -69,7 +69,7 @@ class SQLAlchemy(GenericConnector):
                 raise
             except SqlmapFilePathException:
                 raise
-            except (Exception, msg):
+            except Exception as msg:
                 raise SqlmapConnectionException("SQLAlchemy connection issue ('%s')" % msg[0])
 
             self.printConnected()

@@ -123,7 +123,7 @@ class ConsoleUI(object):
         msg = DISCLAIMER + '\n\n' + QUESTION
         try:
             user_response = input(msg)
-        except (KeyboardInterrupt, EOFError):
+        except KeyboardInterrupt as EOFError:
             print('')
             user_response = ''
 

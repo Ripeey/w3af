@@ -885,7 +885,7 @@ def cmdLineParser(argv=None):
                 try:
                     command = input("sqlmap-shell> ").strip()
                     command = getUnicode(command, encoding=sys.stdin.encoding)
-                except (KeyboardInterrupt, EOFError):
+                except KeyboardInterrupt as EOFError:
                     print()
                     raise SqlmapShellQuitException
 
@@ -908,7 +908,7 @@ def cmdLineParser(argv=None):
             try:
                 for arg in shlex.split(command):
                     argv.append(getUnicode(arg, encoding=sys.stdin.encoding))
-            except (ValueError, ex):
+            except ValueError as ex:
                 raise SqlmapSyntaxException("something went wrong during command line parsing ('%s')" % ex.message)
 
         for i in range(len(argv)):
@@ -949,12 +949,12 @@ def cmdLineParser(argv=None):
                 if argv.index(verbosity) == len(argv) - 1 or not argv[argv.index(verbosity) + 1].isdigit():
                     conf.verbose = verbosity.count('v') + 1
                     del argv[argv.index(verbosity)]
-            except (IndexError, ValueError):
+            except IndexError as ValueError:
                 pass
 
         try:
             (args, _) = parser.parse_args(argv)
-        except (UnicodeEncodeError, ex):
+        except UnicodeEncodeError as ex:
             dataToStdout("\n[!] %s\n" % ex.object.encode("unicode-escape"))
             raise SystemExit
         except SystemExit:

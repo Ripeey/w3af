@@ -145,7 +145,7 @@ class local_file_reader(AttackPlugin):
         try:
             cut = self._define_cut_from_etc_passwd(response_a.get_body(),
                                                    response_b.get_body())
-        except (ValueError, ve):
+        except ValueError as ve:
             om.out.error(str(ve))
             return False
         else:
@@ -298,7 +298,7 @@ class FileReaderShell(ReadShell):
 
         try:
             cut_response = self._cut(response.get_body())
-        except (BodyCutException, bce):
+        except BodyCutException as bce:
             issue = 'https://github.com/andresriancho/w3af/issues/5139'
 
             msg = ('Unexpected exception "%s" while trying to extract the file'

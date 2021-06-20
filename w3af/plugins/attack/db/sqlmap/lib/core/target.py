@@ -418,7 +418,7 @@ def _setHashDB():
             try:
                 os.remove(conf.hashDBFile)
                 logger.info("flushing session file")
-            except (OSError, msg):
+            except OSError as msg:
                 errMsg = "unable to flush the session file (%s)" % msg
                 raise SqlmapFilePathException(errMsg)
 
@@ -578,7 +578,7 @@ def _createFilesDir():
     if not os.path.isdir(conf.filePath):
         try:
             os.makedirs(conf.filePath, 0o755)
-        except (OSError, ex):
+        except OSError as ex:
             tempDir = tempfile.mkdtemp(prefix="sqlmapfiles")
             warnMsg = "unable to create files directory "
             warnMsg += "'%s' (%s). " % (conf.filePath, getUnicode(ex))
@@ -600,7 +600,7 @@ def _createDumpDir():
     if not os.path.isdir(conf.dumpPath):
         try:
             os.makedirs(conf.dumpPath, 0o755)
-        except (OSError, ex):
+        except OSError as ex:
             tempDir = tempfile.mkdtemp(prefix="sqlmapdump")
             warnMsg = "unable to create dump directory "
             warnMsg += "'%s' (%s). " % (conf.dumpPath, getUnicode(ex))
@@ -675,7 +675,7 @@ def _createTargetDirs():
             f.write("  # %s" % getUnicode(subprocess.list2cmdline(sys.argv), encoding=sys.stdin.encoding))
             if conf.data:
                 f.write("\n\n%s" % getUnicode(conf.data))
-    except (IOError, ex):
+    except IOError as ex:
         if "denied" in getUnicode(ex):
             errMsg = "you don't have enough permissions "
         else:

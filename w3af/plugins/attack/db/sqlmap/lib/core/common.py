@@ -653,7 +653,7 @@ def paramToDict(place, parameters=None):
                                         del testableParameters[parameter]
                                         testableParameters.update(candidates)
                                     break
-                            except (KeyboardInterrupt, SqlmapUserQuitException):
+                            except KeyboardInterrupt as SqlmapUserQuitException:
                                 raise
                             except Exception:
                                 pass
@@ -923,7 +923,7 @@ def dataToTrafficFile(data):
     try:
         conf.trafficFP.write(data)
         conf.trafficFP.flush()
-    except (IOError, ex):
+    except IOError as ex:
         errMsg = "something went wrong while trying "
         errMsg += "to write to the traffic file '%s' ('%s')" % (conf.trafficFile, getSafeExString(ex))
         raise SqlmapSystemException(errMsg)
@@ -932,7 +932,7 @@ def dataToDumpFile(dumpFile, data):
     try:
         dumpFile.write(data)
         dumpFile.flush()
-    except (IOError, ex):
+    except IOError as ex:
         if "No space left" in getUnicode(ex):
             errMsg = "no space left on output device"
             logger.error(errMsg)
@@ -952,7 +952,7 @@ def dataToOutFile(filename, data):
             try:
                 with open(retVal, "w+b") as f:  # has to stay as non-codecs because data is raw ASCII encoded data
                     f.write(unicodeencode(data))
-            except (UnicodeEncodeError, ex):
+            except UnicodeEncodeError as ex:
                 _ = normalizeUnicode(filename)
                 if filename != _:
                     filename = _
@@ -960,7 +960,7 @@ def dataToOutFile(filename, data):
                     errMsg = "couldn't write to the "
                     errMsg += "output file ('%s')" % getSafeExString(ex)
                     raise SqlmapGenericException(errMsg)
-            except (IOError, ex):
+            except IOError as ex:
                 errMsg = "something went wrong while trying to write "
                 errMsg += "to the output file ('%s')" % getSafeExString(ex)
                 raise SqlmapGenericException(errMsg)
@@ -1409,7 +1409,7 @@ def parseTargetUrl():
 
     try:
         urlSplit = urlparse.urlsplit(conf.url)
-    except (ValueError, ex):
+    except ValueError as ex:
         errMsg = "invalid URL '%s' has been given ('%s'). " % (conf.url, getSafeExString(ex))
         errMsg += "Please be sure that you don't have any leftover characters (e.g. '[' or ']') "
         errMsg += "in the hostname part"
@@ -1947,7 +1947,7 @@ def getConsoleWidth(default=80):
 
             if len(items) == 2 and items[1].isdigit():
                 width = int(items[1])
-        except (OSError, MemoryError):
+        except OSError as MemoryError:
             pass
 
     if width is None:
@@ -2288,7 +2288,7 @@ def getUnicode(value, encoding=None, noneToNull=False):
         while True:
             try:
                 return str(value, encoding or (kb.get("pageEncoding") if kb.get("originalPage") else None) or UNICODE_ENCODING)
-            except (UnicodeDecodeError, ex):
+            except UnicodeDecodeError as ex:
                 try:
                     return str(value, UNICODE_ENCODING)
                 except:
@@ -3032,7 +3032,7 @@ def saveConfig(conf, filename):
     with openFile(filename, "wb") as f:
         try:
             config.write(f)
-        except (IOError, ex):
+        except IOError as ex:
             errMsg = "something went wrong while trying "
             errMsg += "to write to the configuration file '%s' ('%s')" % (filename, getSafeExString(ex))
             raise SqlmapSystemException(errMsg)
@@ -3928,7 +3928,7 @@ def findPageForms(content, url, raise_=False, addToTargets=False):
 
     try:
         forms = ParseResponse(response, backwards_compat=False)
-    except (UnicodeError, ValueError):
+    except UnicodeError as ValueError:
         pass
     except ParseError:
         if "<html" in (content or ""):

@@ -587,7 +587,7 @@ def checkSqlInjection(place, parameter, value):
 
                                         injectable = True
 
-                            except (SqlmapConnectionException, msg):
+                            except SqlmapConnectionException as msg:
                                 debugMsg = "problem occurred most likely because the "
                                 debugMsg += "server hasn't recovered as expected from the "
                                 debugMsg += "error-based payload used ('%s')" % msg
@@ -1474,7 +1474,7 @@ def checkNullConnection():
                     infoMsg = "NULL connection is supported with 'skip-read' method"
                     logger.info(infoMsg)
 
-    except (SqlmapConnectionException, ex):
+    except SqlmapConnectionException as ex:
         errMsg = getSafeExString(ex)
         raise SqlmapConnectionException(errMsg)
 
@@ -1523,7 +1523,7 @@ def checkConnection(suppressOutput=False):
         else:
             kb.errorIsNone = True
 
-    except (SqlmapConnectionException, ex):
+    except SqlmapConnectionException as ex:
         if conf.ipv6:
             warnMsg = "check connection to a provided "
             warnMsg += "IPv6 address with a tool like ping6 "

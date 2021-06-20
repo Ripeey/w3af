@@ -263,7 +263,7 @@ class Worker(object):
         while maxtasks is None or (maxtasks and completed < maxtasks):
             try:
                 task = get()
-            except (EOFError, IOError):
+            except EOFError as IOError:
                 debug('worker got EOFError or IOError -- exiting')
                 break
 

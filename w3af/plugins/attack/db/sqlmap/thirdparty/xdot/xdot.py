@@ -576,7 +576,7 @@ class XDotAttrParser:
             b = hex2float(c[5:7])
             try:
                 a = hex2float(c[7:9])
-            except (IndexError, ValueError):
+            except IndexError as ValueError:
                 a = 1.0
             return r, g, b, a
         elif c1.isdigit() or c1 == ".":
@@ -607,7 +607,7 @@ class XDotAttrParser:
         try:
             dummy, scheme, index = c.split('/')
             r, g, b = brewer_colors[scheme][int(index)]
-        except (ValueError, KeyError):
+        except ValueError as KeyError:
             pass
         else:
             s = 1.0/255.0

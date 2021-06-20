@@ -1058,7 +1058,7 @@ class Items(object):
         key, value = item
         try:
             assert value == self._main[key]
-        except (KeyError, AssertionError):
+        except KeyError as AssertionError:
             raise ValueError('ValueError: list.remove(x): x not in list')
         else:
             del self._main[key]

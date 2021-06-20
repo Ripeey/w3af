@@ -147,7 +147,7 @@ class TestInterceptProxy(unittest.TestCase):
                 # Catch the 403 from the local proxy when the user
                 # drops the HTTP request.
                 results.put(he)
-            except (KeyboardInterrupt, k):
+            except KeyboardInterrupt as k:
                 exceptions.put(k)
             except Exception as e:
                 exceptions.put(e)

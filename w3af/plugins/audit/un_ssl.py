@@ -88,7 +88,7 @@ class un_ssl(AuditPlugin):
         try:
             insecure_response = send_mutant(insecure_fr, **kwargs)
             secure_response = send_mutant(secure_fr,  **kwargs)
-        except (HTTPRequestException, ScanMustStopException):
+        except HTTPRequestException as ScanMustStopException:
             # No vulnerability to report since one of these threw an error
             # (because there is nothing listening on that port). It makes
             # no sense to keep running since we already got an error

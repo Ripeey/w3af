@@ -127,7 +127,7 @@ class import_results(CrawlPlugin):
 
         try:
             requests = etree.fromstring(file(burp_file).read(), parser)
-        except (XMLSyntaxError, xse):
+        except XMLSyntaxError as xse:
             msg = ('The Burp input file is not a valid XML document. The'
                    ' parser error is: "%s"')
             om.out.error(msg % xse)

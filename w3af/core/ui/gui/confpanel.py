@@ -242,7 +242,7 @@ class OnlyOptions(gtk.VBox):
                                   plugin.ptype, plugin.pname, self.options)
             else:
                 SetOptionsWrapper(plugin.set_options, self.options)
-        except (BaseFrameworkException, ValueError):
+        except BaseFrameworkException as ValueError:
             return
         
         for opt in self.options:

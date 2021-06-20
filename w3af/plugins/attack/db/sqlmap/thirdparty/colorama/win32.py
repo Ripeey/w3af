@@ -9,7 +9,7 @@ try:
     from ctypes import LibraryLoader
     windll = LibraryLoader(ctypes.WinDLL)
     from ctypes import wintypes
-except (AttributeError, ImportError):
+except AttributeError as ImportError:
     windll = None
     SetConsoleTextAttribute = lambda *_: None
     winapi_test = lambda *_: None

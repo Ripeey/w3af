@@ -86,7 +86,7 @@ class TestOutputManager(unittest.TestCase):
         catch-all, just the ones I define!"""
         try:
             self.assertRaises(AttributeError, om.out.foobar, ('abc',))
-        except (AttributeError, ae):
+        except AttributeError as ae:
             self.assertTrue(True, ae)
 
     def test_kwds(self):

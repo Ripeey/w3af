@@ -77,7 +77,7 @@ class Dump(object):
 
         try:
             self._outputFP.write(text)
-        except (IOError, ex):
+        except IOError as ex:
             errMsg = "error occurred while writing to log file ('%s')" % getSafeExString(ex)
             raise SqlmapGenericException(errMsg)
 
@@ -97,7 +97,7 @@ class Dump(object):
         self._outputFile = os.path.join(conf.outputPath, "log")
         try:
             self._outputFP = openFile(self._outputFile, "ab" if not conf.flushSession else "wb")
-        except (IOError, ex):
+        except IOError as ex:
             errMsg = "error occurred while opening log file ('%s')" % getSafeExString(ex)
             raise SqlmapGenericException(errMsg)
 

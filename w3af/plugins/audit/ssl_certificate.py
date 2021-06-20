@@ -173,7 +173,7 @@ class ssl_certificate(AuditPlugin):
 
             try:
                 match_hostname(peer_cert, _domain)
-            except (CertificateError, cve):
+            except CertificateError as cve:
                 self._handle_certificate_validation_error(cve, _domain, _port)
 
         self._ssl_connect(domain,

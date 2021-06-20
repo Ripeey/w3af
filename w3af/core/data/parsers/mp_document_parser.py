@@ -159,7 +159,7 @@ class MultiProcessingDocumentParser(object):
             future = self._pool.schedule(apply_with_return_error,
                                          args=(apply_args,),
                                          timeout=self.PARSER_TIMEOUT)
-        except (RuntimeError, rte):
+        except RuntimeError as rte:
             # Remove the temp file used to send data to the process
             remove_file_if_exists(filename)
 
@@ -262,7 +262,7 @@ class MultiProcessingDocumentParser(object):
             future = self._pool.schedule(apply_with_return_error,
                                          args=(apply_args,),
                                          timeout=self.PARSER_TIMEOUT)
-        except (RuntimeError, rte):
+        except RuntimeError as rte:
             # Remove the temp file used to send data to the process
             remove_file_if_exists(filename)
 
