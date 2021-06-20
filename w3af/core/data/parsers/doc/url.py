@@ -852,8 +852,7 @@ class URL(DiskItem):
         """
         :return: True if the url_strings are equal
         """
-        return isinstance(other, URL) and \
-            self.url_string == other.url_string
+        return isinstance(other, URL) and self.url_string == other.url_string
 
     def __ne__(self, other):
         return not self.__eq__(other)

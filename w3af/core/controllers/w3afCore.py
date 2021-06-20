@@ -218,8 +218,7 @@ class w3afCore(object):
 
         # Let the output plugins know what kind of plugins we're
         # using during the scan
-        om.manager.log_enabled_plugins(self.plugins.get_all_enabled_plugins(),
-                                       self.plugins.get_all_plugin_options())
+        om.manager.log_enabled_plugins(self.plugins.get_all_enabled_plugins(), self.plugins.get_all_plugin_options())
 
         self._first_scan = False
 
