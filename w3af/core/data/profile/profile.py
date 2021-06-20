@@ -294,14 +294,16 @@ class profile(object):
             except:
                 pass
             else:
+                # DEBUG dmknght REMOVEME Add traceback and print to debug crash when set profiles
+                import traceback
+                # End of debug lines
                 if _type == plugin_type and name == plugin_name:
                     for option in self._config.options(section):
                         try:
-                            # DEBUG dmknght REMOVEME Add traceback and print to debug crash when set profiles
-                            import traceback
-                            print(f"Debug: option: {option}, section: {section}")
-                            # End of debug lines
                             value = self._config.get(section, option)
+                            # DEBUG dmknght REMOVEME Add traceback and print to debug crash when set profiles
+                            print(f"Debug_success: option: {option}, section: {section}")
+                            # End of debug lines
                         except KeyError:
                             # We should never get here...
                             msg = ('The option "%s" is unknown for the'
@@ -311,9 +313,16 @@ class profile(object):
                         # DEBUG dmknght REMOVEME Add traceback and print to debug crash when set profiles
                         except:
                             traceback.print_exc()
+                            print(f"Debug_failed: option: {option}, section: {section}")
                         # End of debug lines
                         else:
-                            options_list[option].set_value(value)
+                            try:
+                                options_list[option].set_value(value)
+                            # DEBUG dmknght REMOVEME Add traceback and print to debug crash when set profiles
+                            except:
+                                traceback.print_exc()
+                                print(f"Debug_failed_set_options: option: {option}, section: {section}")
+                            # End of debug lines
 
         return options_list
 
