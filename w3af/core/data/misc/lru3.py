@@ -567,7 +567,7 @@ class SynchronizedLRUDict(object):
         """
 
         with self.__lock:
-            return self.__dict.get(key, None)
+            return self.__dict.get(key, default)
 
     def peek(self, key, default=None):
 
@@ -584,7 +584,7 @@ class SynchronizedLRUDict(object):
         """
 
         with self.__lock:
-            return self.__dict.peek(key, None)
+            return self.__dict.peek(key, default)
 
     def pop(self, key, default=missing):
 
