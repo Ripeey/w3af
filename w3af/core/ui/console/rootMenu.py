@@ -227,6 +227,7 @@ class rootMenu(menu):
     def _show_status(self):
         # Get the information and print it to the console
         status_information_str = self._w3af.status.get_long_status()
+        om.out.console('')
         t = table([(status_information_str,)])
         t.draw()
         om.out.console('')
