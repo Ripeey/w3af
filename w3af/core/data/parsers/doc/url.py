@@ -753,7 +753,10 @@ class URL(DiskItem):
         """
         unquoted_url = urllib.parse.unquote(str(self))
         enc = self._encoding
-        return URL(unquoted_url.decode(enc, 'ignore'), enc)
+        # decode
+        # FIXME dmknght: This decode likely is not highest priority but still have to rewrite again
+        # return URL(unquoted_url.decode(enc, 'ignore'), enc)
+        return URL(unquoted_url, enc)
 
     def url_encode(self):
         """

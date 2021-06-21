@@ -276,7 +276,7 @@ class HTTPResponse(http.client.HTTPResponse):
                 self._rbuf = self._rbuf[amt:]
                 return s
         else:
-            s = self._rbuf + self._multiread
+            s = self._rbuf.encode() + self._multiread
             self._rbuf = ''
             return s
 
