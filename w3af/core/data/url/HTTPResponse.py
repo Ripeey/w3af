@@ -540,7 +540,8 @@ class HTTPResponse(DiskItem):
         return self._realurl
 
     def get_host(self):
-        return self.get_url().get_domain()
+        # return self.get_url().get_domain()
+        return self.host
 
     def set_uri(self, uri):
         """

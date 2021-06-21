@@ -75,6 +75,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         self.use_proxy = use_proxy
         self.debugging_id = debugging_id
         self._binary_response = binary_response
+        self._Request__original = url  # FIXME dmknght fake value to make program works. don't know about this
 
         self.method = method
         if self.method is None:
@@ -94,7 +95,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         return (self.get_method() == other.get_method() and
                 self.get_uri() == other.get_uri() and
                 self.get_headers() == other.get_headers() and
-                self.get_data() == other.get_data() and
+                self.data == other.data and
                 self.get_timeout() == other.get_timeout())
 
     def with_binary_response(self):
@@ -162,7 +163,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         sdict['method'] = self.get_method()
         sdict['uri'] = self.get_uri().url_string
         sdict['headers'] = dict(self.get_headers())
-        sdict['data'] = self.get_data()
+        sdict['data'] = self.data
         sdict['cookies'] = self.cookies
         sdict['session'] = self.session
         sdict['cache'] = self.get_from_cache
@@ -184,7 +185,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
                  in the FuzzableRequest passed as parameter
         """
         host = fuzzable_request.get_url().get_domain()
-        data = fuzzable_request.get_data()
+        data = fuzzable_request.data
         headers = fuzzable_request.get_headers()
         headers.tokens_to_value()
 
