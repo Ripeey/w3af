@@ -81,17 +81,15 @@ class LogSink(object):
         if method is None:
             msg = "'LogSink' object has no attribute '%s'"
             raise AttributeError(msg % name)
-        return method
-
 
         # removeME - A log patch for temp (returns method)
         # This is a DEBUG part to find any crashes
-
-        # def patchLog(*args):
-        #     trace = str(args) if args else ''
-        #     from w3af import logger
-        #     logger.error_log(trace) if name in ('error', 'log_crash') else logger.log(trace)
-        #     return method
-        # return patchLog
-
+        """
+        def patchLog(*args):
+            trace = str(args) if args else ''
+            from w3af import logger
+            logger.error_log(trace) if name in ('error', 'log_crash') else logger.log(trace)
+            return method
+        return patchLog
+        """
         return method

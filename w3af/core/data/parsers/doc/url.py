@@ -866,9 +866,8 @@ class URL(DiskItem):
         """
         :return: A string representation of self
         """
-        # urlstr = smart_str(self.url_string, self._encoding, errors=PERCENT_ENCODE)
-        # return urlstr.replace(' ', '%20')
-        return self.url_string.replace(" ", "%20")
+        urlstr = smart_str(self.url_string, self._encoding, errors=PERCENT_ENCODE)
+        return url_string.replace(" ", "%20")
 
     def __unicode__(self):
         """

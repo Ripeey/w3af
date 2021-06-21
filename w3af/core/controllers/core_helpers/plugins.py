@@ -262,6 +262,7 @@ class CorePlugins(object):
         # Now we filter to show only the directories
         plugin_types = [d for d in plugin_types
                         if os.path.isdir(os.path.join(ROOT_PATH, 'plugins', d))]
+        rem_from_list('__pycache__', plugin_types)
         rem_from_list('attack', plugin_types)
         rem_from_list('tests', plugin_types)
         rem_from_list('.git', plugin_types)
@@ -273,6 +274,7 @@ class CorePlugins(object):
         """
         str_plugin_list = get_file_list(os.path.join(ROOT_PATH, 'plugins',
                                                      plugin_type))
+
         return str_plugin_list
 
     def get_plugin_inst(self, plugin_type, plugin_name):
@@ -306,7 +308,6 @@ class CorePlugins(object):
                 all_plugins = [os.path.splitext(f)[0] for f in file_list
                                if os.path.splitext(f)[1] == '.py']
                 all_plugins.remove('__init__')
-
                 enabled_plugins.extend(all_plugins)
                 enabled_plugins = list(set(enabled_plugins))
                 enabled_plugins.remove('all')
