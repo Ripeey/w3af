@@ -20,24 +20,24 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import re
 import copy
+import re
 import socket
-import urllib.request, urllib.parse, urllib.error
-
+import urllib.error
+import urllib.parse
+import urllib.request
+from collections import OrderedDict
+from functools import wraps
 from urllib.parse import urlparse
 
-from functools import wraps
-from collections import OrderedDict
 from tldextract import TLDExtract
 
-from w3af.core.controllers.misc.is_ip_address import is_ip_address
 from w3af.core.controllers.exceptions import BaseFrameworkException
-
+from w3af.core.controllers.misc.is_ip_address import is_ip_address
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
+from w3af.core.data.db.disk_item import DiskItem
 from w3af.core.data.dc.generic.data_container import DataContainer
 from w3af.core.data.dc.query_string import QueryString
-from w3af.core.data.db.disk_item import DiskItem
 from w3af.core.data.misc.encoding import (smart_str, PERCENT_ENCODE,
                                           is_known_encoding, smart_unicode)
 
@@ -46,6 +46,7 @@ def set_changed(meth):
     """
     Function to decorate methods in order to empty the memoized cache
     """
+
     @wraps(meth)
     def changed_wrapper(self, *args, **kwargs):
         self._cache.clear()
@@ -60,6 +61,7 @@ def memoized(meth):
     simplistic decorator since it can only be used for getters which take
     "self" as parameter.
     """
+
     @wraps(meth)
     def cache_wrapper(self, *args, **kwargs):
         result = self._cache.get(meth, None)
@@ -137,7 +139,7 @@ def parse_qs(qstr, ignore_exc=True, encoding=DEFAULT_ENCODING):
     """
     if not isinstance(qstr, str):
         raise TypeError('parse_qs requires a str as input.')
-    
+
     qs = QueryString(encoding=encoding)
 
     if qstr:
@@ -161,6 +163,7 @@ def parse_qs(qstr, ignore_exc=True, encoding=DEFAULT_ENCODING):
             def decode(item):
                 return (item[0].decode(encoding, 'ignore'),
                         [e.decode(encoding, 'ignore') for e in item[1]])
+
             qs.update((decode(item) for item in odict.items()))
 
     return qs
@@ -202,6 +205,7 @@ class URL(DiskItem):
                  'querystring',
                  'fragment',)
     """
+
     def __init__(self, data, encoding=DEFAULT_ENCODING):
         """
         :param data: Either a string representing a URL or a 6-elems tuple
@@ -274,13 +278,13 @@ class URL(DiskItem):
         :param fragment: #fragments
         :return: An instance of URL.
         """
-        scheme = scheme or u'' 
+        scheme = scheme or u''
         netloc = netloc or u''
         path = path or u''
         params = params or u''
         qs = qs or u''
         fragment = fragment or u''
-        
+
         data = (scheme, netloc, path, params, qs, fragment)
         url_str = urllib.parse.urlunparse(data)
         return cls(url_str, encoding)
@@ -298,7 +302,7 @@ class URL(DiskItem):
         path = src_url_obj.get_path() or u''
         params = src_url_obj.get_params() or u''
         fragment = src_url_obj.get_fragment() or u''
-        
+
         encoding = src_url_obj.encoding
         qs = copy.deepcopy(src_url_obj.querystring)
 
@@ -441,7 +445,7 @@ class URL(DiskItem):
         # 'net_location' beginning in the last appearance of ':'
         at_symb_index = net_location.rfind('@')
         colon_symb_max_index = net_location.rfind(':')
-        
+
         # Found
         if colon_symb_max_index > at_symb_index:
 
@@ -460,10 +464,10 @@ class URL(DiskItem):
             if int(port) > 65535 or int(port) < 1:
                 msg = 'Invalid TCP port "%s", expected a number in range 1-65535.'
                 raise ValueError(msg % port)
-            
+
             # Collapse port
             if (protocol == 'http' and port == '80') or \
-               (protocol == 'https' and port == '443'):
+                    (protocol == 'https' and port == '443'):
                 net_location = host
             else:
                 # The net location has a specific port definition
@@ -490,8 +494,7 @@ class URL(DiskItem):
         #       test_url.py -> test_url_in_filename
         #       https://github.com/andresriancho/w3af/issues/475
         #
-        fixed_url = urllib.parse.urlunparse((protocol, net_location, self.path,
-                                         self.params, u'', self.fragment))
+        fixed_url = urllib.parse.urlunparse((protocol, net_location, self.path, self.params, u'', self.fragment))
 
         # "re-init" the object
         (self.scheme, self.netloc, self.path,
@@ -543,7 +546,7 @@ class URL(DiskItem):
         # There is no need to call normalize_url here, since it is called in the
         # URL object __init__
         #
-        #jurl_obj.normalize_url()
+        # jurl_obj.normalize_url()
 
         return jurl_obj
 
@@ -568,7 +571,7 @@ class URL(DiskItem):
     def is_valid_domain(self):
         """
         :return: Returns a boolean that indicates if self.netloc domain is valid
-        """        
+        """
         # check if domain name valid
         hostname = self.netloc.split(':')[0]  # split away port
         if not self.RE_DOMAIN.match(hostname):
@@ -653,7 +656,7 @@ class URL(DiskItem):
         """
         if self.path:
             res = self.scheme + u'://' + self.netloc + \
-                self.path[:self.path.rfind('/') + 1]
+                  self.path[:self.path.rfind('/') + 1]
         else:
             res = self.scheme + u'://' + self.netloc + u'/'
         return URL(res, self._encoding)
