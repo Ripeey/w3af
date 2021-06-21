@@ -121,7 +121,7 @@ class KeepAliveHandler(object):
         """
         Called by handler's url_open method.
         """
-        host = req.host()
+        host = req.host
         if not host:
             raise urllib.error.URLError('no host given')
 
