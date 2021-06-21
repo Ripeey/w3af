@@ -19,10 +19,10 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import urllib.request, urllib.error, urllib.parse
 import gzip
+# import urllib.parse
+import urllib.request
 import zlib
-
 from io import StringIO
 
 from w3af.core.data.url.handlers.cache import SQLCachedResponse
@@ -57,8 +57,12 @@ class HTTPGzipProcessor(urllib.request.BaseHandler):
         #
         # post-process response
         #
-        if self._should_decompress(response):
-            response = self._decompress(response)
+        import traceback
+        try:
+            if self._should_decompress(response):
+                response = self._decompress(response)
+        except:
+            traceback.print_exc()
 
         return response
 
@@ -113,14 +117,11 @@ class HTTPGzipProcessor(urllib.request.BaseHandler):
         :return: True if the HTTP response contains headers that indicate the
                  content is compressed and this handler should decompress it
         """
+        # FIXME dmknght response.info() which get headers crashed
+        #  Reason: AttributeError: '_io.BufferedReader' object has no attribute 'clone'
+        #  Module: File "/usr/lib/python3.9/email/generator.py", line 97, in flatten
         for enc_hdr in response.info().get('Content-encoding'):
-            if 'gzip' in enc_hdr:
-                return True
-
-            if 'compress' in enc_hdr:
-                return True
-
-            if 'deflate' in enc_hdr:
+            if 'gzip' in enc_hdr or 'compress' in enc_hdr or 'deflate' in enc_hdr:
                 return True
 
         return False
