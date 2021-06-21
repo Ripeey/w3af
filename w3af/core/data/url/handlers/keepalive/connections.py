@@ -58,7 +58,6 @@ class UniqueID(object):
 
 
 class _HTTPConnection(http.client.HTTPConnection, UniqueID):
-
     def __init__(self, host, port=None, strict=None, timeout=socket._GLOBAL_DEFAULT_TIMEOUT):
         UniqueID.__init__(self)
         http.client.HTTPConnection.__init__(self, host, port, strict, timeout)
@@ -75,21 +74,17 @@ class _HTTPConnection(http.client.HTTPConnection, UniqueID):
         In systems that are running many instances of w3af and/or other network
         intensive software.
         """
-        self.sock = create_connection((self.host, self.port),
-                                      self.timeout,
-                                      self.source_address)
+        self.sock = create_connection((self.host, self.port), self.timeout, self.source_address)
 
         if self._tunnel_host:
             self._tunnel()
 
 
-def create_connection(address, timeout=socket._GLOBAL_DEFAULT_TIMEOUT,
-                      source_address=None):
+def create_connection(address, timeout=socket._GLOBAL_DEFAULT_TIMEOUT, source_address=None):
     """
     Extends socket.create_connection with the socket options to apply before
     calling connect().
     """
-
     host, port = address
     err = None
     for res in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
@@ -104,8 +99,9 @@ def create_connection(address, timeout=socket._GLOBAL_DEFAULT_TIMEOUT,
 
             if timeout is not socket._GLOBAL_DEFAULT_TIMEOUT:
                 sock.settimeout(timeout)
-            if source_address:
-                sock.bind(source_address)
+            # FIXME dmknght 2 lines bellow caused crashes because source_address was int value
+            # if source_address:
+            #     sock.bind(source_address)
             sock.connect(sa)
             return sock
 

@@ -47,8 +47,7 @@ class HTTPResponse(http.client.HTTPResponse):
     # modification from socket.py
 
     def __init__(self, sock, debuglevel=0, strict=0, method=None):
-        http.client.HTTPResponse.__init__(self, sock, debuglevel, strict=strict,
-                                      method=method)
+        http.client.HTTPResponse.__init__(self, sock, debuglevel, strict, method)
         self.fileno = sock.fileno
         self.code = None
         self._rbuf = ''
@@ -92,7 +91,7 @@ class HTTPResponse(http.client.HTTPResponse):
 
         max_file_size = cf.get('max_file_size') or None
         if max_file_size:
-            if self.length > max_file_size:
+            if self.length and self.length > max_file_size:
                 self.status = NO_CONTENT
                 self.reason = 'No Content'  # Reason-Phrase
                 self.close()
@@ -164,7 +163,7 @@ class HTTPResponse(http.client.HTTPResponse):
             self.msg = http.client.HTTPMessage(StringIO())
             return
 
-        self.msg = http.client.HTTPMessage(self.fp, 0)
+        self.msg = http.client.HTTPMessage(self.fp)
         if self.debuglevel > 0:
             for hdr in self.msg.headers:
                 print("header:", hdr, end=' ')
@@ -173,7 +172,7 @@ class HTTPResponse(http.client.HTTPResponse):
         self.msg.fp = None
 
         # are we using the chunked-style of transfer encoding?
-        tr_enc = self.msg.getheader('transfer-encoding')
+        tr_enc = self.msg.get('transfer-encoding')
         if tr_enc and tr_enc.lower() == "chunked":
             self.chunked = 1
             self.chunk_left = None
@@ -223,7 +222,7 @@ class HTTPResponse(http.client.HTTPResponse):
 
         :return: The content length (as integer)
         """
-        length = self.msg.getheader('content-length')
+        length = self.msg.get('content-length')
 
         if length is None:
             # This is a response where there is no content-length header,
@@ -330,14 +329,14 @@ class HTTPResponse(http.client.HTTPResponse):
         Overriding to add "max" support
         http://tools.ietf.org/id/draft-thomson-hybi-http-timeout-01.html#p-max
         """
-        keep_alive = self.msg.getheader('keep-alive')
+        keep_alive = self.msg.get('keep-alive')
 
         if keep_alive and keep_alive.lower().endswith('max=1'):
             # We close right before the "max" deadline
             debug('will_close = True due to max=1')
             return True
 
-        conn = self.msg.getheader('connection')
+        conn = self.msg.get('connection')
 
         # Is the remote end saying we need to keep the connection open?
         if conn and 'keep-alive' in conn.lower():
@@ -356,7 +355,7 @@ class HTTPResponse(http.client.HTTPResponse):
             return False
 
         # Proxy-Connection is a netscape hack.
-        pconn = self.msg.getheader('proxy-connection')
+        pconn = self.msg.get('proxy-connection')
         if pconn and 'keep-alive' in pconn.lower():
             return False
 
