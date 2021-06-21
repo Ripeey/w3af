@@ -113,8 +113,10 @@ class HTTPResponse(DiskItem):
             raise TypeError(msg % type(headers))
         
         if not isinstance(read, str):
-            raise TypeError('Invalid type %s for HTTPResponse ctor param read.'
-                            % type(read))
+            if isinstance(read, bytes):
+                read = read.decode("ISO-8859–1")
+            else:
+                raise TypeError('Invalid type %s for HTTPResponse ctor param read.' % type(read))
 
         self._charset = charset
         self._headers = None
