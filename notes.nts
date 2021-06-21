@@ -57,3 +57,6 @@
 # Fix table errors, some syntax
 
 # fix base str, fix parsers url, temp fix rfind issue, unicode fix, removed some files,
+
+# remove auto update, bug report, easy contribute, ui version update, version manager change
+
