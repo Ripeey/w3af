@@ -83,6 +83,7 @@ class LogSink(object):
             raise AttributeError(msg % name)
         return method
 
+
         # removeME - A log patch for temp (returns method)
         # This is a DEBUG part to find any crashes
 
@@ -92,3 +93,5 @@ class LogSink(object):
         #     logger.error_log(trace) if name in ('error', 'log_crash') else logger.log(trace)
         #     return method
         # return patchLog
+
+        return method
