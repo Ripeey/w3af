@@ -829,9 +829,7 @@ class URL(DiskItem):
 
         if self.has_params():
             try:
-                parsed_data = urlparse.parse_qs(self.params,
-                                                keep_blank_values=True,
-                                                strict_parsing=True)
+                parsed_data = urllib.urlparse.parse_qs(self.params, keep_blank_values=True, strict_parsing=True)
             except Exception:
                 if not ignore_exc:
                     msg = 'Strange things found when parsing params string: %s'
