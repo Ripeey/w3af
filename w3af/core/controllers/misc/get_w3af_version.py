@@ -84,7 +84,7 @@ def get_w3af_version_as_dict():
     """
     :return: All the version information in a dict
     """
-    return {'version': '%(version)s' % get_minimalistic_version()}
+    return {'version': '%s' % get_minimalistic_version()}
 
 def get_w3af_version():
     """
@@ -99,5 +99,5 @@ def get_w3af_version_minimal():
     :return: A string with the w3af version.
     """
 
-    return '%(version)s' % get_minimalistic_version()
+    return '%s' % get_minimalistic_version()
 
