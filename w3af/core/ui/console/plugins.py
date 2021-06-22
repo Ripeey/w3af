@@ -229,22 +229,22 @@ class pluginsTypeMenu(menu):
         enabled = self._w3af.plugins.get_enabled_plugins(self._name)
 
         if filter == 'all':
-            list = all
+            lst = all
         elif filter == 'enabled':
-            list = enabled
+            lst = enabled
         elif filter == 'disabled':
-            list = [p for p in all if p not in enabled]
+            lst = [p for p in all if p not in enabled]
         else:
-            list = []
+            lst = []
 
-        if len(list) == 0:
+        if len(lst) == 0:
             om.out.console('No plugins have status ' + filter)
             return
 
-        list.sort()
+        lst.sort()
         table = [['Plugin name', 'Status', 'Conf', 'Description']]
 
-        for plugin_name in list:
+        for plugin_name in lst:
             row = []
             plugin = self._w3af.plugins.get_plugin_inst(
                 self._name, plugin_name)
@@ -283,8 +283,7 @@ class pluginsTypeMenu(menu):
         if len(params) > 0:
             return []
 
-        return suggest([p for p in list(self._plugins.keys())
-                        if self._plugins[p] > 0], part)
+        return suggest([p for p in list(self._plugins.keys()) if self._plugins[p] > 0], part)
 
     def _para_list(self, params, part=''):
         if len(params) == 0:
