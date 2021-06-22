@@ -36,3 +36,4 @@ ipaddresses
 subprocess32
 blinker
 xdot
+https://github.com/Chinmay1743/halberd/archive/refs/heads/master.zip

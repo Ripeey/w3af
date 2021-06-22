@@ -153,8 +153,8 @@ class ConsoleUI(object):
                 self._context = callbackMenu(name, self, self._w3af,
                                              ctx, callback)
             else:
+                print('wait for rootmenu to load ...')
                 self._context = rootMenu(name, self, self._w3af)
-
             self._lastWasArrow = False
             self._showPrompt()
             self._active = True
@@ -376,7 +376,7 @@ class ConsoleUI(object):
             self._paste(prefix)
         elif len(completions) > 0:
             term.writeln()
-            for variant in [c[1] for c in completions]:
+            for variant in map(lambda c: c[1], completions):
                 term.write(variant + ' ')
             term.writeln()
 
@@ -449,7 +449,7 @@ class ConsoleUI(object):
 
         try:
             result = shlex.split(line)
-        except (ValueError, ve):
+        except ValueError as ve:
             term.write(str(ve) + '\n')
             return []
         else:
@@ -460,7 +460,6 @@ class ConsoleUI(object):
         for c in text:
             self._line.insert(self._position, c)
             self._position += 1
-
         term.write(text)
         term.write(''.join(tail))
         term.moveBack(len(tail))

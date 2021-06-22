@@ -79,7 +79,7 @@ class console(OutputPlugin):
         return ''.join(ch for ch in a_string if ch in string.printable)
 
     def _print_to_stdout(self, message, newline, severity=None):
-        message = self._make_printable(message)
+        message = self._make_printable(message.decode('utf-8'))
         if newline:
             message += '\r\n'
 

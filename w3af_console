@@ -184,7 +184,6 @@ def main():
     if res_cfg: console.rescfg()
     if not skip_disclaimer and not console.accept_disclaimer():
         return -4
-
     return console.sh()
 
 

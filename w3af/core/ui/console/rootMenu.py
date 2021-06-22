@@ -50,8 +50,8 @@ class rootMenu(menu):
     Main menu
     :author: Alexander Berezhnoy (alexander.berezhnoy |at| gmail.com)
     """
-    # Wait at most 20 seconds for the core to start the scan
-    MAX_WAIT_FOR_START = 20
+    # Wait at most 10 seconds for the core to start the scan
+    MAX_WAIT_FOR_START = 10
 
     def __init__(self, name, console, core, parent=None):
         menu.__init__(self, name, console, core, parent)
