@@ -66,3 +66,5 @@
 # Fix most cmp and cmp reverse and regex
 
 # Unicode issue Fix URL, fix version, list name conflict in plugins
+
+# fix small httplib, except syntax
