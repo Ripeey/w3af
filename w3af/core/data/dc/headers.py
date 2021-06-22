@@ -199,8 +199,8 @@ class Headers(NonRepeatKeyValueContainer):
         header_str_unicode = self._to_str_with_separators(': ', '\r\n')
         if header_str_unicode:
             header_str_unicode += '\r\n'
-
-        return header_str_unicode.encode('utf-8')
+        # removing .encode() py3 cause bytes
+        return header_str_unicode.encode()
 
     def __unicode__(self):
         """

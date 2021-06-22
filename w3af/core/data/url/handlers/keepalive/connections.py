@@ -215,8 +215,10 @@ class SSLNegotiatorConnection(http.client.HTTPSConnection, UniqueID):
         https://gist.github.com/flandr/74be22d1c3d7c1dfefdd
     """
     def __init__(self, *args, **kwargs):
+        print(args)
+        print(kwargs)
         UniqueID.__init__(self)
-        http.client.HTTPSConnection.__init__(self, *args, **kwargs)
+        http.client.HTTPSConnection.__init__(self, **kwargs, *args)
         self.host_port = '%s:%s' % (self.host, self.port)
 
     def connect(self):

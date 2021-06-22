@@ -121,7 +121,8 @@ class KeepAliveHandler(object):
         """
         Called by handler's url_open method.
         """
-        host = req.get_host()
+        # patchFIx get_host()
+        host = req.host
         if not host:
             raise urllib.error.URLError('no host given')
 
@@ -328,7 +329,8 @@ class KeepAliveHandler(object):
             return
 
         if isinstance(conn, HTTPConnection):
-            conn.sock.settimeout(request.get_timeout())
+            # patchFIX get_timeout()
+            conn.sock.settimeout(request.timeout)
 
     def _start_transaction(self, conn, req):
         """
@@ -430,7 +432,8 @@ class HTTPHandler(KeepAliveHandler, urllib.request.HTTPHandler):
         return self.do_open(req)
 
     def get_connection(self, request):
-        return HTTPConnection(request.get_host(), timeout=request.get_timeout())
+        # patchFIX get_host() get_timeout()
+        return HTTPConnection(request.host, timeout=request.timeout)
 
 
 class HTTPSHandler(KeepAliveHandler, urllib.request.HTTPSHandler):
@@ -458,10 +461,10 @@ class HTTPSHandler(KeepAliveHandler, urllib.request.HTTPSHandler):
             proxy_host, proxy_port = self._proxy.split(':')
             return ProxyHTTPSConnection(proxy_host,
                                         proxy_port,
-                                        timeout=request.get_timeout())
+                                        timeout=request.timeout)
         else:
-            return HTTPSConnection(request.get_host(),
-                                   timeout=request.get_timeout())
+            # patchFIX get_host() get_timeout()
+            return HTTPSConnection(request.host, timeout=request.timeout)
 
 
 

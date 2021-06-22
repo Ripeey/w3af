@@ -22,7 +22,8 @@ class CustomOpenerDirector(OpenerDirector):
 
         # This is what I want to remove and the reason to override
         # req.timeout = timeout
-        protocol = req.get_type()
+        # patchFIX get_type()
+        protocol = req.type
 
         # pre-process request
         meth_name = protocol+"_request"

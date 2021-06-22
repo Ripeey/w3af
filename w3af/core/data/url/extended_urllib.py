@@ -716,8 +716,9 @@ class ExtendedUrllib(object):
         self.setup()
 
         host = uri.get_domain()
-        timeout = self.get_timeout(host) if timeout is None else timeout
 
+        timeout = self.get_timeout(host) if timeout is None else timeout
+        
         req = HTTPRequest(uri, cookies=cookies, session=session,
                           cache=cache, data=data,
                           error_handling=error_handling, method='GET',
@@ -953,7 +954,8 @@ class ExtendedUrllib(object):
 
         # Evasion
         req = self._evasion(req)
-        original_url = req._Request__original
+        # patchFIX _Request__original
+        original_url = req._full_url
         original_url_inst = req.url_object
         
         try:

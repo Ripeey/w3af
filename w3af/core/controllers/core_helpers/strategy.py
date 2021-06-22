@@ -487,11 +487,13 @@ class CoreStrategy(object):
         while sent_requests < MAX_ERROR_COUNT * 1.5:
             for url in targets:
                 try:
+                    print('here ' + url)
                     self._w3af_core.uri_opener.GET(url, cache=False)
                 except ScanMustStopByUserRequest:
                     # Not a real error, the user stopped the scan
                     raise
                 except Exception as e:
+                    print(e)
                     dbg = 'Exception found during verify_target_server_up: "%s"'
                     om.out.debug(dbg % e)
 
