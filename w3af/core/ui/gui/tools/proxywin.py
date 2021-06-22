@@ -272,7 +272,7 @@ class ProxiedRequests(entries.RememberingWindow):
             self.proxy.set_what_to_trap(self.pref.get_value('proxy', 'trap'))
             self.proxy.set_what_not_to_trap(self.pref.get_value('proxy', 'notrap'))
             self.proxy.set_methods_to_trap(self.pref.get_value('proxy', 'methodtrap'))
-        except (BaseFrameworkException, w3):
+        except BaseFrameworkException as w3:
             self.show_alert(_("Invalid configuration!\n" + str(w3)))
 
         self._prev_ip_port = new_port

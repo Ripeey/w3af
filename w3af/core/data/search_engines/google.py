@@ -137,7 +137,7 @@ class GoogleAPISearch(object):
         if self._status == IS_NEW:
             try:
                 self._pages = self._do_google_search()
-            except (BaseFrameworkException, w3):
+            except BaseFrameworkException as w3:
                 om.out.debug('%s' % w3)
                 self._status = FINISHED_BAD
             else:

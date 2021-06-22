@@ -49,7 +49,7 @@ class SearchEngine(object):
         while True:
             try:
                 search_results = self.search(query, start, 10)
-            except (BaseFrameworkException, w3):
+            except BaseFrameworkException as w3:
                 om.out.debug(str(w3))
                 raise
             except Exception as e:
@@ -92,7 +92,7 @@ class SearchEngine(object):
         while True:
             try:
                 res_page = self.page_search(query, start, 10)
-            except (BaseFrameworkException, w3):
+            except BaseFrameworkException as w3:
                 om.out.debug(str(w3))
                 raise
             except Exception as e:
