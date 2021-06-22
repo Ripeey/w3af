@@ -259,13 +259,13 @@ class w3afCore(object):
         except threading.ThreadError as te:
             handle_threading_error(self.status.scans_completed, te)
 
-        except (HTTPRequestException, hre):
+        except HTTPRequestException as hre:
             # TODO: These exceptions should never reach this level
             #       adding the exception handler to raise them and fix any
             #       instances where it happens.
             raise
 
-        except (ScanMustStopByUserRequest, sbur):
+        except ScanMustStopByUserRequest as sbur:
             # I don't have to do anything here, since the user is the one that
             # requested the scanner to stop. From here the code continues at the
             # "finally" clause, which simply shows a message saying that the
@@ -281,7 +281,7 @@ class w3afCore(object):
             #
             raise
 
-        except (ScanMustStopException, wmse):
+        except ScanMustStopException as wmse:
             error = ('The following error was detected and could not be'
                      ' resolved:\n%s\n')
             om.out.error(error % wmse)
