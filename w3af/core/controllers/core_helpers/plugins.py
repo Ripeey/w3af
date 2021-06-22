@@ -262,6 +262,7 @@ class CorePlugins(object):
         # Now we filter to show only the directories
         plugin_types = [d for d in plugin_types
                         if os.path.isdir(os.path.join(ROOT_PATH, 'plugins', d))]
+        rem_from_list('__pycache__', plugin_types)
         rem_from_list('attack', plugin_types)
         rem_from_list('tests', plugin_types)
         rem_from_list('.git', plugin_types)
