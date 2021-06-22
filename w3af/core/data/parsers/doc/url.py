@@ -867,7 +867,7 @@ class URL(DiskItem):
         """
         :return: A string representation of self
         """
-        urlstr = smart_str(
+        urlstr = smart_unicode(
             self.url_string,
             self._encoding,
             errors=PERCENT_ENCODE

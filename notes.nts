@@ -64,3 +64,5 @@
 # Fix halberd
 # console fix perfecty!, fix syntax, fix pycache in plugins
 # Fix most cmp and cmp reverse and regex
+
+# Unicode issue Fix URL, fix version, list name conflict in plugins
