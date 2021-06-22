@@ -415,7 +415,7 @@ class Node(list):
             else:
                 a.append((attr, getattr(self, attr)))
         if len(self): a.append(("length", len(self)))
-        a.sort(lambda a, b: cmp(a[0], b[0]))
+        a.sort(key = lambda _: _[0])
         INDENTATION = "    "
         Node.indentLevel += 1
         n = Node.indentLevel

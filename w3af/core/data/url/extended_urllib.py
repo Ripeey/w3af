@@ -1485,10 +1485,7 @@ class ExtendedUrllib(object):
 
     def set_evasion_plugins(self, evasion_plugins):
         # I'm sorting evasion plugins based on priority
-        def sort_func(x, y):
-            return cmp(x.get_priority(), y.get_priority())
-        print(evasion_plugins)
-        evasion_plugins.sort(sort_func)
+        evasion_plugins.sort(key = lambda _: _.get_priority())
 
         # Save the info
         self._evasion_plugins = evasion_plugins

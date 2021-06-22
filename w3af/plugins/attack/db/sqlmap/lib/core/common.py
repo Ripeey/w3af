@@ -1867,7 +1867,7 @@ def showStaticWords(firstPage, secondPage):
 
     if commonWords:
         commonWords = list(commonWords)
-        commonWords.sort(lambda a, b: cmp(a.lower(), b.lower()))
+        commonWords.sort(key = lambda _: _.lower())
 
         for word in commonWords:
             if len(word) > 2:

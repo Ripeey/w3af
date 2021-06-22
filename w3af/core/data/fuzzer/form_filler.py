@@ -105,16 +105,6 @@ FILE_NAME_KNOWLEDGE = {
 }
 
 
-def sortfunc(x_obj, y_obj):
-    """
-    A simple sort function to sort the values of a list using the second item
-    of each item.
-
-    :return: The answer to: which one is greater?
-    """
-    return cmp(y_obj[1], x_obj[1])
-
-
 def get_match_rate(variable_name, variable_name_db):
     """
     :param variable_name: The name of the variable for which we want a value
@@ -165,8 +155,12 @@ def smart_fill(variable_name, db=PARAM_NAME_KNOWLEDGE, default='56'):
     #   We get here when there is not a 100% match and we need to analyze the
     #   possible_results
     #
+    """
+    sort()
+    :return: The answer to: which one is greater?
+    """
     if possible_results:
-        possible_results.sort(sortfunc)
+        possible_results.sort(key = lambda _: _[1], reverse = True)
         return possible_results[0][0]
 
     else:

@@ -123,12 +123,10 @@ class ConnectionManager(object):
         stats = self.get_connection_pool_stats(host_port)
         om.out.debug(stats)
 
-        # Connection in use time stats
-        def sort_by_time(c1, c2):
-            return cmp(c1.current_request_start, c2.current_request_start)
-
         in_use = list(self.get_all_used_for_host_port(host_port))
-        in_use.sort(sort_by_time)
+
+        # Connection in use time stats
+        in_use.sort(key = lambda _: _current_request_start)
         top_offenders = in_use[:5]
 
         connection_info = []

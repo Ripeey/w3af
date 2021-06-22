@@ -1,7 +1,3 @@
-def sort_by_value(a, b):
-    return cmp(b[1], a[1])
-
-
 class KeyValueOutput(object):
     def __init__(self, _function, title, values=None):
         self.function = _function
@@ -22,7 +18,7 @@ class KeyValueOutput(object):
 
         if isinstance(self.values, dict):
             values_list = list(self.values.items())
-            values_list.sort(sort_by_value)
+            values_list.sort(key = lambda _: _[1], reverse = True)
 
             for key, value in values_list:
                 if isinstance(value, list):
