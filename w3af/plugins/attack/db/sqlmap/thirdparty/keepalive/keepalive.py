@@ -389,7 +389,7 @@ class HTTPResponse(http.client.HTTPResponse):
     # modification from socket.py
 
 
-    def __init__(self, sock, debuglevel=0, strict=0, method=None):
+    def __init__(self, sock, debuglevel=0, method=None):
         if method: # the httplib in python 2.3 uses the method arg
             http.client.HTTPResponse.__init__(self, sock, debuglevel, method)
         else: # 2.2 doesn't
