@@ -55,7 +55,7 @@ class TestEvasion(unittest.TestCase):
         self.assertEqual(len(modified_req.url_object.querystring), 2)
         self.assertIn('id=1', str(modified_req.url_object.querystring))
         
-        data = parse_qs(modified_req.get_data())
+        data = parse_qs(modified_req.data)
         self.assertEqual(len(data), 2)
         self.assertIn('a=b', str(data))
 

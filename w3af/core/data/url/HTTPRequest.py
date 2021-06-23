@@ -183,7 +183,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
                  in the FuzzableRequest passed as parameter
         """
         host = fuzzable_request.get_url().get_domain()
-        data = fuzzable_request.get_data()
+        data = fuzzable_request.data
         headers = fuzzable_request.get_headers()
         headers.tokens_to_value()
 

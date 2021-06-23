@@ -166,7 +166,7 @@ class serialized_object(GrepPlugin):
         """
         headers = request.get_headers()
         query_string = request.get_uri().get_querystring()
-        dc = dc_from_hdrs_post(headers, request.get_data())
+        dc = dc_from_hdrs_post(headers, request.data)
 
         cookie_str, _ = headers.iget('cookie', '')
         cookie_dc = Cookie(cookie_str)

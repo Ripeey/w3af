@@ -61,12 +61,12 @@ class private_ip(GrepPlugin):
         if self._ignore_if_match is None:
             self._generate_ignores(response)
 
-        if (request.get_url(), request.get_data()) in self._already_inspected:
+        if (request.get_url(), request.data) in self._already_inspected:
             return
 
         # Only run this once for each combination of URL and data sent to
         # that URL
-        self._already_inspected.add((request.get_url(), request.get_data()))
+        self._already_inspected.add((request.get_url(), request.data))
         
         self._analyze_headers(request, response)
         self._analyze_html(request, response)
