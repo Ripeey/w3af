@@ -216,7 +216,8 @@ class SSLNegotiatorConnection(http.client.HTTPSConnection, UniqueID):
         print(args)
         print(kwargs)
         UniqueID.__init__(self)
-        http.client.HTTPSConnection.__init__(self, **kwargs, *args)
+        # Fixed scrict cause multi value TypeError
+        http.client.HTTPSConnection.__init__(self, *args, **kwargs)
         self.host_port = '%s:%s' % (self.host, self.port)
 
     def connect(self):
