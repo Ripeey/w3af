@@ -86,7 +86,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
 
         # Call the base class constructor
         urllib.request.Request.__init__(self, url.url_encode(), data,
-                                 headers, origin_req_host, unverifiable)
+                                 headers, origin_req_host, unverifiable, self.method)
         RequestMixIn.__init__(self)
     
     def __eq__(self, other):
