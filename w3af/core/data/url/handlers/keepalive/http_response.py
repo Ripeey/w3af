@@ -1,10 +1,13 @@
 import http.client
+import email.parser
 from io import StringIO
 
 from .utils import debug
 from w3af.core.data.constants.response_codes import NO_CONTENT
 from w3af.core.data.kb.config import cf
 
+# Patch HTTPMessage parser
+HTTPMessage = email.parser.Parser(_class = http.client.HTTPMessage).parse
 
 def close_on_error(read_meth):
     """
@@ -157,10 +160,12 @@ class HTTPResponse(http.client.HTTPResponse):
             self.length = None
             self.chunked = 0
             self.will_close = 1
-            self.msg = http.client.HTTPMessage(StringIO())
+            
+            self.msg = HTTPMessage(StringIO())
             return
-
-        self.msg = http.client.HTTPMessage(self.fp, 0)
+        # removeME
+        self.msg = HTTPMessage(self.fp)
+        print(self.msg)
         if self.debuglevel > 0:
             for hdr in self.msg.headers:
                 print("header:", hdr, end=' ')
