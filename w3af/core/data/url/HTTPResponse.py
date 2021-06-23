@@ -112,23 +112,26 @@ class HTTPResponse(DiskItem):
             msg = 'Invalid type %s for HTTPResponse ctor param headers.'
             raise TypeError(msg % type(headers))
         
-        if not isinstance(read, str):
+        # Switch to raw body (bytes instead of str)
+        if not isinstance(read, bytes):
             raise TypeError('Invalid type %s for HTTPResponse ctor param read.'
                             % type(read))
 
         self._charset = charset
         self._headers = None
 
-        if set_body and isinstance(read, str):
+        # Now raw_body is bytes and body is str
+        if set_body and isinstance(read, bytes):
             # We use this case for deserialization via from_dict()
             #
             # The goal is to prevent the body to be analyzed for charset data
             # once again, since it was already done during to_dict() in the
             # get_body() call.
-            self._body = self._raw_body = read
+            self._raw_body = read
+            self._body = smart_unicode(read)
         else:
             self._body = None
-            self._raw_body = read
+            self._raw_body = read # if binary_response else smart_unicode(read) not yet
 
         self._binary_response = binary_response
         self._content_type = None
@@ -174,6 +177,7 @@ class HTTPResponse(DiskItem):
         :return: A HTTPResponse instance
         """
         resp = httplibresp
+        # body will be in bytes
         code, msg, hdrs, body = (resp.code, resp.msg, resp.info(), resp.read())
         hdrs = Headers(list(hdrs.items()))
 

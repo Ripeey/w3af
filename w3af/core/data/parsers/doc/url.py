@@ -752,8 +752,7 @@ class URL(DiskItem):
                  encoded characters.
         """
         unquoted_url = urllib.parse.unquote(str(self))
-        enc = self._encoding
-        return URL(unquoted_url.decode(enc, 'ignore'), enc)
+        return URL(unquoted_url, self._encoding)
 
     def url_encode(self):
         """
@@ -868,11 +867,11 @@ class URL(DiskItem):
         :return: A string representation of self
         """
         urlstr = smart_unicode(
-            self.url_string,
+            self.url_string.replace(' ', '%20'),
             self._encoding,
             errors=PERCENT_ENCODE
         )
-        return urlstr.replace(' ', '%20')
+        return urlstr
 
     def __unicode__(self):
         """

@@ -70,6 +70,7 @@
 # fix small httplib, except syntax
 # more except and url parse fix
 # added patchFIX for unsure fixes
+# patchFIX removing .encode()
 # patchFIX (request/req)
 	- _Request__original: _full_url
 	- get_host()  : host 
@@ -86,3 +87,4 @@
 # Remove HTTPMessage patch and added new actual fix-1 : updated based on py3 http/client
 # byte fix and more fix-1
 # Fix gzip None type error, fix urllib.parse, remove url-old backup
+# patchFIX bytes from str for raw_body HTTPResponse
