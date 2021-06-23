@@ -493,7 +493,8 @@ class CoreStrategy(object):
                     # Not a real error, the user stopped the scan
                     raise
                 except Exception as e:
-                    print(e)
+                    import traceback
+                    traceback.print_exc()
                     dbg = 'Exception found during verify_target_server_up: "%s"'
                     om.out.debug(dbg % e)
 

@@ -751,7 +751,7 @@ class URL(DiskItem):
         :return: A URL that represents the current URL without URL
                  encoded characters.
         """
-        unquoted_url = urllib.unquote(str(self))
+        unquoted_url = urllib.parse.unquote(str(self))
         enc = self._encoding
         return URL(unquoted_url.decode(enc, 'ignore'), enc)
 

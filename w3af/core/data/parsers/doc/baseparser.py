@@ -82,7 +82,7 @@ class BaseParser(object):
         unicode being u'http://host.tld/é' the final result.
 
         Something small to remember:
-        >>> urllib.unquote('ind%c3%a9x.html').decode('utf-8').encode('utf-8') \
+        >>> urllib.parse.unquote('ind%c3%a9x.html').decode('utf-8').encode('utf-8') \
         == 'ind\xc3\xa9x.html'
         True
 

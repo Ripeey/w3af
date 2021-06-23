@@ -56,7 +56,7 @@ def main():
             usage()
             sys.exit()
     else:
-        print( urllib.unquote_plus( decode ) )
+        print( urllib.parse.unquote_plus( decode ) )
         
 if __name__ == "__main__":
     main()
