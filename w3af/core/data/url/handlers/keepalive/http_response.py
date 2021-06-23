@@ -46,7 +46,7 @@ class HTTPResponse(http.client.HTTPResponse):
                                       method=method)
         self.fileno = sock.fileno
         self.code = None
-        self._rbuf = ''
+        self._rbuf = b''
         self._rbufsize = 8096
         self._handler = None     # inserted by the handler later
         self._host = None        # (same)
@@ -263,7 +263,7 @@ class HTTPResponse(http.client.HTTPResponse):
             # This like fixes the bug with title "GET is much faster than HEAD".
             # https://sourceforge.net/tracker2/?func=detail&aid=2202532&group_id=170274&atid=853652
             self.close()
-            return ''
+            return b''
 
         if self._multiread is None:
             # read all
@@ -279,7 +279,7 @@ class HTTPResponse(http.client.HTTPResponse):
                 return s
         else:
             s = self._rbuf + self._multiread
-            self._rbuf = ''
+            self._rbuf = b''
             return s
 
     def readline(self, limit=-1):
