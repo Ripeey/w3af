@@ -213,8 +213,6 @@ class SSLNegotiatorConnection(http.client.HTTPSConnection, UniqueID):
         https://gist.github.com/flandr/74be22d1c3d7c1dfefdd
     """
     def __init__(self, *args, **kwargs):
-        print(args)
-        print(kwargs)
         UniqueID.__init__(self)
         # Fixed scrict cause multi value TypeError
         http.client.HTTPSConnection.__init__(self, *args, **kwargs)

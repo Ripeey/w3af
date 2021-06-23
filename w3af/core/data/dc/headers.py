@@ -30,8 +30,6 @@ from w3af.core.data.dc.utils.token import DataToken
 class Headers(NonRepeatKeyValueContainer):
     """
     This class represents the set of HTTP request headers.
-
-    :author: Javier Andalia (jandalia AT gmail DOT com)
     """
     def __init__(self, init_val=(), encoding=UTF8):
         cleaned_vals = self.clean_values(init_val)
@@ -199,8 +197,8 @@ class Headers(NonRepeatKeyValueContainer):
         header_str_unicode = self._to_str_with_separators(': ', '\r\n')
         if header_str_unicode:
             header_str_unicode += '\r\n'
-        # removing .encode() py3 cause bytes
-        return header_str_unicode.encode()
+        # patchFIX removing .encode() py3 cause bytes
+        return header_str_unicode
 
     def __unicode__(self):
         """

@@ -1,13 +1,9 @@
 import http.client
-import email.parser
 from io import StringIO
 
 from .utils import debug
 from w3af.core.data.constants.response_codes import NO_CONTENT
 from w3af.core.data.kb.config import cf
-
-# Patch HTTPMessage parser
-HTTPMessage = email.parser.Parser(_class = http.client.HTTPMessage).parse
 
 def close_on_error(read_meth):
     """
@@ -125,10 +121,12 @@ class HTTPResponse(http.client.HTTPResponse):
         return s
 
     def begin(self):
+        """
+        Updated as 3.9 http/client.py
+        """
         if self.msg is not None:
             # we've already started reading the response
             return
-
         # read until we get a non-100 response
         while True:
             version, status, reason = self._read_status()
@@ -136,14 +134,9 @@ class HTTPResponse(http.client.HTTPResponse):
                 break
             # skip the header from the 100 response
             while True:
-                skip = self.fp.readline(http.client._MAXLINE + 1)
-                if len(skip) > http.client._MAXLINE:
-                    raise http.client.LineTooLong("header line")
-                skip = skip.strip()
-                if not skip:
-                    break
+                skipped_headers = http.client._read_headers(self.fp)
                 if self.debuglevel > 0:
-                    print("header:", skip)
+                    print("header:", skipped_headers)
 
         self.status = status
         self.reason = reason.strip()
@@ -156,41 +149,47 @@ class HTTPResponse(http.client.HTTPResponse):
         else:
             raise http.client.UnknownProtocol(version)
 
+        # remove in python 3.9 but will keep it for no reason (who is this old anyway?)
+
         if self.version == 9:
             self.length = None
             self.chunked = 0
             self.will_close = 1
             
-            self.msg = HTTPMessage(StringIO())
+            self.msg = http.client.parse_headers(StringIO())
             return
-        # removeME
-        self.msg = HTTPMessage(self.fp)
-        print(self.msg)
-        if self.debuglevel > 0:
-            for hdr in self.msg.headers:
-                print("header:", hdr, end=' ')
 
+        # not sure about self.headers will have to check py2.7
+        self.headers = self.msg = http.client.parse_headers(self.fp)
+        if self.debuglevel > 0:
+            for hdr, val in self.headers.items():
+                print("header:", hdr + ":", val)
+        
+        # I think by default now it doesn't
+        """
         # don't let the msg keep an fp
         self.msg.fp = None
+        """
 
         # are we using the chunked-style of transfer encoding?
-        tr_enc = self.msg.getheader('transfer-encoding')
+        tr_enc = self.headers.get("transfer-encoding")
         if tr_enc and tr_enc.lower() == "chunked":
-            self.chunked = 1
+            self.chunked = True
             self.chunk_left = None
         else:
-            self.chunked = 0
+            self.chunked = False
 
         # will the connection close at the end of the response?
         self.will_close = self._check_close()
 
         # do we have a Content-Length?
         # NOTE: RFC 2616, S4.4, #3 says we ignore this if tr_enc is "chunked"
-        length = self._get_content_length()
+        self.length = None
+        length = self.headers.get("content-length")
         if length and not self.chunked:
             try:
                 self.length = int(length)
-            except (ValueError, TypeError):
+            except ValueError:
                 self.length = None
             else:
                 if self.length < 0:  # ignore nonsensical negative lengths
@@ -210,8 +209,9 @@ class HTTPResponse(http.client.HTTPResponse):
         if not self.will_close and \
            not self.chunked and \
            self.length is None:
-            self.will_close = 1
-
+            self.will_close = True
+    # Probably dont need anymore
+    '''
     def _get_content_length(self):
         """
         Some very strange sites will return two content-length headers. By
@@ -224,7 +224,7 @@ class HTTPResponse(http.client.HTTPResponse):
 
         :return: The content length (as integer)
         """
-        length = self.msg.getheader('content-length')
+        length = self.headers.get('content-length')
 
         if length is None:
             # This is a response where there is no content-length header,
@@ -234,7 +234,7 @@ class HTTPResponse(http.client.HTTPResponse):
         split = length.split(',')
         split = [int(cl) for cl in split]
         return min(split)
-
+    '''
     def close(self):
         # First call parent's close()
         http.client.HTTPResponse.close(self)
@@ -331,14 +331,14 @@ class HTTPResponse(http.client.HTTPResponse):
         Overriding to add "max" support
         http://tools.ietf.org/id/draft-thomson-hybi-http-timeout-01.html#p-max
         """
-        keep_alive = self.msg.getheader('keep-alive')
+        keep_alive = self.headers.get('keep-alive')
 
         if keep_alive and keep_alive.lower().endswith('max=1'):
             # We close right before the "max" deadline
             debug('will_close = True due to max=1')
             return True
 
-        conn = self.msg.getheader('connection')
+        conn = self.headers.get('connection')
 
         # Is the remote end saying we need to keep the connection open?
         if conn and 'keep-alive' in conn.lower():
@@ -357,7 +357,7 @@ class HTTPResponse(http.client.HTTPResponse):
             return False
 
         # Proxy-Connection is a netscape hack.
-        pconn = self.msg.getheader('proxy-connection')
+        pconn = self.headers.get('proxy-connection')
         if pconn and 'keep-alive' in pconn.lower():
             return False
 
