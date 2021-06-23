@@ -74,7 +74,10 @@
 	- _Request__original: _full_url
 	- get_host()  : host 
   	- get_timeout() : timeout
+  	- get_selector() : selector
 
 # Strict removed based on 3.9 for multi value TypeError read : http.client.HTTPConnection
 
 # test push
+
+# fix selector from get_selector

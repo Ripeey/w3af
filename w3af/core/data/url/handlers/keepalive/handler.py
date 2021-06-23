@@ -233,7 +233,8 @@ class KeepAliveHandler(object):
         resp.set_wait_time(elapsed)
 
         msg = "HTTP response: %s - %s - %s with %s in %s seconds"
-        args = (req.get_selector(), resp.status, resp.reason, conn, elapsed)
+        # patchFIX get_selector()
+        args = (req.selector, resp.status, resp.reason, conn, elapsed)
         debug(msg % args)
 
         return resp
@@ -337,9 +338,9 @@ class KeepAliveHandler(object):
         The real workhorse.
         """
         self._update_socket_timeout(conn, req)
-
+        # patchFIX get_selector()
         conn.putrequest(req.get_method(),
-                        req.get_selector(),
+                        req.selector,
                         skip_host=1,
                         skip_accept_encoding=1)
 
