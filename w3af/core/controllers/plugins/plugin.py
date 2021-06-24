@@ -188,6 +188,12 @@ class Plugin(Configurable):
         """
         return self.__class__.__name__ == other.__class__.__name__
 
+    def __hash__(self):
+        """
+        This patchFIX is required because python3 needs both eq and hash override
+        """
+        return id(self)>>4
+
     def __repr__(self):
         return '<%s.%s>' % (self.get_type(), self.get_name())
 

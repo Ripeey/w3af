@@ -93,3 +93,6 @@
 
 # Add pserser/doc URL __slots__ back but/except easy access
 # patchFIX encoding issues in hash gens
+# more queue import fix
+
+# patchFIX type error unhashable sets plugins

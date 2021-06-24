@@ -237,7 +237,7 @@ class CrawlInfrastructure(BaseConsumer):
 
             if not self._running:
                 return
-
+            # patchFIX Type error hash set()
             if plugin in self._disabled_plugins:
                 continue
 

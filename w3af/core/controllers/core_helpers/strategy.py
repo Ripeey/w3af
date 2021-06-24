@@ -134,9 +134,10 @@ class CoreStrategy(object):
             self._fuzzable_request_router()
 
         except Exception as e:
+            # removeME
             import traceback
             traceback.print_exc()
-            
+
             om.out.debug('strategy.start() found exception "%s"' % e)
             exc_info = sys.exc_info()
 
@@ -380,7 +381,7 @@ class CoreStrategy(object):
 
             try:
                 result_item = url_producer.get_result(timeout=0.1)
-            except (TimeoutError, Queue.Empty) as _:
+            except (TimeoutError, queue.Empty) as _:
                 if not url_producer.has_pending_work():
                     # This consumer is saying that it doesn't have any
                     # pending or in progress work
@@ -436,7 +437,7 @@ class CoreStrategy(object):
             while True:
                 try:
                     result_item = other_consumer.get_result_nowait()
-                except Queue.Empty:
+                except queue.Empty:
                     break
                 else:
                     if isinstance(result_item, ExceptionData):
