@@ -106,11 +106,11 @@ class Headers(NonRepeatKeyValueContainer):
         :param default: The default value to return if the header_name is not found
         :return: The value for a header given a name (be case insensitive)
         """
-        lower = string.lower
-        lower_header_name = lower(header_name)
+
+        lower_header_name = header_name.lower()
 
         for stored_header_name, value in self.items():
-            if lower_header_name == lower(stored_header_name):
+            if lower_header_name == stored_header_name.lower():
                 return value, stored_header_name
 
         return default, None

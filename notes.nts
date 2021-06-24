@@ -88,3 +88,5 @@
 # byte fix and more fix-1
 # Fix gzip None type error, fix urllib.parse, remove url-old backup
 # patchFIX bytes from str for raw_body HTTPResponse
+# patchFIX gen_hash encoding type error
+# more get_data fix

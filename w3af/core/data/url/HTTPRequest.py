@@ -161,7 +161,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         sdict['method'] = self.get_method()
         sdict['uri'] = self.get_uri().url_string
         sdict['headers'] = dict(self.get_headers())
-        sdict['data'] = self.get_data()
+        sdict['data'] = self.data
         sdict['cookies'] = self.cookies
         sdict['session'] = self.session
         sdict['cache'] = self.get_from_cache
