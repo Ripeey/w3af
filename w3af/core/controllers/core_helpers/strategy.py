@@ -134,7 +134,9 @@ class CoreStrategy(object):
             self._fuzzable_request_router()
 
         except Exception as e:
-
+            import traceback
+            traceback.print_exc()
+            
             om.out.debug('strategy.start() found exception "%s"' % e)
             exc_info = sys.exc_info()
 
@@ -487,14 +489,13 @@ class CoreStrategy(object):
         while sent_requests < MAX_ERROR_COUNT * 1.5:
             for url in targets:
                 try:
+                    # removeME
                     print('here ' + url)
                     self._w3af_core.uri_opener.GET(url, cache=False)
                 except ScanMustStopByUserRequest:
                     # Not a real error, the user stopped the scan
                     raise
                 except Exception as e:
-                    import traceback
-                    traceback.print_exc()
                     dbg = 'Exception found during verify_target_server_up: "%s"'
                     om.out.debug(dbg % e)
 

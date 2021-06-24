@@ -20,8 +20,9 @@ def gen_hash(request):
                               headers_1,
                               headers_2,
                               req.data or '')
-    # could be DEFAULT_ENCODING but we keeping 'unicode_escape'
-    return hashlib.md5(the_str.encode('unicode_escape')).hexdigest()
+    # patchFIX encoding
+    # could be DEFAULT_ENCODING but we removing 'unicode_escape' to prevent conflict
+    return hashlib.md5(the_str.encode(DEFAULT_ENCODING)).hexdigest()
 
 
 # Showing TypeError: Unicode-objects must be encoded before hashing so we doing bytes all [patchFIX]

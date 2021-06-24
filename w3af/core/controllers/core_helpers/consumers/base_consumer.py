@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import os
 import sys
 import time
+import codecs
 
 from queue import Empty
 from functools import wraps
@@ -45,7 +46,7 @@ def task_decorator(method):
     
     @wraps(method)
     def _wrapper(self, *args, **kwds):
-        rnd_id = os.urandom(32).encode('hex')
+        rnd_id = codecs.encode(os.urandom(32), 'hex').decode()
         function_id = '%s_%s' % (method.__name__, rnd_id)
 
         self._add_task(function_id)
@@ -485,7 +486,7 @@ class BaseConsumer(Process):
         while True:
             try:
                 self.in_queue.get_nowait()
-            except Empty:
+            except queue.Empty:
                 break
             else:
                 self.in_queue.task_done()
@@ -499,7 +500,7 @@ class BaseConsumer(Process):
         while True:
             try:
                 self.out_queue.get_nowait()
-            except Empty:
+            except queue.Empty:
                 break
             else:
                 self.out_queue.task_done()

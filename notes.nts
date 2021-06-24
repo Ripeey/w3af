@@ -90,3 +90,6 @@
 # patchFIX bytes from str for raw_body HTTPResponse
 # patchFIX gen_hash encoding type error
 # more get_data fix
+
+# Add pserser/doc URL __slots__ back but/except easy access
+# patchFIX encoding issues in hash gens

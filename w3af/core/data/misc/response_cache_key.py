@@ -27,7 +27,7 @@ from w3af.core.data.misc.lru3 import SynchronizedLRUDict
 
 from w3af.core.controllers.core_helpers.not_found.response import FourOhFourResponse
 from w3af.core.data.misc.xml_bones import get_xml_bones
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_str_ignore, smart_unicode_ignore
 
 
 def get_response_cache_key(http_response,
@@ -68,10 +68,12 @@ def get_response_cache_key(http_response,
     #
     # Calculate the hash using all the captured information
     #
+    
+    # patchFIX encoding mess before smart_str_ignore
     key = ''.join([str(http_response.get_code()),
-                   smart_str_ignore(normalized_path),
+                   smart_unicode_ignore(normalized_path),
                    str(headers),
-                   smart_str_ignore(body)])
+                   smart_unicode_ignore(body)])
 
     return quick_hash(key)
 

@@ -99,7 +99,7 @@ class CrawlInfrastructure(BaseConsumer):
                 # wait for .join()
                 continue
 
-            except Queue.Empty:
+            except queue.Empty:
                 # pylint: disable=E1120
                 try:
                     self._route_all_plugin_results()
@@ -254,7 +254,7 @@ class CrawlInfrastructure(BaseConsumer):
 
             try:
                 fuzzable_request = plugin.output_queue.get_nowait()
-            except Queue.Empty:
+            except queue.Empty:
                 break
 
             else:
@@ -299,7 +299,7 @@ class CrawlInfrastructure(BaseConsumer):
         while True:
             try:
                 self.in_queue.get_nowait()
-            except Queue.Empty:
+            except queue.Empty:
                 break
             else:
                 self.in_queue.task_done()

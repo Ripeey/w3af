@@ -39,7 +39,7 @@ from w3af.core.data.db.disk_item import DiskItem
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.request.request_mixin import RequestMixIn
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_str_ignore, smart_unicode_ignore
 
 
 ALL_CHARS = ''.join(chr(i) for i in range(256))
@@ -319,8 +319,9 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         return False
 
     def get_hash(self):
-        raw_http_request = self.dump()
-        return hashlib.md5(raw_http_request).hexdigest()
+        # patchFIX encoding mess
+        raw_http_request = smart_unicode_ignore(self.dump())
+        return hashlib.md5(raw_http_request.encode(DEFAULT_ENCODING)).hexdigest()
 
     def __hash__(self):
         return hash(str(self.get_uri()) + self.get_data())

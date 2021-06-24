@@ -173,6 +173,8 @@ def smart_str(s,
 def smart_str_ignore(s, encoding=DEFAULT_ENCODING):
     return smart_str(s, encoding=encoding, errors='ignore')
 
+def smart_unicode_ignore(s, encoding=DEFAULT_ENCODING):
+    return smart_unicode(s, encoding=encoding, errors='ignore')
 
 def is_known_encoding(encoding):
     """
