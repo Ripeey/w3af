@@ -300,7 +300,7 @@ class DiskList(object):
         return r[0]
 
     def __unicode__(self):
+        # patchFIX removed str(i)
         return '<DiskList [%s]>' % ', '.join([str(i) for i in self])
     
-    __str__ = __unicode__
-
+    __str__ = __unicode__ 

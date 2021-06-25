@@ -71,4 +71,4 @@ class DiskSet(DiskList):
     def __unicode__(self):
         return '<DiskSet [%s]>' % ', '.join([str(i) for i in self])
     
-    __str__ = __unicode__
+    __str__ = __unicode__  

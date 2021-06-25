@@ -342,9 +342,7 @@ class CrawlInfrastructure(BaseConsumer):
 
         # Sort URLs
         tmp_url_list = list(set(kb.kb.get_all_known_urls()))
-
         all_known_fuzzable_requests = kb.kb.get_all_known_fuzzable_requests()
-
         msg = 'Found %s URLs and %s different injections points.'
         args = (len(tmp_url_list), len(all_known_fuzzable_requests))
         om.out.information(msg % args)
@@ -358,7 +356,6 @@ class CrawlInfrastructure(BaseConsumer):
 
         # Now I simply print the list that I have after the filter.
         om.out.information('The list of fuzzable requests is:')
-
         tmp_fr = ['- %s' % str(fr) for fr in all_known_fuzzable_requests]
         tmp_fr.sort()
         list(map(om.out.information, tmp_fr))

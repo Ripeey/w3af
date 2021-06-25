@@ -96,3 +96,5 @@
 # more queue import fix
 
 # patchFIX type error unhashable sets plugins
+
+# patchFIX craw_infrastructure summary (Type error need str found bytes) on console (we shifted fuzzable strbytes to str for now)

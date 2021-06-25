@@ -325,7 +325,9 @@ class FuzzableRequest(RequestMixIn, DiskItem):
 
     def __hash__(self):
         return hash(str(self.get_uri()) + self.get_data())
-
+    # patchFIX show_summary byte instead of str (TypeError)
+    # if ^ this doesnt work will shift to complete bytes and convert to str at show_summary() crawl_infrastructure
+    # instead of here and probably for every other plugins
     def __str__(self):
         """
         :return: A string representation of this fuzzable request.
@@ -347,10 +349,10 @@ class FuzzableRequest(RequestMixIn, DiskItem):
             output = long_fmt % (self.get_method(), self.get_url(),
                                  dc_type, jparams)
 
-        return output.encode(DEFAULT_ENCODING)
+        return output
 
-    def __unicode__(self):
-        return str(self).decode(encoding=DEFAULT_ENCODING, errors='ignore')
+    def __bytes__(self):
+        return str(self).encode(encoding=DEFAULT_ENCODING, errors='ignore')
 
     def __repr__(self):
         return '<fuzzable request | %s | %s>' % (self.get_method(),
