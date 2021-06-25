@@ -36,9 +36,8 @@ GOOGLE_SORRY_PAGES = {'http://www.google.com/support/bin/answer.py?answer=86640'
                       'Our systems have detected unusual traffic from'}
 
 # Set the order in which the Google API searchers will be called by the
-# google class
-GOOGLE_PRIORITY_SEARCH_SEQ = ('GAjaxSearch',
-                              'GMobileSearch',
+# google class, py3 'GAjaxSearch' removing as no longer free
+GOOGLE_PRIORITY_SEARCH_SEQ = ('GMobileSearch',
                               'GStandardSearch',)
 
 
@@ -179,7 +178,8 @@ class GoogleAPISearch(object):
         """
         pass
 
-
+# py3 'GAjaxSearch' removing as no longer free
+'''
 class GAjaxSearch(GoogleAPISearch):
     """
     Search the web using Google's AJAX API. Note that Google restricts
@@ -259,7 +259,7 @@ class GAjaxSearch(GoogleAPISearch):
             links += [GoogleResult(URL(res['url'])) for res in results]
 
         return links[:self._count]
-
+'''
 
 class GStandardSearch(GoogleAPISearch):
     """
