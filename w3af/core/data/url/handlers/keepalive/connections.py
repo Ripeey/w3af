@@ -32,6 +32,7 @@ import OpenSSL
 from .http_response import HTTPResponse
 from .utils import debug
 
+from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.controllers.exceptions import HTTPRequestException
 from w3af.core.data.url.openssl_wrapper.ssl_wrapper import wrap_socket
 
@@ -191,13 +192,13 @@ class ProxyHTTPConnection(_HTTPConnection):
             if line == '\r\n':
                 break
 
+# Deprecated : OpenSSL.SSL.SSLv3_METHOD, OpenSSL.SSL.SSLv2_METHOD
 
-_protocols = [OpenSSL.SSL.SSLv3_METHOD,
-              OpenSSL.SSL.TLSv1_METHOD,
+_protocols = [OpenSSL.SSL.TLSv1_METHOD,
               OpenSSL.SSL.SSLv23_METHOD,
               OpenSSL.SSL.TLSv1_1_METHOD,
               OpenSSL.SSL.TLSv1_2_METHOD,
-              OpenSSL.SSL.SSLv2_METHOD]
+              ]
 
 # Avoid race conditions
 _protocols_lock = threading.RLock()
@@ -253,10 +254,11 @@ class SSLNegotiatorConnection(http.client.HTTPSConnection, UniqueID):
                                    keyfile=self.key_file,
                                    certfile=self.cert_file,
                                    ssl_version=protocol,
-                                   server_hostname=self.host,
+                                   server_hostname=self.host.encode(DEFAULT_ENCODING),
                                    timeout=self.timeout)
         except ssl.SSLError as ssl_exc:
             msg = "SSL connection error occurred with protocol %s: '%s'"
+            # debug
             debug(msg % (protocol, ssl_exc.__class__.__name__))
 
             # Always close the tcp/ip connection on error

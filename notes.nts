@@ -100,3 +100,5 @@
 # patchFIX craw_infrastructure summary (Type error need str found bytes) on console (we shifted fuzzable strbytes to str for now)
 
 # remove google ajax search as its no longer free and valid, other two GOOGLE_PRIORITY_SEARCH_SEQ (see : w3af/core/data/search_engines/google.py) are kept prior now.
+
+# patchFIX remove socket.sslerror
