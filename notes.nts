@@ -102,3 +102,5 @@
 # remove google ajax search as its no longer free and valid, other two GOOGLE_PRIORITY_SEARCH_SEQ (see : w3af/core/data/search_engines/google.py) are kept prior now.
 
 # patchFIX remove socket.sslerror
+
+# patchFIX makefile buff=0 as default in py2.7 but not from py3.9 check client.py, patchFIX rewrite makefile as _fileobject doesnt exist
