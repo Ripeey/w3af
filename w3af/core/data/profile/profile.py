@@ -54,7 +54,7 @@ class profile(object):
         # w3af needs the value as it is
         optionxform = lambda opt: opt
 
-        self._config = configparser.ConfigParser()
+        self._config = configparser.ConfigParser(interpolation = None)
         # Set the new optionxform function
         self._config.optionxform = optionxform
 
@@ -295,7 +295,6 @@ class profile(object):
             else:
                 if _type == plugin_type and name == plugin_name:
                     for option in self._config.options(section):
-                        print(option, section)
                         try:
                             value = self._config.get(section, option)
                         except KeyError:
