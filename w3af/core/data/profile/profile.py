@@ -286,7 +286,6 @@ class profile(object):
         plugin = 'w3af.plugins.%s.%s' % (plugin_type, plugin_name)
         plugin_instance = factory(plugin)
         options_list = plugin_instance.get_options()
-
         for section in self._config.sections():
             # Section is something like audit.xss or crawl.web_spider
             try:
@@ -296,6 +295,7 @@ class profile(object):
             else:
                 if _type == plugin_type and name == plugin_name:
                     for option in self._config.options(section):
+                        print(option, section)
                         try:
                             value = self._config.get(section, option)
                         except KeyError:
