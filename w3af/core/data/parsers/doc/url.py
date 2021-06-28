@@ -537,7 +537,7 @@ class URL(DiskItem):
         Example usage available in test_url.py
         """
         resp_encoding = encoding if encoding is not None else self._encoding
-        joined_url = urlparse.urljoin(self.url_string, relative)
+        joined_url = urllib.parse.urljoin(self.url_string, relative)
         jurl_obj = URL(joined_url, resp_encoding)
 
         # There is no need to call normalize_url here, since it is called in the

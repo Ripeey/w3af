@@ -872,7 +872,6 @@ class DBKnowledgeBase(BasicKnowledgeBase):
             msg = ('add_fuzzable_request requires a FuzzableRequest as'
                    ' parameter, got "%s" instead.')
             raise TypeError(msg % type(fuzzable_request))
-
         self.add_url(fuzzable_request.get_url())
         return self.fuzzable_requests.add(fuzzable_request)
 

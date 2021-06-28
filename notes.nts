@@ -103,4 +103,9 @@
 
 # patchFIX remove socket.sslerror
 
-# patchFIX makefile buff=0 as default in py2.7 but not from py3.9 check client.py, patchFIX rewrite makefile as _fileobject doesnt exist
+# patchFIX makefile buff=0 as default in py2.7 but not from py3.9 check client.py, patchFIX rewrite makefile as _fileobject doesnt exist, check ssl_wrapper for more info.
+
+# fix more 'HTTPMessage' object has no attribute 'getheaders'
+
+# patchFIX HTTPResponse length none, _read_chunked(amt) to _readall_chunked() (could be _peek_chunked())
+# fix xml_bones encoding error

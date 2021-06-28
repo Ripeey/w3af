@@ -491,7 +491,7 @@ class CoreStrategy(object):
             for url in targets:
                 try:
                     # removeME
-                    print('here ' + url)
+                    # print('here ' + url)
                     self._w3af_core.uri_opener.GET(url, cache=False)
                 except ScanMustStopByUserRequest:
                     # Not a real error, the user stopped the scan

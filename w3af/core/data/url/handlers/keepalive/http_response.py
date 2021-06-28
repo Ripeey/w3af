@@ -85,15 +85,15 @@ class HTTPResponse(http.client.HTTPResponse):
             return ''
 
         max_file_size = cf.get('max_file_size') or None
-        if max_file_size:
+        if max_file_size and self.length:
             if self.length > max_file_size:
                 self.status = NO_CONTENT
                 self.reason = 'No Content'  # Reason-Phrase
                 self.close()
                 return ''
-
+        # patchFIX if lenght is None then amt is None, also _readall_chunked() or peak_chunked()
         if self.chunked:
-            return self._read_chunked(amt)
+            return self._readall_chunked()
 
         if amt is None:
             # unbounded read
