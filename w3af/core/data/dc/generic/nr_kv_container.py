@@ -32,7 +32,7 @@ from w3af.core.data.dc.utils.token import DataToken
 from w3af.core.data.dc.utils.filter_printable import filter_non_printable
 
 
-ERR_MSG_NO_REP = 'Unsupported init_val "%s", expected format is [("b", "2")]'
+ERR_MSG_NO_REP = 'Unsupported init_val "%s", expected format is [("b", "2")] with no repeated keys'
 
 # As Collection OD's are default relaxed so switched
 class NonRepeatKeyValueContainer(DataContainer, OrderedDict):
@@ -63,8 +63,8 @@ class NonRepeatKeyValueContainer(DataContainer, OrderedDict):
                     raise TypeError(ERR_MSG_NO_REP % init_val)
 
                 if key in self:
+                    # patchFIX bug multiple headers set-cookies check : keeyalive/http_response.py#L161
                     raise TypeError(ERR_MSG_NO_REP % init_val)
-
                 if not isinstance(val, (str, DataToken)):
                     raise TypeError(ERR_MSG_NO_REP % init_val)
 

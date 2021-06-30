@@ -109,3 +109,12 @@
 
 # patchFIX HTTPResponse length none, _read_chunked(amt) to _readall_chunked() (could be _peek_chunked())
 # fix xml_bones encoding error
+# ', '.join( str() then change source __str__ to str, if smart_str then shift this to str_unicode
+
+# is it ssl.SSLError or socket.error?
+# threadstate observer encoding fix
+
+# fix fuzzable_request get_data() to bytes, extended urllib POST data to bytes
+# fix logs encode in text_file output, patchFIX req/request get_data to data
+# patchFIX (imp) mutiple headers see keepalive/http_response.py#L161
+

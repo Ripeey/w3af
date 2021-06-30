@@ -533,10 +533,10 @@ class FuzzableRequest(RequestMixIn, DiskItem):
 
     def get_data(self):
         """
-        The data is the string representation of the post data, in most
+        The data is the bytes representation of the post data, in most
         cases it will be used as the POSTDATA for requests.
         """
-        return str(self._post_data)
+        return bytes(self._post_data)
 
     def get_raw_data(self):
         return self._post_data

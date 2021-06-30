@@ -158,12 +158,21 @@ class HTTPResponse(http.client.HTTPResponse):
             self.msg = http.client.parse_headers(StringIO())
             return
 
-        # not sure about self.headers will have to check py2.7
+        # patchFIX: headers can contain multiple same key, check: concat at NonRepeatKeyValueContainer in Header class with ','' or ' '
+        # which is already done with http.client.getheader(self, name, default=None)
+        # for now were doing ^ here and not over Headers() class
+        # if we get any issues will shift to NonRepeatKeyValueContainer Header() class instead with a patch setter before super() __init__
         self.headers = self.msg = http.client.parse_headers(self.fp)
+        # to understand this see: email.message.Message
+        for hdr in self.headers.keys():
+            val = self.getheader(hdr)
+            del self.headers[hdr]
+            self.headers.__setitem__(hdr, val)
+
         if self.debuglevel > 0:
             for hdr, val in self.headers.items():
                 print("header:", hdr + ":", val)
-        
+
         # I think by default now it doesn't
         """
         # don't let the msg keep an fp

@@ -179,6 +179,7 @@ class HTTPResponse(DiskItem):
         resp = httplibresp
         # body will be in bytes
         code, msg, hdrs, body = (resp.code, resp.msg, resp.info(), resp.read())
+
         hdrs = Headers(list(hdrs.items()))
 
         if original_url:

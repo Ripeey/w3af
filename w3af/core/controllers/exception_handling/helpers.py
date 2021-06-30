@@ -38,7 +38,7 @@ def pprint_plugins(w3af_core):
     plugs_opts = copy.deepcopy(w3af_core.plugins.get_all_plugin_options())
     plugs = w3af_core.plugins.get_all_enabled_plugins()
 
-    for ptype, plugin_list in plugs.iteritems():
+    for ptype, plugin_list in plugs.items():
         for plugin in plugin_list:
             if plugin not in chain(*(pt.keys() for pt in plugs_opts.itervalues())):
                 plugs_opts[ptype][plugin] = {}

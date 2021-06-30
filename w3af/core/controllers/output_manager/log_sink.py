@@ -92,3 +92,4 @@ class LogSink(object):
         return patchLog
         """
         return method  
+
