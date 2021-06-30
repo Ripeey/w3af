@@ -42,7 +42,11 @@ class RequestMixIn(object):
                  by the RFC, and the POST-data (potentially) holding raw bytes
                  such as an image content.
         """
-        data = self.data or ''
+        # patchFIX hybrid could be FuzzableRequest or HTTPRequest depends on print(type(self))
+        if hasattr(self, 'data'):
+            data = self.data or ''
+        else:
+            data = self.get_data() or ''
 
         request_head = self.dump_request_head(ignore_headers=ignore_headers)
         request_head = request_head.encode('utf-8')

@@ -3,8 +3,8 @@ from astroid.builder import AstroidBuilder
 
 CODE_FIX = """
 class Popen(object):
-    stdout = StringIO.StringIO()
-    stderr = StringIO.StringIO()
+    stdout = StringIO()
+    stderr = StringIO()
     returncode = 0
     def communicate(*args, **kwds): pass
     def pid(*args, **kwds): pass

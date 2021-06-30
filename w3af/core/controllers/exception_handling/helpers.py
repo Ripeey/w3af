@@ -40,7 +40,7 @@ def pprint_plugins(w3af_core):
 
     for ptype, plugin_list in plugs.items():
         for plugin in plugin_list:
-            if plugin not in chain(*(pt.keys() for pt in plugs_opts.itervalues())):
+            if plugin not in chain(*(pt.keys() for pt in plugs_opts.values())):
                 plugs_opts[ptype][plugin] = {}
 
     if not any(plugs_opts.values()):
@@ -48,7 +48,7 @@ def pprint_plugins(w3af_core):
         # this function understand that there is no config
         return u''
 
-    plugins = StringIO.StringIO()
+    plugins = StringIO()
     pprint.pprint(plugs_opts, plugins)
     return plugins.getvalue()
 

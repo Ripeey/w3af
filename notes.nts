@@ -118,3 +118,9 @@
 # fix logs encode in text_file output, patchFIX req/request get_data to data
 # patchFIX (imp) mutiple headers see keepalive/http_response.py#L161
 
+# dict iter calls fix, keeyalive/handler str to bytes
+
+# patchFIX request mixin sould be .data as well will check later, fix stringIO syntax
+# checked ^ its hybrid, Fix check RequestMixIn#L45
+
+# fix itertools imap to list->map, fix cmp syntax in current_request_start

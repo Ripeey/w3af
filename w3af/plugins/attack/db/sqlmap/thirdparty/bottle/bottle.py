@@ -2015,19 +2015,19 @@ class MultiDict(DictMixin):
             return [(k, v[-1]) for k, v in self.dict.items()]
 
         def iterkeys(self):
-            return self.dict.iterkeys()
+            return self.dict.keys()
 
         def itervalues(self):
-            return (v[-1] for v in self.dict.itervalues())
+            return (v[-1] for v in self.dict.values())
 
         def iteritems(self):
-            return ((k, v[-1]) for k, v in self.dict.iteritems())
+            return ((k, v[-1]) for k, v in self.dict.items())
 
         def iterallitems(self):
-            return ((k, v) for k, vl in self.dict.iteritems() for v in vl)
+            return ((k, v) for k, vl in self.dict.items() for v in vl)
 
         def allitems(self):
-            return [(k, v) for k, vl in self.dict.iteritems() for v in vl]
+            return [(k, v) for k, vl in self.dict.items() for v in vl]
 
     def get(self, key, default=None, index=-1, type=None):
         """ Return the most recent value for a key.

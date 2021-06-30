@@ -126,7 +126,7 @@ class ConnectionManager(object):
         in_use = list(self.get_all_used_for_host_port(host_port))
 
         # Connection in use time stats
-        in_use.sort(key = lambda _: _current_request_start)
+        in_use.sort(key = lambda _: _.current_request_start)
         top_offenders = in_use[:5]
 
         connection_info = []

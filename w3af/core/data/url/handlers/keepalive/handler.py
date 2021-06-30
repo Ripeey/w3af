@@ -352,8 +352,9 @@ class KeepAliveHandler(object):
             conn.putheader('Connection', 'keep-alive')
 
         data = req.data
+        # should be already bytes but...
         if data is not None:
-            data = str(data)
+            data = bytes(data)
 
             if not req.has_header('Content-type'):
                 conn.putheader('Content-type', DEFAULT_CONTENT_TYPE)

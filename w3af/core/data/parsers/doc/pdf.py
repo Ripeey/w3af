@@ -109,7 +109,7 @@ def pdf_to_text(pdf_string):
     :return: A string with the content of the PDF file.
     """
     rsrcmgr = PDFResourceManager(caching=True)
-    output = StringIO.StringIO()
+    output = StringIO()
 
     # According to https://github.com/euske/pdfminer/issues/61 it is a good idea
     # to set laparams to None, which will speed-up parsing
