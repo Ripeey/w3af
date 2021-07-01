@@ -29,7 +29,7 @@ from w3af.core.data.misc.lru3 import SynchronizedLRUDict
 
 import w3af.core.controllers.output_manager as om
 
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 
 
 class GetAverageRTTForMutant(object):
@@ -53,7 +53,7 @@ class GetAverageRTTForMutant(object):
         headers = mutant.get_all_headers()
 
         cache_key_parts = [method, uri, data, headers]
-        cache_key_str = ''.join([smart_str_ignore(i) for i in cache_key_parts])
+        cache_key_str = ''.join([smart_bytes_ignore(i) for i in cache_key_parts])
 
         m = hashlib.md5()
         m.update(cache_key_str)

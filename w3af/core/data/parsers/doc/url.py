@@ -38,8 +38,8 @@ from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.data.dc.generic.data_container import DataContainer
 from w3af.core.data.dc.query_string import QueryString
 from w3af.core.data.db.disk_item import DiskItem
-from w3af.core.data.misc.encoding import (smart_str, PERCENT_ENCODE,
-                                          is_known_encoding, smart_unicode)
+from w3af.core.data.misc.encoding import (smart_bytes, PERCENT_ENCODE,
+                                          is_known_encoding, smart_str)
 
 
 def set_changed(meth):
@@ -322,7 +322,7 @@ class URL(DiskItem):
                 self.params,
                 self.querystring,
                 self.fragment)
-        data = [smart_unicode(s) for s in data]
+        data = [smart_str(s) for s in data]
 
         calc = urllib.parse.urlunparse(data)
 
@@ -378,7 +378,7 @@ class URL(DiskItem):
                               None, None, None, encoding=self._encoding)
 
     def set_fragment(self, fragment):
-        self._fragment = smart_unicode(fragment)
+        self._fragment = smart_str(fragment)
 
     def get_fragment(self):
         """
@@ -593,7 +593,7 @@ class URL(DiskItem):
         return self._netloc
 
     def set_net_location(self, netloc):
-        self._netloc = smart_unicode(netloc)
+        self._netloc = smart_str(netloc)
 
     netloc = property(get_net_location, set_net_location)
 
@@ -608,7 +608,7 @@ class URL(DiskItem):
         """
         :return: Returns the domain name for the url.
         """
-        self._scheme = smart_unicode(protocol)
+        self._scheme = smart_str(protocol)
 
     scheme = property(get_protocol, set_protocol)
 
@@ -719,7 +719,7 @@ class URL(DiskItem):
 
     @set_changed
     def set_path(self, path):
-        self._path = smart_unicode(path) or u'/'
+        self._path = smart_str(path) or u'/'
 
     path = property(get_path, set_path)
 
@@ -737,7 +737,7 @@ class URL(DiskItem):
         if self.params != u'':
             res += u';' + self.params
         if self.has_query_string():
-            res += u'?' + smart_unicode(self.querystring)
+            res += u'?' + smart_str(self.querystring)
         return res
 
     def url_decode(self):
@@ -815,7 +815,7 @@ class URL(DiskItem):
         :param param_string: The param to set (e.g. "foo=aaa").
         :return: Returns the url containing param.
         """
-        self._params = smart_unicode(param_string)
+        self._params = smart_str(param_string)
 
     params = property(get_params_string, set_param)
 
@@ -863,7 +863,7 @@ class URL(DiskItem):
         """
         :return: A string representation of self
         """
-        urlstr = smart_unicode(
+        urlstr = smart_str(
             self.url_string.replace(' ', '%20'),
             self._encoding,
             errors=PERCENT_ENCODE
@@ -887,7 +887,7 @@ class URL(DiskItem):
         """
         :return: True if "s" in url_string
         """
-        s = smart_unicode(s)
+        s = smart_str(s)
         return s in self.url_string
 
     def __add__(self, other):

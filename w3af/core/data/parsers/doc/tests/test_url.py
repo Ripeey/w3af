@@ -32,7 +32,7 @@ from nose.plugins.skip import SkipTest
 from w3af.core.data.parsers.doc.url import URL, parse_qs
 from w3af.core.data.dc.query_string import QueryString
 from w3af.core.data.dc.urlencoded_form import URLEncodedForm
-from w3af.core.data.misc.encoding import smart_str
+from w3af.core.data.misc.encoding import smart_bytes
 
 
 # Be strict on unicode warnings
@@ -935,13 +935,13 @@ class TestURLParser(unittest.TestCase):
 
     def test_get_path_qs_string(self):
         u = URL('https://domain/konto/insättning?amount=1&method=abc')
-        self.assertEqual(smart_str(u.get_path_qs()), '/konto/insättning?amount=1&method=abc')
+        self.assertEqual(smart_bytes(u.get_path_qs()), '/konto/insättning?amount=1&method=abc')
 
         u = URL('https://domain/konto/insättning;x=1?amount=1&method=abc')
-        self.assertEqual(smart_str(u.get_path_qs()), '/konto/insättning;x=1?amount=1&method=abc')
+        self.assertEqual(smart_bytes(u.get_path_qs()), '/konto/insättning;x=1?amount=1&method=abc')
 
         u = URL('https://domain/konto/insättning;insättning=1?amount=1&method=abc')
-        self.assertEqual(smart_str(u.get_path_qs()), '/konto/insättning;insättning=1?amount=1&method=abc')
+        self.assertEqual(smart_bytes(u.get_path_qs()), '/konto/insättning;insättning=1?amount=1&method=abc')
 
     def test_has_params(self):
         self.assertFalse(URL('http://w3af.com/').has_params())

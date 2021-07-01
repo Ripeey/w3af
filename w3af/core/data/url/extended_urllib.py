@@ -56,7 +56,7 @@ from w3af.core.data.url.HTTPRequest import HTTPRequest
 from w3af.core.data.dc.headers import Headers
 from w3af.core.data.user_agent.random_user_agent import get_random_user_agent
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
-from w3af.core.data.misc.encoding import smart_unicode, smart_str
+from w3af.core.data.misc.encoding import smart_str, smart_bytes
 from w3af.core.data.url.helpers import get_clean_body, get_exception_reason
 from w3af.core.data.url.response_meta import ResponseMeta, SUCCESS
 from w3af.core.data.url.get_average_rtt import GetAverageRTTForMutant
@@ -1139,7 +1139,7 @@ class ExtendedUrllib(object):
         # Everything went well!
         #
 
-        rdata = smart_unicode(req.data)
+        rdata = smart_str(req.data)
 
         if not rdata:
             args = (req.get_method(),
@@ -1248,7 +1248,7 @@ class ExtendedUrllib(object):
         # Log the exception
         msg = 'Failed to HTTP "%s" "%s". Reason: "%s", going to retry (did:%s)'
 
-        original_url = smart_unicode(original_url)
+        original_url = smart_str(original_url)
         args = (request.get_method(), original_url, exception, request.debugging_id)
 
         om.out.debug(msg % args)

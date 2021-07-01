@@ -76,7 +76,7 @@ codecs.register_error(PERCENT_ENCODE, _percent_encode)
 codecs.register_error(HTML_ENCODE, _return_html_encoded)
 
 
-def smart_unicode(s,
+def smart_str(s,
                   encoding=DEFAULT_ENCODING,
                   errors='strict',
                   on_error_guess=True,
@@ -127,17 +127,17 @@ def smart_unicode(s,
             except UnicodeDecodeError:
                 # And why I'm doing it here:
                 s = _str(s)
-                s = smart_unicode(s, encoding=encoding, errors=errors,
+                s = smart_str(s, encoding=encoding, errors=errors,
                                   on_error_guess=on_error_guess)
         else:
             s = _str(s)
-            s = smart_unicode(s, encoding=encoding, errors=errors,
+            s = smart_str(s, encoding=encoding, errors=errors,
                               on_error_guess=on_error_guess)
 
     return s
 
 
-def smart_str(s,
+def smart_bytes(s,
               encoding=DEFAULT_ENCODING,
               errors='strict',
 
@@ -173,14 +173,14 @@ def smart_str(s,
 
             return ''
         else:
-            return smart_str(unicode_s, encoding=encoding, errors=errors)
+            return smart_bytes(unicode_s, encoding=encoding, errors=errors)
 
+
+def smart_bytes_ignore(s, encoding=DEFAULT_ENCODING):
+    return smart_bytes(s, encoding=encoding, errors='ignore')
 
 def smart_str_ignore(s, encoding=DEFAULT_ENCODING):
     return smart_str(s, encoding=encoding, errors='ignore')
-
-def smart_unicode_ignore(s, encoding=DEFAULT_ENCODING):
-    return smart_unicode(s, encoding=encoding, errors='ignore')
 
 def is_known_encoding(encoding):
     """

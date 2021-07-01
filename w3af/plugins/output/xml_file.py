@@ -49,7 +49,7 @@ from w3af.core.data.db.disk_list import DiskList
 from w3af.core.data.options.opt_factory import opt_factory
 from w3af.core.data.options.option_types import OUTPUT_FILE
 from w3af.core.data.options.option_list import OptionList
-from w3af.core.data.misc.encoding import smart_str_ignore, smart_unicode
+from w3af.core.data.misc.encoding import smart_bytes_ignore, smart_str
 from w3af.core.data.misc.dotdict import dotdict
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 
@@ -641,10 +641,10 @@ class HTTPTransaction(CachedXMLNode):
         request, response = req_history.load_from_file(self._id)
 
         data = request.data or ''
-        b64_encoded_request_body = base64.encodestring(smart_str_ignore(data))
+        b64_encoded_request_body = base64.encodestring(smart_bytes_ignore(data))
 
         body = response.get_body() or ''
-        b64_encoded_response_body = base64.encodestring(smart_str_ignore(body))
+        b64_encoded_response_body = base64.encodestring(smart_bytes_ignore(body))
 
         context = {'id': self._id,
                    'request': {'status': request.get_request_line().strip(),
@@ -862,7 +862,7 @@ def jinja2_attr_value_escape_filter(value):
 
     # Fix some encoding errors which are triggered when the value is not an
     # unicode string
-    value = smart_unicode(value)
+    value = smart_str(value)
     retval = ''
 
     for letter in value:
@@ -923,7 +923,7 @@ def jinja2_text_value_escape_filter(value):
 
     # Fix some encoding errors which are triggered when the value is not an
     # unicode string
-    value = smart_unicode(value)
+    value = smart_str(value)
     retval = ''
 
     for letter in value:

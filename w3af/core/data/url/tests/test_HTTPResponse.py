@@ -29,7 +29,7 @@ from nose.plugins.attrib import attr
 from nose.plugins.skip import SkipTest
 
 from w3af.core.data.url.HTTPResponse import HTTPResponse, DEFAULT_CHARSET
-from w3af.core.data.misc.encoding import smart_unicode, ESCAPED_CHAR
+from w3af.core.data.misc.encoding import smart_str, ESCAPED_CHAR
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.dc.headers import Headers
 from w3af import ROOT_PATH
@@ -139,7 +139,7 @@ class TestHTTPResponse(unittest.TestCase):
             resp = self.create_resp(
                 Headers([('Content-Type', 'text/xml')]), html)
             self.assertEqual(
-                smart_unicode(html, DEFAULT_CHARSET,
+                smart_str(html, DEFAULT_CHARSET,
                               ESCAPED_CHAR, on_error_guess=False),
                 resp.body
             )
@@ -153,7 +153,7 @@ class TestHTTPResponse(unittest.TestCase):
                                                 choice(('XXX', 'utf-8')))])
             resp = self.create_resp(headers, html)
             self.assertEqual(
-                smart_unicode(html, DEFAULT_CHARSET,
+                smart_str(html, DEFAULT_CHARSET,
                               ESCAPED_CHAR, on_error_guess=False),
                 resp.body
             )
@@ -207,7 +207,7 @@ class TestHTTPResponse(unittest.TestCase):
             loaded_resp = HTTPResponse.from_dict(loaded_dict)
 
             self.assertEqual(
-                smart_unicode(html, DEFAULT_CHARSET,
+                smart_str(html, DEFAULT_CHARSET,
                               ESCAPED_CHAR, on_error_guess=False),
                 loaded_resp.body
             )

@@ -34,7 +34,7 @@ import w3af.core.data.kb.config as cf
 from w3af import ROOT_PATH
 from w3af.core.controllers.exceptions import DBException
 from w3af.core.controllers.plugins.output_plugin import OutputPlugin
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 from w3af.core.data.db.history import HistoryItem
 from w3af.core.data.db.disk_list import DiskList
 from w3af.core.data.options.opt_factory import opt_factory
@@ -184,7 +184,7 @@ class html_file(OutputPlugin):
 
         enabled_plugins = self._enabled_plugins
         findings = kb.kb.get_all_findings_iter()
-        debug_log = ((t, l, smart_unicode(m)) for (t, l, m) in self._additional_info)
+        debug_log = ((t, l, smart_str(m)) for (t, l, m) in self._additional_info)
         known_urls = kb.kb.get_all_known_urls()
 
         context = {'target_urls': target_urls,
@@ -287,7 +287,7 @@ def request_dump(_id):
     except DBException:
         return None
 
-    return smart_unicode(details.request.dump().strip())
+    return smart_str(details.request.dump().strip())
 
 
 def response_dump(_id):
@@ -302,7 +302,7 @@ def response_dump(_id):
     except DBException:
         return None
 
-    return smart_unicode(details.response.dump().strip())
+    return smart_str(details.response.dump().strip())
 
 
 def get_current_date():

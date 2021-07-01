@@ -30,7 +30,7 @@ from w3af.core.controllers.misc.itertools_toolset import unique_everseen_hash
 from errno import (ECONNREFUSED, EHOSTUNREACH, ECONNRESET, ENETDOWN,
                    ENETUNREACH, ETIMEDOUT, ENOSPC)
 
-from w3af.core.data.misc.encoding import smart_unicode, PERCENT_ENCODE
+from w3af.core.data.misc.encoding import smart_str, PERCENT_ENCODE
 from w3af.core.controllers.exceptions import HTTPRequestException
 from w3af.core.data.url.handlers.keepalive import URLTimeoutError
 from w3af.core.data.constants.response_codes import NO_CONTENT
@@ -282,7 +282,7 @@ def get_clean_body_impl(body, strings_to_replace_list, multi_encode=True,
         # I convert it myself with some error handling
         #
         # https://github.com/andresriancho/w3af/issues/8953
-        unicode_to_repl = smart_unicode(str_to_repl, errors=PERCENT_ENCODE)
+        unicode_to_repl = smart_str(str_to_repl, errors=PERCENT_ENCODE)
 
         # unquote, just in case the plugin did an extra encoding of some type.
         # what we want to do here is get the original version of the string

@@ -24,7 +24,7 @@ import re
 import w3af.core.controllers.output_manager as om
 
 from w3af.core.data.parsers.doc.cookie_parser import parse_cookie
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 
 LINK_HEADER_RE = re.compile(r'<(.*?)>.*')
 
@@ -153,7 +153,7 @@ def headers_url_generator(resp, fuzzable_req):
             header_value, _ = resp_headers.iget(header_name, None)
             if header_value is not None:
 
-                header_value = smart_unicode(header_value,
+                header_value = smart_str(header_value,
                                              encoding=resp.charset)
 
                 for ref in parser(resp, header_name, header_value):

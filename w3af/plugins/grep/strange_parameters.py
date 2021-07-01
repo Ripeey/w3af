@@ -27,7 +27,7 @@ import w3af.core.data.constants.severity as severity
 
 from w3af.core.controllers.plugins.grep_plugin import GrepPlugin
 from w3af.core.controllers.exceptions import BaseFrameworkException
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 from w3af.core.data.bloomfilter.scalable_bloom import ScalableBloomFilter
 from w3af.core.data.kb.info import Info
 from w3af.core.data.kb.vuln import Vuln
@@ -102,7 +102,7 @@ class strange_parameters(GrepPlugin):
                 ' "%s", which is very uncommon and requires manual'
                 ' inspection.')
         args = (response.get_uri(), token_name, token_value)
-        args = tuple(smart_str_ignore(i) for i in args)
+        args = tuple(smart_bytes_ignore(i) for i in args)
         desc %= args
 
         i = Info('Uncommon query string parameter', desc, response.id,

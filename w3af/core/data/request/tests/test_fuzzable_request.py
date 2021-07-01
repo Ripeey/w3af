@@ -33,7 +33,7 @@ from w3af.core.data.dc.headers import Headers
 from w3af.core.data.dc.factory import dc_from_form_params
 from w3af.core.data.dc.query_string import QueryString
 from w3af.core.data.dc.generic.kv_container import KeyValueContainer
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 from w3af.core.data.dc.urlencoded_form import URLEncodedForm
 from w3af.core.data.dc.utils.multipart import multipart_encode
 from w3af.core.data.db.disk_set import DiskSet
@@ -76,7 +76,7 @@ class TestFuzzableRequest(unittest.TestCase):
         header_value = ''.join(chr(i) for i in range(256))
         
         expected = '\r\n'.join(['GET http://w3af.com/a/b/c.php HTTP/1.1',
-                                 'Hola: %s' % smart_unicode(header_value),
+                                 'Hola: %s' % smart_str(header_value),
                                  '',
                                  'a=b'])
 

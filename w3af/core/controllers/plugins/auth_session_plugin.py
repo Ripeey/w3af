@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import w3af.core.data.kb.knowledge_base as kb
 
 from w3af.core.controllers.plugins.auth_plugin import AuthPlugin
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 from w3af.core.data.kb.info import Info
 
 
@@ -107,7 +107,7 @@ class AuthSessionPlugin(AuthPlugin):
         self._log_session_failed_http_response(http_response)
 
         body = http_response.get_body()
-        logged_in = smart_str_ignore(self.check_string) in smart_str_ignore(body)
+        logged_in = smart_bytes_ignore(self.check_string) in smart_bytes_ignore(body)
 
         if logged_in:
             self._handle_session_active_success()

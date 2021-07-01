@@ -24,7 +24,7 @@ from functools import partial
 
 from collections import OrderedDict
 
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 from w3af.core.data.dc.generic.data_container import DataContainer
 from w3af.core.data.constants.encodings import UTF8
 from w3af.core.data.parsers.utils.encode_decode import urlencode
@@ -97,7 +97,7 @@ class NonRepeatKeyValueContainer(DataContainer, OrderedDict):
         # pylint: disable=E1133
         for k, v in list(self.items()):
             to_app = '%s%s%s' % (k, key_val_sep,
-                                  smart_unicode(v, encoding=UTF8))
+                                  smart_str(v, encoding=UTF8))
             lst.append(to_app)
         # pylint: enable=E1133
 

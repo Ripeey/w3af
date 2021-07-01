@@ -38,7 +38,7 @@ from w3af.core.data.db.history import HistoryItem
 from w3af.core.data.dc.headers import Headers
 from w3af.core.data.request.fuzzable_request import FuzzableRequest
 from w3af.core.data.misc.response_cache_key import ResponseCacheKeyCache
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 
 
 class grep(BaseConsumer):
@@ -413,7 +413,7 @@ class grep(BaseConsumer):
         # using EXCLUDE_HEADERS_FOR_HASH
         #
         headers = response.dump_headers(exclude_headers=self.EXCLUDE_HEADERS_FOR_HASH)
-        headers = smart_str_ignore(headers)
+        headers = smart_bytes_ignore(headers)
 
         #
         # Note that using cached_get_response_cache_key() here gives a performance

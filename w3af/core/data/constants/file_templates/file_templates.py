@@ -23,7 +23,7 @@ import os
 
 from w3af import ROOT_PATH
 from w3af.core.data.fuzzer.utils import rand_alnum, rand_alpha
-from w3af.core.data.misc.encoding import smart_str
+from w3af.core.data.misc.encoding import smart_bytes
 
 
 TEMPLATE_DIR = os.path.join(ROOT_PATH, 'core', 'data', 'constants',
@@ -47,5 +47,5 @@ def get_file_from_template(extension):
 def get_template_with_payload(extension, payload):
     success, file_content, file_name = get_file_from_template(extension)
     # TODO: Add support for file types which have some type of CRC
-    file_content = file_content.replace('A' * 239, smart_str(payload))
+    file_content = file_content.replace('A' * 239, smart_bytes(payload))
     return success, file_content, file_name

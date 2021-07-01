@@ -23,7 +23,7 @@ import itertools
 import operator
 import hashlib
 
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 
 #
 #    Source for this code was taken from http://docs.python.org/library/itertools.html
@@ -82,7 +82,7 @@ def unique_everseen_hash(iterable):
 
     for element in iterable:
         m = hashlib.md5()
-        m.update(smart_str_ignore(element))
+        m.update(smart_bytes_ignore(element))
         element_hash = m.digest()
 
         if element_hash in seen:

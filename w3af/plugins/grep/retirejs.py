@@ -33,7 +33,7 @@ from w3af.core.controllers.misc.temp_dir import get_temp_dir
 from w3af.core.controllers.plugins.grep_plugin import GrepPlugin
 from w3af.core.controllers.misc.which import which
 from w3af.core.data.parsers.doc.url import URL
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 from w3af.core.data.bloomfilter.scalable_bloom import ScalableBloomFilter
 from w3af.core.data.kb.vuln import Vuln
 from w3af.core.data.options.opt_factory import opt_factory
@@ -302,7 +302,7 @@ class retirejs(GrepPlugin):
         #
         # Avoid running this plugin twice on the same file content
         #
-        body = smart_str_ignore(response.get_body())
+        body = smart_bytes_ignore(response.get_body())
         response_hash = hashlib.md5(body).hexdigest()
 
         if response_hash in self._analyzed_hashes:
@@ -325,7 +325,7 @@ class retirejs(GrepPlugin):
                                                     delete=False,
                                                     dir=self._get_js_temp_directory())
 
-        body = smart_str_ignore(response.get_body())
+        body = smart_bytes_ignore(response.get_body())
         response_file.write(body)
         response_file.close()
 

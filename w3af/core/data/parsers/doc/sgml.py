@@ -34,7 +34,7 @@ from w3af.core.controllers.misc_settings import EXCLUDE, INCLUDE
 from w3af.core.data.parsers.doc.baseparser import BaseParser
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 from w3af.core.controllers.exceptions import ParserException
 
 
@@ -186,7 +186,7 @@ class SGMLParser(BaseParser):
             return
 
         if elem.text is not None:
-            self._comments_in_doc.append(smart_unicode(elem.text))
+            self._comments_in_doc.append(smart_str(elem.text))
 
     def close(self):
         pass

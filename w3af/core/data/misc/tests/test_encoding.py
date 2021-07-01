@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import unittest
 
 from w3af.core.data.misc.encoding import is_known_encoding, ESCAPED_CHAR, HTML_ENCODE
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 
 
 class TestEncoding(unittest.TestCase):
@@ -51,4 +51,4 @@ class TestEncoding(unittest.TestCase):
         self.assertEqual(decoded, '&#xff')
 
     def test_atilde(self):
-        self.assertEqual(smart_unicode('á'), 'á')
+        self.assertEqual(smart_str('á'), 'á')

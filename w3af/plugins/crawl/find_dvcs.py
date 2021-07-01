@@ -31,7 +31,7 @@ import w3af.core.data.constants.severity as severity
 from w3af.core.controllers.plugins.crawl_plugin import CrawlPlugin
 from w3af.core.controllers.core_helpers.fingerprint_404 import is_404
 from w3af.core.controllers.misc.temp_dir import get_temp_dir
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 from w3af.core.data.request.fuzzable_request import FuzzableRequest
 from w3af.core.data.bloomfilter.scalable_bloom import ScalableBloomFilter
 from w3af.core.data.kb.vuln import Vuln
@@ -120,7 +120,7 @@ class find_dvcs(CrawlPlugin):
             # Sometimes we get random bytes from the .git/index because of
             # git versions we don't fully support, so we ignore any encoding
             # errors
-            filename = smart_unicode(filename, errors='ignore')
+            filename = smart_str(filename, errors='ignore')
 
             if filename.startswith('/'):
                 filename = filename[1:]

@@ -24,7 +24,7 @@ from functools import partial
 
 from collections import OrderedDict
 
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 from w3af.core.data.dc.generic.data_container import DataContainer
 from w3af.core.data.constants.encodings import UTF8
 from w3af.core.data.parsers.utils.encode_decode import urlencode
@@ -128,7 +128,7 @@ class KeyValueContainer(DataContainer, OrderedDict):
         # pylint: disable=E1133
         for key, value_list in list(self.items()):
             for value in value_list:
-                value = smart_unicode(value, encoding=UTF8, errors=errors)
+                value = smart_str(value, encoding=UTF8, errors=errors)
                 to_app = '%s%s%s' % (key, key_val_sep, value)
                 lst.append(to_app)
         # pylint: enable=E1133

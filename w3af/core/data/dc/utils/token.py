@@ -20,7 +20,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-from w3af.core.data.misc.encoding import smart_str
+from w3af.core.data.misc.encoding import smart_bytes
 
 
 class DataToken(object):
@@ -71,7 +71,7 @@ class DataToken(object):
                                              self.get_value())
 
     def __str__(self):
-        return smart_str(self._value, errors='ignore')
+        return smart_bytes(self._value, errors='ignore')
 
     def __unicode__(self):
         return str(self._value)

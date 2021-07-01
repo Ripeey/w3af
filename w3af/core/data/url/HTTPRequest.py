@@ -30,7 +30,7 @@ from w3af.core.data.dc.utils.token import DataToken
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.request.request_mixin import RequestMixIn
 from w3af.core.data.url.constants import MAX_HTTP_RETRIES
-from w3af.core.data.misc.encoding import smart_str
+from w3af.core.data.misc.encoding import smart_bytes
 
 class HTTPRequest(RequestMixIn, urllib.request.Request):
     def __init__(self, url,
@@ -86,7 +86,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         headers = dict(headers)
 
         # Call the base class constructor
-        urllib.request.Request.__init__(self, url.url_encode(), smart_str(data),
+        urllib.request.Request.__init__(self, url.url_encode(), smart_bytes(data),
                                  headers, origin_req_host, unverifiable, self.method)
         RequestMixIn.__init__(self)
     
@@ -101,7 +101,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         return self._binary_response
 
     def set_data(self, data):
-        self.data = smart_str(data)
+        self.data = smart_bytes(data)
 
     def add_header(self, key, val):
         """

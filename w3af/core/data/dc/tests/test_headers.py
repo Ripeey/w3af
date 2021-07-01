@@ -70,7 +70,7 @@ class TestHeaders(unittest.TestCase):
         headers = Headers([('Hola', header_value)])
         
         # I don't assert in a stricter way because the output depends on
-        # smart_unicode which might change in the future
+        # smart_str which might change in the future
         self.assertIn('Hola: \x00\x01\x02', str(headers))
         
     def test_repeated_raises(self):

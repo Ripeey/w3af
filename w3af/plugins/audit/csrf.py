@@ -31,7 +31,7 @@ from w3af.core.controllers.plugins.audit_plugin import AuditPlugin
 from w3af.core.controllers.misc.fuzzy_string_cmp import fuzzy_equal
 from w3af.core.data.fuzzer.fuzzer import create_mutants
 from w3af.core.data.fuzzer.mutants.headers_mutant import HeadersMutant
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 from w3af.core.data.kb.vuln import Vuln
 
 
@@ -271,7 +271,7 @@ class csrf(AuditPlugin):
                 return True
     
         # Calculate entropy
-        entropy = self.shannon_entropy(smart_str_ignore(value))
+        entropy = self.shannon_entropy(smart_bytes_ignore(value))
         if entropy >= min_entropy:
             return True
 

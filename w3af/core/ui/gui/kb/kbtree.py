@@ -29,7 +29,7 @@ import w3af.core.data.kb.knowledge_base as kb
 from w3af.core.data.kb.vuln import Vuln
 from w3af.core.data.kb.info import Info
 from w3af.core.data.kb.kb_observer import KBObserver
-from w3af.core.data.misc.encoding import smart_str
+from w3af.core.data.misc.encoding import smart_bytes
 from w3af.core.ui.gui import helpers
 from w3af.core.ui.gui.tabs.exploit.exploit_all import effectively_exploit_all
 
@@ -218,7 +218,7 @@ class KBTree(gtk.TreeView):
             # Add the new data to the treestore
             child_count = '( 1 )'
             color = helpers.KB_COLORS[data.color_level]
-            location_a = smart_str(data.location_a, errors='ignore')
+            location_a = smart_bytes(data.location_a, errors='ignore')
             store_iter = self.treestore.append(None, [None,
                                                       location_a,
                                                       0, None, 0,

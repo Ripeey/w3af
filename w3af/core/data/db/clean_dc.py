@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 
 FILENAME_TOKEN = 'file-5692fef3f5dcd97'
 PATH_TOKEN = 'path-0fb923a04c358a37c'
@@ -106,7 +106,7 @@ def clean_fuzzable_request_form(fuzzable_request, dc_handler=clean_data_containe
     else:
         res.append('')
 
-    return '|'.join([smart_str_ignore(s) for s in res])
+    return '|'.join([smart_bytes_ignore(s) for s in res])
 
 
 def clean_url(url, dc_handler=clean_data_container):

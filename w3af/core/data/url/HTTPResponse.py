@@ -31,7 +31,7 @@ import w3af.core.controllers.output_manager as om
 import w3af.core.data.parsers.parser_cache as parser_cache
 
 from w3af.core.controllers.exceptions import BaseFrameworkException
-from w3af.core.data.misc.encoding import smart_unicode, smart_str_ignore, ESCAPED_CHAR
+from w3af.core.data.misc.encoding import smart_str, smart_bytes_ignore, ESCAPED_CHAR
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.dc.headers import Headers
@@ -128,10 +128,10 @@ class HTTPResponse(DiskItem):
             # once again, since it was already done during to_dict() in the
             # get_body() call.
             self._raw_body = read
-            self._body = smart_unicode(read)
+            self._body = smart_str(read)
         else:
             self._body = None
-            self._raw_body = read # if binary_response else smart_unicode(read) not yet
+            self._raw_body = read # if binary_response else smart_str(read) not yet
 
         self._binary_response = binary_response
         self._content_type = None
@@ -156,7 +156,7 @@ class HTTPResponse(DiskItem):
         self._redirected_uri = geturl
 
         # Set the rest
-        self._msg = smart_unicode(msg)
+        self._msg = smart_str(msg)
         self._time = time
         self._alias = alias
         self._doc_type = None
@@ -321,14 +321,14 @@ class HTTPResponse(DiskItem):
         return '%s%s' % (hash(text), zlib.adler32(text))
 
     def get_body_hash(self):
-        body = smart_str_ignore(self.get_body())
+        body = smart_bytes_ignore(self.get_body())
         return self._quick_hash(body)
 
     def get_hash(self, exclude_headers=None):
         exclude_headers = [] or exclude_headers
 
         headers = self.dump_response_head(exclude_headers=exclude_headers)
-        body = smart_str_ignore(self.get_body())
+        body = smart_bytes_ignore(self.get_body())
 
         args = (headers, body)
         dump = '%s%s' % args
@@ -664,7 +664,7 @@ class HTTPResponse(DiskItem):
             # Now that we have the charset, we use it!
             # The return value of the decode function is a unicode string.
             try:
-                _body = smart_unicode(raw_body,
+                _body = smart_str(raw_body,
                                       charset,
                                       errors=ESCAPED_CHAR,
                                       on_error_guess=False)
@@ -677,7 +677,7 @@ class HTTPResponse(DiskItem):
 
                 # Forcing it to use the default
                 charset = DEFAULT_CHARSET
-                _body = smart_unicode(raw_body,
+                _body = smart_str(raw_body,
                                       charset,
                                       errors=ESCAPED_CHAR,
                                       on_error_guess=False)

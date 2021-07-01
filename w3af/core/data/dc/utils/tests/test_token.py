@@ -24,7 +24,7 @@ import unittest
 import copy
 
 from w3af.core.data.dc.utils.token import DataToken
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 
 
 class TestToken(unittest.TestCase):
@@ -68,7 +68,7 @@ class TestToken(unittest.TestCase):
 
         self.assertRaises(UnicodeDecodeError, str, token)
 
-        encoded_token = smart_unicode(token)
+        encoded_token = smart_str(token)
         self.assertEqual(encoded_token, '\xf3')
 
     def test_unicodeencodeerror(self):

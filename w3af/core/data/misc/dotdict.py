@@ -1,4 +1,4 @@
-from w3af.core.data.misc.encoding import smart_str_ignore, smart_unicode
+from w3af.core.data.misc.encoding import smart_bytes_ignore, smart_str
 
 
 class dotdict(dict):
@@ -13,7 +13,7 @@ class dotdict(dict):
         :return: None
         """
         if isinstance(value, str):
-            value = smart_unicode(value)
+            value = smart_str(value)
 
         self[key] = value
 

@@ -27,7 +27,7 @@ from w3af.core.data.misc.lru3 import SynchronizedLRUDict
 
 from w3af.core.controllers.core_helpers.not_found.response import FourOhFourResponse
 from w3af.core.data.misc.xml_bones import get_xml_bones
-from w3af.core.data.misc.encoding import smart_str_ignore, smart_unicode_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore, smart_str_ignore
 
 
 def get_response_cache_key(http_response,
@@ -69,11 +69,11 @@ def get_response_cache_key(http_response,
     # Calculate the hash using all the captured information
     #
     
-    # patchFIX encoding mess before smart_str_ignore
+    # patchFIX encoding mess before smart_bytes_ignore
     key = ''.join([str(http_response.get_code()),
-                   smart_unicode_ignore(normalized_path),
+                   smart_str_ignore(normalized_path),
                    str(headers),
-                   smart_unicode_ignore(body)])
+                   smart_str_ignore(body)])
 
     return quick_hash(key)
 
@@ -106,7 +106,7 @@ def _should_use_xml_bones(http_response):
 
 
 def quick_hash(text):
-    text = smart_str_ignore(text)
+    text = smart_bytes_ignore(text)
     return '%s%s' % (hash(text), zlib.adler32(text))
 
 
@@ -135,7 +135,7 @@ class ResponseCacheKeyCache(object):
         else:
             body = http_response.body
 
-        cache_key = '%s%s' % (smart_str_ignore(body), headers)
+        cache_key = '%s%s' % (smart_bytes_ignore(body), headers)
         cache_key = quick_hash(cache_key)
 
         result = self._cache.get(cache_key, None)

@@ -30,7 +30,7 @@ from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.url.HTTPRequest import HTTPRequest
 from w3af.core.data.url.HTTPResponse import HTTPResponse
 from w3af.core.data.dc.headers import Headers
-from w3af.core.data.misc.encoding import smart_str
+from w3af.core.data.misc.encoding import smart_bytes
 from w3af.core.controllers.daemons.proxy.templates.utils import render
 
 
@@ -78,12 +78,12 @@ class ProxyHandler(Master):
         """
         charset = response.charset
 
-        body = smart_str(response.body, charset, errors='ignore')
+        body = smart_bytes(response.body, charset, errors='ignore')
 
         header_items = []
         for header_name, header_value in list(response.headers.items()):
-            header_name = smart_str(header_name, charset, errors='ignore')
-            header_value = smart_str(header_value, charset, errors='ignore')
+            header_name = smart_bytes(header_name, charset, errors='ignore')
+            header_value = smart_bytes(header_value, charset, errors='ignore')
             header_items.append((header_name, header_value))
 
         headers = http.Headers(header_items)

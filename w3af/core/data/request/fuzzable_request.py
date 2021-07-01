@@ -39,7 +39,7 @@ from w3af.core.data.db.disk_item import DiskItem
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.request.request_mixin import RequestMixIn
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
-from w3af.core.data.misc.encoding import smart_str_ignore, smart_unicode_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore, smart_str_ignore
 
 
 ALL_CHARS = ''.join(chr(i) for i in range(256))
@@ -262,7 +262,7 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         :param needle: The string
         :return: True if something similar was sent
         """
-        needle = smart_str_ignore(needle)
+        needle = smart_bytes_ignore(needle)
 
         needles = set()
         needles.add(needle)
@@ -279,22 +279,22 @@ class FuzzableRequest(RequestMixIn, DiskItem):
         needles = {n for n in needles if len(n) >= 3}
 
         uri = self.get_uri()
-        data = smart_str_ignore(self.get_data())
-        headers = smart_str_ignore(self.get_all_headers())
+        data = smart_bytes_ignore(self.get_data())
+        headers = smart_bytes_ignore(self.get_all_headers())
 
         haystacks = set()
 
         # uris
         uri_decoded = uri.url_decode()
 
-        haystacks.add(smart_str_ignore(uri))
-        haystacks.add(smart_str_ignore(uri_decoded))
-        haystacks.add(self.make_comp(smart_str_ignore(uri_decoded)))
+        haystacks.add(smart_bytes_ignore(uri))
+        haystacks.add(smart_bytes_ignore(uri_decoded))
+        haystacks.add(self.make_comp(smart_bytes_ignore(uri_decoded)))
 
         # uris without encoding
-        haystacks.add(smart_str_ignore(uri.url_string))
-        haystacks.add(smart_str_ignore(uri_decoded.url_string))
-        haystacks.add(self.make_comp(smart_str_ignore(uri_decoded.url_string)))
+        haystacks.add(smart_bytes_ignore(uri.url_string))
+        haystacks.add(smart_bytes_ignore(uri_decoded.url_string))
+        haystacks.add(self.make_comp(smart_bytes_ignore(uri_decoded.url_string)))
 
         # data
         haystacks.add(data)
@@ -320,7 +320,7 @@ class FuzzableRequest(RequestMixIn, DiskItem):
 
     def get_hash(self):
         # patchFIX encoding mess
-        raw_http_request = smart_unicode_ignore(self.dump())
+        raw_http_request = smart_str_ignore(self.dump())
         return hashlib.md5(raw_http_request.encode(DEFAULT_ENCODING)).hexdigest()
 
     def __hash__(self):

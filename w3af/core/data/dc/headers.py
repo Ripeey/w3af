@@ -23,7 +23,7 @@ import string
 
 from w3af.core.data.constants.encodings import UTF8
 from w3af.core.data.dc.generic.nr_kv_container import NonRepeatKeyValueContainer
-from w3af.core.data.misc.encoding import smart_unicode
+from w3af.core.data.misc.encoding import smart_str
 from w3af.core.data.dc.utils.token import DataToken
 
 
@@ -81,9 +81,9 @@ class Headers(NonRepeatKeyValueContainer):
             # I can do this (key, value) thing because the headers do NOT
             # have multiple header values like query strings and post-data
             if isinstance(value, str):
-                value = smart_unicode(value)
+                value = smart_str(value)
             
-            cleaned_vals.append((smart_unicode(key), value))
+            cleaned_vals.append((smart_str(key), value))
         
         return cleaned_vals
 
@@ -150,14 +150,14 @@ class Headers(NonRepeatKeyValueContainer):
     def __setitem__(self, k, v):
 
         if isinstance(k, str):
-            k = smart_unicode(k, encoding=self.encoding)
+            k = smart_str(k, encoding=self.encoding)
         else:
             raise ValueError('Header name must be a string.')
 
         if isinstance(v, str):
-            v = smart_unicode(v, encoding=self.encoding)
+            v = smart_str(v, encoding=self.encoding)
         elif isinstance(v, DataToken):
-            encoded_str = smart_unicode(v.get_value(), encoding=self.encoding)
+            encoded_str = smart_str(v.get_value(), encoding=self.encoding)
             v.set_value(encoded_str)
         else:
             raise ValueError('Header value must be a string.')

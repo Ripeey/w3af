@@ -28,7 +28,7 @@ import w3af.core.controllers.output_manager as om
 
 from w3af.core.controllers.plugins.audit_plugin import AuditPlugin
 from w3af.core.data.constants.file_patterns import FILE_PATTERNS
-from w3af.core.data.misc.encoding import smart_str_ignore
+from w3af.core.data.misc.encoding import smart_bytes_ignore
 from w3af.core.data.fuzzer.fuzzer import create_mutants
 from w3af.core.data.quick_match.multi_in import MultiIn
 from w3af.core.data.kb.vuln import Vuln
@@ -241,7 +241,7 @@ class xxe(AuditPlugin):
             return None
 
         try:
-            original_value_str = smart_str_ignore(original_value)
+            original_value_str = smart_bytes_ignore(original_value)
         except Exception as e:
             msg = ('Failed to encode unicode original value to string'
                    ' in _parse_xml(). Exception: "%s"')
