@@ -86,7 +86,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         headers = dict(headers)
 
         # Call the base class constructor
-        urllib.request.Request.__init__(self, url.url_encode(), data,
+        urllib.request.Request.__init__(self, url.url_encode(), bytes(data),
                                  headers, origin_req_host, unverifiable, self.method)
         RequestMixIn.__init__(self)
     
@@ -101,7 +101,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         return self._binary_response
 
     def set_data(self, data):
-        self.data = data
+        self.data = bytes(data)
 
     def add_header(self, key, val):
         """
