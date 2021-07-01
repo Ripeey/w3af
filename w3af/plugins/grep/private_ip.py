@@ -61,7 +61,10 @@ class private_ip(GrepPlugin):
         if self._ignore_if_match is None:
             self._generate_ignores(response)
 
-        request_data = getattr(request, 'data', getattr(request, 'get_data')())
+        if hasattr(request, 'data'):
+            request_data = request.data
+        else:
+            request_data = request.get_data()
 
         if (request.get_url(),  request_data) in self._already_inspected:
             return

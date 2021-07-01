@@ -43,7 +43,10 @@ class RequestMixIn(object):
                  such as an image content.
         """
         # patchFIX hybrid could be FuzzableRequest or HTTPRequest depends on print(type(self))
-        data = getattr(self, 'data', getattr(self, 'get_data')()) or ''
+         if hasattr(self, 'data'):
+            data = self.data or ''
+        else:
+            data = self.get_data() or ''
 
         request_head = self.dump_request_head(ignore_headers=ignore_headers)
         request_head = request_head.encode('utf-8')

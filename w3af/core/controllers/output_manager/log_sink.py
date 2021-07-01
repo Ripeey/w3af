@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import functools
-patchLog
+
 class LogSink(object):
     """
     The log sink receives log messages in different threads/processes and sends
