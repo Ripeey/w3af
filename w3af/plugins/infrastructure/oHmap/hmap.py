@@ -198,7 +198,7 @@ class response(object):
             self.response_text = 'NONE'
             return
 
-        if not re.search('^HTTP/1\.[01] [0-9]{3} [A-Z]{,10}', text):
+        if not re.search(r'^HTTP/1\.[01] [0-9]{3} [A-Z]{,10}', text):
             self.response_code = 'NO_RESPONSE_CODE'  # HTTP/0.9 like
             self.response_text = 'NONE'
             self.body = text
@@ -215,10 +215,8 @@ class response(object):
 
         response_lines = text.split(line_splitter)
         self.response_line = response_lines[0]
-        response_line_match = re.search(
-            '(HTTP/1\.[01]) ([0-9]{3}) ([^\r\n]*)', text)
-        self.response_code, self.response_text = response_line_match.groups(
-        )[1:]
+        response_line_match = re.search(r'(HTTP/1\.[01]) ([0-9]{3}) ([^\r\n]*)', text)
+        self.response_code, self.response_text = response_line_match.groups()[1:]
 
         blank_index = response_lines[:].index('')
         if blank_index == -1:
@@ -314,7 +312,8 @@ def get_fingerprint(url, threads):
     pool.close()
     pool.join()
     pool.terminate()
-
+    # removeME 
+    print('reeeeee1xeeee', fingerprint)
     fingerprint['SYNTACTIC']['HEADER_ORDER'] = winnow_ordered_list(fingerprint['SYNTACTIC']['HEADER_ORDER'])
     return fingerprint
 

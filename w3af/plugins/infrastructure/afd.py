@@ -127,8 +127,8 @@ class afd(InfrastructurePlugin):
         else:
             # I get here when the remote end returns a 403 or something like
             # that... So I must analyze the response body
-            resp_body = resp_body.replace(offending_string, '')
-            resp_body = resp_body.replace(rnd_param, '')
+            resp_body = resp_body.replace(offending_string.encode(DEFAULT_ENCODING), b'')
+            resp_body = resp_body.replace(rnd_param.encode(DEFAULT_ENCODING), b'')
 
             if fuzzy_not_equal(resp_body, original_resp_body, 0.15):
                 self._filtered.append(offending_url)

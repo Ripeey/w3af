@@ -22,6 +22,7 @@ import OpenSSL
 
 from OpenSSL.SSL import SysCallError
 
+from w3af.core.data.misc.encoding import smart_str
 
 from ndg.httpsclient.subj_alt_name import SubjectAltName
 from pyasn1.codec.der.decoder import decode as der_decoder
@@ -555,7 +556,7 @@ def wrap_socket(sock, keyfile=None, certfile=None, server_side=False,
 
     # SNI support
     if server_hostname is not None:
-        cnx.set_tlsext_host_name(server_hostname)
+        cnx.set_tlsext_host_name(smart_str(server_hostname))
 
     cnx.set_connect_state()
 

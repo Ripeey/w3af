@@ -634,6 +634,7 @@ class HTTPResponse(DiskItem):
         charset = self._charset
         raw_body = self._raw_body
         headers = self.get_headers()
+        # corss check with original once removeME
         content_type, _ = headers.iget(CONTENT_TYPE, None)
 
         # Only try to decode <str> strings. Skip <unicode> strings

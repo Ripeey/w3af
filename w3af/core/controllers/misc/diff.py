@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import difflib
 import diff_match_patch as dmp_module
 
+from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.data.misc.encoding import smart_str_ignore
 
 # 20 seconds it the max time we'll wait for a diff, the good thing
@@ -196,6 +197,6 @@ def split_by_sep(sequence):
     #
     try:
         translated_seq = str.translate(sequence, TRANSLATION_TABLE)
-    except UnicodeDecodeError:
-        translated_seq = str.translate(sequence.encode('utf-8'), TRANSLATION_TABLE)
+    except TypeError:
+        translated_seq = str.translate(sequence.decode(DEFAULT_ENCODING), TRANSLATION_TABLE)
     return translated_seq.split('\0')
