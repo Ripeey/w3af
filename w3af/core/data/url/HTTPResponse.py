@@ -31,7 +31,7 @@ import w3af.core.controllers.output_manager as om
 import w3af.core.data.parsers.parser_cache as parser_cache
 
 from w3af.core.controllers.exceptions import BaseFrameworkException
-from w3af.core.data.misc.encoding import smart_str, smart_bytes_ignore, ESCAPED_CHAR
+from w3af.core.data.misc.encoding import smart_str, smart_bytes, smart_bytes_ignore, ESCAPED_CHAR
 from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.dc.headers import Headers
@@ -280,8 +280,8 @@ class HTTPResponse(DiskItem):
 
         :param string_to_test: String to look for in the body
         """
-        return string_to_test in self.body
-    
+        return smart_bytes(string_to_test) in self.body
+
     def __eq__(self, other):
         return (self.id == other.id and
                 self._code == other._code and

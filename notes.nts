@@ -137,3 +137,5 @@
 
 # *** from this point smart encode str->bytes unicode->str ***
 # some encoding fix
+# contains fix HTTPResponse, fix ssl ceritificate audit, fingerprint is on hold, remove clamAV
+ 

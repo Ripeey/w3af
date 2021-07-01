@@ -127,7 +127,7 @@ class dav(AuditPlugin):
         res = self._uri_opener.PROPFIND(domain_path, data=content,
                                         headers=headers)
 
-        if b"D:href" in res and res.get_code() in range(200, 300):
+        if "D:href" in res and res.get_code() in range(200, 300):
             msg = ('Directory listing with HTTP PROPFIND method was found at'
                    ' directory: "%s".' % domain_path)
 

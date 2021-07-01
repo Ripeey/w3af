@@ -314,6 +314,7 @@ def get_fingerprint(url, threads):
     pool.terminate()
     # removeME 
     print('reeeeee1xeeee', fingerprint)
+    print("Error is fingerprint need to fix later, ignore this for now")
     fingerprint['SYNTACTIC']['HEADER_ORDER'] = winnow_ordered_list(fingerprint['SYNTACTIC']['HEADER_ORDER'])
     return fingerprint
 

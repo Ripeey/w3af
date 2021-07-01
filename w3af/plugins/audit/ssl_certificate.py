@@ -111,7 +111,7 @@ class ssl_certificate(AuditPlugin):
         else:
             self._cert_expiration_analysis(domain, port, cert, cert_der, cipher)
             self._ssl_info_to_kb(domain, port, cert, cert_der, cipher)
-        
+    # removeME also need for v3 now
     def _allows_ssl_v2(self, domain, port):
         """
         Check if the server allows SSLv2 connections
@@ -123,8 +123,8 @@ class ssl_certificate(AuditPlugin):
         # we want to start a connection using that protocol and it fails from
         # our side
         if getattr(ssl, 'PROTOCOL_SSLv2', None) is None:
-            om.out.debug('There is no SSLv2 protocol support in the client.'
-                         ' Will not be able to verify if the remote end has'
+            om.out.debug('There is no SSLv2 protocol support in the client.' \
+                         ' Will not be able to verify if the remote end has' \
                          ' SSLv2 support.')
             return
 
@@ -189,11 +189,11 @@ class ssl_certificate(AuditPlugin):
         Not all python versions support all SSL protocols.
         :return: The protocol constants that exist in this python version
         """
-        return [OpenSSL.SSL.SSLv3_METHOD,
-                OpenSSL.SSL.TLSv1_METHOD,
+        return [OpenSSL.SSL.TLSv1_METHOD,
                 OpenSSL.SSL.SSLv23_METHOD,
                 OpenSSL.SSL.TLSv1_1_METHOD,
                 OpenSSL.SSL.TLSv1_2_METHOD,
+                OpenSSL.SSL.SSLv3_METHOD,
                 OpenSSL.SSL.SSLv2_METHOD]
 
     def _ssl_connect(self,
@@ -219,6 +219,10 @@ class ssl_certificate(AuditPlugin):
         ca_certs = self._ca_file if ca_certs is None else ca_certs
 
         for protocol in self._get_procotols():
+            # removeME PatchFIX : Just checking 
+            if protocol == OpenSSL.SSL.SSLv2_METHOD or protocol == OpenSSL.SSL.SSLv3_METHOD:
+                print("Insecure SSLv2 or SSLv3 approached, client might not support this.")
+
             om.out.debug('Trying to connect with SSL protocol %s' % protocol)
             
             try:
@@ -236,7 +240,7 @@ class ssl_certificate(AuditPlugin):
             else:
                 if result is not None:
                     return result
-    # Final error over here
+
     def _ssl_connect_specific_protocol(self,
                                        domain,
                                        port,
