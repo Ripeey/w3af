@@ -30,7 +30,7 @@ from w3af.core.data.dc.utils.token import DataToken
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.request.request_mixin import RequestMixIn
 from w3af.core.data.url.constants import MAX_HTTP_RETRIES
-from w3af.core.data.constants.encoding import smart_str
+from w3af.core.data.misc.encoding import smart_str
 
 class HTTPRequest(RequestMixIn, urllib.request.Request):
     def __init__(self, url,
