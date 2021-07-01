@@ -31,6 +31,8 @@ from datetime import date, datetime
 import w3af.core.controllers.output_manager as om
 import w3af.core.data.constants.severity as severity
 
+from w3af.core.data.constants.encodings import DEFAULT_ENCODING
+
 from w3af import ROOT_PATH
 from w3af.core.controllers.plugins.audit_plugin import AuditPlugin
 from w3af.core.data.options.opt_factory import opt_factory
@@ -234,7 +236,7 @@ class ssl_certificate(AuditPlugin):
             else:
                 if result is not None:
                     return result
-
+    # Final error over here
     def _ssl_connect_specific_protocol(self,
                                        domain,
                                        port,
@@ -374,7 +376,7 @@ class ssl_certificate(AuditPlugin):
         not_after = cert['notAfter']
 
         try:
-            exp_date = datetime.strptime(not_after, '%Y%m%d%H%M%SZ')
+            exp_date = datetime.strptime(not_after.decode(DEFAULT_ENCODING), '%Y%m%d%H%M%SZ')
         except ValueError:
             msg = 'Invalid SSL certificate date format: %s' % not_after
             om.out.debug(msg)

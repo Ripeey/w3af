@@ -134,3 +134,6 @@
 # HTTPRequest data force to bytes for now, fix string translation, detect_reverse_proxy encoding fix, added debug for hmap ssl issues
 
 # Fix encoding for detect_reverse_proxy, afd, _handle_send_success, (_ssl_connect_specific_protocol->set_tlsext_host_name).
+
+# *** from this point smart encode str->bytes unicode->str ***
+# some encoding fix
