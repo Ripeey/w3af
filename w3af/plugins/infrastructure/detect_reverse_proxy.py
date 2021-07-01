@@ -28,7 +28,7 @@ from w3af.core.controllers.plugins.infrastructure_plugin import InfrastructurePl
 from w3af.core.controllers.exceptions import RunOnce
 from w3af.core.controllers.misc.decorators import runonce
 from w3af.core.data.kb.info import Info
-
+from w3af.core.data.constants.encoding import DEFAULT_ENCODING
 
 class detect_reverse_proxy(InfrastructurePlugin):
     """
@@ -120,7 +120,7 @@ class detect_reverse_proxy(InfrastructurePlugin):
         :param response: The HTTP response object to analyze
         :return: True if the remote web server has a reverse proxy
         """
-        response_body = response.get_body().upper()
+        response_body = response.get_body().decode(DEFAULT_ENCODING).upper()
         #remove duplicated spaces from body
         whitespace = re.compile(r'\s+')
         response_body = re.sub(whitespace, ' ', response_body)

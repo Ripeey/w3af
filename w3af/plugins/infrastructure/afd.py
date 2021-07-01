@@ -28,6 +28,7 @@ from w3af.core.controllers.plugins.infrastructure_plugin import InfrastructurePl
 from w3af.core.controllers.exceptions import RunOnce, BaseFrameworkException
 from w3af.core.controllers.misc.decorators import runonce
 from w3af.core.controllers.misc.fuzzy_string_cmp import fuzzy_not_equal
+from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 from w3af.core.data.parsers.doc.url import URL
 from w3af.core.data.fuzzer.utils import rand_alnum
 from w3af.core.data.kb.info import Info
@@ -92,8 +93,8 @@ class afd(InfrastructurePlugin):
             raise BaseFrameworkException(msg % bfe)
 
         orig_resp_body = http_resp.get_body()
-        orig_resp_body = orig_resp_body.replace(bytes(rnd_param), b'')
-        orig_resp_body = orig_resp_body.replace(bytes(rnd_value), b'')
+        orig_resp_body = orig_resp_body.replace(rnd_param.encode(DEFAULT_ENCODING), b'')
+        orig_resp_body = orig_resp_body.replace(rnd_value.encode(DEFAULT_ENCODING), b'')
 
         tests = []
         for offending_string in self._get_offending_strings():

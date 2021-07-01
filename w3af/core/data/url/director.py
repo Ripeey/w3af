@@ -20,10 +20,6 @@ class CustomOpenerDirector(OpenerDirector):
             if data is not None:
                 req.add_data(data)
 
-        #removeME I think data is empty and req is HTTPReq with already inside so fix at extended_urllib before at HTTPReq (audit.dav error)
-        print('reeeeeeeee', type(data))
-        print('reeeeeeeex2', type(full_url))
-
         # This is what I want to remove and the reason to override
         # req.timeout = timeout
         # patchFIX get_type()

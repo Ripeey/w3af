@@ -130,3 +130,5 @@
 # fix global redirect regex matching encoding, audit/dav added debug to test, guess_charset in HTTPResponse temp fix added that thing needs a logical replacement/removal
 
 # some revision RequestMixIn#L45 and syntax fix
+
+# HTTPRequest data force to bytes for now, fix string translation, detect_reverse_proxy encoding fix, added debug for hmap ssl issues
