@@ -92,8 +92,8 @@ class afd(InfrastructurePlugin):
             raise BaseFrameworkException(msg % bfe)
 
         orig_resp_body = http_resp.get_body()
-        orig_resp_body = orig_resp_body.replace(rnd_param, '')
-        orig_resp_body = orig_resp_body.replace(rnd_value, '')
+        orig_resp_body = orig_resp_body.replace(bytes(rnd_param), b'')
+        orig_resp_body = orig_resp_body.replace(bytes(rnd_value), b'')
 
         tests = []
         for offending_string in self._get_offending_strings():

@@ -56,7 +56,7 @@ class HTTPRequest(RequestMixIn, urllib.request.Request):
         with some common tasks like serialization, cache, etc.
 
         :param method: None means choose the default (POST if data is not None)
-        :param data: The post_data as a string
+        :param data: The post_data as a bytes
         """
         headers = headers or Headers()
         #

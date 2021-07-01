@@ -29,7 +29,7 @@ from w3af.core.data.fuzzer.fuzzer import create_mutants
 from w3af.core.data.kb.vuln import Vuln
 from w3af.core.controllers.exceptions import BaseFrameworkException
 from w3af.core.controllers.plugins.audit_plugin import AuditPlugin
-
+from w3af.core.data.constants.encodings import DEFAULT_ENCODING
 
 class global_redirect(AuditPlugin):
     """
@@ -283,7 +283,7 @@ class global_redirect(AuditPlugin):
 
         :return: Lines of javascript code
         """
-        mo = self.SCRIPT_RE.search(response.get_body())
+        mo = self.SCRIPT_RE.search(response.get_body().decode(DEFAULT_ENCODING))
 
         if mo is not None:
 

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
 import functools
-
+patchLog
 class LogSink(object):
     """
     The log sink receives log messages in different threads/processes and sends
@@ -83,13 +83,13 @@ class LogSink(object):
             raise AttributeError(msg % name)
 
         #removeME - A log patch for temp (returns method)
-        """
-        def patchLog(*args):
+
+        def patchLog(*args, **kwargs):
             trace = str(args) if args else ''
             from w3af import logger
             logger.error_log(trace) if name in ('error', 'log_crash') else logger.log(trace)
-            return method
+            return method(*args, **kwargs)
         return patchLog
         """
         return method  
-
+        """

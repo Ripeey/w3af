@@ -38,9 +38,9 @@ class private_ip(GrepPlugin):
     :author: Andres Riancho (andres.riancho@gmail.com)
     """
     # More info regarding this regular expression: http://bit.ly/185DFJc
-    IP_RE = '(?<!\.)(?<!\d)(?:(?:10|127)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9]' \
-            '[0-9]?)|192\.168|169\.254|172\.0?(?:1[6-9]|2[0-9]|3[01]))' \
-            '(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){2}(?!\d)(?!\.)'
+    IP_RE = r'(?<!\.)(?<!\d)(?:(?:10|127)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9]' \
+            r'[0-9]?)|192\.168|169\.254|172\.0?(?:1[6-9]|2[0-9]|3[01]))' \
+            r'(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){2}(?!\d)(?!\.)'
 
     RE_LIST = [re.compile(IP_RE)]
 
@@ -61,12 +61,14 @@ class private_ip(GrepPlugin):
         if self._ignore_if_match is None:
             self._generate_ignores(response)
 
-        if (request.get_url(), request.data) in self._already_inspected:
+        request_data = getattr(request, 'data', getattr(request, 'get_data')())
+
+        if (request.get_url(),  request_data) in self._already_inspected:
             return
 
         # Only run this once for each combination of URL and data sent to
         # that URL
-        self._already_inspected.add((request.get_url(), request.data))
+        self._already_inspected.add((request.get_url(), request_data))
         
         self._analyze_headers(request, response)
         self._analyze_html(request, response)

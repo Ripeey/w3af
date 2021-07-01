@@ -682,7 +682,7 @@ class HTTPResponse(DiskItem):
                                       on_error_guess=False)
 
         return _body, charset
-
+# Why at all? removeME we did .decode() for fix but its for guess so wtf
     def guess_charset(self, raw_body, headers):
         # Start with the headers
         content_type, _ = headers.iget(CONTENT_TYPE, None)
@@ -692,7 +692,7 @@ class HTTPResponse(DiskItem):
             charset = charset_mo.groups()[0].lower().strip()
         else:
             # Continue with the body's meta tag
-            charset_mo = CHARSET_META_RE.search(raw_body, re.IGNORECASE)
+            charset_mo = CHARSET_META_RE.search(raw_body.decode(), re.IGNORECASE)
             if charset_mo:
                 charset = charset_mo.groups()[0].lower().strip()
             else:

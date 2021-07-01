@@ -149,8 +149,7 @@ class dav(AuditPlugin):
         rnd_content = rand_alnum(6)
         headers = Headers([('content-type', 'text/plain')])
 
-        put_response = self._uri_opener.PUT(url, data=rnd_content,
-                                            headers=headers)
+        put_response = self._uri_opener.PUT(url, data=rnd_content, headers=headers)
 
         # check if uploaded
         res = self._uri_opener.GET(url, cache=True)
@@ -164,7 +163,7 @@ class dav(AuditPlugin):
 
             v.set_url(url)
             v.set_method('PUT')
-            
+
             self.kb_append(self, 'dav', v)
 
         # Report some common errors
@@ -178,7 +177,7 @@ class dav(AuditPlugin):
 
             i.set_url(url)
             i.set_method('PUT')
-            
+
             self.kb_append(self, 'dav', i)
 
         # Report some common errors
