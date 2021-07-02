@@ -27,12 +27,7 @@ from gi.repository import GObject as gobject
 from w3af.core.ui.gui.helpers import end_threads, Throbber
 from w3af.core.ui.gui.entries import EmailEntry
 from w3af.core.ui.gui.constants import W3AF_ICON
-from w3af.core.controllers.easy_contribution.github_issues import (GithubIssues,
-                                                                   OAUTH_TOKEN,
-                                                                   LoginFailed,
-                                                                   OAUTH_AUTH_FAILED,
-                                                                   OAuthTokenInvalid,
-                                                                   DEFAULT_BUG_QUERY_TEXT)
+# from w3af.core.controllers.easy_contribution.github_issues import (GithubIssues, OAUTH_TOKEN, LoginFailed, OAUTH_AUTH_FAILED, OAuthTokenInvalid, DEFAULT_BUG_QUERY_TEXT)
 
 
 class SimpleBaseWindow(gtk.Window):
@@ -438,7 +433,8 @@ def dlg_invalid_token(parent):
                            gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                            gtk.MESSAGE_WARNING,
                            gtk.BUTTONS_OK,
-                           OAUTH_AUTH_FAILED)
+                           )
+                           #OAUTH_AUTH_FAILED)
 
     md.set_icon_from_file(W3AF_ICON)
     md.set_title('GitHub authentication failed')
@@ -477,7 +473,7 @@ class dlg_ask_bug_info(gtk.MessageDialog):
         description_text_view.set_size_request(240, 300)
         description_text_view.set_wrap_mode(gtk.WRAP_WORD)
         buffer = description_text_view.get_buffer()
-        buffer.set_text(DEFAULT_BUG_QUERY_TEXT)
+        buffer.set_text('DEFAULT_BUG_QUERY_TEXT')
         sw.add(description_text_view)
 
         #create a horizontal box to pack the entry and a label
@@ -509,7 +505,7 @@ class dlg_ask_bug_info(gtk.MessageDialog):
 
         return False, summary, description
 
-
+'''
 class GithubBugReport(object):
     """
     Class that models user interaction with Github to report ONE bug.
@@ -663,3 +659,4 @@ class GithubMultiBugReport(GithubBugReport):
             return None, None
         else:
             return ticket_url, ticket_id
+'''
