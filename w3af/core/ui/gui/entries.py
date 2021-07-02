@@ -18,8 +18,9 @@ You should have received a copy of the GNU General Public License
 along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
+from gi.repository import Gdk
 
 from w3af.core.ui.gui import history
 from w3af.core.ui.gui import helpers
@@ -58,7 +59,7 @@ class ValidatedEntry(gtk.Entry):
         self.connect("focus-out-event", self._setDefault)
         self.connect("key-release-event", self._key)
         self.orig_value = orig_value
-        self.esc_key = gtk.gdk.keyval_from_name("Escape")
+        self.esc_key = Gdk.keyval_from_name("Escape")
         self.set_width_chars(50)
         
         # color handling
@@ -679,7 +680,7 @@ class RememberingWindow(gtk.Window):
         self.connect('key_press_event', self.help_f1)
 
     def help_f1(self, widget, event):
-        if event.keyval != 65470:  # F1, check: gtk.gdk.keyval_name(event.keyval)
+        if event.keyval != 65470:  # F1, check: Gdk.keyval_name(event.keyval)
             return
 
         self.open_help()

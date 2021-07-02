@@ -18,7 +18,8 @@ You should have received a copy of the GNU General Public License
 along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-import gtk
+from gi.repository import Gtk as gtk
+from gi.repository import Gdk
 
 from w3af.core.controllers.exceptions import BaseFrameworkException
 from w3af.core.controllers.plugins.plugin import Plugin
@@ -330,14 +331,14 @@ class ConfigDialog(gtk.Dialog):
 
         Filters by event.
         """
-        if event.type != gtk.gdk.DELETE:
+        if event.type != Gdk.DELETE:
             return False
         return self._close()
 
     def _btn_close(self, widget):
         """Handles the user trying to close the configuration."""
         if not self._close():
-            self.emit("delete_event", gtk.gdk.Event(gtk.gdk.DELETE))
+            self.emit("delete_event", Gdk.Event(Gdk.DELETE))
 
     def _close(self):
         """Generic close."""

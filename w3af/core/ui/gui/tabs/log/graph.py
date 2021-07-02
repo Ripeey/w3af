@@ -20,8 +20,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
 
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
 import time
 import itertools
 
@@ -41,12 +41,12 @@ MSUP = 20
 
 
 class colors:
-    grey = gtk.gdk.color_parse("grey")
-    red = gtk.gdk.color_parse("red")
-    blue = gtk.gdk.color_parse("blue")
-    black = gtk.gdk.color_parse("black")
-    white = gtk.gdk.color_parse("white")
-    whitesmoke = gtk.gdk.color_parse("whitesmoke")
+    grey = Gdk.color_parse("grey")
+    red = Gdk.color_parse("red")
+    blue = Gdk.color_parse("blue")
+    black = Gdk.color_parse("black")
+    white = Gdk.color_parse("white")
+    whitesmoke = Gdk.color_parse("whitesmoke")
 
 
 class LogGraph(gtk.DrawingArea, MessageConsumer):

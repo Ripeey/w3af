@@ -19,8 +19,8 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
 import cairo
 import pango
 import random
@@ -61,7 +61,7 @@ class Speedometer(gtk.DrawingArea):
 
         # This invalidates the screen, causing the expose event to fire.
         self.alloc = self.get_allocation()
-        rect = gtk.gdk.Rectangle(
+        rect = Gdk.Rectangle(
             self.alloc.x, self.alloc.y, self.alloc.width, self.alloc.height)
         self.window.invalidate_rect(rect, True)
 
@@ -164,14 +164,14 @@ class Speedometer(gtk.DrawingArea):
         self._layout.set_font_description(pango.FontDescription("Arial 13"))
         fontw, fonth = self._layout.get_pixel_size()
         self.text_ctx.move_to(150, 243)
-        self.text_ctx.set_source_color(gtk.gdk.Color(255, 255, 255))
+        self.text_ctx.set_source_color(Gdk.Color(255, 255, 255))
         self.text_ctx.update_layout(self._layout)
         self.text_ctx.show_layout(self._layout)
 
     def draw_image(self, ctx, x, y, image_file):
         ctx.save()
         ctx.translate(x, y)
-        pixbuf = gtk.gdk.pixbuf_new_from_file(image_file)
+        pixbuf = Gdk.pixbuf_new_from_file(image_file)
         format = cairo.FORMAT_RGB24
         if pixbuf.get_has_alpha():
             format = cairo.FORMAT_ARGB32

@@ -18,7 +18,9 @@ You should have received a copy of the GNU General Public License
 along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-import gtk
+from gi.repository import Gtk as gtk
+from gi.repository import Gdk
+
 import os
 
 from w3af.core.ui.gui.constants import W3AF_ICON
@@ -55,7 +57,7 @@ class Splash(gtk.Window):
         #    self.set_decorated(False)
 
         # color and position
-        color = gtk.gdk.color_parse('#f2f2ff')
+        color = Gdk.color_parse('#f2f2ff')
         self.modify_bg(gtk.STATE_NORMAL, color)
         self.set_position(gtk.WIN_POS_CENTER)
         self.set_size_request(644, 315)

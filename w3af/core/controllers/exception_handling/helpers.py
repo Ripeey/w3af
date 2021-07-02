@@ -70,7 +70,7 @@ def get_platform_dist():
 
 def get_versions():
     try:
-        import gtk
+        from gi.repository import Gtk as gtk
     except ImportError:
         gtk_version = 'No GTK module installed'
         pygtk_version = 'No GTK module installed'

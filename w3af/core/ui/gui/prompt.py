@@ -19,8 +19,10 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import os
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
+from gi.repository import Gdk
+
 import pango
 
 from w3af.core.ui.gui import GUI_DATA_PATH
@@ -48,13 +50,13 @@ class PromptView(gtk.TextView, MessageConsumer):
 
         # keys
         self.keys = {
-            gtk.gdk.keyval_from_name("Return"): self._key_enter,
-            gtk.gdk.keyval_from_name("KP_Enter"): self._key_enter,
-            gtk.gdk.keyval_from_name("Up"): self._key_up,
-            gtk.gdk.keyval_from_name("Down"): self._key_down,
-            gtk.gdk.keyval_from_name("BackSpace"): self._key_backspace,
-            gtk.gdk.keyval_from_name("Control_L"): lambda: False,
-            gtk.gdk.keyval_from_name("Control_R"): lambda: False,
+            Gdk.keyval_from_name("Return"): self._key_enter,
+            Gdk.keyval_from_name("KP_Enter"): self._key_enter,
+            Gdk.keyval_from_name("Up"): self._key_up,
+            Gdk.keyval_from_name("Down"): self._key_down,
+            Gdk.keyval_from_name("BackSpace"): self._key_backspace,
+            Gdk.keyval_from_name("Control_L"): lambda: False,
+            Gdk.keyval_from_name("Control_R"): lambda: False,
         }
 
         # mono spaced font looks more like a terminal to me =)
@@ -261,13 +263,13 @@ class PromptView(gtk.TextView, MessageConsumer):
         # reset the cursor after moving it with the mouse
         if self.cursorPosition is not None:
             # special: don't reset for ctrl-C, as we want to copy the selected stuff
-            if event.state & gtk.gdk.CONTROL_MASK and event.keyval == gtk.gdk.keyval_from_name("c"):
+            if event.state & Gdk.CONTROL_MASK and event.keyval == Gdk.keyval_from_name("c"):
                 return False
             iterl = self.textbuffer.get_iter_at_offset(self.cursorPosition)
             self.textbuffer.place_cursor(iterl)
             self.cursorPosition = None
 
-#        print gtk.gdk.keyval_name(event.keyval)
+#        print Gdk.keyval_name(event.keyval)
         return False
 
 

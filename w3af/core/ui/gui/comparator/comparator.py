@@ -4,8 +4,8 @@ import re
 import difflib
 import struct
 import pango
-import gobject
-import gtk
+from gi.repository import GObject as gobject
+from gi.repository import Gtk as gtk
 from . import diffutil
 import traceback
 
@@ -188,7 +188,7 @@ class FileDiff(object):
         da.set_property("visible", True)
         da.set_property("can_focus", True)
         da.set_property("has_focus", True)
-        da.set_property("events", gtk.gdk.BUTTON_PRESS_MASK | gtk.gdk.BUTTON_RELEASE_MASK | gtk.gdk.KEY_PRESS_MASK | gtk.gdk.KEY_RELEASE_MASK)
+        da.set_property("events", Gdk.BUTTON_PRESS_MASK | Gdk.BUTTON_RELEASE_MASK | Gdk.KEY_PRESS_MASK | Gdk.KEY_RELEASE_MASK)
         da.connect("expose-event", self.on_linkmap_expose_event)
         da.connect("scroll-event", self.on_linkmap_scroll_event)
         da.connect("button-press-event", self.on_linkmap_button_press_event)
@@ -202,7 +202,7 @@ class FileDiff(object):
         da = gtk.DrawingArea()
         da.set_property("width_request", 20)
         da.set_property("visible", True)
-        da.set_property("events", gtk.gdk.BUTTON_PRESS_MASK)
+        da.set_property("events", Gdk.BUTTON_PRESS_MASK)
         da.connect("expose-event", self.on_diffmap_expose_event)
         da.connect("button-press-event", self.on_diffmap_button_press_event)
         return da
@@ -305,7 +305,7 @@ class FileDiff(object):
 
         # glade bug workaround
         self.linkmap.set_events(
-            gtk.gdk.BUTTON_PRESS_MASK | gtk.gdk.BUTTON_RELEASE_MASK)
+            Gdk.BUTTON_PRESS_MASK | Gdk.BUTTON_RELEASE_MASK)
         self.linkmap.set_double_buffered(0)  # we call paint_begin ourselves
 
         for text in self.textview:
@@ -742,7 +742,7 @@ class FileDiff(object):
         curline = self._pixel_to_line(
             1, int(adjs[1].value + adjs[1].page_size / 2))
         c = None
-        if direction == gtk.gdk.SCROLL_DOWN:
+        if direction == Gdk.SCROLL_DOWN:
             for c in self.linediffer.single_changes(1, self._get_texts()):
                 assert c[0] != "equal"
                 c1, c2 = self._consume_blank_lines(
@@ -751,7 +751,7 @@ class FileDiff(object):
                     continue
                 if c[1] > curline + 1:
                     break
-        else:  # direction == gtk.gdk.SCROLL_UP
+        else:  # direction == Gdk.SCROLL_UP
             for chunk in self.linediffer.single_changes(1, self._get_texts()):
                 c1, c2 = self._consume_blank_lines(
                     self._get_texts()[1][chunk[1]:chunk[2]])
@@ -778,13 +778,13 @@ class FileDiff(object):
     def _setup_gcs(self, area):
         assert area.window
         gcd = area.window.new_gc()
-        gcd.set_rgb_fg_color(gtk.gdk.color_parse(Prefs.color_delete_bg))
+        gcd.set_rgb_fg_color(Gdk.color_parse(Prefs.color_delete_bg))
         gcc = area.window.new_gc()
-        gcc.set_rgb_fg_color(gtk.gdk.color_parse(Prefs.color_replace_bg))
+        gcc.set_rgb_fg_color(Gdk.color_parse(Prefs.color_replace_bg))
         gce = area.window.new_gc()
-        gce.set_rgb_fg_color(gtk.gdk.color_parse(Prefs.color_edited_bg))
+        gce.set_rgb_fg_color(Gdk.color_parse(Prefs.color_edited_bg))
         gcx = area.window.new_gc()
-        gcx.set_rgb_fg_color(gtk.gdk.color_parse(Prefs.color_conflict_bg))
+        gcx.set_rgb_fg_color(Gdk.color_parse(Prefs.color_conflict_bg))
         area.meldgc = Struct(
             gc_delete=gcd, gc_insert=gcd, gc_replace=gcc, gc_conflict=gcx)
         area.meldgc.get_gc = lambda p: getattr(area.meldgc, "gc_" + p)

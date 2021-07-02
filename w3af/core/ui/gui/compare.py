@@ -19,7 +19,8 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import os
-import gtk
+from gi.repository import Gtk as gtk
+from gi.repository import Gdk
 
 from w3af.core.ui.gui import GUI_DATA_PATH
 from w3af.core.ui.gui import entries
@@ -77,7 +78,7 @@ class Compare(entries.RememberingWindow):
         iconfactory.add_default()
 
         def make_iconset(path):
-            return gtk.IconSet(gtk.gdk.pixbuf_new_from_file(path))
+            return gtk.IconSet(Gdk.pixbuf_new_from_file(path))
 
         iconfactory.add(
             'req_head', make_iconset(os.path.join(GUI_DATA_PATH, 'request-headers.png')))
@@ -90,13 +91,13 @@ class Compare(entries.RememberingWindow):
 
         gtk.stock_add((
             ('req_head', "Show Request Headers", 0,
-             gtk.gdk.keyval_from_name('1'), 'w3af'),
+             Gdk.keyval_from_name('1'), 'w3af'),
             ('req_body', "Show Request Body", 0,
-             gtk.gdk.keyval_from_name('2'), 'w3af'),
+             Gdk.keyval_from_name('2'), 'w3af'),
             ('res_head', "Show Response Headers", 0,
-             gtk.gdk.keyval_from_name('3'), 'w3af'),
+             Gdk.keyval_from_name('3'), 'w3af'),
             ('res_body', "Show Response Body", 0,
-             gtk.gdk.keyval_from_name('4'), 'w3af'),
+             Gdk.keyval_from_name('4'), 'w3af'),
         ))
 
         actiongroup.add_toggle_actions([

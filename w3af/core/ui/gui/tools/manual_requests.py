@@ -19,8 +19,8 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
 import threading
 
 from w3af.core.ui.gui import helpers, entries
@@ -89,10 +89,10 @@ class ManualRequests(entries.RememberingWindow):
         """
         tsup, tlow = self.reqresp.request.get_both_texts()
 
-        busy = gtk.gdk.Window(self.window, gtk.gdk.screen_width(),
-                              gtk.gdk.screen_height(), gtk.gdk.WINDOW_CHILD,
-                              0, gtk.gdk.INPUT_ONLY)
-        busy.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+        busy = Gdk.Window(self.window, Gdk.screen_width(),
+                              Gdk.screen_height(), Gdk.WINDOW_CHILD,
+                              0, Gdk.INPUT_ONLY)
+        busy.set_cursor(Gdk.Cursor(Gdk.WATCH))
         busy.show()
 
         while gtk.events_pending():
@@ -130,19 +130,19 @@ class ManualRequests(entries.RememberingWindow):
 
                     self.reqresp.response.clear_panes()
                     self.reqresp.response.set_sensitive(False)
-                    gtk.gdk.threads_enter()
+                    Gdk.threads_enter()
                     helpers.FriendlyExceptionDlg(msg % impact.exception)
-                    gtk.gdk.threads_leave()
+                    Gdk.threads_leave()
 
             else:
                 # This is a very strange case, because impact.ok == False
                 # but impact.exception does not exist!
                 self.reqresp.response.clear_panes()
                 self.reqresp.response.set_sensitive(False)
-                gtk.gdk.threads_enter()
+                Gdk.threads_enter()
                 helpers.FriendlyExceptionDlg('Errors occurred while sending'
                                              ' the HTTP request.')
-                gtk.gdk.threads_leave()
+                Gdk.threads_leave()
 
             return False
 

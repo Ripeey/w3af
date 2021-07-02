@@ -20,8 +20,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import threading
 
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
+from gi.repository import Gdk
 from w3af.core.ui.gui import helpers, entries
 
 
@@ -261,15 +262,15 @@ class clusterCellData(gtk.TreeView):
         if "path-cross-event" not in gobject.signal_list_names(gtk.TreeView):
             gobject.signal_new("path-cross-event", gtk.TreeView,
                                gobject.SIGNAL_RUN_LAST,
-                               gobject.TYPE_BOOLEAN, (gtk.gdk.Event,))
+                               gobject.TYPE_BOOLEAN, (Gdk.Event,))
 
             gobject.signal_new("column-cross-event", gtk.TreeView,
                                gobject.SIGNAL_RUN_LAST,
-                               gobject.TYPE_BOOLEAN, (gtk.gdk.Event,))
+                               gobject.TYPE_BOOLEAN, (Gdk.Event,))
 
             gobject.signal_new("cell-cross-event", gtk.TreeView,
                                gobject.SIGNAL_RUN_LAST,
-                               gobject.TYPE_BOOLEAN, (gtk.gdk.Event,))
+                               gobject.TYPE_BOOLEAN, (Gdk.Event,))
         # pylint: enable=E1101
 
         self.connect(
@@ -434,8 +435,8 @@ class clusterCellData(gtk.TreeView):
     def compute_tooltip_position(
         self, treeview, cell_x, cell_y, cell_x_, cell_y_,
             popup_width, popup_height, event):
-        screen_width = gtk.gdk.screen_width()
-        screeen_height = gtk.gdk.screen_height()
+        screen_width = Gdk.screen_width()
+        screeen_height = Gdk.screen_height()
 
         pos_x = treeview.get_bin_window(
         ).get_origin()[0] + event.x - popup_width / 2

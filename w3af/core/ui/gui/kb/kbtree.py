@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
 import queue
 
 from collections import namedtuple
@@ -66,8 +66,8 @@ class KBTree(gtk.TreeView):
         #    * color_level,
         #    * color,
         #    * child_count
-        self.treestore = gtk.TreeStore(gtk.gdk.Pixbuf, str, str,
-                                       gtk.gdk.Pixbuf, int, str, str)
+        self.treestore = gtk.TreeStore(Gdk.Pixbuf, str, str,
+                                       Gdk.Pixbuf, int, str, str)
         gtk.TreeView.__init__(self, self.treestore)
         #self.set_enable_tree_lines(True)
 
@@ -145,7 +145,7 @@ class KBTree(gtk.TreeView):
 
     def _double_click(self, widg, event):
         """If double click, expand/collapse the row."""
-        if event.type == gtk.gdk._2BUTTON_PRESS:
+        if event.type == Gdk._2BUTTON_PRESS:
             path = self.get_cursor()[0]
             # This "if path" fixed bug #2205544
             # https://sourceforge.net/tracker2/?func=detail&atid=853652&aid=2205544&group_id=170274

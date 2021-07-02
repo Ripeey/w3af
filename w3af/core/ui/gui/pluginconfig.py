@@ -18,8 +18,10 @@ You should have received a copy of the GNU General Public License
 along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
+from gi.repository import Gdk
+
 import os
 
 from w3af.core.ui.gui import GUI_DATA_PATH
@@ -207,7 +209,7 @@ class PluginTree(gtk.TreeView):
         # 5. a image to show if the plugin is configurable
         self.treestore = gtk.TreeStore(str, gobject.TYPE_BOOLEAN,
                                        gobject.TYPE_BOOLEAN, str,
-                                       gtk.gdk.Pixbuf)
+                                       Gdk.Pixbuf)
 
         # decide which type in function of style
         if style == "standard":
@@ -289,7 +291,7 @@ class PluginTree(gtk.TreeView):
 
     def _doubleClick(self, widg, event):
         """If double click, expand/collapse the row."""
-        if event.type == gtk.gdk._2BUTTON_PRESS:
+        if event.type == Gdk._2BUTTON_PRESS:
             path = self.get_cursor()[0]
             if self.row_expanded(path):
                 self.collapse_row(path)
@@ -625,7 +627,7 @@ class PluginConfigBody(gtk.VBox):
         self.pack_start(self.pan, padding=5)
 
         # key binding
-        self.key_l = gtk.gdk.keyval_from_name("l")
+        self.key_l = Gdk.keyval_from_name("l")
         mainwin.window.connect("key-press-event", self._key)
 
         self.show()
@@ -753,7 +755,7 @@ class PluginConfigBody(gtk.VBox):
     def _key(self, widg, event):
         """Handles keystrokes."""
         # ctrl-something
-        if event.state & gtk.gdk.CONTROL_MASK:
+        if event.state & Gdk.CONTROL_MASK:
             if event.keyval == self.key_l:   # -l
                 self.target.grab_focus()
                 return True

@@ -22,8 +22,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import threading
 import signal
 
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
+from gi.repository import Gdk
+
 import w3af.core.controllers.output_manager as om
 from w3af.core.controllers.exceptions import (BaseFrameworkException,
                                               HTTPRequestException,
@@ -276,9 +278,9 @@ class ReqResViewer(gtk.VBox):
             # We stop the throbber, and hide it
             self.throbber.hide()
             self.throbber.running(False)
-            gtk.gdk.threads_enter()
+            Gdk.threads_enter()
             helpers.FriendlyExceptionDlg(msg)
-            gtk.gdk.threads_leave()
+            Gdk.threads_leave()
 
         return False
 

@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import gtk
+from gi.repository import Gtk as gtk
 from w3af.core.ui.gui.entries import SemiStockButton
 
 
@@ -39,11 +39,11 @@ class Searchable(object):
         # By default, don't match case
         self._matchCaseValue = False
         # key definitions
-        self.key_f = gtk.gdk.keyval_from_name("f")
-        self.key_g = gtk.gdk.keyval_from_name("g")
-        self.key_G = gtk.gdk.keyval_from_name("G")
-        self.key_F3 = gtk.gdk.keyval_from_name("F3")
-        self.key_Esc = gtk.gdk.keyval_from_name("Escape")
+        self.key_f = Gdk.keyval_from_name("f")
+        self.key_g = Gdk.keyval_from_name("g")
+        self.key_G = Gdk.keyval_from_name("G")
+        self.key_F3 = Gdk.keyval_from_name("F3")
+        self.key_Esc = Gdk.keyval_from_name("Escape")
         # signals
         self.connect("key-press-event", self._key)
         self.textview.connect("populate-popup", self._populate_popup)
@@ -59,7 +59,7 @@ class Searchable(object):
     def _key(self, widg, event):
         """Handles keystrokes."""
         # ctrl-something
-        if event.state & gtk.gdk.CONTROL_MASK:
+        if event.state & Gdk.CONTROL_MASK:
             if event.keyval == self.key_f:   # -f
                 self.show_search()
             elif event.keyval == self.key_g:   # -g
@@ -69,7 +69,7 @@ class Searchable(object):
             return True
         # F3
         if event.keyval == self.key_F3:
-            if event.state & gtk.gdk.SHIFT_MASK:
+            if event.state & Gdk.SHIFT_MASK:
                 self._find(None, "previous")
             else:
                 self._find(None, "next")

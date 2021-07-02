@@ -22,8 +22,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 # Now that I know that I have them, import them!
-import gtk
-import gobject
+    
+
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk as gtk
+from gi.repository import Gdk
+from gi.repository import GObject as gobject
+
 import shelve
 import os
 import webbrowser
@@ -75,8 +81,8 @@ if sys.platform == "win32":
     # Load the theme, this fixes bug 2022433: Windows buttons without images
     gtk.rc_add_default_file('%USERPROFILE%/.gtkrc-2.0')
 else:
-    gtk.gdk.threads_init()
-    gtk.gdk.threads_enter()
+    Gdk.threads_init()
+    Gdk.threads_enter()
 # pylint: enable=E1101
 
 class FakeShelve(dict):
@@ -496,7 +502,7 @@ class MainApp(object):
         self.pcbody.edit_selected_plugin()
 
     def on_window_state_event(self, widget, event, data=None):
-        mask = gtk.gdk.WINDOW_STATE_MAXIMIZED
+        mask = Gdk.WINDOW_STATE_MAXIMIZED
         self.is_maximized = widget.get_window().get_state() & mask == mask
     
     def quit(self, widget, event, data=None):
@@ -922,7 +928,7 @@ class MainApp(object):
         wizard.WizardChooser(self.w3af)
 
     def help_f1(self, widget, event):
-        if event.keyval != 65470:  # F1, check: gtk.gdk.keyval_name(event.keyval)
+        if event.keyval != 65470:  # F1, check: Gdk.keyval_name(event.keyval)
             return
 
         chapter = self.w3af.helpChapters["main"]

@@ -26,8 +26,8 @@ import base64
 import hashlib
 import random
 
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
 import w3af.core.data.parsers.utils.encode_decode as encode_decode
 from w3af.core.controllers.exceptions import BaseFrameworkException
 from w3af.core.ui.gui import entries
@@ -162,10 +162,10 @@ class EncodeDecode(entries.RememberingWindow):
         # clear the output text, this will introduce a small blink
         out.set_text("")
         # go busy
-        busy = gtk.gdk.Window(self.window, gtk.gdk.screen_width(),
-                              gtk.gdk.screen_height(), gtk.gdk.WINDOW_CHILD,
-                              0, gtk.gdk.INPUT_ONLY)
-        busy.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+        busy = Gdk.Window(self.window, Gdk.screen_width(),
+                              Gdk.screen_height(), Gdk.WINDOW_CHILD,
+                              0, Gdk.INPUT_ONLY)
+        busy.set_cursor(Gdk.Cursor(Gdk.WATCH))
         busy.show()
         while gtk.events_pending():
             gtk.main_iteration()

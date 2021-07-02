@@ -22,8 +22,8 @@ def profile(profileOutputFile=None, dotOutputFile=None, imageOutputFile=None):
     try:
         from thirdparty.gprof2dot import gprof2dot
         from thirdparty.xdot import xdot
-        import gobject
-        import gtk
+        from gi.repository import GObject as gobject
+        from gi.repository import Gtk as gtk
         import pydot
     except ImportError as e:
         errMsg = "profiling requires third-party libraries ('%s') " % getUnicode(e, UNICODE_ENCODING)

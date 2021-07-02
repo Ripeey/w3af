@@ -30,9 +30,9 @@ import time
 import re
 import optparse
 
-import gobject
-import gtk
-import gtk.gdk
+from gi.repository import GObject as gobject
+from gi.repository import Gtk as gtk
+from gi.repository import Gdk
 import gtk.keysyms
 import cairo
 import pango
@@ -205,8 +205,8 @@ class ImageShape(Shape):
         self.path = path
 
     def draw(self, cr, highlight=False):
-        cr2 = gtk.gdk.CairoContext(cr)
-        pixbuf = gtk.gdk.pixbuf_new_from_file(self.path)
+        cr2 = Gdk.CairoContext(cr)
+        pixbuf = Gdk.pixbuf_new_from_file(self.path)
         sx = float(self.w)/float(pixbuf.get_width())
         sy = float(self.h)/float(pixbuf.get_height())
         cr.save()
@@ -593,7 +593,7 @@ class XDotAttrParser:
 
     def lookup_color(self, c):
         try:
-            color = gtk.gdk.color_parse(c)
+            color = Gdk.color_parse(c)
         except ValueError:
             pass
         else:
@@ -1404,17 +1404,17 @@ class NullAction(DragAction):
         if item is None:
             item = dot_widget.get_jump(x, y)
         if item is not None:
-            dot_widget.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND2))
+            dot_widget.window.set_cursor(Gdk.Cursor(Gdk.HAND2))
             dot_widget.set_highlight(item.highlight)
         else:
-            dot_widget.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.ARROW))
+            dot_widget.window.set_cursor(Gdk.Cursor(Gdk.ARROW))
             dot_widget.set_highlight(None)
 
 
 class PanAction(DragAction):
 
     def start(self):
-        self.dot_widget.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.FLEUR))
+        self.dot_widget.window.set_cursor(Gdk.Cursor(Gdk.FLEUR))
 
     def drag(self, deltax, deltay):
         self.dot_widget.x += deltax / self.dot_widget.zoom_ratio
@@ -1422,7 +1422,7 @@ class PanAction(DragAction):
         self.dot_widget.queue_draw()
 
     def stop(self):
-        self.dot_widget.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.ARROW))
+        self.dot_widget.window.set_cursor(Gdk.Cursor(Gdk.ARROW))
 
     abort = stop
 
@@ -1474,7 +1474,7 @@ class DotWidget(gtk.DrawingArea):
 
     __gsignals__ = {
         'expose-event': 'override',
-        'clicked' : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_STRING, gtk.gdk.Event))
+        'clicked' : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_STRING, Gdk.Event))
     }
 
     filter = 'dot'
@@ -1487,10 +1487,10 @@ class DotWidget(gtk.DrawingArea):
 
         self.set_flags(gtk.CAN_FOCUS)
 
-        self.add_events(gtk.gdk.BUTTON_PRESS_MASK | gtk.gdk.BUTTON_RELEASE_MASK)
+        self.add_events(Gdk.BUTTON_PRESS_MASK | Gdk.BUTTON_RELEASE_MASK)
         self.connect("button-press-event", self.on_area_button_press)
         self.connect("button-release-event", self.on_area_button_release)
-        self.add_events(gtk.gdk.POINTER_MOTION_MASK | gtk.gdk.POINTER_MOTION_HINT_MASK | gtk.gdk.BUTTON_RELEASE_MASK)
+        self.add_events(Gdk.POINTER_MOTION_MASK | Gdk.POINTER_MOTION_HINT_MASK | Gdk.BUTTON_RELEASE_MASK)
         self.connect("motion-notify-event", self.on_area_motion_notify)
         self.connect("scroll-event", self.on_area_scroll_event)
         self.connect("size-allocate", self.on_area_size_allocate)
@@ -1768,9 +1768,9 @@ class DotWidget(gtk.DrawingArea):
     def get_drag_action(self, event):
         state = event.state
         if event.button in (1, 2): # left or middle button
-            if state & gtk.gdk.CONTROL_MASK:
+            if state & Gdk.CONTROL_MASK:
                 return ZoomAction
-            elif state & gtk.gdk.SHIFT_MASK:
+            elif state & Gdk.SHIFT_MASK:
                 return ZoomAreaAction
             else:
                 return PanAction
@@ -1788,7 +1788,7 @@ class DotWidget(gtk.DrawingArea):
         return False
 
     def is_click(self, event, click_fuzz=4, click_timeout=1.0):
-        assert event.type == gtk.gdk.BUTTON_RELEASE
+        assert event.type == Gdk.BUTTON_RELEASE
         if self.presstime is None:
             # got a button release without seeing the press?
             return False
@@ -1830,11 +1830,11 @@ class DotWidget(gtk.DrawingArea):
         return False
 
     def on_area_scroll_event(self, area, event):
-        if event.direction == gtk.gdk.SCROLL_UP:
+        if event.direction == Gdk.SCROLL_UP:
             self.zoom_image(self.zoom_ratio * self.ZOOM_INCREMENT,
                             pos=(event.x, event.y))
             return True
-        if event.direction == gtk.gdk.SCROLL_DOWN:
+        if event.direction == Gdk.SCROLL_DOWN:
             self.zoom_image(self.zoom_ratio / self.ZOOM_INCREMENT,
                             pos=(event.x, event.y))
             return True

@@ -18,8 +18,10 @@ You should have received a copy of the GNU General Public License
 along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-import gtk
-import gobject
+from gi.repository import Gtk as gtk
+from gi.repository import GObject as gobject
+from gi.repository import Gdk
+
 import urllib.request, urllib.error, urllib.parse
 import sys
 import re
@@ -515,7 +517,7 @@ class URLsTree(gtk.TreeView):
 
     def _doubleClick(self, widg, event):
         """If double click, expand/collapse the row."""
-        if event.type == gtk.gdk._2BUTTON_PRESS:
+        if event.type == Gdk._2BUTTON_PRESS:
             path = self.get_cursor()[0]
             # This "if path" fixed bug #2205544
             if path:

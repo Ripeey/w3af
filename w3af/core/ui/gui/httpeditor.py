@@ -22,7 +22,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import os
 import re
 
-import gtk
+from gi.repository import Gtk as gtk
+from gi.repository import Gdk
+
 import pango
 import gtksourceview2 as gtksourceview
 from w3af import ROOT_PATH
@@ -258,7 +260,7 @@ class HttpEditor(gtk.VBox, Searchable):
 
     def reset_bg_color(self):
         self.textView.modify_base(
-            gtk.STATE_NORMAL, gtk.gdk.color_parse("#FFFFFF"))
+            gtk.STATE_NORMAL, Gdk.color_parse("#FFFFFF"))
 
     def get_buffer(self):
         return self.textView.get_buffer()

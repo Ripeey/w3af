@@ -19,7 +19,7 @@ along with w3af; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 """
-import gtk
+from gi.repository import Gtk as gtk
 from w3af.core.data.parsers.doc.http_request_parser import http_request_parser
 
 from w3af.core.ui.gui.httpeditor import HttpEditor
@@ -65,7 +65,7 @@ class HttpRawView(HttpEditor):
                 obj = self.get_object()
             except BaseFrameworkException as ValueError:
                 # We get here when there is a parse error in the HTTP request
-                self.set_bg_color(gtk.gdk.color_parse("#FFCACA"))
+                self.set_bg_color(Gdk.color_parse("#FFCACA"))
                 self.parentView.disable_attached_widgets()
             else:
                 self.reset_bg_color()

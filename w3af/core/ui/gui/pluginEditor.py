@@ -4,7 +4,8 @@
 
 import os
 from . import pluginEditorDialogs
-import gtk
+from gi.repository import Gtk as gtk
+from gi.repository import Gdk
 
 from w3af import ROOT_PATH
 
