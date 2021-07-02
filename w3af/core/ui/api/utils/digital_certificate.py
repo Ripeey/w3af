@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import os
 import socket
 
-from OpenSSL import crypto
+from OpenSSL import crypto, SSL
 from w3af.core.controllers.misc.home_dir import get_home_dir
 
 
@@ -58,10 +58,10 @@ class SSLCertificate(object):
         cert.set_pubkey(key)
         cert.sign(key, 'sha256')
 
-        with open(self.cert_path, 'w') as f:
+        with open(self.cert_path, 'wb') as f:
             f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
 
-        with open(self.key_path, 'w') as f:
+        with open(self.key_path, 'wb') as f:
             f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, key))
 
     def get_cert_key(self, host=None):
@@ -71,8 +71,14 @@ class SSLCertificate(object):
                     - Certificate path
                     - Key path
         """
-        if not os.path.exists(self.cert_path) or not os.path.exists(self.cert_path):
+
+        if not os.path.exists(self.cert_path) or not os.path.exists(self.key_path):
             self.generate(host=host)
+        else:
+            if not os.stat(self.cert_path).st_size or not os.stat(self.key_path).st_size:
+                os.remove(self.cert_path)
+                os.remove(self.key_path)
+                self.generate(host=host)
 
         # context = SSL.Context(SSL.TLSv1_2_METHOD)
         # context.use_privatekey_file(self.key_path)
@@ -94,3 +100,4 @@ class SSLCertificate(object):
         # my 2.7.6 python. So returning that!
         #
         return self.cert_path, self.key_path
+        #return context

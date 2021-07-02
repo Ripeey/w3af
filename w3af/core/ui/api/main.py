@@ -52,6 +52,8 @@ def main():
                     debug=args.verbose, use_reloader=False, threaded=True,
                     ssl_context=cert_key)
     except socket.error as se:
+        import traceback
+        traceback.print_exc()
         print(('Failed to start REST API server: %s' % se.strerror))
         return 1
 
