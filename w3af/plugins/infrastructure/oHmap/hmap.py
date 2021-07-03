@@ -36,6 +36,7 @@ from w3af import ROOT_PATH
 from w3af.core.controllers.exceptions import BaseFrameworkException
 from w3af.core.controllers.threads.threadpool import Pool
 
+DEFAULT_CHARSET = 'UTF-8'
 
 class request(object):
     """
@@ -60,6 +61,9 @@ class request(object):
         return self.line_joiner.join([method_line] +
                                      ['%s: %s' % (x, y) for x, y in self.headers]) + \
                                     (2 * self.line_joiner) + self.body
+
+    def __bytes__(self):
+        return str(self).encode(DEFAULT_CHARSET)
 
     def get_connection(self):
         HOST = self.url
@@ -86,8 +90,7 @@ class request(object):
                 args = (HOST, PORT, e)
                 raise BaseFrameworkException(msg % args)
 
-            s.recv = s2.read
-            s.send = s2.write
+            s = s2
 
         s.settimeout(10)
 
@@ -102,11 +105,11 @@ class request(object):
         while tries != 0:
             s = self.get_connection()
 
-            data = ''
+            data = b''
 
             # Send the "HTTP request" to the socket
             try:
-                s.send(str(self))
+                s.send(bytes(self))
             except Exception as e:
                 om.out.debug('hmap failed to send data to socket: "%s"' % e)
 
@@ -137,7 +140,7 @@ class request(object):
             except KeyboardInterrupt as e:
                 raise e
 
-            except socket.sslerror as ssl_err:
+            except ssl.SSLError as ssl_err:
                 # When the remote server has no more data to send
                 # It simply closes the remote connection, which raises:
                 # (6, 'TLS/SSL connection has been closed')
@@ -176,7 +179,7 @@ class request(object):
             return response(data)
 
         # Something happen... we just return an empty response
-        return response('')
+        return response(b'')
 
     def add_header(self, name, data):
         self.headers.append([name, data])
@@ -193,6 +196,7 @@ class response(object):
         self.__parse(raw_text)
 
     def __parse(self, text):
+        text = text.decode(DEFAULT_CHARSET)
         if not text:
             self.response_code = 'NO_RESPONSE'
             self.response_text = 'NONE'
@@ -284,6 +288,9 @@ def get_fingerprint(url, threads):
         try:
             result = test(url)
         except Exception as e:
+            # removeME
+            import traceback
+            traceback.print_exc()
             args = (test.__name__, e)
             om.out.debug('[hmap] Test %s raised an exception: "%s"' % args)
             raise
