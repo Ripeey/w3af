@@ -28,6 +28,7 @@ import glob
 import time
 import socket
 import select
+import functools
 
 import w3af.core.data.kb.config as cf
 import w3af.core.controllers.output_manager as om
@@ -1027,14 +1028,44 @@ def testServer(ssl, server, port, matchCount, generateFP, threads):
     scores = find_most_similar(known_servers, fp)
 
     def score_cmp(score1, score2):
+        # Ugly need to replace using brain am too tired removeME patchFIX
+        cmp = lambda a,b: (a > b) - (a < b)
+        
+        # https://stackoverflow.com/a/3484456
+        def smallest_diff_key(A, B):
+            """return the smallest key adiff in A such that adiff not in B or A[adiff] != B[bdiff]"""
+            diff_keys = [k for k in A if k not in B or A[k] != B[k]]
+            return min(diff_keys)
+
+        def dict_cmp(A, B):
+            if len(A) != len(B):
+                return cmp(len(A), len(B))
+            try:
+                adiff = smallest_diff_key(A, B)
+            except ValueError:
+                # No difference.
+                return 0
+            bdiff = smallest_diff_key(B, A)
+            if adiff != bdiff:
+                return cmp(adiff, bdiff)
+            return cmp(A[adiff], b[bdiff])
+
+        def smart_cmp(a, b):
+            if type(a) == dict or type(b) == dict:
+                dict_cmp(a, b)
+            else:
+                cmp(a, b)
+
+
+
         (server1, (matches1, mismatches1, unknowns1)) = score1
         (server2, (matches2, mismatches2, unknowns2)) = score2
 
-        if -cmp(matches1, matches2) != 0:
-            return -cmp(matches1, matches2)
+        if -smart_cmp(matches1, matches2) != 0:
+            return -smart_cmp(matches1, matches2)
 
-        return cmp(server1, server2)
-    scores.sort(score_cmp)
+        return smart_cmp(server1, server2)
+    scores.sort(key = functools.cmp_to_key(score_cmp))
 
     res = []
     for (server, (matches, mismatches, unknowns)) in scores[:MATCH_COUNT]:

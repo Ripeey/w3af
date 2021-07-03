@@ -141,3 +141,4 @@
  
 # hmap socket, ssl, encoding, issues fix
 # hmap cmp and float point fix
+# hmap weird case cmp fix

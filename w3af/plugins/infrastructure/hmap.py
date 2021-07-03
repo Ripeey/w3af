@@ -72,6 +72,9 @@ class hmap(InfrastructurePlugin):
             om.out.error(msg % w3)
             return
         except Exception as e:
+            # removeME
+            import traceback
+            traceback.print_exc()
             msg = 'An unhandled exception occurred while running hmap: "%s"'
             om.out.error(msg % e)
             return
