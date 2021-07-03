@@ -139,3 +139,5 @@
 # some encoding fix
 # contains fix HTTPResponse, fix ssl ceritificate audit, fingerprint is on hold, remove clamAV
  
+# hmap socket, ssl, encoding, issues fix
+# hmap cmp and float point fix

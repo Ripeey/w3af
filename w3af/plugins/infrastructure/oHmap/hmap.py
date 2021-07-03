@@ -499,10 +499,10 @@ def malformed_method_line(url):
                           'GET %2F HTTP/1.0',  # 90
                           'GET%20/ HTTP/1.0',
                           'GET / FTP/1.0',
-                          'GET \ HTTP/1.0',  # windows style
+                          r'GET \ HTTP/1.0',  # windows style
                           #'GET \./',
                           #'GET \.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\. HTTP/1.0'
-                          'GET C:\ HTTP/1.0',
+                          r'GET C:\ HTTP/1.0',
                           'HTTP/1.0 / GET',  # and other permutations
                           # try various escape sequences from c etal
                           # \a = bell
@@ -561,7 +561,7 @@ def find_halfways(ranges):
 
         if (smallest_next[0] - largest_previous[0]) == 1:
             continue
-        hw = ((smallest_next[0] - largest_previous[0]) / 2) + largest_previous[0]
+        hw = ((smallest_next[0] - largest_previous[0]) // 2) + largest_previous[0]
         if VERBOSE:
             print(largest_previous, hw, smallest_next)
         halfways.append(hw)
@@ -781,7 +781,7 @@ def winnow_ordered_list(ordered_list):
         #print 'ordered_list too small to look at'
         return
 
-    ordered_list.sort(lambda a, b: cmp(len(a), len(b)))
+    ordered_list.sort(key = lambda _: len(_))
     #print 'sorted order', ordered_list
 
     index = 0
