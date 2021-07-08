@@ -280,7 +280,7 @@ class HTTPResponse(DiskItem):
 
         :param string_to_test: String to look for in the body
         """
-        return smart_bytes(string_to_test) in self.body
+        return string_to_test in self.body
 
     def __eq__(self, other):
         return (self.id == other.id and
