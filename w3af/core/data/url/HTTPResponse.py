@@ -280,7 +280,8 @@ class HTTPResponse(DiskItem):
 
         :param string_to_test: String to look for in the body
         """
-        return string_to_test in self.body
+        # patchFIX encodeFIX body could be str and bytes
+        return string_to_test in smart_str(self.body)
 
     def __eq__(self, other):
         return (self.id == other.id and
@@ -664,10 +665,10 @@ class HTTPResponse(DiskItem):
             # Now that we have the charset, we use it!
             # The return value of the decode function is a unicode string.
             try:
-                _body = smart_str(raw_body,
+                _body = smart_bytes(raw_body,
                                       charset,
-                                      errors=ESCAPED_CHAR,
-                                      on_error_guess=False)
+                                      errors=ESCAPED_CHAR)
+                                      #on_error_guess=False)
             except LookupError:
                 # Warn about a buggy charset
                 msg = ('Charset LookupError: unknown charset: %s; '
@@ -679,8 +680,8 @@ class HTTPResponse(DiskItem):
                 charset = DEFAULT_CHARSET
                 _body = smart_str(raw_body,
                                       charset,
-                                      errors=ESCAPED_CHAR,
-                                      on_error_guess=False)
+                                      errors=ESCAPED_CHAR)
+                                      #on_error_guess=False)
 
         return _body, charset
 # Why at all? removeME we did .decode() for fix but its for guess so wtf

@@ -99,7 +99,7 @@ def _should_use_xml_bones(http_response):
         return False
 
     # Check that it actually has tags
-    if http_response.get_body().count('<') < 20:
+    if http_response.get_body().count(b'<') < 20:
         return False
 
     return True

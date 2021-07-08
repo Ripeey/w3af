@@ -30,7 +30,7 @@ from w3af.core.controllers.misc.itertools_toolset import unique_everseen_hash
 from errno import (ECONNREFUSED, EHOSTUNREACH, ECONNRESET, ENETDOWN,
                    ENETUNREACH, ETIMEDOUT, ENOSPC)
 
-from w3af.core.data.misc.encoding import smart_str, PERCENT_ENCODE
+from w3af.core.data.misc.encoding import smart_str, smart_bytes, PERCENT_ENCODE
 from w3af.core.controllers.exceptions import HTTPRequestException
 from w3af.core.data.url.handlers.keepalive import URLTimeoutError
 from w3af.core.data.constants.response_codes import NO_CONTENT
@@ -359,7 +359,8 @@ def remove_using_lower_case(body, body_lower, to_replace):
     to_replace_len = len(to_replace)
 
     while idx < len(body):
-        index_l = body_lower.find(to_replace, idx)
+        # patchFIX encodeFIX cause body is in bytes? 
+        index_l = body_lower.find(smart_bytes(to_replace), idx)
 
         if index_l == -1:
             return body, body_lower

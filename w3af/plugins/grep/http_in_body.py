@@ -35,10 +35,10 @@ class http_in_body(GrepPlugin):
 
     HTTP = (
         # GET / HTTP/1.0
-        ('[a-zA-Z]{3,6} .*? HTTP/1.[01]', 'REQUEST'),
+        (r'[a-zA-Z]{3,6} .*? HTTP/1.[01]', r'REQUEST'),
 
         # HTTP/1.1 200 OK
-        ('HTTP/1.[01] [0-9][0-9][0-9] [a-zA-Z]*', 'RESPONSE')
+        (r'HTTP/1.[01] [0-9][0-9][0-9] [a-zA-Z]*', r'RESPONSE')
     )
     _multi_re = MultiRE(HTTP)
 
@@ -59,7 +59,9 @@ class http_in_body(GrepPlugin):
 
         if not response.is_text_or_html():
             return
-            
+        print("greeeeeeeeep removeME")
+        print(type(response))
+        print(type(response.get_clear_text_body()))
         body_without_tags = response.get_clear_text_body()
         if body_without_tags is None:
             return

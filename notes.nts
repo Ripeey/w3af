@@ -142,3 +142,5 @@
 # hmap socket, ssl, encoding, issues fix
 # hmap cmp and float point fix
 # hmap weird case cmp fix
+
+# On404 during grep in http_in_body->get_clean_body -> remove_using_lower_case, audit/xts encoding fix, HTTPResponse chatset handling shif to bytes(were testing)
