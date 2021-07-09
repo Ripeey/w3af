@@ -59,9 +59,7 @@ class http_in_body(GrepPlugin):
 
         if not response.is_text_or_html():
             return
-        print("greeeeeeeeep removeME")
-        print(type(response))
-        print(type(response.get_clear_text_body()))
+
         body_without_tags = response.get_clear_text_body()
         if body_without_tags is None:
             return
