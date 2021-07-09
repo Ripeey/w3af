@@ -65,9 +65,9 @@ def parse_cookie(cookie_header_value):
     #
     # if type(rawdata) == type(""):
     #     self.__ParseString(rawdata)
-    #
-    # Should read "if isinstance(rawdata, str)"
-    cookie_header_value = cookie_header_value.encode('utf-8')
+    # 
+    if isinstance(cookie_header_value, bytes):
+        cookie_header_value = cookie_header_value.decode('utf-8')
 
     # Note to self: This line may print some chars to the console
     cookie_object.load(cookie_header_value)

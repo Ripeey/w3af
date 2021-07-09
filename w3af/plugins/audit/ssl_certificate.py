@@ -292,10 +292,7 @@ class ssl_certificate(AuditPlugin):
                 raise
 
         except Exception as e:
-            # removeME
-            print('reeeeeeeeeeex3')
-            import traceback
-            traceback.print_exc()
+
             msg = 'Unhandled %s exception in _ssl_connect_specific_protocol(): "%s"'
             args = (e.__class__.__name__, e)
             om.out.debug(msg % args)

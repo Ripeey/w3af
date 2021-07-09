@@ -13,7 +13,7 @@ mitmproxy
 pyasn1
 lxml
 scapy
-guess-language
+guess_language-spirit
 cluster
 msgpack
 python-ntlm3
@@ -33,6 +33,6 @@ lz4
 vulners
 ipaddresses
 subprocess32
-blinker
+blinker-1.5.dev0
 xdot
 https://github.com/Chinmay1743/halberd/archive/refs/heads/master.zip

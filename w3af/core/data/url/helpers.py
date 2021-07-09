@@ -328,6 +328,10 @@ def get_clean_body_impl(body, strings_to_replace_list, multi_encode=True,
     encoded_payloads = [i.lower() for i in encoded_payloads]
 
     for to_replace in encoded_payloads:
+        # patchFIX encodeFIX cause body is in bytes? 
+        if isinstance(body, bytes):
+            to_replace = smart_bytes(to_replace)
+
         body, body_lower = remove_using_lower_case(body, body_lower, to_replace)
 
     return body
@@ -359,8 +363,7 @@ def remove_using_lower_case(body, body_lower, to_replace):
     to_replace_len = len(to_replace)
 
     while idx < len(body):
-        # patchFIX encodeFIX cause body is in bytes? 
-        index_l = body_lower.find(smart_bytes(to_replace), idx)
+        index_l = body_lower.find(to_replace, idx)
 
         if index_l == -1:
             return body, body_lower

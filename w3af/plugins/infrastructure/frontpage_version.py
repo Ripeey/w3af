@@ -92,9 +92,11 @@ class frontpage_version(InfrastructurePlugin):
         :param response: The http response object for the _vti_inf file.
         :return: None. All the info is saved to the kb.
         """
-        version_mo = self.VERSION_RE.search(response.get_body())
-        admin_mo = self.ADMIN_URL_RE.search(response.get_body())
-        author_mo = self.AUTHOR_URL_RE.search(response.get_body())
+        # patchFIX encodeFIX cause body is in bytes? 
+        body = response.get_body().decode('utf-8')
+        version_mo = self.VERSION_RE.search(body)
+        admin_mo = self.ADMIN_URL_RE.search(body)
+        author_mo = self.AUTHOR_URL_RE.search(body)
 
         if version_mo and admin_mo and author_mo:
             self._exec = False

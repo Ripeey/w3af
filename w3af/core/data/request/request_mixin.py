@@ -49,7 +49,6 @@ class RequestMixIn(object):
             data = self.get_data() or ''
 
         request_head = self.dump_request_head(ignore_headers=ignore_headers)
-        request_head = request_head.encode('utf-8')
 
         return '%s%s%s' % (request_head, CRLF, data)
 
@@ -57,7 +56,8 @@ class RequestMixIn(object):
         """
         :return: Hash the request (as it would be sent to the wire) and return
         """
-        return hashlib.md5(self.dump(ignore_headers=ignore_headers)).hexdigest()
+        # patchFIX encodeFIX
+        return hashlib.md5(self.dump(ignore_headers=ignore_headers).encode('UTF-8')).hexdigest()
 
     def get_request_line(self):
         """

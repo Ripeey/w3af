@@ -124,8 +124,9 @@ class MultiRE(object):
         :param target_str: The target string where the keywords need to be match
         :yield: (match_obj, re_str_N, compiled_regex)
         """
-        if isinstance(target_str, str):
-            target_str = target_str.encode(DEFAULT_ENCODING)
+        # patchFIX encodeFIX
+        #if isinstance(target_str, str):
+        #    target_str = target_str.encode(DEFAULT_ENCODING)
 
         #
         #   Match the regular expressions that have keywords and those

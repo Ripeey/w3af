@@ -108,7 +108,7 @@ def clean_fuzzable_request_form(fuzzable_request, dc_handler=clean_data_containe
 
     return '|'.join([smart_bytes_ignore(s) for s in res])
 
-
+# patchFIX encodeFIX remove all encode() here
 def clean_url(url, dc_handler=clean_data_container):
     """
     Clean a URL instance to string following these rules:
@@ -120,10 +120,10 @@ def clean_url(url, dc_handler=clean_data_container):
     :param url: URL instance
     :return: A "clean" representation of the URL
     """
-    res = url.base_url().url_string.encode(DEFAULT_ENCODING)
+    res = url.base_url().url_string
 
     if url.has_query_string():
-        res += url.get_path().encode(DEFAULT_ENCODING)[1:]
+        res += url.get_path()[1:]
         res += '?' + dc_handler(url.querystring)
     else:
         res += clean_path_filename(url)
@@ -141,14 +141,14 @@ def clean_path_filename(url):
     :param url: The URL instance
     :return: A clean URL string
     """
-    filename = url.get_file_name().encode(DEFAULT_ENCODING)
-    path = url.get_path_without_file().encode(DEFAULT_ENCODING)
+    filename = url.get_file_name()
+    path = url.get_path_without_file()
 
     if filename:
         res = path[1:]
         res += clean_filename(filename)
     else:
-        res = clean_path(url.get_path().encode(DEFAULT_ENCODING))[1:]
+        res = clean_path(url.get_path())[1:]
 
     return res
 

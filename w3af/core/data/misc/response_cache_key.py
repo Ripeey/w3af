@@ -99,7 +99,8 @@ def _should_use_xml_bones(http_response):
         return False
 
     # Check that it actually has tags
-    if http_response.get_body().count(b'<') < 20:
+    # patchFIX encodeFIX could be both smh
+    if smart_str_ignore(http_response.get_body()).count('<') < 20:
         return False
 
     return True

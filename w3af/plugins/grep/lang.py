@@ -69,13 +69,13 @@ class lang(GrepPlugin):
         body = body.lower()
 
         try:
-            guessed_lang = guess_language.guessLanguage(body)
+            guessed_lang = guess_language.guess_language(body)
         except IndexError:
             # I don't care about exception handling of the external lib
             guessed_lang = UNKNOWN
 
         with self._plugin_lock:
-            if guessed_lang == UNKNOWN:
+            if guessed_lang.lower() == UNKNOWN:
                 # None means "I'm still trying"
                 kb.kb.raw_write(self, 'lang', None)
 

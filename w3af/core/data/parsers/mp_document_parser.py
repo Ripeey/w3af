@@ -81,7 +81,7 @@ class MultiProcessingDocumentParser(object):
     :author: Andres Riancho (andres.riancho@gmail.com)
     """
     DEBUG = core_profiling_is_enabled()
-    MAX_WORKERS = 2 if is_running_on_ci() else (multiprocessing.cpu_count() / 2) or 1
+    MAX_WORKERS = 2 if is_running_on_ci() else (multiprocessing.cpu_count() // 2) or 1
 
     # Increasing the timeout when profiling is enabled seems to fix issue #9713
     #
@@ -452,7 +452,7 @@ def limit_memory_usage(mem_limit):
     soft, hard = resource.getrlimit(resource.RLIMIT_AS)
     resource.setrlimit(resource.RLIMIT_AS, (real_memory_limit, hard))
 
-    limit_mb = (real_memory_limit / 1024 / 1024)
+    limit_mb = (real_memory_limit // 1024 // 1024)
     msg = 'Using RLIMIT_AS memory usage limit %s MB for new pool process'
     om.out.debug(msg % limit_mb)
 

@@ -144,3 +144,7 @@
 # hmap weird case cmp fix
 
 # On404 during grep in http_in_body->get_clean_body -> remove_using_lower_case, audit/xts encoding fix, HTTPResponse chatset handling shif to bytes(were testing)
+
+# cookie parser bytes to str, guess_language fix, mp_document_parser float point fix, multi_re/query encoding fix, removed debugs
+
+# db/clean_dc remove all .encode() for encoding fix, dav _PUT -> put_response encode fix

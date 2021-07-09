@@ -184,7 +184,7 @@ class dav(AuditPlugin):
         elif put_response.get_code() == 403:
             # handle false positive when PUT method is not supported
             # https://github.com/andresriancho/w3af/pull/2724/files
-            if 'supported' in put_response.get_body().lower():
+            if b'supported' in put_response.get_body().lower():
                 return
             
             msg = ('DAV seems to be correctly configured and allowing you to'
