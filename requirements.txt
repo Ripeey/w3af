@@ -9,7 +9,7 @@ pdfminer
 pyOpenSSL
 ndg-httpsclient
 distro
-mitmproxy
+mitmproxy==6.0.2
 pyasn1
 lxml
 scapy
@@ -36,3 +36,6 @@ subprocess32
 blinker
 xdot
 https://github.com/Chinmay1743/halberd/archive/refs/heads/master.zip
+vulndb==0.1.3
+https://github.com/wharris/esmre/archive/refs/heads/main.zip
+markdown

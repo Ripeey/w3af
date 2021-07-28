@@ -69,9 +69,10 @@ def factory(module_name, *args):
         #
         # https://github.com/andresriancho/w3af/issues/9688
         msg = ('It seems that your Python installation does not have all the'
-               ' modules required by the w3af framework. For more information'
+               f' modules `<{module_name}>` required by the w3af framework. For more information'
                ' about how to install and debug dependency issues please browse'
                ' to http://docs.w3af.org/en/latest/install.html')
+
         print(msg)
 
         # Raise so the user sees the whole traceback
